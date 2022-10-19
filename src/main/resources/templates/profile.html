@@ -1,0 +1,847 @@
+<!doctype html>
+<html lang="en" class="h-100"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+          integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.sstatic.net/Shared/stacks.css?v=5ad0f45f4799">
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.sstatic.net/Sites/stackoverflow/primary.css?v=0cc30ee01b86">
+
+
+    <title>Profile Page</title>
+</head>
+
+<body>
+
+<div id="content" class="snippet-hidden">
+    <div id="mainbar-full" class="user-show-new">
+        <div class="ps-relative mb16">
+            <div class="d-flex ai-center fw-wrap gs16">
+                <a class="flex--item" href="/users/19743327/Omar">
+                    <div class="md:d-none js-usermini-avatar-container">
+                        <div class="bar-md bs-sm"><img
+                                src="https://www.gravatar.com/avatar/3941cbcfe30b4248e88adf748d99316a?s=256&amp;d=identicon&amp;r=PG"
+                                alt="Omar&#39;s user avatar" width="128" height="128" class="bar-sm bar-md d-block">
+                        </div>
+                    </div>
+                    <div class="d-none md:d-block sm:d-none js-usermini-avatar-container">
+                        <div class="bar-md bs-sm"><img
+                                src="https://www.gravatar.com/avatar/3941cbcfe30b4248e88adf748d99316a?s=192&amp;d=identicon&amp;r=PG"
+                                alt="Omar&#39;s user avatar" width="96" height="96" class="bar-sm bar-md d-block"></div>
+                    </div>
+                    <div class="d-none sm:d-block js-usermini-avatar-container">
+                        <div class="bar-md bs-sm"><img
+                                src="https://www.gravatar.com/avatar/3941cbcfe30b4248e88adf748d99316a?s=128&amp;d=identicon&amp;r=PG"
+                                alt="Omar&#39;s user avatar" width="64" height="64" class="bar-sm bar-md d-block"></div>
+                    </div>
+                </a>
+                <div class="flex--item">
+                    <div class="d-flex ai-center fw-wrap gs8 wmx4">
+                        <div class="flex--item mb12 fs-headline2 lh-xs">
+                            Omar
+                        </div>
+                        <div class="flex--item">
+                            <div class="d-flex ai-center fw-nowrap gs4">
+                            </div>
+                        </div>
+                    </div>
+
+                    <ul class="list-reset s-anchors s-anchors__inherit d-flex fc-light gs8 mln4 fw-wrap">
+
+
+                        <li class="flex--item">
+                            <div class="d-flex gs4 gsx ai-center">
+                                <div class="flex--item fc-black-350">
+                                    <svg aria-hidden="true" class="svg-icon iconCake" width="18" height="18"
+                                         viewBox="0 0 18 18">
+                                        <path d="M9 4.5a1.5 1.5 0 0 0 1.28-2.27L9 0 7.72 2.23c-.14.22-.22.48-.22.77 0 .83.68 1.5 1.5 1.5Zm3.45 7.5-.8-.81-.81.8c-.98.98-2.69.98-3.67 0l-.8-.8-.82.8c-.49.49-1.14.76-1.83.76-.55 0-1.3-.17-1.72-.46V15c0 1.1.9 2 2 2h10a2 2 0 0 0 2-2v-2.7c-.42.28-1.17.45-1.72.45-.69 0-1.34-.27-1.83-.76Zm1.3-5H10V5H8v2H4.25C3 7 2 8 2 9.25v.9c0 .81.91 1.47 1.72 1.47.39 0 .77-.14 1.03-.42l1.61-1.6 1.6 1.6a1.5 1.5 0 0 0 2.08 0l1.6-1.6 1.6 1.6c.28.28.64.43 1.03.43.81 0 1.73-.67 1.73-1.48v-.9C16 8.01 15 7 13.75 7Z"/>
+                                    </svg>
+                                </div>
+                                <div class="flex--item">
+                                    Member for <span title="2022-08-11 12:46:07Z">2 months</span>
+                                </div>
+                            </div>
+                        </li>
+
+
+                        <li class="flex--item">
+                            <div class="d-flex gs4 gsx ai-center">
+                                <div class="flex--item fc-black-350">
+                                    <svg aria-hidden="true" class="svg-icon iconClock" width="18" height="18"
+                                         viewBox="0 0 18 18">
+                                        <path d="M9 17c-4.36 0-8-3.64-8-8 0-4.36 3.64-8 8-8 4.36 0 8 3.64 8 8 0 4.36-3.64 8-8 8Zm0-2c3.27 0 6-2.73 6-6s-2.73-6-6-6-6 2.73-6 6 2.73 6 6 6ZM8 5h1.01L9 9.36l3.22 2.1-.6.93L8 10V5Z"/>
+                                    </svg>
+                                </div>
+                                <div class="flex--item">
+                                    Last seen
+                                    this week
+                                </div>
+                            </div>
+                        </li>
+
+                        <li id="js-daily-access-calendar-container" class="flex--item">
+                            <button
+                                    class="d-flex gs4 gsx ai-center s-btn s-btn__muted s-btn__unset c-pointer js-daily-access-calendar-toggle"
+                                    role="button"
+                                    aria-controls="popover-daily-access-calendar"
+                                    data-controller="s-popover s-tooltip"
+                                    data-action="s-popover#toggle"
+                                    data-s-popover-placement="bottom-start"
+                                    data-s-popover-toggle-class="is-selected"
+                                    title="Click to view daily visit calendar"
+                                    data-s-tooltip-placement="top-start">
+                                <div class="flex--item fc-black-350">
+                                    <svg aria-hidden="true" class="svg-icon iconCalendar" width="18" height="18"
+                                         viewBox="0 0 18 18">
+                                        <path d="M14 2h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4c0-1.1.9-2 2-2h1V0h2v2h6V0h2v2ZM3 6v9h12V6H3Zm2 2h2v2H5V8Zm0 3h2v2H5v-2Zm3 0h2v2H8v-2Zm3 0h2v2h-2v-2Zm0-3h2v2h-2V8ZM8 8h2v2H8V8Z"/>
+                                    </svg>
+                                </div>
+                                <div class="flex--item">Visited 46 days, 9 consecutive</div>
+                            </button>
+                            <div class="s-popover w-auto" id="popover-daily-access-calendar" role="menu">
+                                <div class="s-popover--arrow"></div>
+                                <div class="js-daily-access-calendar">
+                                    <div class="s-spinner">
+                                        <div class="v-visible-sr">Loading…</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+
+            <div class="ps-absolute t0 r0 d-flex gs6 fw-wrap">
+                <a class="flex--item s-btn s-btn__outlined s-btn__muted s-btn__icon s-btn__sm"
+                   href="/users/edit/19743327">
+                    <svg aria-hidden="true" class="svg-icon iconPencil" width="18" height="18" viewBox="0 0 18 18">
+                        <path d="m13.68 2.15 2.17 2.17c.2.2.2.51 0 .71L14.5 6.39l-2.88-2.88 1.35-1.36c.2-.2.51-.2.71 0ZM2 13.13l8.5-8.5 2.88 2.88-8.5 8.5H2v-2.88Z"/>
+                    </svg>
+                    Edit profile</a>
+
+                <ul class="flex--item list-reset">
+                    <li role="menuitem">
+                        <a href="https://stackexchange.com/users/25829674/Omar"
+                           class="d-flex ai-center ws-nowrap s-btn s-btn__outlined s-btn__muted s-btn__icon s-btn__sm d-flex ai-center">
+                            <svg aria-hidden="true" class="native mln2 mr2 svg-icon iconLogoSEXxs" width="18"
+                                 height="18" viewBox="0 0 18 18">
+                                <path d="M3 4c0-1.1.9-2 2-2h8a2 2 0 0 1 2 2H3Z" fill="#8FD8F7"/>
+                                <path d="M15 11H3c0 1.1.9 2 2 2h5v3l3-3a2 2 0 0 0 2-2Z" fill="#155397"/>
+                                <path fill="#46A2D9" d="M3 5h12v2H3z"/>
+                                <path fill="#2D6DB5" d="M3 8h12v2H3z"/>
+                            </svg>
+                            Network profile
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+
+        <div class="d-flex ai-center jc-space-between fw-wrap mb16 js-user-header">
+            <div class="flex--item s-navigation">
+                <a href="/users/19743327/Omar?tab=profile" class="s-navigation--item" data-shortcut="P">Profile</a>
+                <a href="/users/19743327/Omar?tab=topactivity" class="s-navigation--item is-selected" data-shortcut="A">Activity</a>
+
+                <a href="/users/saves/19743327/all" class="s-navigation--item">Saves</a>
+
+                <a href="/users/preferences/19743327" class="s-navigation--item">Settings</a>
+            </div>
+            <div class="flex--item ml-auto">
+                <div class="s-navigation s-navigation__muted ai-center">
+                </div>
+            </div>
+        </div>
+
+        <div class="d-none md:d-block">
+            <nav class="mb24">
+                <div class="d-flex gs4 gsy fd-column">
+                    <label class="flex--item s-label" for="js-select-menu">
+                        Navigation
+                        <p class="mt2 s-description">View all activity pages</p>
+                    </label>
+                    <div class="flex--item s-select">
+                        <select id="js-select-menu">
+                            <option value="/users/19743327/Omar?tab=summary" selected="selected">Summary</option>
+                            <option value="/users/19743327/Omar?tab=answers">Answers</option>
+                            <option value="/users/19743327/Omar?tab=questions">Questions</option>
+                            <option value="/users/19743327/Omar?tab=tags">Tags</option>
+                            <option value="/users/19743327/Omar?tab=articles">Articles</option>
+                            <option value="/users/19743327/Omar?tab=badges">Badges</option>
+                            <option value="/users/19743327/Omar?tab=following">Following</option>
+                            <option value="/users/19743327/Omar?tab=bounties">Bounties</option>
+                            <option value="/users/19743327/Omar?tab=reputation">Reputation</option>
+                            <option value="/users/19743327/Omar?tab=activity">All actions</option>
+                            <option value="/users/19743327/Omar?tab=responses">Responses</option>
+                            <option value="/users/19743327/Omar?tab=votes">Votes</option>
+                        </select>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <div class="d-flex mb48">
+            <nav class="flex--item fl-shrink0 mr32 wmn1 md:d-none js-settings-nav" role="navigation">
+                <ul class="ps-sticky t64 s-navigation s-navigation__muted s-navigation__vertical">
+                    <li>
+                        <a class="s-navigation--item is-selected pr48 ps-relative"
+                           href="/users/19743327/Omar?tab=summary" title="Your overall summary" data-shortcut="S">
+                            Summary
+                        </a>
+                    </li>
+                    <li>
+                        <a class="s-navigation--item pr48 ps-relative" href="/users/19743327/Omar?tab=answers"
+                           title="Answers you provided" data-shortcut="A">
+                            Answers
+                        </a>
+                    </li>
+                    <li>
+                        <a class="s-navigation--item pr48 ps-relative" href="/users/19743327/Omar?tab=questions"
+                           title="Questions you asked" data-shortcut="Q">
+                            Questions
+                        </a>
+                    </li>
+                    <li>
+                        <a class="s-navigation--item pr48 ps-relative" href="/users/19743327/Omar?tab=tags"
+                           title="Tags you have posts in" data-shortcut="T">
+                            Tags
+                        </a>
+                    </li>
+                    <li>
+                        <a class="s-navigation--item pr48 ps-relative" href="/users/19743327/Omar?tab=articles"
+                           title="Articles you created" data-shortcut="I">
+                            Articles
+                        </a>
+                    </li>
+                    <li>
+                        <a class="s-navigation--item pr48 ps-relative" href="/users/19743327/Omar?tab=badges"
+                           title="Badges you have earned" data-shortcut="B">
+                            Badges
+                        </a>
+                    </li>
+                    <li>
+                        <a class="s-navigation--item pr48 ps-relative" href="/users/19743327/Omar?tab=following"
+                           title="Posts you are following" data-shortcut="P">
+                            Following
+                        </a>
+                    </li>
+                    <li>
+                        <a class="s-navigation--item pr48 ps-relative" href="/users/19743327/Omar?tab=bounties"
+                           title="Bounties you have participated in" data-shortcut="O">
+                            Bounties
+                        </a>
+                    </li>
+                    <li>
+                        <a class="s-navigation--item pr48 ps-relative" href="/users/19743327/Omar?tab=reputation"
+                           title="Reputation you have earned" data-shortcut="R">
+                            Reputation
+                        </a>
+                    </li>
+                    <li>
+                        <a class="s-navigation--item pr48 ps-relative" href="/users/19743327/Omar?tab=activity"
+                           title="Your recent actions" data-shortcut="L">
+                            All actions
+                        </a>
+                    </li>
+                    <li>
+                        <a class="s-navigation--item pr48 ps-relative" href="/users/19743327/Omar?tab=responses"
+                           title="Your recent responses" data-shortcut="E">
+                            Responses
+                        </a>
+                    </li>
+                    <li>
+                        <a class="s-navigation--item pr48 ps-relative" href="/users/19743327/Omar?tab=votes"
+                           title="Votes you have cast" data-shortcut="V">
+                            Votes
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <section class="flex--item fl-grow1 wmx100">
+                <div id="user-tab-summary" class="js-user-tab">
+                    <div class="d-flex ai-end jc-space-between mb8 fw-wrap">
+                        <div class="flex--item fl-grow1">
+                            <div class="d-flex ai-end jc-space-between">
+
+                                <h2 class="flex--item fs-title mb0">
+                                    Summary
+                                </h2>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+
+                        <div class="d-grid grid__2 g24 lg:grid__1">
+                            <div class="grid--item grid--col-start1 grid--col-end3 lg:grid--col-end2">
+                                <div id="top-cards" class="d-flex gs16 md:fd-column">
+                                    <aside class="flex--item flex--item3 s-card bar-md c-auto fl-grow1">
+
+                                        <div class="d-flex g8 fd-column py24 ta-center">
+                                            <div class="flex--item fc-black-350">
+                                                <svg aria-hidden="true" class="svg-spot spotReputation" width="48"
+                                                     height="48" viewBox="0 0 48 48">
+                                                    <path d="M32 9a1 1 0 0 1-1 1H6a1 1 0 0 1 0-2h25a1 1 0 0 1 1 1Zm4.25 1.6a1 1 0 0 1 .92-.6H41a1 1 0 1 1 0 2h-3.18l-4.9 11.4a1 1 0 0 1-.92.6h-7.38l-2.73 5.45A1 1 0 0 1 21 30h-6.51l-4.07 9.4a1 1 0 0 1-1.84-.8l4.34-10a1 1 0 0 1 .91-.6h6.55l2.73-5.45A1 1 0 0 1 24 22h7.34l4.9-11.4ZM42 16a1 1 0 1 0 0-2h-2a1 1 0 1 0 0 2h2Zm-24 5a1 1 0 0 1-1 1H6a1 1 0 1 1 0-2h11a1 1 0 0 1 1 1Zm24 1a1 1 0 1 0 0-2h-4a1 1 0 1 0 0 2h4Zm1 11a1 1 0 0 1-1 1H17a1 1 0 1 1 0-2h25a1 1 0 0 1 1 1ZM8 28a1 1 0 1 0 0-2H6a1 1 0 1 0 0 2h2Z"
+                                                          opacity=".2"/>
+                                                    <path d="M36.17 8a1 1 0 0 0-.92.6L30.35 20H23a1 1 0 0 0-.9.55L19.39 26h-6.55a1 1 0 0 0-.9.58L6.1 39.08a1 1 0 0 0 1.82.84L13.47 28H20a1 1 0 0 0 .9-.55L23.61 22H31a1 1 0 0 0 .92-.6l4.9-11.4H42a1 1 0 1 0 0-2h-5.83ZM27 16a1 1 0 1 0 0-2H6a1 1 0 1 0 0 2h21Zm16 11a1 1 0 0 1-1 1H28a1 1 0 1 1 0-2h14a1 1 0 0 1 1 1Zm-1 13a1 1 0 1 0 0-2H14a1 1 0 1 0 0 2h28Z"/>
+                                                </svg>
+                                            </div>
+                                            <h2 class="flex--item fl0 fs-body2 fw-medium mb2">Reputation is how the
+                                                community thanks you</h2>
+                                            <p class="flex--item px8 fs-caption lh-md fc-light">
+                                                When users upvote your helpful posts, you&#x27;ll earn reputation and
+                                                unlock new privileges.
+                                            </p>
+                                            <p class="flex--item mt8 px8">
+                                                Learn more about <a href="/help/whats-reputation"
+                                                                    class="fc-medium td-underline">reputation</a> and <a
+                                                    href="/help/privileges"
+                                                    class="fc-medium td-underline">privileges</a>
+                                            </p>
+                                        </div>
+
+                                    </aside>
+                                    <aside class="flex--item flex--item2 s-card bar-md c-auto fl-grow1">
+                                        <div class="d-flex jc-center g8 fd-column py24 ta-center">
+                                            <div class="flex--item fc-black-350">
+                                                <svg aria-hidden="true" class="svg-spot spotBadge" width="48"
+                                                     height="48" viewBox="0 0 48 48">
+                                                    <path d="M14 6a1 1 0 0 1 1-1h20a1 1 0 1 1 0 2H15a1 1 0 0 1-1-1ZM7 21c0-1.1.9-2 2-2h35a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H10a3 3 0 0 1-3-3V21Zm27 23a1 1 0 1 0 0-2H14a1 1 0 1 0 0 2h20Z"
+                                                          opacity=".2"/>
+                                                    <path d="M8 11a1 1 0 0 1 1-1h31a1 1 0 1 1 0 2H9a1 1 0 0 1-1-1Zm0 13a4 4 0 1 1 8 0 4 4 0 0 1-8 0Zm4-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-9-4a3 3 0 0 1 3-3h36a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V18Zm3-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h36a1 1 0 0 0 1-1V18a1 1 0 0 0-1-1H6Zm34 22a1 1 0 1 0 0-2H9a1 1 0 1 0 0 2h31Z"/>
+                                                </svg>
+                                            </div>
+                                            <h1 class="flex--item fl0 fs-body2 fw-medium mb2">Earn badges for helpful
+                                                actions</h1>
+                                            <p class="flex--item px8 fs-caption lh-md fc-light wmx3 mx-auto">
+                                                Badges are bits of digital flair that you get when you participate in
+                                                especially helpful ways.
+                                            </p>
+
+                                            <p class="flex--item mt8 px8">
+                                                <a href="/tour" class="d-inline-flex s-btn s-btn__primary">Take the Tour
+                                                    and earn your first badge</a>
+                                            </p>
+                                        </div>
+
+                                    </aside>
+                                    <aside class="flex--item flex--item1 s-card bar-md c-auto fl-grow1">
+
+                                        <div class="d-flex gs8 fd-column py24 ta-center">
+                                            <div class="flex--item fc-black-350">
+                                                <svg aria-hidden="true" class="svg-spot spotAstronaut" width="48"
+                                                     height="48" viewBox="0 0 48 48">
+                                                    <path opacity=".2"
+                                                          d="M39.5 12a.5.5 0 0 1-.5-.5.5.5 0 0 0-.5-.5h-6.1c-.77 0-1.4.63-1.4 1.4v6.2c0 .77.63 1.4 1.4 1.4H38a1 1 0 0 1 1 1 1 1 0 0 0 1 1h3.6c.77 0 1.4-.63 1.4-1.4v-7.2c0-.77-.63-1.4-1.4-1.4h-4.1Z"/>
+                                                    <path d="M15.03 5.84c-2.17 0-3.66.42-4.44 1.59-.37.55-.5 1.17-.55 1.73-.05.44-.04.93-.04 1.39v1.8c0 .4.2.7.38.89.18.17.38.29.54.37.34.15.75.25 1.15.32.83.15 1.9.22 2.93.22 1.03 0 2.1-.07 2.93-.22.4-.07.81-.17 1.15-.32.16-.08.36-.2.54-.37.18-.19.38-.49.38-.9V10.5c0-.44 0-.9-.03-1.32a3.68 3.68 0 0 0-.52-1.73c-.76-1.18-2.25-1.6-4.42-1.6ZM12 10.5c0-.45 0-.82.03-1.15.04-.4.12-.65.22-.81.18-.26.7-.7 2.78-.7s2.58.44 2.74.69c.1.15.18.4.21.8.03.32.02.66.02 1.07v1.47l-.43.1c-.67.12-1.6.18-2.57.18a15.59 15.59 0 0 1-3-.28V10.5ZM11 21a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2h-6a1 1 0 0 1-1-1Zm4.03-19c-3.82 0-6.2 1.12-7.57 3-1.31 1.8-1.51 4.08-1.51 6v3.94A4.45 4.45 0 0 0 2 19.5v11C2 32.02 3.13 34 5.47 34c.58 0 1.09-.12 1.53-.33V44a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V32h2v12a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V23.3l2.87 2.74 1.97 1.86.16.14V44a1 1 0 1 0 2 0V28.79h.1c.8 0 1.65-.28 2.27-.9.62-.64.88-1.52.88-2.32 0-.79-.26-1.66-.87-2.3L30 20.78V19h6c0 1.1.9 2 2 2h3a3 3 0 0 0 3-3v-6a3 3 0 0 0-3-3h-3.09c-.2-.58-.76-1-1.41-1H30v-.17a3 3 0 1 0-2 0v10.83l-1.24-1.32h-.01l-.34-.36c-.48-.49-.93-.95-1.36-1.3-.3-.25-.64-.47-1.02-.63V11c0-1.9-.18-4.2-1.47-6-1.35-1.88-3.71-3-7.53-3Zm-7.08 9c0-1.86.21-3.57 1.13-4.83C9.94 5 11.6 4 15.03 4s5.06.99 5.9 2.17c.9 1.25 1.1 2.96 1.1 4.83v4.41c-.35.11-.9.22-1.64.32a46.7 46.7 0 0 1-5.4.28c-1.99 0-3.95-.1-5.4-.28a9.4 9.4 0 0 1-1.64-.32V11ZM12 39.34a3.4 3.4 0 0 0-3 0V36h3v3.34Zm-3 3.31c0-.98.71-1.65 1.5-1.65s1.5.67 1.5 1.65V43H9v-.35Zm9 .35v-.35c0-.98.71-1.65 1.5-1.65s1.5.67 1.5 1.65V43h-3Zm1.5-4a3.4 3.4 0 0 0-1.5.34V36h3v3.34a3.4 3.4 0 0 0-1.5-.34ZM9 34v-8h12v8h-3v-3a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v3H9Zm-2-3.5c0 .69-.56 1.5-1.53 1.5C4.53 32 4 31.23 4 30.5V29h3v1.5ZM7 27H4v-7.5c0-.88.32-1.51.8-1.93a3 3 0 0 1 1.67-.69l.08.06c.24.17.52.29.78.37.53.17 1.23.3 2 .4 1.57.2 3.62.3 5.66.3 2.03 0 4.09-.1 5.65-.3.78-.1 1.48-.23 2.01-.4.25-.08.52-.19.75-.35l.4.27c.32.27.66.62 1.13 1.1v.01l.38.39L28 21.56v.92l-1.45 1.44-3.64-3.46c-.25-.24-.55-.46-.91-.46a1 1 0 0 0-1 1v3H9v-3a1 1 0 1 0-2 0v6Zm23-.22v-3.1l.93.98h.01c.17.18.31.51.31.91s-.14.73-.3.91a1.19 1.19 0 0 1-.95.3ZM29 4a1 1 0 1 1 0 2 1 1 0 0 1 0-2Zm1 13v-7h6v7h-6Zm8 2v-8h3a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-3Z"/>
+                                                </svg>
+                                            </div>
+                                            <h2 class="flex--item fl0 fs-body2 fw-medium mb2">Measure your impact</h2>
+                                            <p class="flex--item px4 fs-caption lh-md fc-light">
+                                                Your posts and helpful actions here help hundreds or thousands of people
+                                                searching for help.
+                                            </p>
+                                        </div>
+
+                                    </aside>
+                                </div>
+                            </div>
+
+                            <div id="user-panel-answers" class="d-flex fd-column js-user-panel h100">
+                                <div class="d-flex ai-end jc-space-between mb8 fw-wrap">
+                                    <div class="flex--item fl-grow1">
+                                        <div class="d-flex fd-column">
+
+                                            <h3 class="flex--item fs-title mb0">Answers</h3>
+
+
+                                            <div class="flex--item d-none">
+                                                <a href="/users/19743327/Omar?tab=answers&amp;sort=votes"
+                                                   class="s-link s-link__muted">View all 0 answers</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex--item s-btn-group js-user-subtabs">
+                                        <a href="javascript:void(0)"
+                                           class="s-btn s-btn__muted s-btn__outlined s-btn__xs js-user-subtab is-selected js-selected"
+                                           data-sort-id="votes">
+                                            Score
+                                        </a>
+                                        <a href="javascript:void(0)"
+                                           class="s-btn s-btn__muted s-btn__outlined s-btn__xs js-user-subtab"
+                                           data-sort-id="activity">
+                                            Activity
+                                        </a>
+                                        <a href="javascript:void(0)"
+                                           class="s-btn s-btn__muted s-btn__outlined s-btn__xs js-user-subtab"
+                                           data-sort-id="newest">
+                                            Newest
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="fl-grow1 ba bc-black-100 bar-md">
+
+                                    <div class="d-flex flex__center h100 s-empty-state p24">
+                                        <p class="wmx4 m0">
+                                            You have not <a href="/questions/how-to-answer">answered</a> any questions
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div id="user-panel-questions" class="d-flex fd-column js-user-panel h100">
+                                <div class="d-flex ai-end jc-space-between mb8 fw-wrap">
+                                    <div class="flex--item fl-grow1">
+                                        <div class="d-flex fd-column">
+
+                                            <h3 class="flex--item fs-title mb0">Questions</h3>
+
+                                            <div class="flex--item d-none">
+                                                <a href="/users/19743327/Omar?tab=questions&amp;sort=votes"
+                                                   class="s-link s-link__muted">View all 0 questions</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex--item s-btn-group js-user-subtabs">
+                                        <a href="javascript:void(0)"
+                                           class="s-btn s-btn__muted s-btn__outlined s-btn__xs js-user-subtab is-selected js-selected"
+                                           data-sort-id="votes">
+                                            Score
+                                        </a>
+                                        <a href="javascript:void(0)"
+                                           class="s-btn s-btn__muted s-btn__outlined s-btn__xs js-user-subtab"
+                                           data-sort-id="activity">
+                                            Activity
+                                        </a>
+                                        <a href="javascript:void(0)"
+                                           class="s-btn s-btn__muted s-btn__outlined s-btn__xs js-user-subtab"
+                                           data-sort-id="newest">
+                                            Newest
+                                        </a>
+                                        <a href="javascript:void(0)"
+                                           class="s-btn s-btn__muted s-btn__outlined s-btn__xs js-user-subtab"
+                                           data-sort-id="views">
+                                            Views
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="fl-grow1 ba bc-black-100 bar-md">
+
+                                    <div class="d-flex flex__center h100 s-empty-state p24">
+                                        <p class="wmx4 m0">
+                                            You have not <a href="/questions/how-to-ask">asked</a> any questions
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div id="user-panel-tags" class="d-flex fd-column js-user-panel h100">
+                                <div class="d-flex ai-end jc-space-between mb8 fw-wrap">
+                                    <div class="flex--item fl-grow1">
+                                        <div class="d-flex ai-end jc-space-between">
+
+                                            <h3 class="flex--item fs-title mb0">Tags</h3>
+
+                                            <div class="flex--item d-none">
+                                                <a href="/users/19743327/Omar?tab=tags" class="s-link s-link__muted">View
+                                                    all 0 tags</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="fl-grow1 ba bc-black-100 bar-md">
+
+                                    <div class="d-flex flex__center h100 s-empty-state p24">
+                                        <p class="wmx4 m0">
+                                            You have not participated in any <a href="/tags">tags</a>
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div id="user-panel-reputation" class="d-flex fd-column js-user-panel h100">
+                                <div class="d-flex ai-end jc-space-between mb8 fw-wrap">
+                                    <div class="flex--item fl-grow1">
+                                        <div class="d-flex ai-end jc-space-between">
+
+                                            <h3 class="flex--item fs-title mb0">
+                                                Reputation
+                                            </h3>
+
+                                            <div class="flex--item">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="fl-grow1 ba bc-black-100 bar-md">
+
+                                    <div class="d-flex flex__center h100 s-empty-state p24">
+                                        <p class="wmx4 m0">
+                                            You have no recent <a href="/help/whats-reputation">reputation changes</a>.
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="grid--item grid--col-start1 grid--col-end3 lg:grid--col-end2">
+                                <div id="user-panel-badges" class="d-flex fd-column js-user-panel h100">
+                                    <div class="d-flex ai-end jc-space-between mb8 fw-wrap">
+                                        <div class="flex--item fl-grow1">
+                                            <div class="d-flex ai-end jc-space-between">
+
+                                                <h3 class="flex--item fs-title mb0">Badges</h3>
+
+
+                                                <div class="flex--item d-none">
+                                                    <a href="/users/19743327/Omar?tab=badges"
+                                                       class="s-link s-link__muted">View all badges</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="fl-grow1">
+
+                                        <div class="s-card p0">
+                                            <div class="d-flex flex__center h100 s-empty-state p24">
+                                                <p class="wmx4 m0">
+                                                    You have not earned any <a href="/help/badges">badges</a>
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="grid--item grid--col-start1 grid--col-end3 lg:grid--col-end2">
+                                <div id="user-panel-following" class="d-flex fd-column js-user-panel h100">
+                                    <div class="d-flex ai-end jc-space-between mb8 fw-wrap">
+                                        <div class="flex--item fl-grow1">
+                                            <div class="d-flex fd-column">
+
+                                                <h3 class="flex--item fs-title mb0">Followed posts</h3>
+
+                                                <div class="flex--item d-none">
+                                                    <a href="/users/19743327/Omar?tab=following&amp;sort=activity"
+                                                       class="s-link s-link__muted">View all 0 followed posts</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="flex--item s-btn-group js-user-subtabs">
+                                            <a href="javascript:void(0)"
+                                               class="s-btn s-btn__muted s-btn__outlined s-btn__xs js-user-subtab"
+                                               data-sort-id="votes">
+                                                Score
+                                            </a>
+                                            <a href="javascript:void(0)"
+                                               class="s-btn s-btn__muted s-btn__outlined s-btn__xs js-user-subtab is-selected js-selected"
+                                               data-sort-id="activity">
+                                                Activity
+                                            </a>
+                                            <a href="javascript:void(0)"
+                                               class="s-btn s-btn__muted s-btn__outlined s-btn__xs js-user-subtab"
+                                               data-sort-id="newest">
+                                                Newest
+                                            </a>
+                                            <a href="javascript:void(0)"
+                                               class="s-btn s-btn__muted s-btn__outlined s-btn__xs js-user-subtab"
+                                               data-sort-id="added">
+                                                Added
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="fl-grow1 ba bc-black-100 bar-md">
+
+                                        <script>
+                                            StackExchange.ready(function () {
+                                                StackExchange.user.followingTab.initPostTypeFilter(19743327);
+                                                StackExchange.user.followingTab.initActionButtons();
+                                            });
+                                        </script>
+                                        <div class="d-flex flex__center h100 s-empty-state p24">
+                                            <p class="wmx4 m0">
+                                                You are not <a
+                                                    href="https://meta.stackexchange.com/questions/345661/the-follow-questions-and-answers-feature-is-now-live-across-the-network">following
+                                                any posts</a>. </p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="grid--item grid--col-start1 grid--col-end3 lg:grid--col-end2">
+                                <div id="user-panel-accounts" class="d-flex fd-column js-user-panel h100">
+                                    <div class="d-flex ai-end jc-space-between mb8 fw-wrap">
+                                        <div class="flex--item fl-grow1">
+                                            <div class="d-flex ai-end jc-space-between">
+
+                                                <div class="flex--item">
+                                                    <h3 class="fs-title mb0">Accounts</h3>
+                                                </div>
+
+                                                <div class="flex--item d-none">
+                                                    <a href="https://stackexchange.com/users/25829674/Omar?tab=accounts"
+                                                       class="s-link s-link__muted">View all 2 accounts</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="fl-grow1 ba bc-black-100 bar-md">
+
+                                        <div class="d-flex fw-wrap jc-space-between ai-center p12 bb bc-black-075">
+                                            <div class="flex--item">
+                                                <div class="d-flex ai-center">
+                                                    <div class="flex--item mr12">
+                                                        <div class="favicon favicon-ru favicon"
+                                                             title="Stack Overflow на русском"></div>
+                                                    </div>
+                                                    <a class="flex--item s-link fs-body2"
+                                                       href="https://ru.stackoverflow.com/users/510982/">
+                                                        Stack Overflow &#x43D;&#x430; &#x440;&#x443;&#x441;&#x441;&#x43A;&#x43E;&#x43C;
+
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="flex--item">
+                                                <div class="s-user-card s-user-card__small">
+                                                    <div class="s-user-card--info">
+                                                        <ul class="s-user-card--awards">
+                                                            <li class="s-user-card--rep"><span class="reputation-score"
+                                                                                               title="reputation score "
+                                                                                               dir="ltr">1</span></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex fw-wrap jc-space-between ai-center p12">
+                                            <div class="flex--item">
+                                                <div class="d-flex ai-center">
+                                                    <div class="flex--item mr12">
+                                                        <div class="favicon favicon-stackoverflow favicon"
+                                                             title="Stack Overflow"></div>
+                                                    </div>
+                                                    <a class="flex--item s-link fs-body2"
+                                                       href="https://stackoverflow.com/users/19743327/">Stack
+                                                        Overflow</a>
+                                                </div>
+                                            </div>
+                                            <div class="flex--item">
+                                                <div class="s-user-card s-user-card__small">
+                                                    <div class="s-user-card--info">
+                                                        <ul class="s-user-card--awards">
+                                                            <li class="s-user-card--rep"><span class="reputation-score"
+                                                                                               title="reputation score "
+                                                                                               dir="ltr">1</span></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="grid--item grid--col-start1 grid--col-end3 lg:grid--col-end2">
+                                <div id="user-panel-bounties" class="d-flex fd-column js-user-panel h100">
+                                    <div class="d-flex ai-end jc-space-between mb8 fw-wrap">
+                                        <div class="flex--item fl-grow1">
+                                            <div class="d-flex fd-column">
+
+                                                <h3 class="flex--item fs-title mb0">
+                                                    Active bounties <span>(0)</span></h3>
+
+                                                <div class="flex--item d-none">
+                                                    <a href="/users/19743327/Omar?tab=bounties&amp;sort=active"
+                                                       class="s-link s-link__muted">View all 0 bounties</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="flex--item s-btn-group js-user-subtabs">
+                                            <a href="javascript:void(0)"
+                                               class="s-btn s-btn__muted s-btn__outlined s-btn__xs js-user-subtab is-selected js-selected"
+                                               data-sort-id="active">
+                                                Active
+                                            </a>
+                                            <a href="javascript:void(0)"
+                                               class="s-btn s-btn__muted s-btn__outlined s-btn__xs js-user-subtab"
+                                               data-sort-id="offered">
+                                                Offered
+                                            </a>
+                                            <a href="javascript:void(0)"
+                                               class="s-btn s-btn__muted s-btn__outlined s-btn__xs js-user-subtab"
+                                               data-sort-id="earned">
+                                                Earned
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="fl-grow1 ba bc-black-100 bar-md">
+
+                                        <div class="d-flex flex__center h100 s-empty-state p24">
+                                            <p class="wmx4 m0">
+                                                You have no active <a href="https://stackoverflow.com/help/bounty">bounties</a>
+                                            </p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="grid--item grid--col-start1 grid--col-end3 lg:grid--col-end2">
+                                <div id="user-panel-articles" class="d-flex fd-column js-user-panel h100">
+                                    <div class="d-flex ai-end jc-space-between mb8 fw-wrap">
+                                        <div class="flex--item fl-grow1">
+                                            <div class="d-flex fd-column">
+
+                                                <h3 class="flex--item fs-title mb0">Articles</h3>
+
+                                                <div class="flex--item d-none">
+                                                    <a href="/users/19743327/Omar?tab=articles&amp;sort=votes"
+                                                       class="s-link s-link__muted">View all 0 articles</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="flex--item s-btn-group js-user-subtabs">
+                                            <a href="javascript:void(0)"
+                                               class="s-btn s-btn__muted s-btn__outlined s-btn__xs js-user-subtab is-selected js-selected"
+                                               data-sort-id="votes">
+                                                Score
+                                            </a>
+                                            <a href="javascript:void(0)"
+                                               class="s-btn s-btn__muted s-btn__outlined s-btn__xs js-user-subtab"
+                                               data-sort-id="activity">
+                                                Activity
+                                            </a>
+                                            <a href="javascript:void(0)"
+                                               class="s-btn s-btn__muted s-btn__outlined s-btn__xs js-user-subtab"
+                                               data-sort-id="newest">
+                                                Newest
+                                            </a>
+                                            <a href="javascript:void(0)"
+                                               class="s-btn s-btn__muted s-btn__outlined s-btn__xs js-user-subtab"
+                                               data-sort-id="views">
+                                                Views
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="fl-grow1 ba bc-black-100 bar-md">
+
+                                        <div class="d-flex flex__center h100 s-empty-state p24">
+                                            <p class="wmx4 m0">
+                                                You have not created any <a href="/help/propose-article">articles</a>.
+                                            </p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="grid--item grid--col-start1 grid--col-end3 lg:grid--col-end2">
+                                <div id="user-panel-votes" class="d-flex fd-column js-user-panel h100">
+                                    <div class="d-flex ai-end jc-space-between mb8 fw-wrap">
+                                        <div class="flex--item fl-grow1">
+                                            <div class="d-flex ai-end jc-space-between">
+
+                                                <h3 class="flex--item fs-title mb0">Votes cast</h3>
+
+
+                                                <div class="flex--item d-none">
+                                                    <a href="/users/19743327/Omar?tab=votes"
+                                                       class="s-link s-link__muted">View all 0 votes</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="fl-grow1 ba bc-black-100 bar-md">
+
+                                        <div class="d-flex flex__center h100 s-empty-state p24">
+                                            <p class="wmx4 m0">
+                                                You have not cast any <a href="/help/why-vote">votes</a></p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex--item">
+                                <div id="feed-link" class="js-feed-link">
+                                    <a href="/feeds/user/19743327"
+                                       title="Feed of the 30 latest questions, answers, and comments from this user">
+                                        <svg aria-hidden="true" class="fc-orange-400 svg-icon iconRss" width="18"
+                                             height="18" viewBox="0 0 18 18">
+                                            <path d="M3 1a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H3Zm0 1.5c6.9 0 12.5 5.6 12.5 12.5H13C13 9.55 8.45 5 3 5V2.5Zm0 5c4.08 0 7.5 3.41 7.5 7.5H8c0-2.72-2.28-5-5-5V7.5Zm0 5c1.36 0 2.5 1.14 2.5 2.5H3v-2.5Z"/>
+                                        </svg>
+                                        User feed
+                                    </a>
+                                </div>
+                                <aside class="s-modal js-feed-link-modal" tabindex="-1" role="dialog"
+                                       aria-labelledby="feed-modal-title" aria-describedby="feed-modal-description"
+                                       aria-hidden="true">
+                                    <div class="s-modal--dialog js-modal-dialog wmx4" role="document"
+                                         data-controller="se-draggable">
+                                        <h1 class="s-modal--header fw-bold js-first-tabbable" id="feed-modal-title"
+                                            data-se-draggable-target="handle" tabindex="0">
+                                            Subscribe to RSS
+                                        </h1>
+                                        <div class="d-flex gs4 gsy fd-column">
+                                            <div class="flex--item">
+                                                <label class="d-block s-label c-default" for="feed-url">
+                                                    User feed
+                                                    <p class="s-description mt2" id="feed-modal-description">To
+                                                        subscribe to this RSS feed, copy and paste this URL into your
+                                                        RSS reader.</p>
+                                                </label>
+                                            </div>
+                                            <div class="d-flex ps-relative">
+                                                <input class="s-input" type="text" name="feed-url" id="feed-url"
+                                                       readonly="readonly"
+                                                       value="https://stackoverflow.com/feeds/user/19743327"/>
+                                                <svg aria-hidden="true"
+                                                     class="s-input-icon fc-orange-400 svg-icon iconRss" width="18"
+                                                     height="18" viewBox="0 0 18 18">
+                                                    <path d="M3 1a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H3Zm0 1.5c6.9 0 12.5 5.6 12.5 12.5H13C13 9.55 8.45 5 3 5V2.5Zm0 5c4.08 0 7.5 3.41 7.5 7.5H8c0-2.72-2.28-5-5-5V7.5Zm0 5c1.36 0 2.5 1.14 2.5 2.5H3v-2.5Z"/>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <a class="s-modal--close s-btn s-btn__muted js-modal-close js-last-tabbable"
+                                           href="#" aria-label="Close">
+                                            <svg aria-hidden="true" class="svg-icon iconClearSm" width="14" height="14"
+                                                 viewBox="0 0 14 14">
+                                                <path d="M12 3.41 10.59 2 7 5.59 3.41 2 2 3.41 5.59 7 2 10.59 3.41 12 7 8.41 10.59 12 12 10.59 8.41 7 12 3.41Z"/>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </aside>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="js-user-tab-paging">
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+</div>
+
+</body>
+</html>

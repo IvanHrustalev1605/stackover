@@ -61,7 +61,7 @@ function header(block) {
         </form>
 
         <nav class="h7 ml-auto overflow-x-auto pr12">
-            <a type="button" class="btn btn-info" href="/index">Мой профиль</a>
+            <a type="button" class="btn btn-info" href="/profile">Мой профиль</a>
         </nav>
     </div>
 </header>
