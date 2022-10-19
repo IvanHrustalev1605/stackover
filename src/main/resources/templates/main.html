@@ -1,15 +1,169 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html" class="h-100">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+          integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.sstatic.net/Shared/stacks.css?v=5ad0f45f4799">
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.sstatic.net/Sites/stackoverflow/primary.css?v=0cc30ee01b86">
+
+    <title>Main Page</title>
+    <style>
+        body {
+            background-color: #f1f2f3;
+            height: 100px;
+        }
+
+        #header {
+            display: flex;
+            flex-direction: column;
+            height: auto;
+        }
+
+        #sidebar {
+            display: flex;
+            flex-grow: 1;
+            height: auto;
+            position: relative;
+            /*right: -304px;*/
+
+        }
+
+        #content {
+            display: flex;
+            flex-grow: 1;
+            height: 550px;
+            /*padding: 24px;*/
+            float: right;
+            position: relative;
+            top: -262px;
+            /*right: -97px;*/
+            /*left: 100px;*/
+        }
+
+        #footer {
+            display: block;
+            flex-grow: 1;
+            height: auto;
+            text-align: left;
+        }
+    </style>
 </head>
+
 <body>
+<div id="header"></div>
+<div id="sidebar"></div>
+<div id="content">
+    <div class="container-fluid">
+        <div class="col-10 ">
+            <div class="row">
+                <div class="col-12 ">
+                    <div class="d-flex flex-row row">
+                        <h1 class="flex--item fl1 fs-headline1">
+                            Исследуйте вопросы сообщества
+                        </h1>
+                        <div>
+                            <button type="button" class="btn btn-info btn-sm">Задать вопрос</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-4 ">
+                    <button type="button" class="btn btn-outline-secondary">тег 1</button>
+                    <button type="button" class="btn btn-outline-secondary">тег 2</button>
+                    <button type="button" class="btn btn-outline-secondary">тег 3</button>
+                </div>
+                <div class="col">
+                    <div class="d-flex flex-row-reverse">
+                        <button type="button" class="btn btn-outline-secondary">Интересные</button>
+                        <button type="button" class="btn btn-outline-secondary">Конкурсные</button>
+                        <button type="button" class="btn btn-outline-secondary">Популярные</button>
+                        <button type="button" class="btn btn-outline-secondary">За неделю</button>
+                        <button type="button" class="btn btn-outline-secondary">За месяц</button>
+                    </div>
+                </div>
+            </div>
+            <hr>
+
+            <div class="row">
+                <div class="col-2 ">
+                    <div class="row">
+                        <span>голоса</span>
+                    </div>
+                    <div class="row">
+                        <span>ответы</span>
+                    </div>
+                    <div class="row">
+                        <span>показы</span>
+                    </div>
+                </div>
+
+                <div class="col-10 ">
+                    <div class="row">
+                        <h3>Название статьи</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-8 ">
+                            <button type="button" class="btn btn-outline-secondary">тег 1</button>
+                            <button type="button" class="btn btn-outline-secondary">тег 2</button>
+                            <button type="button" class="btn btn-outline-secondary">тег 3</button>
+                        </div>
+
+                        <div class="col-4 ">
+                            <span>Имя пользователя</span>
+                            <span>уровень репутации</span>
+                            <span>статус</span>
+                            <span>время</span>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <hr>
+        </div>
+        <div class="col-2 ">
+            <div class="row">
+                <h3>Недавние метки</h3>
+            </div>
+            <div class="row">
+                <button type="button" class="btn btn-outline-secondary">тег 1</button>
+            </div>
+            <div class="row">
+                <button type="button" class="btn btn-outline-secondary">тег 2</button>
+            </div>
+            <div class="row">
+                <button type="button" class="btn btn-outline-secondary">тег 3</button>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                </div>
+                <div class="col-6">
+                    <a href="ссылка">недавние метки >></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
 
 
+</div>
+
+<div id="footer"></div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+        crossorigin="anonymous"></script>
 <script type="text/javascript" src="/js/header.js"></script>
 <script type="text/javascript" src="/js/sidebar.js"></script>
 <script type="text/javascript" src="/js/footer.js"></script>
-
 </body>
 </html>
