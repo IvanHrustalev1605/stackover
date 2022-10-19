@@ -3,12 +3,12 @@ package com.javamentor.qa.platform.security;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.filter.CharacterEncodingFilter;
@@ -20,17 +20,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
 
-    private final UserDetailsServiceImpl userDetailsService;
+    private final UserDetailsService userDetailsService;
 
     @Override
     public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
         authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-    }
-
-    @Bean
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
     }
 
     @Bean
@@ -42,7 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
     public void configure(WebSecurity web) {
         web.ignoring()
                 .antMatchers("/swagger-ui/**", "/v3/api-docs/**",
-                        "/error", "/webjars/**", "/login", "resources/static/**");
+                        "/error", "/webjars/**", "resources/static/**");
     }
 
     @Override
@@ -53,7 +47,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
         http.csrf().disable();
         http.cors().disable();
         http
-                // делаем страницу регистрации недоступной для авторизированных пользователей
+                //настройка страницы login
+                .formLogin()
+                .loginPage("/login")
+                .loginProcessingUrl("/login_processing")
+                .successForwardUrl("/index")
+                .failureForwardUrl("/error")
+                .and()
                 .authorizeRequests()
                 // ограничиваем доступ api/user/** - разрешен только USER
                 .antMatchers("api/user/**").hasRole("USER")
