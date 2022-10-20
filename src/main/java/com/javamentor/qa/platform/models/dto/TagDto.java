@@ -14,10 +14,10 @@ import lombok.Setter;
 @Schema(description = "тег")
 public class TagDto {
 
-    @Parameter(description = "id пользователя")
+    @Parameter(description = "id тега")
     private Long id;
-    @Schema(description = "почта пользователя")
+    @Schema(description = "имя тега")
     private String name;
-    @Schema(description = "почта пользователя")
+    @Schema(description = "описание тега")
     private String description;
 }
