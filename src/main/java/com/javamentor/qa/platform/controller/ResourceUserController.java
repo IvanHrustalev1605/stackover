@@ -1,6 +1,6 @@
 package com.javamentor.qa.platform.controller;
 
-import com.javamentor.qa.platform.dao.abstracts.dto.UserDtoDao;
+import com.javamentor.qa.platform.dao.impl.dto.UserDtoDaoImpl;
 import com.javamentor.qa.platform.models.dto.UserDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,15 +14,15 @@ import java.util.Optional;
 @RestController
 public class ResourceUserController {
 
-    private final UserDtoDao userDtoDao;
+    private final UserDtoDaoImpl userDtoDaoImpl;
 
-    public ResourceUserController(UserDtoDao userDtoDao) {
-        this.userDtoDao = userDtoDao;
+    public ResourceUserController(UserDtoDaoImpl userDtoDaoImpl) {
+        this.userDtoDaoImpl = userDtoDaoImpl;
     }
 
     @RequestMapping("/api/user/{id}")
     ResponseEntity<Optional<UserDto>> getUserDtoById (@PathVariable long id) {
-        return new ResponseEntity<>(userDtoDao.getById(id), HttpStatus.OK);
+        return new ResponseEntity<>(userDtoDaoImpl.getUserDtoById(id), HttpStatus.OK);
     }
 
 }

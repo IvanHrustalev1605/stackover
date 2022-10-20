@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.Optional;
 
 @Repository
 public class UserDtoDaoImpl extends ReadWriteDaoImpl<UserDto, Long> implements UserDtoDao {
@@ -14,5 +15,12 @@ public class UserDtoDaoImpl extends ReadWriteDaoImpl<UserDto, Long> implements U
     @PersistenceContext
     private EntityManager entityManager;
 
-
+    public Optional<UserDto> getUserDtoById(long id) {
+        try {
+            return Optional.of(entityManager.createQuery("SELECT u FROM User u WHERE u.id=:id", UserDto.class)
+                    .setParameter("id", id).getSingleResult());
+        } catch (RuntimeException e) {
+            throw new RuntimeException("User not found");
+        }
+    }
 }
