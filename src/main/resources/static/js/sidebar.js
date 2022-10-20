@@ -1,13 +1,6 @@
-const modelSideBar = [
-    {type: 'sidebar', value: [
-            'Главная',
-            'ПУБЛИЧНЫЕ',
-            'Вопросы',
-            'Метки',
-            'Участники',
-            'Неотвеченные'
-        ]}
-]
+const modelSideBar = [{
+    type: 'sidebar', value: ['Главная', 'ПУБЛИЧНЫЕ', 'Вопросы', 'Метки', 'Участники', 'Неотвеченные']
+}]
 
 const $sidebar = document.querySelector("#sidebar")
 
@@ -23,7 +16,6 @@ modelSideBar.forEach(block => {
 
 function sidebar(block) {
     return `
-<div class="container">
     <div id="left-sidebar" data-is-here-when="md lg" class="left-sidebar js-pinned-left-sidebar ps-relative">
         <div class="left-sidebar--sticky-container js-sticky-leftnav">
             <nav role="navigation">
@@ -114,6 +106,5 @@ function sidebar(block) {
             </nav>
         </div>
     </div>
-</div>
     `
 }
