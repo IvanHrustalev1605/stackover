@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serial;
 import java.io.Serializable;
 
 @Entity
@@ -21,6 +22,8 @@ import java.io.Serializable;
 @Table(name = "badges")
 public class Badge implements Serializable {
 
+    @Serial
+    private static final long serialVersionUID = 4290576964592105765L;
     @Id
     @GeneratedValue(generator = "Badge_seq")
     private Long id;

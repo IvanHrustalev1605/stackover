@@ -15,6 +15,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.io.Serial;
+import java.io.Serializable;
 
 @Entity
 @Getter
@@ -22,8 +24,10 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "bookmarks")
-public class BookMarks {
+public class BookMarks implements Serializable {
 
+    @Serial
+    private static final long serialVersionUID = 8262952961927611749L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
