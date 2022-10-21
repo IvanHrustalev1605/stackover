@@ -19,6 +19,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.Set;
 
@@ -28,7 +30,10 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "group_chat")
-public class GroupChat{
+public class GroupChat implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 4832511658910376915L;
 
     @Id
     private Long id;

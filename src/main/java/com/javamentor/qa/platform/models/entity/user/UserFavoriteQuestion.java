@@ -17,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -28,6 +29,8 @@ import java.time.LocalDateTime;
 @Table(name = "user_favorite_question")
 public class UserFavoriteQuestion implements Serializable {
 
+    @Serial
+    private static final long serialVersionUID = 6080406042144570264L;
     @Id
     @GeneratedValue(generator = "UserFavoriteQuestion_seq")
     private Long id;

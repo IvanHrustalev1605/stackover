@@ -21,6 +21,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Collections;
@@ -33,8 +35,10 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "user_entity")
-public class User implements UserDetails {
+public class User implements UserDetails, Serializable {
 
+    @Serial
+    private static final long serialVersionUID = -8404955799922281311L;
     @Id
     @GeneratedValue(generator = "User_seq")
     private Long id;

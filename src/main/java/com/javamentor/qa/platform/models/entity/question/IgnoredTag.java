@@ -17,6 +17,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -29,6 +30,8 @@ import java.time.LocalDateTime;
 @Table(name = "tag_ignore")
 public class IgnoredTag implements Serializable {
 
+    @Serial
+    private static final long serialVersionUID = 7619599555617084857L;
     @Id
     @GeneratedValue(generator = "IgnoreTag_seq")
     private Long id;
