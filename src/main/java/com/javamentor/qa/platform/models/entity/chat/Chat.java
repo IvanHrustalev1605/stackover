@@ -13,6 +13,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
@@ -21,7 +23,10 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "chat")
-public class Chat {
+public class Chat implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 2041742463925939659L;
 
     @Id
     @GeneratedValue(generator = "Chat_seq")

@@ -21,6 +21,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -34,6 +35,8 @@ import java.util.Objects;
 @Table(name = "reputation")
 public class Reputation implements Serializable {
 
+    @Serial
+    private static final long serialVersionUID = 8899066159642240089L;
     @Id
     @GeneratedValue(generator = "Reputation_seq")
     private Long id;

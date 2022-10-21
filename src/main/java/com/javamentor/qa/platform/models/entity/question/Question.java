@@ -28,6 +28,7 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -42,6 +43,8 @@ import java.util.Objects;
 @Table(name = "question")
 public class Question implements Serializable {
 
+    @Serial
+    private static final long serialVersionUID = 8765151549804433494L;
     @Id
     @GeneratedValue(generator = "Question_seq")
     private Long id;

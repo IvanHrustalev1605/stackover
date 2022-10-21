@@ -19,6 +19,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
@@ -27,8 +29,10 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class VoteAnswer {
+public class VoteAnswer implements Serializable {
 
+    @Serial
+    private static final long serialVersionUID = -3612653779756670617L;
     @Id
     @GeneratedValue(generator = "AnswerVote_seq")
     private Long id;
