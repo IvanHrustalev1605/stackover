@@ -18,7 +18,7 @@ public class UserDtoDaoImpl extends ReadWriteDaoImpl<UserDto, Long> implements U
 
     @Override
     public Optional<UserDto> getById(Long id) {
-        return SingleResultUtil.getSingleResultOrNull(entityManager.createQuery("SELECT u FROM User u WHERE u.id=:id", UserDto.class)
+        return SingleResultUtil.getSingleResultOrNull(entityManager.createQuery("SELECT u FROM User u WHERE u.id=:id")
                 .setParameter("id", id));
     }
 }
