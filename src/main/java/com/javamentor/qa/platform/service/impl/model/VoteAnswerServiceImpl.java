@@ -12,4 +12,9 @@ public class VoteAnswerServiceImpl extends ReadWriteServiceImpl<VoteAnswer, Long
     public VoteAnswerServiceImpl(ReadWriteDao<VoteAnswer, Long> readWriteDao) {
         super(readWriteDao);
     }
+
+    @Override
+    public void voteUp() {
+
+    }
 }
