@@ -1,8 +1,7 @@
 package com.javamentor.qa.platform.controller;
 
 import com.javamentor.qa.platform.models.dto.UserDto;
-import com.javamentor.qa.platform.models.entity.user.User;
-import com.javamentor.qa.platform.service.abstracts.model.UserService;
+import com.javamentor.qa.platform.service.impl.dto.UserDtoServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -17,10 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/user")
 public class ResourceUserController {
 
-    private final UserService userService;
+    private final UserDtoServiceImpl userDtoService;
 
-    public ResourceUserController(UserService userService) {
-        this.userService = userService;
+    public ResourceUserController(UserDtoServiceImpl userDtoService) {
+        this.userDtoService = userDtoService;
     }
 
     @GetMapping("/{id}")
@@ -29,11 +28,11 @@ public class ResourceUserController {
             @ApiResponse(responseCode = "200", description = "Get User обработан успешно"),
             @ApiResponse(responseCode = "404", description = "User By Id не найден")
     })
-    ResponseEntity<User> getUserDtoById(@PathVariable Long id) {
-        if (userService.getById(id).isEmpty()) {
+    ResponseEntity<UserDto> getUserDtoById(@PathVariable Long id) {
+        if (userDtoService.getById(id).isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(userService.getById(id).get(), HttpStatus.OK);
+        return new ResponseEntity<>(userDtoService.getById(id).get(), HttpStatus.OK);
     }
 
 }
