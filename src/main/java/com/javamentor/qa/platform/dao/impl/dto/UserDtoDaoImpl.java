@@ -18,15 +18,16 @@ public class UserDtoDaoImpl extends ReadWriteDaoImpl<UserDto, Long> implements U
 
     @Override
     public Optional<UserDto> getById(Long id) {
-    return SingleResultUtil.getSingleResultOrNull(entityManager.createQuery(
-                "SELECT User.id, User.email, User.fullName as fullName, User.imageLink as linkImage, User.city, Reputation.count as reputation, User.persistDateTime as registrationDate," +
-                        "count(VoteQuestion.vote) + count(VoteAnswer.voteType) as votes " +
-                        "FROM User " +
-                        "LEFT JOIN VoteAnswer ON User.id = VoteAnswer.user.id " +
-                        "LEFT JOIN VoteQuestion ON User.id = VoteQuestion.user.id " +
-                        "LEFT JOIN Reputation ON User.id = Reputation.author.id AND User.id = Reputation.sender.id " +
-                        "WHERE User.id=:id " +
-                        "GROUP BY User.id, User.email, User.fullName, User.imageLink, User.city, Reputation.count, User.persistDateTime")
+        return SingleResultUtil.getSingleResultOrNull(entityManager.createQuery("""
+                        SELECT User.id, User.email, User.fullName as fullName, User.imageLink as linkImage, User.city, Reputation.count as reputation, User.persistDateTime as registrationDate,
+                                                count(VoteQuestion.vote) + count(VoteAnswer.voteType) as votes
+                                                FROM User
+                                                LEFT JOIN VoteAnswer ON User.id = VoteAnswer.user.id
+                                                LEFT JOIN VoteQuestion ON User.id = VoteQuestion.user.id
+                                                LEFT JOIN Reputation ON User.id = Reputation.author.id AND User.id = Reputation.sender.id
+                                                WHERE User.id=:id
+                                                GROUP BY User.id, User.email, User.fullName, User.imageLink, User.city, Reputation.count, User.persistDateTime
+                        """)
                 .setParameter("id", id));
     }
 }

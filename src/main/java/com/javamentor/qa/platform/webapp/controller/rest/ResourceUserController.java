@@ -1,4 +1,4 @@
-package com.javamentor.qa.platform.controller;
+package com.javamentor.qa.platform.webapp.controller.rest;
 
 import com.javamentor.qa.platform.models.dto.UserDto;
 import com.javamentor.qa.platform.service.impl.dto.UserDtoServiceImpl;
@@ -28,7 +28,7 @@ public class ResourceUserController {
             @ApiResponse(responseCode = "200", description = "Get User обработан успешно"),
             @ApiResponse(responseCode = "404", description = "User By Id не найден")
     })
-    ResponseEntity<UserDto> getUserDtoById(@PathVariable Long id) {
+    private ResponseEntity<UserDto> getUserDtoById(@PathVariable Long id) {
         if (userDtoService.getById(id).isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
