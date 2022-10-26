@@ -12,4 +12,5 @@ public class AnswerServiceImpl extends ReadWriteServiceImpl<Answer, Long> implem
     public AnswerServiceImpl(ReadWriteDao<Answer, Long> readWriteDao) {
         super(readWriteDao);
     }
+
 }
