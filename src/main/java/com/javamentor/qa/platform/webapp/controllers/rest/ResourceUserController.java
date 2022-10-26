@@ -1,6 +1,7 @@
-package com.javamentor.qa.platform.webapp.controller.rest;
+package com.javamentor.qa.platform.webapp.controllers.rest;
 
 import com.javamentor.qa.platform.models.dto.UserDto;
+import com.javamentor.qa.platform.service.abstracts.dto.UserDtoService;
 import com.javamentor.qa.platform.service.impl.dto.UserDtoServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/user")
 public class ResourceUserController {
 
-    private final UserDtoServiceImpl userDtoService;
+    private final UserDtoService userDtoService;
 
     public ResourceUserController(UserDtoServiceImpl userDtoService) {
         this.userDtoService = userDtoService;
