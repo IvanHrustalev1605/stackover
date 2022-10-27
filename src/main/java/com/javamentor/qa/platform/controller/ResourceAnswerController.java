@@ -7,7 +7,7 @@ import com.javamentor.qa.platform.models.entity.user.User;
 import com.javamentor.qa.platform.models.entity.user.reputation.Reputation;
 import com.javamentor.qa.platform.service.abstracts.model.AnswerService;
 import com.javamentor.qa.platform.service.abstracts.model.UserService;
-import com.javamentor.qa.platform.service.abstracts.model.VoteAnswerService;
+import com.javamentor.qa.platform.service.impl.dto.model.AnswerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,18 +20,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/user/question/{questionId}/answer")
 public class ResourceAnswerController {
-
     UserService userService;
-    AnswerService answerService;
+    AnswerServiceImpl answerService;
 
     @Autowired
-    public ResourceAnswerController(UserService userService, AnswerService answerService) {
+    public ResourceAnswerController(UserService userService, AnswerServiceImpl answerService) {
         this.answerService = answerService;
         this.userService = userService;
     }
 
     @PostMapping("/{id}/upVote")
-    private ResponseEntity<Integer> upVoteAnswer(@PathVariable("id") Long id) {
+    public ResponseEntity<Long> increaseVoteAnswer(@PathVariable Long answerId) {
         User user = null;
         try {
             user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -39,16 +38,11 @@ public class ResourceAnswerController {
             return new ResponseEntity <>(HttpStatus.NOT_FOUND);
         }
 
-
-        Reputation reputation = new Reputation();
-        reputation.setAuthor(user);
-
-        if (answerService.getById(id).isPresent()) {
-            Answer answer = answerService.getById(id).get();
-            VoteAnswer voteAnswerUp = new VoteAnswer(user, answer, VoteType.UP);
-            answer.getVoteAnswers().add(voteAnswerUp);
-            reputation.setCount(reputation.getCount() + 10);
+        if (answerService.getById(answerId).isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(answerService.increaseVoteAnswer(answerId, user.getId()), HttpStatus.OK);
         }
-        return new ResponseEntity<>(reputation.getCount(), HttpStatus.OK);
     }
 }
+

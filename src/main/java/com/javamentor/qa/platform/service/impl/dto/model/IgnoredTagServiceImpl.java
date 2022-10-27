@@ -1,4 +1,4 @@
-package com.javamentor.qa.platform.service.impl.model;
+package com.javamentor.qa.platform.service.impl.dto.model;
 
 import com.javamentor.qa.platform.dao.abstracts.repository.ReadWriteDao;
 import com.javamentor.qa.platform.models.entity.question.IgnoredTag;
