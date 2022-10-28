@@ -61,7 +61,7 @@ public class AnswerServiceImpl extends ReadWriteServiceImpl<Answer, Long> implem
 
     @Override
     public Long increaseVoteAnswer(Long answerId, Long userId) {
-        Long votes = null;
+        Long votes = 0L;
         if (answerDao.getById(answerId).isPresent()) {
             if (voteAnswerDao.getByAnswerIdAndUserId(answerId, userId).isPresent()) {
                 voteAnswerDao.getByAnswerIdAndUserId(answerId, userId).get().setVoteType(VoteType.UP);
@@ -77,7 +77,7 @@ public class AnswerServiceImpl extends ReadWriteServiceImpl<Answer, Long> implem
                     currentUserReputation.setPersistDate(LocalDateTime.now());
                 }
             } else {
-                new VoteAnswer(userDao.getById(userId).get(), answerDao.getById(answerId).get(), VoteType.DOWN);
+                new VoteAnswer(userDao.getById(userId).get(), answerDao.getById(answerId).get(), VoteType.UP);
             }
 
             for (int i=0; i<answerDao.getById(answerId).get().getVoteAnswers().size(); i++) {
@@ -90,5 +90,7 @@ public class AnswerServiceImpl extends ReadWriteServiceImpl<Answer, Long> implem
         }
         return votes;
     }
+
+
 
 }
