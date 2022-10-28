@@ -87,7 +87,7 @@ public class User implements UserDetails, Serializable {
     @Column
     private String nickname;
 
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Role.class, cascade = {CascadeType.PERSIST})
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Role.class, cascade = {CascadeType.MERGE})
     @JoinColumn(name = "role_id", nullable = false)
     @NonNull
     private Role role;
