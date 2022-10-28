@@ -1,13 +1,8 @@
 package com.javamentor.qa.platform.controller;
 
-import com.javamentor.qa.platform.models.entity.question.VoteType;
-import com.javamentor.qa.platform.models.entity.question.answer.Answer;
-import com.javamentor.qa.platform.models.entity.question.answer.VoteAnswer;
 import com.javamentor.qa.platform.models.entity.user.User;
-import com.javamentor.qa.platform.models.entity.user.reputation.Reputation;
-import com.javamentor.qa.platform.service.abstracts.model.AnswerService;
 import com.javamentor.qa.platform.service.abstracts.model.UserService;
-import com.javamentor.qa.platform.service.impl.dto.model.AnswerServiceImpl;
+import com.javamentor.qa.platform.service.impl.model.AnswerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,12 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/user/question/{questionId}/answer")
-public class ResourceAnswerController {
+public class AnswerController {
     UserService userService;
     AnswerServiceImpl answerService;
 
     @Autowired
-    public ResourceAnswerController(UserService userService, AnswerServiceImpl answerService) {
+    public AnswerController(UserService userService, AnswerServiceImpl answerService) {
         this.answerService = answerService;
         this.userService = userService;
     }
