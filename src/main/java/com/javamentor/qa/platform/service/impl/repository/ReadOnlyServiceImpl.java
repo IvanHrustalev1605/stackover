@@ -1,6 +1,7 @@
 package com.javamentor.qa.platform.service.impl.repository;
 
 import com.javamentor.qa.platform.dao.abstracts.repository.ReadOnlyDao;
+import com.javamentor.qa.platform.models.entity.user.reputation.Reputation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
@@ -39,4 +40,10 @@ public abstract class ReadOnlyServiceImpl<E, K> {
     public boolean existsByAllIds(Collection<K> ids) {
         return readOnlyDao.existsByAllIds(ids);
     }
+
+    @Transactional
+    public Optional<Reputation> getReputation(Long answerId, Long authorId) {return readOnlyDao.getReputation(answerId, authorId);}
+
+    @Transactional
+    public Optional<E> getByAnswerIdAndUserId(Long answerId, Long userId){return readOnlyDao.getByAnswerIdAndUserId(answerId, userId);}
 }

@@ -2,6 +2,7 @@ package com.javamentor.qa.platform.dao.impl.repository;
 
 import com.javamentor.qa.platform.dao.util.SingleResultUtil;
 import com.javamentor.qa.platform.models.entity.user.User;
+import com.javamentor.qa.platform.models.entity.user.reputation.Reputation;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -62,5 +63,26 @@ public abstract class ReadOnlyDaoImpl<E, K> {
                         """, User.class)
                 .setParameter("email", email);
         return SingleResultUtil.getSingleResultOrNull(query);
+    }
+
+    public Optional<Reputation> getReputation(Long answerId, Long authorId) {
+        TypedQuery<Reputation> query = entityManager.createQuery("""
+                        SELECT r
+                        FROM Reputation r
+                        JOIN FETCH r.answer
+                        WHERE r.id=:id
+                        """, Reputation.class)
+                .setParameter("id", answerId)
+                .setParameter("id", authorId);
+        return SingleResultUtil.getSingleResultOrNull(query);
+    }
+    public Optional<E> getByAnswerIdAndUserId(Long answerId, Long userId) {
+        {
+            String hql = "SELECT e FROM" + clazz.getName() + "as e WHERE e.answer.id = :answerId and e.user.id =:userId";
+            TypedQuery<E> query = (TypedQuery<E>) entityManager.createQuery(hql);
+            query.setParameter("answerId", answerId);
+            query.setParameter("userId", userId);
+            return SingleResultUtil.getSingleResultOrNull(query);
+        }
     }
 }

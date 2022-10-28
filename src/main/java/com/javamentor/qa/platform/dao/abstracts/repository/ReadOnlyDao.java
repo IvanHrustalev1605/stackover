@@ -1,6 +1,7 @@
 package com.javamentor.qa.platform.dao.abstracts.repository;
 
 import com.javamentor.qa.platform.models.entity.user.User;
+import com.javamentor.qa.platform.models.entity.user.reputation.Reputation;
 
 import java.util.Collection;
 import java.util.List;
@@ -18,4 +19,8 @@ public interface ReadOnlyDao<E, K> {
     boolean existsByAllIds(Collection<K> ids);
 
     Optional<User> getByEmail(String email);
+
+    Optional<E> getByAnswerIdAndUserId (Long answerId, Long userId);
+
+    Optional<Reputation> getReputation(Long userId, Long authorId);
 }
