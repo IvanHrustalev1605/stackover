@@ -588,3 +588,35 @@ this.mockMvc
 ```
 
 5. Если ожидаемые результаты не совпадут, тест сообщит об ошибке и распечатает все параметры. В ином случае вы увидите сообщение о том, что тест успешно пройден.
+
+## Настройка профиля подключения к БД
+
+Для запуска БД с локальными настройками
+
+Заходим в _Edit Configuration_`->`_Configuration_`->`_Environment variables_
+
+![](src/main/resources/static/images/VMOption2.png)
+
+![](src/main/resources/static/images/OMG.png)
+
+Вписываем в VM Option `-ea -Dspring.profiles.active=local/dev` - выбираем профиль для запуска
+
+Environment variables `HIBERNATE_DDL=;DB_BASE=;DB_SERVER=;DB_PORT=;DB_NAME=;DB_USERNAME=;DB_PASS=`
+
+где
+
+HIBERNATE_DDL - настройка ddl
+
+DB_BASE - тип используемой БД
+
+DB_SERVER - адрес сервера (по умолчанию localhost)
+
+DB_PORT - порт
+
+DB_NAME - название БД
+
+DB_USERNAME - твой логин
+
+DB_PASS - твой пароль
+
+-ea -Dspring.profiles.active= - выбери профиль
