@@ -363,7 +363,7 @@ public class DataBaseInitialize {
             } else {
                 user.setRole(ROLE_USER);
             }
-            userService.persist(user);
+            userService.update(user);
         }
     }
 
