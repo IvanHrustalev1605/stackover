@@ -16,12 +16,14 @@ import com.javamentor.qa.platform.models.entity.user.UserFavoriteQuestion;
 import com.javamentor.qa.platform.models.entity.user.reputation.Reputation;
 import com.javamentor.qa.platform.models.entity.user.reputation.ReputationType;
 import com.javamentor.qa.platform.service.abstracts.model.*;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.*;
 
 @Service
+@RequiredArgsConstructor
 public class DataBaseInitialize {
 
     private final AnswerService answerService;
@@ -62,39 +64,6 @@ public class DataBaseInitialize {
     private final static int VOTE_QUESTIONS_COUNT = 2;
     private final static List<Question> questions = new ArrayList<>();
     private final static List<Tag> tags = new ArrayList<>();
-
-    public DataBaseInitialize(UserService userService, RoleService roleService, AnswerService answerService,
-                              QuestionService questionService, ReputationService reputationService, TagService tagService,
-                              CommentAnswerService commentAnswerService, IgnoredTagService ignoredTagService, TrackedTagService trackedTagService,
-                              VoteAnswerService voteAnswerService, VoteQuestionService voteQuestionService, BadgesService badgesService,
-                              BookmarksService bookmarksService, ChatService chatService, CommentService commentService,
-                              CommentQuestionService commentQuestionService, GroupChatService groupChatService, MessageService messageService,
-                              QuestionViewedService questionViewedService, RelatedTagService relatedTagService, SingleChatService singleChatService,
-                              UserBadgesService userBadgesService, UserFavoriteQuestionService userFavoriteQuestionService) {
-        this.userService = userService;
-        this.roleService = roleService;
-        this.answerService = answerService;
-        this.questionService = questionService;
-        this.reputationService = reputationService;
-        this.tagService = tagService;
-        this.commentAnswerService = commentAnswerService;
-        this.ignoredTagService = ignoredTagService;
-        this.trackedTagService = trackedTagService;
-        this.voteAnswerService = voteAnswerService;
-        this.voteQuestionService = voteQuestionService;
-        this.badgesService = badgesService;
-        this.bookmarksService = bookmarksService;
-        this.chatService = chatService;
-        this.commentService = commentService;
-        this.commentQuestionService = commentQuestionService;
-        this.groupChatService = groupChatService;
-        this.messageService = messageService;
-        this.questionViewedService = questionViewedService;
-        this.relatedTagService = relatedTagService;
-        this.singleChatService = singleChatService;
-        this.userBadgesService = userBadgesService;
-        this.userFavoriteQuestionService = userFavoriteQuestionService;
-    }
 
     void dataBaseInit() {
         roleInit();
