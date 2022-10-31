@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en" class="h-100"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+        integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
+  <title>Users</title>
+</head>
+
+<body>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3">
+      <a href="https://stackoverflow.com" class="s-topbar--logo js-gps-track" data-gps-track="top_nav.click({is_current:false, location:25, destination:8})">
+        <span class="-img _glyph">Stack Overflow</span>
+      </a>
+    </div>
+    <div class="col-md-3">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+              <a class="nav-link" href="#!">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#!">Products</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#!">For Teams</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="col-md-3">
+      <nav class="navbar navbar-light bg-light">
+        <form class="form-inline">
+          <input class="form-control mr-sm-2" type="search" placeholder="Поиск"
+                 aria-label="Поиск">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Поиск</button>
+        </form>
+      </nav>
+    </div>
+    <div class="col-md-3">
+      <button type="button" class="btn btn-outline-primary">Log in</button>
+      <button type="button" class="btn btn-outline-primary">Sing up</button>
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link active" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">PUBLIC</a>
+          <ul>
+
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Tags</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Users</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Companies</a>
+            </li>
+
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">COLLECTIVES</a>
+          <ul>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Explore Collectives</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">TEAMS</a>
+        </li>
+      </ul>
+
+    </div>
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-6">
+          <h1>Users</h1>
+          <nav class="navbar navbar-light bg-light">
+            <form class="form-inline">
+              <input class="form-control mr-sm-2" type="search" placeholder="Поиск"
+                     aria-label="Поиск">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Поиск</button>
+            </form>
+          </nav>
+        </div>
+        <div class="col-md-6">
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+              <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item active">
+                  <a class="nav-link" href="#!">Reputation</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#!">New users</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#!">Voters</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#!">Editors</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#!">Moderators</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <h1>Тут будет вывод юзеров!!!</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <nav aria-label="...">
+            <ul class="pagination">
+              <li class="page-item disabled">
+                <a class="page-link" href="#!" tabindex="-1">Previous</a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#!">1</a></li>
+              <li class="page-item active">
+                <a class="page-link" href="#!">2 <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#!">3</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#!">Next</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Footer!</h1>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript" src="/js/header.js"></script>
+<script type="text/javascript" src="/js/sidebar.js"></script>
+<script type="text/javascript" src="/js/footer.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+        crossorigin="anonymous"></script>
+</body>
+</html>
