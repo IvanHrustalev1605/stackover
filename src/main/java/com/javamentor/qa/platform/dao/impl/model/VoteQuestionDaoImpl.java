@@ -3,9 +3,7 @@ package com.javamentor.qa.platform.dao.impl.model;
 import com.javamentor.qa.platform.dao.abstracts.model.VoteQuestionDao;
 import com.javamentor.qa.platform.dao.impl.repository.ReadWriteDaoImpl;
 import com.javamentor.qa.platform.dao.util.SingleResultUtil;
-import com.javamentor.qa.platform.models.entity.question.Question;
 import com.javamentor.qa.platform.models.entity.question.VoteQuestion;
-import com.javamentor.qa.platform.models.entity.user.User;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -19,7 +17,7 @@ public class VoteQuestionDaoImpl extends ReadWriteDaoImpl<VoteQuestion, Long> im
     private EntityManager entityManager;
 
     @Override
-    public Optional<VoteQuestion> getUserVoteQuestion(User userId, Question questionId) {
+    public Optional<VoteQuestion> getUserVoteQuestion(Long userId, Long questionId) {
         return SingleResultUtil.getSingleResultOrNull(entityManager.createQuery("""
                 SELECT vote FROM VoteQuestion vote
                 WHERE vote.question.id = :questionId

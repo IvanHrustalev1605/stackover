@@ -3,8 +3,6 @@ package com.javamentor.qa.platform.dao.impl.model;
 import com.javamentor.qa.platform.dao.abstracts.model.ReputationDao;
 import com.javamentor.qa.platform.dao.impl.repository.ReadWriteDaoImpl;
 import com.javamentor.qa.platform.dao.util.SingleResultUtil;
-import com.javamentor.qa.platform.models.entity.question.Question;
-import com.javamentor.qa.platform.models.entity.user.User;
 import com.javamentor.qa.platform.models.entity.user.reputation.Reputation;
 import com.javamentor.qa.platform.models.entity.user.reputation.ReputationType;
 import org.springframework.stereotype.Repository;
@@ -20,7 +18,7 @@ public class ReputationDaoImpl extends ReadWriteDaoImpl<Reputation, Long> implem
     private EntityManager entityManager;
 
     @Override
-    public Optional<Reputation> getBySenderAndQuestion(User senderId, Question questionId, ReputationType type) {
+    public Optional<Reputation> getBySenderAndQuestion(Long senderId, Long questionId, ReputationType type) {
         return SingleResultUtil.getSingleResultOrNull(entityManager.createQuery("""
                 SELECT r FROM Reputation r
                 WHERE r.sender = :sender
