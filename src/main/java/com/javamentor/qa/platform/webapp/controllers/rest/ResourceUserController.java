@@ -2,7 +2,6 @@ package com.javamentor.qa.platform.webapp.controllers.rest;
 
 import com.javamentor.qa.platform.models.dto.UserDto;
 import com.javamentor.qa.platform.service.abstracts.dto.UserDtoService;
-import com.javamentor.qa.platform.service.impl.dto.UserDtoServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -19,7 +18,7 @@ public class ResourceUserController {
 
     private final UserDtoService userDtoService;
 
-    public ResourceUserController(UserDtoServiceImpl userDtoService) {
+    public ResourceUserController(UserDtoService userDtoService) {
         this.userDtoService = userDtoService;
     }
 
