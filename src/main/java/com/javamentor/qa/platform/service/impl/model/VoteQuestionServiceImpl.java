@@ -31,8 +31,8 @@ public class VoteQuestionServiceImpl extends ReadWriteServiceImpl<VoteQuestion, 
 
     @Override
     public void downVote(User user, Question question) {
-        Optional<VoteQuestion> voteQuestionOptional = voteQuestionDao.getUserVoteQuestion(user.getId(), question.getId());
-        Optional<Reputation> reputationOptional = reputationDao.getBySenderAndQuestion(user.getId(), question.getId(), ReputationType.VoteQuestion);
+        Optional<VoteQuestion> voteQuestionOptional = voteQuestionDao.getUserVoteQuestion(user, question);
+        Optional<Reputation> reputationOptional = reputationDao.getBySenderAndQuestion(user, question, ReputationType.VoteQuestion);
         if (user.equals(question.getUser())) {
             throw new VoteException("пользователь не может голосовать за свой вопрос");
         }
