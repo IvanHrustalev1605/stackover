@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -20,11 +19,10 @@ public class VoteQuestionDaoImpl extends ReadWriteDaoImpl<VoteQuestion, Long> im
     @Override
     public Optional<VoteQuestion> getUserVoteQuestion(Long userId, Long questionId) {
         return SingleResultUtil.getSingleResultOrNull(entityManager.createQuery("""
-                        SELECT vote from VoteQuestion vote
-                         where vote.id = :questionId
-                         and vote.user = :userId
-                         and vote.localDateTime = (select max(localDateTime) from VoteQuestion)
-                        """, VoteQuestion.class)
+                SELECT vote FROM VoteQuestion vote
+                WHERE vote.question.id = :questionId
+                AND vote.user.id = :userId
+                """, VoteQuestion.class)
                 .setParameter("questionId", questionId)
                 .setParameter("userId", userId));
     }
@@ -32,14 +30,13 @@ public class VoteQuestionDaoImpl extends ReadWriteDaoImpl<VoteQuestion, Long> im
     @Override
     public Long getSumVoteQuestionType(Long questionId) {
         return entityManager.createQuery("""
-                                            select vote
-                                                    from VoteQuestion vote
-                                                    where vote.vote = 'up' and vote.id = :questionId
-                                                    EXCEPT
-                                                    select vote
-                                                    from VoteQuestion vote
-                                                    where vote.vote = 'down' and vote.id = :questionId
-                                            """, VoteQuestion.class)
+                SELECT
+                COALESCE(SUM(
+                    CASE WHEN vq.voteTypeQ = 'UP' THEN 1
+                    WHEN vq.voteTypeQ = 'DOWN' THEN -1 END), 0)
+                FROM VoteQuestion vq
+                WHERE vq.question.id = :questionId
+                """, Long.class)
                 .setParameter("questionId", questionId)
                 .getResultStream().count();
     }

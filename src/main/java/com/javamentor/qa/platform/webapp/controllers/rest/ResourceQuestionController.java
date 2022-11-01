@@ -32,15 +32,17 @@ public class ResourceQuestionController {
     @PostMapping("/downVote")
     @Operation(summary = "голосование против вопроса")
     @ApiResponse(responseCode = "200", description = "Голос против вопроса")
-    @ApiResponse(responseCode = "403", description = "Вопрос не найден")
+    @ApiResponse(responseCode = "404", description = "Вопрос не найден")
     @ApiResponse(responseCode = "400", description = "пользователь голосует за свой вопрос")
     public ResponseEntity<Long> downVoteQuestion(@PathVariable Long questionId, @AuthenticationPrincipal User user) {
-        Optional<Question> questionOp;
-        if((questionOp = questionService.getById(questionId)).isPresent()) {
-            voteQuestionService.downVote(user, questionOp.get());
-            return new ResponseEntity<>(voteQuestionService.getSumVoteQuestionType(questionOp.get()), HttpStatus.OK);
+        Optional<Question> optionalQuestion = questionService.getById(questionId);
+        if (optionalQuestion.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        voteQuestionService.downVote(user, optionalQuestion.get());
+        Long sumVote = voteQuestionService.getSumVoteQuestionType(optionalQuestion.get());
+
+        return new ResponseEntity<>(sumVote, HttpStatus.OK);
     }
 
 }

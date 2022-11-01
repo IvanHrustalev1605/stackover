@@ -20,12 +20,12 @@ public class ReputationDaoImpl extends ReadWriteDaoImpl<Reputation, Long> implem
     @Override
     public Optional<Reputation> getBySenderAndQuestion(Long senderId, Long questionId, ReputationType type) {
         return SingleResultUtil.getSingleResultOrNull(entityManager.createQuery("""
-                    select rep from Reputation rep
-                     where rep.type = :type
-                     and rep.sender = :sender
-                     and rep.question = :question
-                    """)
-                .setParameter("type", type)
+                SELECT r FROM Reputation r
+                WHERE r.sender = :sender
+                AND r.question = :question
+                AND r.type = :reputationType
+                """, Reputation.class)
+                .setParameter("reputationType", type)
                 .setParameter("sender", senderId)
                 .setParameter("question", questionId));
     }
