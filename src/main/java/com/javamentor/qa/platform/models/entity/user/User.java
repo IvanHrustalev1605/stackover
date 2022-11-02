@@ -92,6 +92,9 @@ public class User implements UserDetails, Serializable {
     @NonNull
     private Role role;
 
+    @Column(name = "activation_code")
+    private String activationCode;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singleton(role);

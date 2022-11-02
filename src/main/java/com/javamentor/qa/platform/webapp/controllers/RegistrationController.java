@@ -29,15 +29,15 @@ public class RegistrationController {
 
     @PostMapping
     private ResponseEntity<UserRegistrationDto> sendMessage(@RequestBody UserRegistrationDto userRegistrationDto) {
-        if (!userRegistrationDtoService.addRegisterUserDto(userRegistrationDto)) {
+        if (!userRegistrationDtoService.addUserRegistrationDto(userRegistrationDto)) {
             return new ResponseEntity<>(HttpStatus.PRECONDITION_FAILED);
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/verify")
-    private ResponseEntity<UserRegistrationDto> verify(@RequestBody UserRegistrationDto userRegistrationDto) {
-        if (!userRegistrationDtoService.verifyUserRegistrationDto(userRegistrationDto)) {
+    @GetMapping("/verify/{activationCode}")
+    private ResponseEntity<UserRegistrationDto> verify(@PathVariable String activationCode) {
+        if(!userRegistrationDtoService.verifyUserRegistrationDto(activationCode)) {
             return new ResponseEntity<>(HttpStatus.PRECONDITION_FAILED);
         }
         return new ResponseEntity<>(HttpStatus.OK);

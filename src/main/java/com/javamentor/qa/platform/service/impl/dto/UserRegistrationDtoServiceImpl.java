@@ -6,6 +6,9 @@ import com.javamentor.qa.platform.models.dto.UserRegistrationDto;
 import com.javamentor.qa.platform.service.abstracts.dto.UserRegistrationDtoService;
 import com.javamentor.qa.platform.service.impl.repository.ReadWriteServiceImpl;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @Service
 public class UserRegistrationDtoServiceImpl extends ReadWriteServiceImpl<UserRegistrationDto, Long> implements UserRegistrationDtoService {
@@ -18,12 +21,21 @@ public class UserRegistrationDtoServiceImpl extends ReadWriteServiceImpl<UserReg
     }
 
     @Override
-    public boolean addRegisterUserDto(UserRegistrationDto userRegistrationDto) {
-        return userRegistrationDtoDao.addRegisterUserDto(userRegistrationDto);
+    @Transactional
+    public boolean addUserRegistrationDto(UserRegistrationDto userRegistrationDto) {
+        return userRegistrationDtoDao.addUserRegistrationDto(userRegistrationDto);
     }
 
     @Override
-    public boolean verifyUserRegistrationDto(UserRegistrationDto userRegistrationDto) {
-        return userRegistrationDtoDao.verifyUserRegistrationDto(userRegistrationDto);
+    @Transactional
+    public boolean verifyUserRegistrationDto(String activationCode) {
+        return userRegistrationDtoDao.verifyUserRegistrationDto(activationCode);
     }
+
+    @Override
+    @Transactional
+    public Optional<UserRegistrationDto> getUserRegistrationDtoByActivationCode(String activationCode) {
+        return userRegistrationDtoDao.getUserRegistrationDtoByActivationCode(activationCode);
+    }
+
 }
