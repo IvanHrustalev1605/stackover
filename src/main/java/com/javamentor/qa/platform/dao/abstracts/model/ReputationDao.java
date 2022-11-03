@@ -7,5 +7,6 @@ import com.javamentor.qa.platform.models.entity.user.reputation.ReputationType;
 import java.util.Optional;
 
 public interface ReputationDao extends ReadWriteDao<Reputation, Long> {
+
     Optional<Reputation> getBySenderAndQuestion(Long senderId, Long questionId, ReputationType type);
 }
