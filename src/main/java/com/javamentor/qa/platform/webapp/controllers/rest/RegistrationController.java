@@ -1,4 +1,4 @@
-package com.javamentor.qa.platform.webapp.controllers;
+package com.javamentor.qa.platform.webapp.controllers.rest;
 
 import com.javamentor.qa.platform.models.dto.UserRegistrationDto;
 import com.javamentor.qa.platform.service.abstracts.dto.UserRegistrationDtoService;
@@ -8,10 +8,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 @RequestMapping("api/user/registration")
 public class RegistrationController {
 
