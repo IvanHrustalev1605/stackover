@@ -63,4 +63,8 @@ public abstract class ReadOnlyDaoImpl<E, K> {
                 .setParameter("email", email);
         return SingleResultUtil.getSingleResultOrNull(query);
     }
+
+
+
+
 }
