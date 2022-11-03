@@ -358,6 +358,7 @@ public class DataBaseInitialize {
             user.setNickname(String.format("Nickname User %s", userNum));
             user.setPassword("password");
             user.setPersistDateTime(LocalDateTime.now());
+            user.setActivationCode(String.format("Code %s", userNum));
             if (userNum == 1) {
                 user.setRole(ROLE_ADMIN);
             } else {
