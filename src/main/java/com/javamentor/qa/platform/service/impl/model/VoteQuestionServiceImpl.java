@@ -14,7 +14,6 @@ import com.javamentor.qa.platform.service.abstracts.model.VoteQuestionService;
 import com.javamentor.qa.platform.service.impl.repository.ReadWriteServiceImpl;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -58,5 +57,33 @@ public class VoteQuestionServiceImpl extends ReadWriteServiceImpl<VoteQuestion, 
     @Override
     public Long getSumVoteQuestionType(Question question) {
         return voteQuestionDao.getSumVoteQuestionType(question.getId());
+    }
+
+    @Override
+    public void upVote(User user, Question question) {
+        Optional<VoteQuestion> voteQuestion = voteQuestionDao.getUserVoteQuestion(user.getId(), question.getId());
+        Optional<Reputation> reputation = reputationDao.getBySenderAndQuestion(user.getId(), question.getId(), ReputationType.VoteQuestion);
+        if (question.getUser().getId().equals(user.getId())) {
+            throw new VoteException("Пользователь не может голосовать за свой вопрос");
+        }
+        if (voteQuestion.isPresent() && reputation.isPresent()) {
+            if (voteQuestion.get().getVote() == VoteType.DOWN) {
+                voteQuestion.get().setVote(VoteType.UP);
+                reputation.get().setCount(10);
+                reputationDao.update(reputation.get());
+                super.update(voteQuestion.get());
+            } else {
+                throw new VoteException("Пользователь проголосовал \"за\" ранее");
+            }
+        } else {
+            Optional<Reputation> newReputation = Optional.of(new Reputation());
+            newReputation.get().setAuthor(question.getUser());
+            newReputation.get().setSender(user);
+            newReputation.get().setQuestion(question);
+            newReputation.get().setCount(10);
+            newReputation.get().setType(ReputationType.VoteQuestion);
+            reputationDao.persist(newReputation.get());
+            super.persist(new VoteQuestion(user, question, VoteType.UP));
+        }
     }
 }

@@ -39,4 +39,5 @@ public abstract class ReadOnlyServiceImpl<E, K> {
     public boolean existsByAllIds(Collection<K> ids) {
         return readOnlyDao.existsByAllIds(ids);
     }
+
 }
