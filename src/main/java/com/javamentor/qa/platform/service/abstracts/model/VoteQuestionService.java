@@ -10,4 +10,6 @@ public interface VoteQuestionService extends ReadWriteService<VoteQuestion, Long
     void downVote(User user, Question question);
 
     Long getSumVoteQuestionType(Question question);
+
+    void upVote(User user, Question question);
 }
