@@ -48,7 +48,7 @@ public class RegistrationController {
         }
         userRegistrationDto.setPassword(passwordEncoder.encode(userRegistrationDto.getPassword()));
         userRegistrationDto.setActivationCode(UUID.randomUUID().toString());
-        userRegistrationDtoService.persist(userRegistrationDto);
+        userRegistrationDtoService.update(userRegistrationDto);
 
         if (StringUtils.hasLength(userRegistrationDto.getEmail())) {
             String message = String.format("Hello, %s \n" +
@@ -66,7 +66,7 @@ public class RegistrationController {
             return false;
         }
         userRegistrationDto.get().setActivationCode(null);
-        userRegistrationDtoService.persist(userRegistrationDto.get());
+        userRegistrationDtoService.update(userRegistrationDto.get());
         return true;
     }
 
@@ -90,7 +90,7 @@ public class RegistrationController {
             @ApiResponse(responseCode = "414", description = "Ошибка в условии подтверждения")
     })
     private ResponseEntity<UserRegistrationDto> verify(@PathVariable String activationCode) {
-        if(!verifyUserRegistrationDto(activationCode)) {
+        if (!verifyUserRegistrationDto(activationCode)) {
             return new ResponseEntity<>(HttpStatus.PRECONDITION_FAILED);
         }
         return new ResponseEntity<>(HttpStatus.OK);
