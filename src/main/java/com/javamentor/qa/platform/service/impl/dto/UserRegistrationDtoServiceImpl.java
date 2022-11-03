@@ -22,18 +22,6 @@ public class UserRegistrationDtoServiceImpl extends ReadWriteServiceImpl<UserReg
 
     @Override
     @Transactional
-    public boolean addUserRegistrationDto(UserRegistrationDto userRegistrationDto) {
-        return userRegistrationDtoDao.addUserRegistrationDto(userRegistrationDto);
-    }
-
-    @Override
-    @Transactional
-    public boolean verifyUserRegistrationDto(String activationCode) {
-        return userRegistrationDtoDao.verifyUserRegistrationDto(activationCode);
-    }
-
-    @Override
-    @Transactional
     public Optional<UserRegistrationDto> getUserRegistrationDtoByActivationCode(String activationCode) {
         return userRegistrationDtoDao.getUserRegistrationDtoByActivationCode(activationCode);
     }

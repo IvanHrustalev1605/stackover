@@ -7,7 +7,5 @@ import java.util.Optional;
 
 public interface UserRegistrationDtoService extends ReadWriteService<UserRegistrationDto, Long> {
 
-    boolean addUserRegistrationDto(UserRegistrationDto userRegistrationDto);
-    boolean verifyUserRegistrationDto(String activationCode);
     Optional<UserRegistrationDto> getUserRegistrationDtoByActivationCode(String activationCode);
 }
