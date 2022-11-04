@@ -2,6 +2,7 @@ package com.javamentor.qa.platform.dao.impl.model;
 
 import com.javamentor.qa.platform.dao.abstracts.model.AnswerDao;
 import com.javamentor.qa.platform.dao.impl.repository.ReadWriteDaoImpl;
+import com.javamentor.qa.platform.dao.util.SingleResultUtil;
 import com.javamentor.qa.platform.models.entity.question.answer.Answer;
 import org.springframework.stereotype.Repository;
 
@@ -20,8 +21,16 @@ public class AnswerDaoImpl extends ReadWriteDaoImpl<Answer, Long> implements Ans
         return super.getById(id);
     }
 
+
     @Override
     public Optional<Answer> getByAnswerIdAndUserId(Long answerId, Long userId) {
-        return super.getByAnswerIdAndUserId(answerId, userId);
+        return SingleResultUtil.getSingleResultOrNull(
+                entityManager.createQuery("SELECT a FROM Answer as a " +
+                                "WHERE a.id = :answerId " +
+                                "and not a.user.id =:userId", Answer.class)
+                        .setParameter("answerId", answerId)
+                        .setParameter("userId", userId)
+        );
+
     }
 }

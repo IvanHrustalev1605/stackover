@@ -26,12 +26,4 @@ public class ReputationServiceImpl extends ReadWriteServiceImpl<Reputation, Long
         super(readWriteDao);
         this.reputationDao = reputationDao;
     }
-
-
-    @Override
-    @Transactional
-    public Optional<Reputation> getReputation(Long answerId, Long authorId) {
-        return reputationDao.getReputation(answerId, authorId);
-    }
-
 }

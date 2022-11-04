@@ -7,7 +7,4 @@ import java.util.Optional;
 
 public interface ReputationService extends ReadWriteService<Reputation, Long> {
 
-    @Override
-    Optional<Reputation> getReputation(Long answerId, Long authorId);
-
 }

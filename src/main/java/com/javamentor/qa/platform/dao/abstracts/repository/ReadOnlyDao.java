@@ -20,7 +20,4 @@ public interface ReadOnlyDao<E, K> {
 
     Optional<User> getByEmail(String email);
 
-    Optional<E> getByAnswerIdAndUserId (Long answerId, Long userId);
-
-    Optional<Reputation> getReputation(Long userId, Long authorId);
 }

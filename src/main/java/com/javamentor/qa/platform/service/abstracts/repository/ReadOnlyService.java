@@ -17,8 +17,4 @@ public interface ReadOnlyService<E, K> {
 
     boolean existsByAllIds(Collection<K> ids);
 
-    Optional<Reputation> getReputation(Long answerId, Long authorId);
-
-    Optional<E> getByAnswerIdAndUserId(Long answerId, Long userId);
-
 }

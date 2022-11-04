@@ -10,9 +10,6 @@ public interface AnswerService extends ReadWriteService<Answer, Long> {
     @Override
     Optional<Answer> getById(Long id);
 
-    @Override
     Optional<Answer> getByAnswerIdAndUserId(Long answerId, Long userId);
 
-
-    Long increaseVoteAnswer(Long answerId, Long userId);
 }

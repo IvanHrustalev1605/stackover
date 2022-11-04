@@ -41,9 +41,4 @@ public abstract class ReadOnlyServiceImpl<E, K> {
         return readOnlyDao.existsByAllIds(ids);
     }
 
-    @Transactional
-    public Optional<Reputation> getReputation(Long answerId, Long authorId) {return readOnlyDao.getReputation(answerId, authorId);}
-
-    @Transactional
-    public Optional<E> getByAnswerIdAndUserId(Long answerId, Long userId){return readOnlyDao.getByAnswerIdAndUserId(answerId, userId);}
 }
