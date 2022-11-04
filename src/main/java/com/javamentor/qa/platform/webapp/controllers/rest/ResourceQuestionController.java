@@ -5,22 +5,21 @@ import com.javamentor.qa.platform.models.entity.user.User;
 
 import com.javamentor.qa.platform.service.abstracts.model.QuestionService;
 import com.javamentor.qa.platform.service.abstracts.model.VoteQuestionService;
+import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
 @RestController
-@RequestMapping("api/user/question/{questionId}")
+@RequestMapping("api/user/question")
 public class ResourceQuestionController {
 
     private final QuestionService questionService;
@@ -31,7 +30,7 @@ public class ResourceQuestionController {
         this.voteQuestionService = voteQuestionService;
     }
 
-    @PostMapping("/downVote")
+    @PostMapping("/{questionId}/downVote")
     @Operation(summary = "голосование против вопроса")
     @ApiResponse(responseCode = "200", description = "Голос против вопроса")
     @ApiResponse(responseCode = "404", description = "Вопрос не найден")
@@ -47,7 +46,7 @@ public class ResourceQuestionController {
         return new ResponseEntity<>(sumVote, HttpStatus.OK);
     }
 
-    @PostMapping("/upVote")
+    @PostMapping("/{questionId}/upVote")
     @Operation(summary = "Позволяет проголосовать за вопрос",
             description = "Позволяет проголосовать за вопрос, также повышает репутацию автора вопроса. Возвращает значение рейтинга вопроса.")
     @ApiResponse(responseCode = "200", description = "Успешно")
@@ -63,5 +62,19 @@ public class ResourceQuestionController {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+
+    @GetMapping("/count")
+    @Operation(summary = "Получение количества вопросов в базе")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Запрос прошел успешно"),
+            @ApiResponse(responseCode = "400", description = "Ошибка в запросе")
+    })
+    public ResponseEntity<Long> getCountQuestion() {
+        Optional <Long> countQuestion = questionService.getCountQuestion();
+        if (countQuestion.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(countQuestion.get(), HttpStatus.OK);
     }
 }
