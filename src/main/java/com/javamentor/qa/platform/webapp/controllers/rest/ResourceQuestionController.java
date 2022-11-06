@@ -71,7 +71,7 @@ public class ResourceQuestionController {
             @ApiResponse(responseCode = "400", description = "Ошибка в запросе")
     })
     public ResponseEntity<Long> getCountQuestion() {
-        Optional <Long> countQuestion = questionService.getCountQuestion();
+        Optional<Long> countQuestion = questionService.getCountQuestion();
         if (countQuestion.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
