@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("api/user/question")
+@RequestMapping("api/user/question/{questionId}")
 public class ResourceQuestionController {
 
     private final QuestionService questionService;
@@ -30,7 +30,7 @@ public class ResourceQuestionController {
         this.voteQuestionService = voteQuestionService;
     }
 
-    @PostMapping("/{questionId}/downVote")
+    @PostMapping("/downVote")
     @Operation(summary = "голосование против вопроса")
     @ApiResponse(responseCode = "200", description = "Голос против вопроса")
     @ApiResponse(responseCode = "404", description = "Вопрос не найден")
@@ -46,7 +46,7 @@ public class ResourceQuestionController {
         return new ResponseEntity<>(sumVote, HttpStatus.OK);
     }
 
-    @PostMapping("/{questionId}/upVote")
+    @PostMapping("/upVote")
     @Operation(summary = "Позволяет проголосовать за вопрос",
             description = "Позволяет проголосовать за вопрос, также повышает репутацию автора вопроса. Возвращает значение рейтинга вопроса.")
     @ApiResponse(responseCode = "200", description = "Успешно")
@@ -62,19 +62,5 @@ public class ResourceQuestionController {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-    }
-
-    @GetMapping("/count")
-    @Operation(summary = "Получение количества вопросов в базе")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Запрос прошел успешно"),
-            @ApiResponse(responseCode = "400", description = "Ошибка в запросе")
-    })
-    public ResponseEntity<Long> getCountQuestion() {
-        Optional<Long> countQuestion = questionService.getCountQuestion();
-        if (countQuestion.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-        return new ResponseEntity<>(countQuestion.get(), HttpStatus.OK);
     }
 }

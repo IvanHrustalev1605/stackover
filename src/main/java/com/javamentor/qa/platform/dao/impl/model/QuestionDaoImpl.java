@@ -17,6 +17,6 @@ public class QuestionDaoImpl extends ReadWriteDaoImpl<Question, Long> implements
     private EntityManager entityManager;
 
     public Optional<Long> getCountQuestion() {
-        return SingleResultUtil.getSingleResultOrNull(entityManager.createQuery("SELECT count(id) FROM Question"));
+        return SingleResultUtil.getSingleResultOrNull(entityManager.createQuery("SELECT count(id) FROM Question WHERE isDeleted=false"));
     }
 }
