@@ -1,5 +1,7 @@
 package com.javamentor.qa.platform.webapp.controllers.rest;
 
+import com.javamentor.qa.platform.dao.abstracts.dto.QuestionDtoDao;
+import com.javamentor.qa.platform.dao.impl.dto.QuestionDtoDaoImpl;
 import com.javamentor.qa.platform.models.entity.question.Question;
 import com.javamentor.qa.platform.models.entity.user.User;
 
@@ -24,10 +26,23 @@ public class ResourceQuestionController {
 
     private final QuestionService questionService;
     private final VoteQuestionService voteQuestionService;
+    private final QuestionDtoDaoImpl questionDtoDao;
 
-    public ResourceQuestionController(QuestionService questionService, VoteQuestionService voteQuestionService) {
+    public ResourceQuestionController(QuestionService questionService, VoteQuestionService voteQuestionService, QuestionDtoDaoImpl questionDtoDao) {
         this.questionService = questionService;
         this.voteQuestionService = voteQuestionService;
+        this.questionDtoDao = questionDtoDao;
+    }
+    @GetMapping("")
+    @Operation(summary = "получение вопроса")
+    @ApiResponse(responseCode = "200", description = "Вопрос найден")
+    @ApiResponse(responseCode = "404", description = "Вопрос не найден")
+    public ResponseEntity<?> getQuestionById(@PathVariable Long questionId, @AuthenticationPrincipal User user) {
+        Optional<QuestionDtoDao> optionalQuestion = questionDtoDao.getById(questionId, user.getId());
+        if (optionalQuestion.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(questionDtoDao,HttpStatus.OK);
     }
 
     @PostMapping("/downVote")

@@ -8,9 +8,11 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -21,6 +23,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
 
     private final UserDetailsServiceImpl userDetailsService;
+    private final AuthTokenFilter authTokenFilter;
+    private final AuthEntryPointJwt authEntryPointJwt;
 
     private final static String[] AUTH_WHITELIST = {
             "/swagger-resources",
@@ -33,7 +37,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
             "/js/*",
             "/login",
             "/registration",
-            "/api/user/registration/**"
+            "/api/user/registration/**",
+            "/api/auth/token"
     };
 
     @Override
@@ -59,7 +64,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
                 .cors()
                 .and()
                 .exceptionHandling()
+                .authenticationEntryPoint(authEntryPointJwt)
                 .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
+                .and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
                 .antMatchers(AUTH_WHITELIST).permitAll()
@@ -68,6 +76,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
                 .logout()
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/");
+
+        http.addFilterBefore(authTokenFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
     @Override
