@@ -8,6 +8,8 @@ import com.javamentor.qa.platform.service.abstracts.repository.ReadWriteService;
 
 public interface VoteAnswerService extends ReadWriteService<VoteAnswer, Long> {
 
+    Long increaseVoteAnswer(Answer answer, User user, Long repCount, VoteType voteType);
+
     Long countVotes(Long answerId);
 
     Long voteDownForAnswer(Answer answer, User user, Long repCount, VoteType voteType);

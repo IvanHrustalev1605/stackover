@@ -29,4 +29,17 @@ public class ReputationDaoImpl extends ReadWriteDaoImpl<Reputation, Long> implem
                 .setParameter("sender", senderId)
                 .setParameter("question", questionId));
     }
+    @Override
+    public Optional<Reputation> getReputation(Long senderId, Long questionId, ReputationType reputationType) {
+        return SingleResultUtil.getSingleResultOrNull(entityManager.createQuery("""
+                SELECT r FROM Reputation r
+                WHERE r.sender = :sender
+                AND r.question = :question
+                AND r.type = :reputationType
+                """, Reputation.class)
+                .setParameter("reputationType", reputationType)
+                .setParameter("sender", senderId)
+                .setParameter("question", questionId));
+
+    }
 }

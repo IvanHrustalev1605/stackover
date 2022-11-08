@@ -1,6 +1,7 @@
 package com.javamentor.qa.platform.service.impl.repository;
 
 import com.javamentor.qa.platform.dao.abstracts.repository.ReadOnlyDao;
+import com.javamentor.qa.platform.models.entity.user.reputation.Reputation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
