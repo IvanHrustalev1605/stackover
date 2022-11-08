@@ -1,4 +1,4 @@
-package com.javamentor.qa.platform.controller;
+package com.javamentor.qa.platform.webapp.controllers.rest;
 
 import com.javamentor.qa.platform.models.entity.question.VoteType;
 import com.javamentor.qa.platform.models.entity.question.answer.Answer;

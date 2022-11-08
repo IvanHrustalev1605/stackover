@@ -1,4 +1,4 @@
-package com.javamentor.qa.platform.webapp.converters;
+package com.javamentor.qa.platform.converters;
 
 import com.javamentor.qa.platform.models.dto.UserDto.UserDtoBuilder;
 import com.javamentor.qa.platform.models.dto.UserDto;
