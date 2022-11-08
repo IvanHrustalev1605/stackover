@@ -233,7 +233,7 @@ public class DataBaseInitialize {
                 question.setUser(userService.getByEmail("email3@mail.com").get());
             }
             question.setTags(tags);
-            questionService.persist(question);
+            questionService.persistAll(question);
             questions.add(question);
         }
     }
