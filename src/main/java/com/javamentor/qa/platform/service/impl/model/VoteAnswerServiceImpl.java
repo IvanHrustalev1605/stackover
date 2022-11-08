@@ -31,6 +31,34 @@ public class VoteAnswerServiceImpl extends ReadWriteServiceImpl<VoteAnswer, Long
         this.reputationDao = reputationDao;
     }
 
+    @Override
+    public Long increaseVoteAnswer(Answer answer, User user, Long repCount, VoteType voteType) {
+        Long votes = 10L;
+        Optional<VoteAnswer> votedAnswer = voteAnswerDao.getVotedAnswerByAnswerIdAndUserId(answer.getId(), user.getId());
+        if (votedAnswer.isPresent()) {
+            votedAnswer.get().setVoteType(VoteType.UP);
+            voteAnswerDao.update(votedAnswer.get());
+        } else {
+            new VoteAnswer(user, answer, VoteType.UP);
+        }
+
+        Optional<Reputation> reputation = reputationDao.getReputation(answer.getId(), user.getId(), ReputationType.Answer);
+        if (reputation.isPresent()) {
+            reputation.get().setCount(Math.toIntExact(repCount));
+            reputationDao.update(reputation.get());
+        } else {
+            reputation = Optional.of(new Reputation());
+            reputation.get().setAnswer(answer);
+            reputation.get().setSender(user);
+            reputation.get().setAuthor(answer.getUser());
+            reputation.get().setType(ReputationType.Answer);
+            reputation.get().setCount(Math.toIntExact(repCount));
+            reputation.get().setPersistDate(LocalDateTime.now());
+        }
+        return votes;
+}
+
+
     @Transactional
     @Override
     public Long voteDownForAnswer(Answer answer, User user, Long repCount, VoteType voteType) {
@@ -59,8 +87,6 @@ public class VoteAnswerServiceImpl extends ReadWriteServiceImpl<VoteAnswer, Long
         return countVotes(answer.getId());
     }
 
-
-    @Transactional
     @Override
     public Long countVotes(Long answerId) {
         return voteAnswerDao.countVotes(answerId);
