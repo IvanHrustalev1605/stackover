@@ -4,7 +4,6 @@ import com.javamentor.qa.platform.models.dto.AuthenticationRequestDTO;
 import com.javamentor.qa.platform.models.dto.TokenResponseDTO;
 import com.javamentor.qa.platform.models.entity.user.User;
 import com.javamentor.qa.platform.security.util.JwtUtils;
-import com.javamentor.qa.platform.service.abstracts.model.UserService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -19,23 +18,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.time.ZonedDateTime;
-import java.util.Date;
-
 @RestController
 @RequestMapping("api/auth")
 public class AuthenticationController {
 
-
-    private final UserService userService;
-    private final AuthenticationManager authenticationManager;
+    private AuthenticationManager authenticationManager;
     private final JwtUtils jwtUtils;
 
-    public AuthenticationController(UserService userService, AuthenticationManager authenticationManager, JwtUtils jwtUtils) {
-        this.userService = userService;
-        this.authenticationManager = authenticationManager;
+    public AuthenticationController(JwtUtils jwtUtils) {
         this.jwtUtils = jwtUtils;
     }
 
@@ -52,7 +42,7 @@ public class AuthenticationController {
                         authenticationRequest.getPass()));
         if (authentication.isAuthenticated()) {
             SecurityContextHolder.getContext().setAuthentication(authentication);
-            User user = (User)authentication.getPrincipal();
+            User user = (User) authentication.getPrincipal();
             TokenResponseDTO token = new TokenResponseDTO();
             token.setToken(jwtUtils.generateJwtToken(user));
             token.setRole(user.getRole().getAuthority());
@@ -62,7 +52,11 @@ public class AuthenticationController {
     }
 
     @PostMapping("/logout")
-    public ResponseEntity<?> logout(HttpServletResponse response, HttpServletRequest request) {
+    public ResponseEntity<?> logout() {
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    public void setAuthenticationManager(AuthenticationManager authenticationManager) {
+        this.authenticationManager = authenticationManager;
     }
 }
