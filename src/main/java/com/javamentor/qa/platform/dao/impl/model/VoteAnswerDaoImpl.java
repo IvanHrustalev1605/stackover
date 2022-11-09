@@ -50,11 +50,4 @@ public class VoteAnswerDaoImpl extends ReadWriteDaoImpl<VoteAnswer, Long> implem
         );
     }
 
-    @Override
-    public Long countVotes(Long answerId) {
-        return entityManager.createQuery("select distinct count(va) from VoteAnswer va " +
-                        "where va.answer.id = :answerId " +
-                        "and va.voteType = 'UP'", Long.class)
-                .getSingleResult();
-    }
 }

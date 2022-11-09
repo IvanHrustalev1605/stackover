@@ -15,9 +15,7 @@ public interface VoteAnswerDao extends ReadWriteDao<VoteAnswer, Long> {
 
     Long countVotes(Long answerId);
 
-    @Override
-    Optional<VoteAnswer> getById(Long id);
     Optional<VoteAnswer> getVotedAnswerByAnswerIdAndUserId(Long answerId, Long userId);
-    Long countVotes(Long answerId);
+
 
 }
