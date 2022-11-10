@@ -71,22 +71,24 @@ public class ResourceAnswerController {
             @ApiResponse(responseCode = "200", description = "Оценка ответа успешно увеличена"),
             @ApiResponse(responseCode = "414", description = "Ответ не найден")
     })
-
     public ResponseEntity<Long> increaseVoteAnswer(@PathVariable Long answerId) {
-        User user;
-        try {
-            user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        } catch (Exception e) {
-            return new ResponseEntity <>(HttpStatus.NOT_FOUND);
-        }
 
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Optional<Answer> answer = answerService.getByAnswerIdAndUserId(answerId, user.getId());
-
         if (answer.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } else {
             return new ResponseEntity<>(voteAnswerService.increaseVoteAnswer(answer.get(), user, 10L, VoteType.UP), HttpStatus.OK);
         }
+    }
+
+    @PostMapping()
+    public ResponseEntity<Long> voteDownForAnswer(@PathVariable Long answerId) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Optional<Answer> answer = answerService.getAnswerByAnswerIdAndUserId(answerId, user.getId());
+        return answer.map(value ->
+                new ResponseEntity<>(voteAnswerService.voteDownForAnswer(value, user, 5L, VoteType.DOWN), HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
     }
 
 }
