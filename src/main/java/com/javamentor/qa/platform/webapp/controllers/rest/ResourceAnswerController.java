@@ -71,10 +71,10 @@ public class ResourceAnswerController {
             @ApiResponse(responseCode = "200", description = "Оценка ответа успешно увеличена"),
             @ApiResponse(responseCode = "414", description = "Ответ не найден")
     })
-    public ResponseEntity<Long> increaseVoteAnswer(@PathVariable Long answerId) {
+    public ResponseEntity<Long> increaseVoteAnswer(@PathVariable Long id) {
 
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Optional<Answer> answer = answerService.getByAnswerIdAndUserId(answerId, user.getId());
+        Optional<Answer> answer = answerService.getByAnswerIdAndUserId(id, user.getId());
         if (answer.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } else {
@@ -82,10 +82,13 @@ public class ResourceAnswerController {
         }
     }
 
-    @PostMapping()
-    public ResponseEntity<Long> voteDownForAnswer(@PathVariable Long answerId) {
+    @PostMapping("/{id}/downVote")
+    @Operation(summary = "Уменьшает оценку ответа")
+    @ApiResponse(responseCode = "200", description = "Оценка ответа уменьшена, репутация автора понижена")
+    @ApiResponse(responseCode = "400", description = "Ответ не найден")
+    public ResponseEntity<Long> voteDownForAnswer(@PathVariable Long id) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Optional<Answer> answer = answerService.getAnswerByAnswerIdAndUserId(answerId, user.getId());
+        Optional<Answer> answer = answerService.getAnswerByAnswerIdAndUserId(id, user.getId());
         return answer.map(value ->
                 new ResponseEntity<>(voteAnswerService.voteDownForAnswer(value, user, 5L, VoteType.DOWN), HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
