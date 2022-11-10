@@ -7,15 +7,10 @@ import java.util.Optional;
 
 public interface VoteAnswerDao extends ReadWriteDao<VoteAnswer, Long> {
 
-
-
-    Optional<VoteAnswer> getById(Long id);
-
     Optional<VoteAnswer> getVoteAnswerByAnswerIdAndUserId(Long answerId, Long userId);
 
     Long countVotes(Long answerId);
 
-    Optional<VoteAnswer> getVotedAnswerByAnswerIdAndUserId(Long answerId, Long userId);
 
 
 }

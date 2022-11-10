@@ -34,20 +34,4 @@ public class VoteAnswerDaoImpl extends ReadWriteDaoImpl<VoteAnswer, Long> implem
                 "and va.voteType = 'DOWN'", Long.class)
                 .getSingleResult();
     }
-
-
-
-
-    @Override
-    public Optional<VoteAnswer> getVotedAnswerByAnswerIdAndUserId(Long answerId, Long userId) {
-        return SingleResultUtil.getSingleResultOrNull(
-                entityManager.createQuery("" +
-                                "SELECT va FROM VoteAnswer as va " +
-                                "WHERE va.answer.id = :answerId " +
-                                "and va.user.id =:userId", VoteAnswer.class)
-                        .setParameter("answerId", answerId)
-                        .setParameter("userId", userId)
-        );
-    }
-
 }

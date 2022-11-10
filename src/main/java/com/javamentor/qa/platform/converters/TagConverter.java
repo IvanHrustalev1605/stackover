@@ -8,7 +8,7 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public abstract class TagConverter {
-    public abstract List<Tag> tagListToTagDtoList(List<TagDto> tagDto);
+    public abstract TagDto tagToTagDto(Tag tag);
 
-    public abstract List<TagDto> tagDtoListToTagList(List<Tag> tag);
+    public abstract Tag tagDtoToTag(TagDto tagDto);
 }

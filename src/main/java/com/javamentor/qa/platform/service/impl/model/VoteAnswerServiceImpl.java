@@ -21,7 +21,6 @@ import java.util.Optional;
 public class VoteAnswerServiceImpl extends ReadWriteServiceImpl<VoteAnswer, Long> implements VoteAnswerService {
 
     public final VoteAnswerDao voteAnswerDao;
-
     public final ReputationDao reputationDao;
 
 
@@ -34,7 +33,7 @@ public class VoteAnswerServiceImpl extends ReadWriteServiceImpl<VoteAnswer, Long
     @Override
     public Long increaseVoteAnswer(Answer answer, User user, Long repCount, VoteType voteType) {
         Long votes = 10L;
-        Optional<VoteAnswer> votedAnswer = voteAnswerDao.getVotedAnswerByAnswerIdAndUserId(answer.getId(), user.getId());
+        Optional<VoteAnswer> votedAnswer = voteAnswerDao.getVoteAnswerByAnswerIdAndUserId(answer.getId(), user.getId());
         if (votedAnswer.isPresent()) {
             votedAnswer.get().setVoteType(VoteType.UP);
             voteAnswerDao.update(votedAnswer.get());
@@ -56,7 +55,7 @@ public class VoteAnswerServiceImpl extends ReadWriteServiceImpl<VoteAnswer, Long
             reputation.get().setPersistDate(LocalDateTime.now());
         }
         return votes;
-}
+    }
 
 
     @Transactional
