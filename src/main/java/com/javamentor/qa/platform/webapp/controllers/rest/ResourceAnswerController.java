@@ -68,8 +68,8 @@ public class ResourceAnswerController {
     @PostMapping("/{id}/upVote")
     @ApiOperation("Увеличение оценки ответа")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Оценка ответа успешно увеличена"),
-            @ApiResponse(responseCode = "414", description = "Ответ не найден")
+            @ApiResponse(responseCode = "200", description = "Оценка ответа увеличена, репутация автора повышена"),
+            @ApiResponse(responseCode = "400", description = "Ответ не найден")
     })
     public ResponseEntity<Long> increaseVoteAnswer(@PathVariable Long id) {
 
