@@ -57,7 +57,7 @@ public class User implements UserDetails, Serializable {
     private LocalDateTime persistDateTime;
 
     @Column(name = "is_enabled")
-    private Boolean isEnabled = true;
+    private Boolean isEnabled = false;
 
     @Column(name = "is_deleted")
     private Boolean isDeleted = false;
