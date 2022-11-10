@@ -1,5 +1,6 @@
 package com.javamentor.qa.platform.service.impl.model;
 
+import com.javamentor.qa.platform.dao.abstracts.model.QuestionDao;
 import com.javamentor.qa.platform.dao.abstracts.repository.ReadWriteDao;
 import com.javamentor.qa.platform.models.entity.question.Question;
 import com.javamentor.qa.platform.models.entity.question.Tag;
@@ -15,10 +16,12 @@ import java.util.Optional;
 public class QuestionServiceImpl extends ReadWriteServiceImpl<Question, Long> implements QuestionService {
 
     private final TagService tagService;
+    private final QuestionDao questionDao;
 
-    public QuestionServiceImpl(ReadWriteDao<Question, Long> readWriteDao, TagService tagService) {
+    public QuestionServiceImpl(ReadWriteDao<Question, Long> readWriteDao, TagService tagService, QuestionDao questionDao) {
         super(readWriteDao);
         this.tagService = tagService;
+        this.questionDao = questionDao;
     }
 
     @Override
@@ -30,7 +33,7 @@ public class QuestionServiceImpl extends ReadWriteServiceImpl<Question, Long> im
 
     @Override
     public Optional<Long> getCountQuestion() {
-        return Optional.empty();
+        return questionDao.getCountQuestion();
     }
 
 }

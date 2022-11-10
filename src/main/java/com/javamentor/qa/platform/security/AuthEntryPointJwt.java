@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-//Добавил @Component для Spring
 @Component
 public class AuthEntryPointJwt implements AuthenticationEntryPoint {
     @Override

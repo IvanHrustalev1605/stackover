@@ -31,6 +31,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Table(name = "user_entity")
+@Builder
 public class User implements UserDetails, Serializable {
 
     @Serial

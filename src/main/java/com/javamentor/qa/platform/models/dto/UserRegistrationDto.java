@@ -26,7 +26,6 @@ public class UserRegistrationDto {
     @NotEmpty
     @Parameter(description = "пароль пользователя")
     private String password;
-    @NotEmpty
     @Parameter(description = "код активации")
     private String activationCode;
 

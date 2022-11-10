@@ -23,6 +23,7 @@
         <spring.messaging.version>5.2.8.RELEASE</spring.messaging.version>
         <thymeleaf.layout.dialect.version>2.5.1</thymeleaf.layout.dialect.version>
         <springdoc.version>1.6.9</springdoc.version>
+        <rider-spring>1.33.0</rider-spring>
     </properties>
 
     <dependencies>
@@ -138,6 +139,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mail</artifactId>
             <version>2.7.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.database-rider</groupId>
+            <artifactId>rider-spring</artifactId>
+            <version>${rider-spring}</version>
         </dependency>
 
     </dependencies>
