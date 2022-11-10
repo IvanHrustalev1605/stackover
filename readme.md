@@ -619,3 +619,40 @@ DB_USERNAME - твой логин
 DB_PASS - твой пароль
 
 -ea -Dspring.profiles.active= - выбери профиль
+
+## Работа с POTSMAN
+
+### Авторизация в POSTMAN
+1. Перейти на сайт POSTMAN https://identity.getpostman.com/login
+
+2. Если есть аккаунт залогиниться
+
+![](src/main/resources/static/images/postman_tutor/login.PNG)
+
+Если нет, то создать аккаунт по ссылке https://identity.getpostman.com/signup
+
+Или авторизоваться через Google
+
+### Тестирование своих API через POSTMAN
+
+1. После авторизации перейдите в My Workspace
+
+![](src/main/resources/static/images/postman_tutor/my_workspace.PNG)
+
+2. Далее откройте новую вкладку запросов
+
+![](src/main/resources/static/images/postman_tutor/request.png)
+
+3. Отправьте запрос, получите ответ: отправьте POST запрос с URL "localhost:8080/api/auth/token", выберите вкладку Body(1), raw(2), JSON(3), введите логин и пароль и отправьте запрос
+получите в ответе token(5)
+
+![](src/main/resources/static/images/postman_tutor/get_token.png)
+
+4. Авторизация с token: выберите вкладку Authorization, измените Type на Bearer Token(1), вставьте полученный токен в поле Token(2)
+
+![](src/main/resources/static/images/postman_tutor/auth.png)
+
+5. Тестируйте свои API: URL запроса(1), Метод запроса(2), Отправка запроса(3), Ответ(4), Параметры запроса(5)
+
+![](src/main/resources/static/images/postman_tutor/workspace.png)
+
