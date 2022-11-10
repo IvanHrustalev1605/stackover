@@ -65,7 +65,15 @@ public abstract class ReadOnlyDaoImpl<E, K> {
         return SingleResultUtil.getSingleResultOrNull(query);
     }
 
-
-
+    public Optional<User> getUserByActivationCode(String activationCode) {
+        TypedQuery<User> query = entityManager.createQuery("""
+                        SELECT u
+                        FROM User u
+                        JOIN FETCH u.role
+                        WHERE u.activationCode=:activationCode
+                        """, User.class)
+                .setParameter("activationCode", activationCode);
+        return SingleResultUtil.getSingleResultOrNull(query);
+    }
 
 }
