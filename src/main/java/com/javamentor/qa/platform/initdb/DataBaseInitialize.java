@@ -356,7 +356,7 @@ public class DataBaseInitialize {
             user.setLinkSite(String.format("Link Site User %s", userNum));
             user.setLinkVk(String.format("Link VK User %s", userNum));
             user.setNickname(String.format("Nickname User %s", userNum));
-            user.setPassword("password");
+            user.setPassword("$2a$10$TK8.rREtgluZwqFzN62L2uQcTFKriK6.P5lul0Y/EFdYJ3ndwt4ES"); // password
             user.setPersistDateTime(LocalDateTime.now());
             user.setActivationCode(String.format("Code %s", userNum));
             if (userNum == 1) {
