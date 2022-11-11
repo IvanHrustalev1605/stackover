@@ -147,16 +147,4 @@ public class User implements UserDetails, Serializable {
         return Objects.hash(id, email, password, fullName);
     }
 
-    public boolean checkUserLock() {
-        return isEnabled;
-    }
-
-    public void lockUser() {
-        setIsEnabled(false);
-    }
-
-    public void unLockUser() {
-        setIsEnabled(true);
-    }
-
 }
