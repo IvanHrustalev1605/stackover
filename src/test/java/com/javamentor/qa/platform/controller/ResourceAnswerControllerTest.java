@@ -41,7 +41,7 @@ class ResourceAnswerControllerTest extends BaseTest {
     void getAllAnswersTest() throws Exception {
         User user = userService.getByEmail("email@mail.com").get();
         Question question = questionService.getById(1L).get();
-        this.mockMvc.perform(get("/api/user/question/1/answer")
+        this.mockMvc.perform(get("/api/user/question/{questionId}/answer", question.getId())
                         .contentType(MediaType.APPLICATION_JSON)
                         .header("Authorization", getToken(user))
                         .content(objectMapper.writeValueAsString(user)))
