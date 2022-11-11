@@ -28,7 +28,6 @@ public class ResourceAnswerController {
     private final QuestionService questionService;
     private final AnswerService answerService;
     private final AnswerDtoService answerDtoService;
-
     private final VoteAnswerService voteAnswerService;
 
     public ResourceAnswerController(QuestionService questionService, AnswerService answerService, AnswerDtoService answerDtoService, VoteAnswerService voteAnswerService) {

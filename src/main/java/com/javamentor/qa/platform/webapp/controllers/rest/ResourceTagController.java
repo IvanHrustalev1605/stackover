@@ -33,8 +33,6 @@ public class ResourceTagController {
     private final TagDtoService tagDtoService;
 
 
-
-
     @GetMapping("/related")
     @Operation(summary = "Возвращает список топ 10 вопросов")
     @ApiResponse(responseCode = "200", description = "Список вопросов успешно найден")
