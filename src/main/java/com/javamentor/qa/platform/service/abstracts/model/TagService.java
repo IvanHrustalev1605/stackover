@@ -16,4 +16,5 @@ public interface TagService extends ReadWriteService<Tag, Long> {
     Optional<Tag> getById(Long id);
 
 
+    boolean checkedAndIgnoredContainTag(Long tagId, Long id);
 }

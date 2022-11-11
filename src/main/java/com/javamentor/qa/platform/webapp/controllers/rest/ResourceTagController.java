@@ -4,10 +4,15 @@ import com.javamentor.qa.platform.converters.TagConverter;
 import com.javamentor.qa.platform.models.dto.IgnoredTagDto;
 import com.javamentor.qa.platform.models.dto.RelatedTagDto;
 import com.javamentor.qa.platform.models.dto.TagDto;
+import com.javamentor.qa.platform.models.entity.question.IgnoredTag;
+import com.javamentor.qa.platform.models.entity.question.Tag;
+import com.javamentor.qa.platform.service.abstracts.model.IgnoredTagService;
 import com.javamentor.qa.platform.service.abstracts.model.TagService;
 import com.javamentor.qa.platform.models.entity.user.User;
 import com.javamentor.qa.platform.service.abstracts.dto.TagDtoService;
 import com.javamentor.qa.platform.service.abstracts.model.TrackedTagService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponses;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -20,6 +25,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -31,6 +37,7 @@ public class ResourceTagController {
     private final TagConverter tagConverter;
     private final TrackedTagService trackedTagService;
     private final TagDtoService tagDtoService;
+    private final IgnoredTagService ignoredTagService;
 
 
     @GetMapping("/related")
@@ -63,5 +70,29 @@ public class ResourceTagController {
     public List<IgnoredTagDto> getAllIgnoredTag() {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return tagDtoService.getAllIgnoredTags(user.getId());
+    }
+    @ApiOperation(
+            value = "Добавляет тэг с tagId=* в игнорируемые текущим пользователем")
+    @ApiResponses(value = {
+            @io.swagger.annotations.ApiResponse(code = 200, message = "Тэг с tagId=* добавлен в игнорируемые"),
+            @io.swagger.annotations.ApiResponse(code = 400, message = "Неверный формат введенного tagId"),
+            @io.swagger.annotations.ApiResponse(code = 404, message = "Тэг с tagId=* не найден")
+    })
+    @PostMapping("/{id}/ignored")
+    public ResponseEntity<?> addIgnoredTag(@PathVariable("id") Long tagId) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Optional<Tag> optionalTag = tagService.getById(tagId);
+        if (optionalTag.isPresent()) {
+            Tag tag = optionalTag.get();
+            if (tagService.checkedAndIgnoredContainTag(tagId, user.getId())) {
+                IgnoredTag ignoredTag = new IgnoredTag();
+                ignoredTag.setIgnoredTag(tag);
+                ignoredTag.setUser(user);
+                ignoredTagService.persist(ignoredTag);
+            }
+            TagDto tagDto = tagConverter.tagToTagDto(tag);
+            return new ResponseEntity<>(tagDto, HttpStatus.OK);
+        }
+        return new ResponseEntity<>("Тэг с tagId=" + tagId + " не найден", HttpStatus.NOT_FOUND);
     }
 }
