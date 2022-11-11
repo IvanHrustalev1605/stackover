@@ -1,5 +1,6 @@
-package com.javamentor.qa.platform.exception;
+package com.javamentor.qa.platform.webapp.controllers.rest.advice;
 
+import com.javamentor.qa.platform.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -9,7 +10,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import java.time.LocalDateTime;
 
 @ControllerAdvice
-public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
+public class AdviceController extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(ApiRequestException.class)
     public ResponseEntity<ErrorResponse> apiRequestException(ApiRequestException ex) {
