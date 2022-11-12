@@ -1,0 +1,39 @@
+user_entity:
+  - id: 1
+    about: "about"
+    city: "city"
+    email: "mail@mail.ru"
+    full_name: "full_name"
+    image_link: "image_link"
+    is_deleted: false
+    is_enabled: false
+    last_redaction_date: "[DAY,NOW]"
+    link_github: "link_github"
+    link_site: "link_site"
+    link_vk: "link_vk"
+    nickname: "nickname"
+    password: "password"
+    persist_date: "[DAY,NOW]"
+    activation_code: "activationCode"
+    role_id: 1
+  - id: 2
+    about: "about"
+    city: "city"
+    email: "mail@mail.ru"
+    full_name: "full_name"
+    image_link: "image_link"
+    is_deleted: false
+    is_enabled: true
+    last_redaction_date: "[DAY,NOW]"
+    link_github: "link_github"
+    link_site: "link_site"
+    link_vk: "link_vk"
+    nickname: "nickname"
+    password: "password"
+    persist_date: "[DAY,NOW]"
+    activation_code: "activationCode"
+    role_id: 1
+
+role:
+  - id: 1
+    name: "ROLE_USER"
