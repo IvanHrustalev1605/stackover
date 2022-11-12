@@ -26,9 +26,10 @@ public class AnswerDaoImpl extends ReadWriteDaoImpl<Answer, Long> implements Ans
         {
             return SingleResultUtil.getSingleResultOrNull(
                     entityManager.createQuery("""
-                                    SELECT a FROM Answer a
+                                    SELECT a
+                                    FROM Answer a
                                     WHERE a.id = :answerId
-                                    and a.user.id =:userId""", Answer.class)
+                                    and not a.user.id =:userId""", Answer.class)
                             .setParameter("answerId", answerId)
                             .setParameter("userId", userId)
             );
