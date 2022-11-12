@@ -7,6 +7,7 @@ import com.javamentor.qa.platform.models.entity.user.User;
 import com.javamentor.qa.platform.service.abstracts.dto.AnswerDtoService;
 import com.javamentor.qa.platform.service.abstracts.model.AnswerService;
 import com.javamentor.qa.platform.service.abstracts.model.QuestionService;
+import com.javamentor.qa.platform.service.abstracts.model.UserService;
 import com.javamentor.qa.platform.service.abstracts.model.VoteAnswerService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.Operation;
@@ -85,12 +86,12 @@ public class ResourceAnswerController {
     @Operation(summary = "Уменьшает оценку ответа")
     @ApiResponse(responseCode = "200", description = "Оценка ответа уменьшена, репутация автора понижена")
     @ApiResponse(responseCode = "400", description = "Ответ не найден")
-    public ResponseEntity<Long> voteDownForAnswer(@PathVariable Long id) {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    public ResponseEntity<Long> voteDownForAnswer(@AuthenticationPrincipal User user, @PathVariable("id") Long id) {
         Optional<Answer> answer = answerService.getAnswerByAnswerIdAndUserId(id, user.getId());
-        return answer.map(value ->
-                new ResponseEntity<>(voteAnswerService.voteDownForAnswer(value, user, 5L, VoteType.DOWN), HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
+        if (answer.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        Long vote = voteAnswerService.voteDownForAnswer(answer.get(), user,5L, VoteType.DOWN);
+        return new  ResponseEntity<>(vote,HttpStatus.OK);
     }
-
 }
