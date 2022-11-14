@@ -53,15 +53,14 @@ public class ResourceAnswerController {
     @ApiOperation("Возвращает лист DTO ответов по id вопроса")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Ответы получены успешно"),
-            @ApiResponse(responseCode = "400", description = "Вопроса по ID не существует")
+            @ApiResponse(responseCode = "404", description = "Вопроса по ID не существует")
     })
     public ResponseEntity<List<AnswerDto>> getAllAnswers(@AuthenticationPrincipal User user,
                                                          @PathVariable("questionId") Long questionId) {
         if (questionService.getById(questionId).isEmpty()) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        List<AnswerDto> answers = answerDtoService.getAllAnswersDtoByQuestionId(questionId, user.getId());
-        return new ResponseEntity<>(answers, HttpStatus.OK);
+        return ResponseEntity.ok(answerDtoService.getAllAnswersDtoByQuestionId(questionId, user.getId()));
     }
 
     @PostMapping("/{id}/upVote")
