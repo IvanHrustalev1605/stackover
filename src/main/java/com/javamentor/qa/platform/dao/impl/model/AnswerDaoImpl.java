@@ -17,11 +17,6 @@ public class AnswerDaoImpl extends ReadWriteDaoImpl<Answer, Long> implements Ans
     private EntityManager entityManager;
 
     @Override
-    public Optional<Answer> getById(Long id) {
-        return super.getById(id);
-    }
-
-    @Override
     public Optional<Answer> getAnswerByAnswerIdAndUserId(Long answerId, Long userId) {
         {
             return SingleResultUtil.getSingleResultOrNull(
