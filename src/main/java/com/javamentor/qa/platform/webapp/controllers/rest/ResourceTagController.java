@@ -60,8 +60,8 @@ public class ResourceTagController {
     @GetMapping("/ignored")
     @Operation(summary = "Вывод списка игнорируемых тегов пользователя")
     @ApiResponse(responseCode = "200", description = "Список игнорируемых тегов пользователя сформирован")
-    public List<IgnoredTagDto> getAllIgnoredTag() {
+    public ResponseEntity<List<IgnoredTagDto>> getAllIgnoredTag() {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return tagDtoService.getAllIgnoredTags(user.getId());
+        return ResponseEntity.ok(tagDtoService.getAllIgnoredTags(user.getId()));
     }
 }
