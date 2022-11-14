@@ -20,9 +20,11 @@ public class AnswerDaoImpl extends ReadWriteDaoImpl<Answer, Long> implements Ans
     public Optional<Answer> getAnswerByAnswerIdAndUserId(Long answerId, Long userId) {
         {
             return SingleResultUtil.getSingleResultOrNull(
-                    entityManager.createQuery("SELECT a FROM Answer as a " +
-                                    "WHERE a.id = :answerId " +
-                                    "and not a.user.id =:userId", Answer.class)
+                    entityManager.createQuery("""
+                                    SELECT a
+                                    FROM Answer a
+                                    WHERE a.id = :answerId
+                                    and not a.user.id =:userId""", Answer.class)
                             .setParameter("answerId", answerId)
                             .setParameter("userId", userId)
             );
@@ -38,7 +40,5 @@ public class AnswerDaoImpl extends ReadWriteDaoImpl<Answer, Long> implements Ans
                         .setParameter("answerId", answerId)
                         .setParameter("userId", userId)
         );
-
     }
-
 }
