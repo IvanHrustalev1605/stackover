@@ -7,7 +7,6 @@ import com.javamentor.qa.platform.models.entity.user.User;
 import com.javamentor.qa.platform.service.abstracts.dto.AnswerDtoService;
 import com.javamentor.qa.platform.service.abstracts.model.AnswerService;
 import com.javamentor.qa.platform.service.abstracts.model.QuestionService;
-import com.javamentor.qa.platform.service.abstracts.model.UserService;
 import com.javamentor.qa.platform.service.abstracts.model.VoteAnswerService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.Operation;
@@ -39,10 +38,12 @@ public class ResourceAnswerController {
     }
 
     @DeleteMapping("/{answerId}")
-    @Operation(summary = "Помечает ответ на удаление")
-    @ApiResponse(responseCode = "200", description = "Вопрос успешно помечен на удаление")
-    @ApiResponse(responseCode = "403", description = "Вопрос не найден")
-    public ResponseEntity<?> markAnswerToDelete(@PathVariable("answerId") Long answerId) {
+    @ApiOperation("Помечает ответ на удаление")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Вопрос успешно помечен на удаление"),
+            @ApiResponse(responseCode = "404", description = "Вопрос не найден")
+    })
+    public ResponseEntity<?> markAnswerToDelete(@PathVariable Long answerId) {
         if (answerService.getById(answerId).isPresent()) {
             answerService.getById(answerId).get().setIsDeleted(Boolean.TRUE);
             return new ResponseEntity<>(HttpStatus.OK);
