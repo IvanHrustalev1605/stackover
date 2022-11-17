@@ -41,6 +41,8 @@ public class VoteQuestionServiceImpl extends ReadWriteServiceImpl<VoteQuestion, 
                 reputationOptional.get().setCount(-5);
                 reputationDao.update(reputationOptional.get());
                 super.update(voteQuestionOptional.get());
+            } else {
+                throw new VoteException("Пользователь проголосовал \"против\" ранее");
             }
         } else {
             Optional<Reputation> newReputation = Optional.of(new Reputation());
