@@ -38,10 +38,12 @@ public class ResourceAnswerController {
     }
 
     @DeleteMapping("/{answerId}")
-    @Operation(summary = "Помечает ответ на удаление")
-    @ApiResponse(responseCode = "200", description = "Вопрос успешно помечен на удаление")
-    @ApiResponse(responseCode = "403", description = "Вопрос не найден")
-    public ResponseEntity<?> markAnswerToDelete(@PathVariable("answerId") Long answerId) {
+    @ApiOperation("Помечает ответ на удаление")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Вопрос успешно помечен на удаление"),
+            @ApiResponse(responseCode = "404", description = "Вопрос не найден")
+    })
+    public ResponseEntity<?> markAnswerToDelete(@PathVariable Long answerId) {
         if (answerService.getById(answerId).isPresent()) {
             answerService.getById(answerId).get().setIsDeleted(Boolean.TRUE);
             return new ResponseEntity<>(HttpStatus.OK);
@@ -53,15 +55,14 @@ public class ResourceAnswerController {
     @ApiOperation("Возвращает лист DTO ответов по id вопроса")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Ответы получены успешно"),
-            @ApiResponse(responseCode = "400", description = "Вопроса по ID не существует")
+            @ApiResponse(responseCode = "404", description = "Вопроса по ID не существует")
     })
     public ResponseEntity<List<AnswerDto>> getAllAnswers(@AuthenticationPrincipal User user,
                                                          @PathVariable("questionId") Long questionId) {
         if (questionService.getById(questionId).isEmpty()) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        List<AnswerDto> answers = answerDtoService.getAllAnswersDtoByQuestionId(questionId, user.getId());
-        return new ResponseEntity<>(answers, HttpStatus.OK);
+        return ResponseEntity.ok(answerDtoService.getAllAnswersDtoByQuestionId(questionId, user.getId()));
     }
 
     @PostMapping("/{id}/upVote")
@@ -85,12 +86,12 @@ public class ResourceAnswerController {
     @Operation(summary = "Уменьшает оценку ответа")
     @ApiResponse(responseCode = "200", description = "Оценка ответа уменьшена, репутация автора понижена")
     @ApiResponse(responseCode = "400", description = "Ответ не найден")
-    public ResponseEntity<Long> voteDownForAnswer(@PathVariable Long id) {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    public ResponseEntity<Long> voteDownForAnswer(@AuthenticationPrincipal User user, @PathVariable("id") Long id) {
         Optional<Answer> answer = answerService.getAnswerByAnswerIdAndUserId(id, user.getId());
-        return answer.map(value ->
-                new ResponseEntity<>(voteAnswerService.voteDownForAnswer(value, user, 5L, VoteType.DOWN), HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
+        if (answer.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        Long vote = voteAnswerService.voteDownForAnswer(answer.get(), user,5L, VoteType.DOWN);
+        return new  ResponseEntity<>(vote,HttpStatus.OK);
     }
-
 }

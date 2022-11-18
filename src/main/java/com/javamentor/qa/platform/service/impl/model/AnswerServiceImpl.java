@@ -35,14 +35,6 @@ public class AnswerServiceImpl extends ReadWriteServiceImpl<Answer, Long> implem
         return answerDao.getByAnswerIdAndUserId(answerId, userId);
     }
 
-
-    @Override
-    @Transactional
-    public Optional<Answer> getById(Long id) {
-        return answerDao.getById(id);
-
-}
-
     @Override
     @Transactional
     public Optional<Answer> getAnswerByAnswerIdAndUserId(Long answerId, Long userId) {

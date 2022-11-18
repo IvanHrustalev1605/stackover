@@ -16,12 +16,12 @@ public class TagDtoDaoImpl implements TagDtoDao {
     private EntityManager entityManager;
 
     @Override
-    public List<IgnoredTagDto> getAllIgnoredTags (Long userId) {
+    public List<IgnoredTagDto> getAllIgnoredTags(Long userId) {
         return entityManager.createQuery("""
-                        SELECT Tag FROM Tag
-                        LEFT JOIN IgnoredTag AS it
-                        ON User.id = it.user.id
-                        WHERE User.id=:userId
+                        SELECT NEW com.javamentor.qa.platform.models.dto.IgnoredTagDto(t.id, t.name)
+                        FROM Tag t
+                        JOIN IgnoredTag it ON it.ignoredTag.id = t.id
+                        WHERE it.user.id =:userId
                          """, IgnoredTagDto.class)
                 .setParameter("userId", userId)
                 .getResultList();
@@ -30,13 +30,13 @@ public class TagDtoDaoImpl implements TagDtoDao {
     @Override
     public List<RelatedTagDto> getTopTags() {
         return entityManager.createQuery("""
-                    SELECT
-                    t.id AS id,
-                    t.name AS title,
-                    COALESCE(t.questions.size, 0L) AS countQuestion
-                    FROM Tag t
-                    GROUP BY t.id, t.name
-                    ORDER BY countQuestion DESC
-                    """, RelatedTagDto.class).setMaxResults(10).getResultList();
+                SELECT
+                t.id AS id,
+                t.name AS title,
+                COALESCE(t.questions.size, 0L) AS countQuestion
+                FROM Tag t
+                GROUP BY t.id, t.name
+                ORDER BY countQuestion DESC
+                """, RelatedTagDto.class).setMaxResults(10).getResultList();
     }
 }

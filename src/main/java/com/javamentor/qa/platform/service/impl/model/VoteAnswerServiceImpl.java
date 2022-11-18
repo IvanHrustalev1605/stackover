@@ -57,7 +57,6 @@ public class VoteAnswerServiceImpl extends ReadWriteServiceImpl<VoteAnswer, Long
         return votes;
     }
 
-
     @Transactional
     @Override
     public Long voteDownForAnswer(Answer answer, User user, Long repCount, VoteType voteType) {
@@ -90,5 +89,4 @@ public class VoteAnswerServiceImpl extends ReadWriteServiceImpl<VoteAnswer, Long
     public Long countVotes(Long answerId) {
         return voteAnswerDao.countVotes(answerId);
     }
-
 }

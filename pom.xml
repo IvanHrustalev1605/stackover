@@ -115,11 +115,13 @@
             <version>${thymeleaf.layout.dialect.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-ui</artifactId>
-            <version>${springdoc.version}</version>
-        </dependency>
+<!--        Данную зависимость необходимо убрать, т.к. происходит конфликт с springfox,-->
+<!--        И swagger должным образом не работает-->
+<!--        <dependency>-->
+<!--            <groupId>org.springdoc</groupId>-->
+<!--            <artifactId>springdoc-openapi-ui</artifactId>-->
+<!--            <version>${springdoc.version}</version>-->
+<!--        </dependency>-->
 
         <!-- https://mvnrepository.com/artifact/com.auth0/java-jwt -->
         <dependency>

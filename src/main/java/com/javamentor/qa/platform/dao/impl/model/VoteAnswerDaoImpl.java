@@ -19,9 +19,10 @@ public class VoteAnswerDaoImpl extends ReadWriteDaoImpl<VoteAnswer, Long> implem
     @Override
     public Optional<VoteAnswer> getVoteAnswerByAnswerIdAndUserId(Long answerId, Long userId) {
         return SingleResultUtil.getSingleResultOrNull(
-                entityManager.createQuery("SELECT va FROM VoteAnswer as va " +
-                        "WHERE va.answer.id = :answerId " +
-                        "and va.user.id =:userId", VoteAnswer.class)
+                entityManager.createQuery("""
+                        SELECT va FROM VoteAnswer va
+                        WHERE va.answer.id = :answerId
+                        and va.user.id =:userId""", VoteAnswer.class)
                 .setParameter("answerId", answerId)
                 .setParameter("userId", userId)
         );
@@ -29,9 +30,11 @@ public class VoteAnswerDaoImpl extends ReadWriteDaoImpl<VoteAnswer, Long> implem
 
     @Override
     public Long countVotes(Long answerId) {
-        return entityManager.createQuery("select count(va) from VoteAnswer va " +
-                "where va.answer.id = :answerId " +
-                "and va.voteType = 'DOWN'", Long.class)
+        return entityManager.createQuery("""
+                select count(va) from VoteAnswer va
+                where va.answer.id = :answerId
+                and va.voteType = 'DOWN'""", Long.class)
+                .setParameter("answerId", answerId)
                 .getSingleResult();
     }
 }
