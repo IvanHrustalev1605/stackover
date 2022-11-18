@@ -9,5 +9,4 @@ import java.util.Optional;
 public interface TagDao extends ReadWriteDao<Tag, Long> {
     List<Tag> backListTag(List<String> names);
 
-    boolean checkedAndIgnoredContainTag(Long tagId, Long userId);
 }
