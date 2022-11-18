@@ -38,6 +38,7 @@ public class ResourceTagController {
     private final TrackedTagService trackedTagService;
     private final TagDtoService tagDtoService;
     private final IgnoredTagService ignoredTagService;
+    private final IgnoredTag ignoredTag;
 
 
     @GetMapping("/related")
@@ -86,13 +87,11 @@ public class ResourceTagController {
         if (optionalTag.isPresent()) {
             Tag tag = optionalTag.get();
             if (tagService.existsById(tagId)){
-                IgnoredTag ignoredTag = new IgnoredTag();
                 ignoredTag.setIgnoredTag(tag);
                 ignoredTag.setUser(user);
                 ignoredTagService.persist(ignoredTag);
             }
-            TagDto tagDto = tagConverter.tagToTagDto(tag);
-            return new ResponseEntity<>(tagDto, HttpStatus.OK);
+            return ResponseEntity.ok(tagConverter.tagToTagDto(ignoredTag.getIgnoredTag()));
         }
         return new ResponseEntity<>("Тэг с tagId=" + tagId + " не найден", HttpStatus.NOT_FOUND);
     }
