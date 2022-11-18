@@ -62,6 +62,7 @@ public class ResourceTagController {
     public ResponseEntity<TagDto> addTagToTracked(@PathVariable(name = "id") Long tagId,
                                                   @AuthenticationPrincipal User user) {
         return ResponseEntity.ok(tagConverter.tagToTagDto(trackedTagService.add(tagId, user)));
+        
     }
 
     @GetMapping("/ignored")
@@ -79,12 +80,12 @@ public class ResourceTagController {
             @io.swagger.annotations.ApiResponse(code = 404, message = "Тэг с tagId=* не найден")
     })
     @PostMapping("/{id}/ignored")
-    public ResponseEntity<?> addIgnoredTag(@PathVariable("id") Long tagId) {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    public ResponseEntity<?> addIgnoredTag(@PathVariable("id") Long tagId,
+                                           @AuthenticationPrincipal User user) {
         Optional<Tag> optionalTag = tagService.getById(tagId);
         if (optionalTag.isPresent()) {
             Tag tag = optionalTag.get();
-            if (tagService.checkedAndIgnoredContainTag(tagId, user.getId())) {
+            if (tagService.existsById(tagId)){
                 IgnoredTag ignoredTag = new IgnoredTag();
                 ignoredTag.setIgnoredTag(tag);
                 ignoredTag.setUser(user);

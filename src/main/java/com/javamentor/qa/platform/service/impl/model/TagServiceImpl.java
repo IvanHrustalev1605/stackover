@@ -25,9 +25,4 @@ public class TagServiceImpl extends ReadWriteServiceImpl<Tag, Long> implements T
         return tagDao.backListTag(names);
     }
 
-    @Transactional
-    @Override
-    public boolean checkedAndIgnoredContainTag(Long tagId, Long userId) {
-        return tagDao.checkedAndIgnoredContainTag(tagId, userId);
-    }
 }
