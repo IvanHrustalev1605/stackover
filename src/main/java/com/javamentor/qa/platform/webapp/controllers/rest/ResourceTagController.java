@@ -1,13 +1,19 @@
 package com.javamentor.qa.platform.webapp.controllers.rest;
 
 import com.javamentor.qa.platform.converters.TagConverter;
+import com.javamentor.qa.platform.dao.abstracts.model.IgnoredTagDao;
+import com.javamentor.qa.platform.exception.TagAlreadyExistsException;
+import com.javamentor.qa.platform.exception.TagNotFoundException;
 import com.javamentor.qa.platform.models.dto.IgnoredTagDto;
 import com.javamentor.qa.platform.models.dto.RelatedTagDto;
 import com.javamentor.qa.platform.models.dto.TagDto;
+import com.javamentor.qa.platform.models.entity.question.IgnoredTag;
 import com.javamentor.qa.platform.service.abstracts.model.TagService;
 import com.javamentor.qa.platform.models.entity.user.User;
 import com.javamentor.qa.platform.service.abstracts.dto.TagDtoService;
 import com.javamentor.qa.platform.service.abstracts.model.TrackedTagService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponses;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -31,6 +37,8 @@ public class ResourceTagController {
     private final TagConverter tagConverter;
     private final TrackedTagService trackedTagService;
     private final TagDtoService tagDtoService;
+    private final IgnoredTag ignoredTag;
+    private final IgnoredTagDao ignoredTagDao;
 
 
     @GetMapping("/related")
@@ -55,6 +63,7 @@ public class ResourceTagController {
     public ResponseEntity<TagDto> addTagToTracked(@PathVariable(name = "id") Long tagId,
                                                   @AuthenticationPrincipal User user) {
         return ResponseEntity.ok(tagConverter.tagToTagDto(trackedTagService.add(tagId, user)));
+        
     }
 
     @GetMapping("/ignored")
@@ -64,4 +73,23 @@ public class ResourceTagController {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return ResponseEntity.ok(tagDtoService.getAllIgnoredTags(user.getId()));
     }
-}
+    @ApiOperation(
+            value = "Добавляет тэг с tagId=* в игнорируемые текущим пользователем")
+    @ApiResponses(value = {
+            @io.swagger.annotations.ApiResponse(code = 200, message = "Тэг с tagId=* добавлен в игнорируемые"),
+            @io.swagger.annotations.ApiResponse(code = 400, message = "Неверный формат введенного tagId"),
+            @io.swagger.annotations.ApiResponse(code = 404, message = "Тэг с tagId=* не найден")
+    })
+    @PostMapping("/{id}/ignored")
+    public ResponseEntity<?> addIgnoredTag(@PathVariable("id") Long tagId,
+                                           @AuthenticationPrincipal User user) {
+        if(tagService.getById(tagId).isEmpty()) {
+            throw new TagNotFoundException("тег с таким id не найден");
+        }
+        if (ignoredTagDao.getIgnoredTagByTagIdAndUserId(tagId, user.getId()).isPresent()) {
+            throw new TagAlreadyExistsException("тег уже был добавлен в игнорируемые ранее");
+        }
+        return ResponseEntity.ok(tagConverter.tagToTagDto(ignoredTag.getIgnoredTag()));
+        }
+    }
+

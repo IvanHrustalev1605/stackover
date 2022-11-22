@@ -15,5 +15,4 @@ public interface TagService extends ReadWriteService<Tag, Long> {
     @Override
     Optional<Tag> getById(Long id);
 
-
 }

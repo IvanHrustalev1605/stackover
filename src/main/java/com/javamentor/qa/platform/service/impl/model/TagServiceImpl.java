@@ -6,6 +6,7 @@ import com.javamentor.qa.platform.models.entity.question.Tag;
 import com.javamentor.qa.platform.service.abstracts.model.TagService;
 import com.javamentor.qa.platform.service.impl.repository.ReadWriteServiceImpl;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -23,4 +24,5 @@ public class TagServiceImpl extends ReadWriteServiceImpl<Tag, Long> implements T
     public List<Tag> backListTag(List<String> names) {
         return tagDao.backListTag(names);
     }
+
 }

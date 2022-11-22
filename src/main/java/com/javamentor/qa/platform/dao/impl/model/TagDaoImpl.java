@@ -22,4 +22,6 @@ public class TagDaoImpl extends ReadWriteDaoImpl<Tag, Long> implements TagDao {
         query.setParameter("names", names);
         return query.getResultList();
     }
+
+
 }
