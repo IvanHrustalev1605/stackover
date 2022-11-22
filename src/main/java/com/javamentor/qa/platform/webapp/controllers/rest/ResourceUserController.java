@@ -21,18 +21,18 @@ public class ResourceUserController {
     public ResourceUserController(UserDtoService userDtoService) {
         this.userDtoService = userDtoService;
     }
-
-    @GetMapping("/{id}")
-    @Operation(summary = "Get User Dto By Id")
+    @GetMapping("/{userId}")
+    @Operation(summary = "Получение пользователя по ID")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Get User обработан успешно"),
-            @ApiResponse(responseCode = "404", description = "User By Id не найден")
+            @ApiResponse(responseCode = "200", description = "Пользователь с userId=* получен"),
+            @ApiResponse(responseCode = "404", description = "Пользователь с userId=* не найден"),
+            @ApiResponse(responseCode = "400", description = "Неверный формат введенного userId")
     })
-    private ResponseEntity<UserDto> getUserDtoById(@PathVariable Long id) {
-        if (userDtoService.getById(id).isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    private ResponseEntity<UserDto> getUserDtoById(@PathVariable Long userId) throws Exception {
+        if (userDtoService.getById(userId).isEmpty()) {
+            throw new Exception("Пользователь c таким айди не найден");
         }
-        return new ResponseEntity<>(userDtoService.getById(id).get(), HttpStatus.OK);
+        return new ResponseEntity<>(userDtoService.getById(userId).get(), HttpStatus.OK);
     }
 
 }
