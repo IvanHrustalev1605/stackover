@@ -9,9 +9,9 @@
         <relativePath/>
     </parent>
     <groupId>com.jm.qa.platform</groupId>
-    <artifactId>jm</artifactId>
+    <artifactId>stackover</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>jm</name>
+    <name>stackover</name>
     <description>Kata</description>
     <properties>
         <java.version>17</java.version>
