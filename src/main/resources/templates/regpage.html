@@ -1,94 +1,58 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html" class="h-100">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
-          integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="https://cdn.sstatic.net/Shared/stacks.css?v=5ad0f45f4799">
-    <link rel="stylesheet" type="text/css"
-          href="https://cdn.sstatic.net/Sites/stackoverflow/primary.css?v=0cc30ee01b86">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title>Регистрация</title>
+    <title>Registration Page</title>
     <style>
-        body {
-            background-color: #f1f2f3;
-            height: 100px;
-        }
-        #header {
-            display: flex;
-            flex-direction: column;
-            height: auto;
-        }
-        #sidebar {
-            display: flex;
-            flex-grow: 1;
-            height: auto;
-            position: relative;
-            right: -304px;
-
-        }
-        #content {
-            display: flex;
-            flex-grow: 1;
-            height: 550px;
-            padding: 24px;
-            float: right;
-            position: relative;
-            top: -262px;
-            right: -97px;
-
-        }
-        #footer {
-            display: block;
-            flex-grow: 1;
-            height: auto;
-            text-align: left;
+        form {
+            margin: 0 auto;
+            width: 250px;
         }
     </style>
 </head>
-
 <body>
-<div id="header"></div>
-<div id="sidebar"></div>
-<div id="content">
-    <div class="container">
-        <div class="row justify-content-center mt-5">
-            <div class="col-4">
-                <div class="card shadow">
-                    <div class="card-body">
-                        <form>
-                            <div class="form-group">
-                                <label for="name" style="font-weight: 700">Отображаемое имя</label>
-                                <input class="form-control form-control-sm" id="name" type="text">
-                            </div>
-                            <div class="form-group">
-                                <label for="email" style="font-weight: 700">Почта</label>
-                                <input class="form-control form-control-sm" id="email" type="email">
-                            </div>
-                            <div class="form-group">
-                                <label for="password" style="font-weight: 700">Пароль</label>
-                                <input class="form-control form-control-sm" id="password" type="password">
-                                <p class="text-muted" style="font-size: smaller">Пароли должны содержать не менее восьми
-                                    символов, включая как минимум 1 букву и 1 цифру.</p>
-                            </div>
-                            <button type="submit" id="register" class="btn btn-primary btn-block">Регистрация</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
+<div class="container">
+    <form class="text-center mt-5">
+        <div class="container">
+            <h1>Регистрация</h1>
+            <p>Чтобы создать аккаунт, заполните все поля</p>
+            <hr>
+
+
+            <label for="fullName"><b>Имя пользователя</b></label>
+            <label>
+                <input type="text" placeholder="Введите ваше имя" name="fullName" id="fullName" required>
+            </label>
+            <label for="email"><b>Email</b></label>
+            <label>
+                <input type="text" placeholder="Введите email" name="email" id="email" required>
+            </label>
+            <label for="password"><b>Пароль</b></label>
+            <label>
+                <input type="text" placeholder="Придумайте пароль" name="password" id="password" required>
+            </label>
+
+            <button type="submit" id="register" class="btn btn-success">Зарегистрироваться</button>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
         </div>
-    </div>
+    </form>
 </div>
-<div id="footer"></div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
         crossorigin="anonymous"></script>
-<script type="text/javascript" src="/js/header.js"></script>
 <script type="text/javascript" src="/js/sidebar.js"></script>
+<script type="text/javascript" src="/js/header.js"></script>
 <script type="text/javascript" src="/js/footer.js"></script>
 </body>
 </html>

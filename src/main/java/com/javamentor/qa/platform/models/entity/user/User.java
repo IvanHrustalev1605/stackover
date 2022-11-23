@@ -1,6 +1,11 @@
 package com.javamentor.qa.platform.models.entity.user;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -16,8 +21,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import java.io.Serial;
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Collections;
@@ -29,13 +32,9 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@RequiredArgsConstructor
 @Table(name = "user_entity")
-@Builder
-public class User implements UserDetails, Serializable {
+public class User implements UserDetails {
 
-    @Serial
-    private static final long serialVersionUID = -8404955799922281311L;
     @Id
     @GeneratedValue(generator = "User_seq")
     private Long id;
@@ -57,7 +56,7 @@ public class User implements UserDetails, Serializable {
     private LocalDateTime persistDateTime;
 
     @Column(name = "is_enabled")
-    private Boolean isEnabled = false;
+    private Boolean isEnabled = true;
 
     @Column(name = "is_deleted")
     private Boolean isDeleted = false;
@@ -92,9 +91,6 @@ public class User implements UserDetails, Serializable {
     @JoinColumn(name = "role_id", nullable = false)
     @NonNull
     private Role role;
-
-    @Column(name = "activation_code")
-    private String activationCode;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -146,5 +142,4 @@ public class User implements UserDetails, Serializable {
     public int hashCode() {
         return Objects.hash(id, email, password, fullName);
     }
-
 }

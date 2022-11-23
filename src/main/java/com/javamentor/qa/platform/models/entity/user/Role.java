@@ -12,8 +12,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.io.Serial;
-import java.io.Serializable;
 
 @Entity
 @Getter
@@ -21,10 +19,8 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "role")
-public class Role implements GrantedAuthority, Serializable {
+public class Role implements GrantedAuthority {
 
-    @Serial
-    private static final long serialVersionUID = -6705337507213514105L;
     @Id
     @GeneratedValue(generator = "Role_seq")
     private Long id;

@@ -20,7 +20,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
-import java.io.Serial;
 import java.io.Serializable;
 
 @Entity
@@ -30,8 +29,6 @@ import java.io.Serializable;
 @Table(name = "comment_answer")
 public class CommentAnswer implements Serializable {
 
-    @Serial
-    private static final long serialVersionUID = -3551765668238214891L;
     @Id
     private Long id;
 

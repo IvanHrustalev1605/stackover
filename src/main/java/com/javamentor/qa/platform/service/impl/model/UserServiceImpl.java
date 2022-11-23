@@ -24,20 +24,4 @@ public class UserServiceImpl extends ReadWriteServiceImpl<User, Long> implements
     public Optional<User> getByEmail(String email) {
         return userDao.getByEmail(email);
     }
-
-    @Override
-    public Optional<User> getUserByActivationCode(String activationCode) {
-        return userDao.getUserByActivationCode(activationCode);
-    }
-
-    @Override
-    @Transactional
-    public boolean activateUser(Long userId) {
-        User user = userDao.getById(userId).get();
-        if (user.getIsEnabled().equals(false)) {
-            user.setIsEnabled(true);
-        }
-        userDao.update(user);
-        return true;
-    }
 }

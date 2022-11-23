@@ -2,7 +2,6 @@ package com.javamentor.qa.platform.dao.impl.repository;
 
 import com.javamentor.qa.platform.dao.util.SingleResultUtil;
 import com.javamentor.qa.platform.models.entity.user.User;
-import com.javamentor.qa.platform.models.entity.user.reputation.Reputation;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -64,16 +63,4 @@ public abstract class ReadOnlyDaoImpl<E, K> {
                 .setParameter("email", email);
         return SingleResultUtil.getSingleResultOrNull(query);
     }
-
-    public Optional<User> getUserByActivationCode(String activationCode) {
-        TypedQuery<User> query = entityManager.createQuery("""
-                        SELECT u
-                        FROM User u
-                        JOIN FETCH u.role
-                        WHERE u.activationCode=:activationCode
-                        """, User.class)
-                .setParameter("activationCode", activationCode);
-        return SingleResultUtil.getSingleResultOrNull(query);
-    }
-
 }

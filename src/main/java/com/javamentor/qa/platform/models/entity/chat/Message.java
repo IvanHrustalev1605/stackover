@@ -7,8 +7,6 @@ import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.io.Serial;
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -18,10 +16,8 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "message")
-public class Message implements Serializable {
+public class Message {
 
-    @Serial
-    private static final long serialVersionUID = -5539173835103065739L;
     @Id
     @GeneratedValue(generator = "Message_seq")
     private Long id;

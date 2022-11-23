@@ -14,9 +14,4 @@ public class UserDaoImpl extends ReadWriteDaoImpl<User, Long> implements UserDao
     public Optional<User> getByEmail(String email) {
         return super.getByEmail(email);
     }
-
-    @Override
-    public Optional<User> getUserByActivationCode(String activationCode) {
-        return super.getUserByActivationCode(activationCode);
-    }
 }

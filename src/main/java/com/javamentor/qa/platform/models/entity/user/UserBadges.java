@@ -14,7 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -26,8 +25,6 @@ import java.util.Objects;
 @Table(name = "user_badges")
 public class UserBadges implements Serializable {
 
-    @Serial
-    private static final long serialVersionUID = 6206650946423753498L;
     @Id
     @GeneratedValue(generator = "UserBadges_seq")
     private Long id;

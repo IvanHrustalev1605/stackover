@@ -18,6 +18,4 @@ public interface ReadOnlyDao<E, K> {
     boolean existsByAllIds(Collection<K> ids);
 
     Optional<User> getByEmail(String email);
-
-
 }
