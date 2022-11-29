@@ -35,6 +35,11 @@
             <version>5.4.18.Final</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+        </dependency>
+
         <!-- hot swapping, enable live reload -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

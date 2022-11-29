@@ -1,0 +1,1266 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+          integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn"
+          crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.sstatic.net/Shared/stacks.css?v=5ad0f45f4799">
+    <link rel="stylesheet" type="text/css" href="https://cdn.sstatic.net/Sites/ru/primary.css?v=bdbca3b61982">
+    <link rel="stylesheet" type="text/css" href="https://cdn.sstatic.net/Sites/ru/secondary.css?v=6793be5668e3">
+    <link rel="stylesheet" type="text/css" href="https://cdn.sstatic.net/Shared/Channels/channels.css?v=d098999fc478">
+
+    <title>Tags</title>
+</head>
+
+
+<body class="tags-page unified-theme">
+
+<!--===============H E A D E R======================================= -->
+<header class="s-topbar ps-fixed t0 l0 js-top-bar">
+    <div class="s-topbar--container">
+        <a href="#" class="s-topbar--menu-btn js-left-sidebar-toggle" role="menuitem" aria-haspopup="true"
+           aria-controls="left-sidebar" aria-expanded="false"><span></span></a>
+        <div class="topbar-dialog leftnav-dialog js-leftnav-dialog dno">
+            <div class="left-sidebar js-unpinned-left-sidebar" data-can-be="left-sidebar" data-is-here-when="sm"></div>
+        </div>
+        <a href="" class="s-topbar--logo js-gps-track"
+           data-gps-track="top_nav.click({is_current:false, location:16, destination:8})">
+            <span class="-img _glyph">Stack Overflow на русском</span>
+        </a>
+
+        <!--        search-->
+        <form id="search" role="search" action="" class="s-topbar--searchbar js-searchbar "
+              autocomplete="off" method="POST">
+            <div class="s-topbar--searchbar--input-group">
+                <input name="q" type="text" role="combobox" placeholder="Поиск..." value="" autocomplete="off"
+                       maxlength="240" class="s-input s-input__search js-search-field " aria-label="Поиск"
+                       aria-controls="top-search" data-controller="s-popover" data-action="focus->s-popover#show"
+                       data-s-popover-placement="bottom-start">
+                <svg aria-hidden="true" class="s-input-icon s-input-icon__search svg-icon iconSearch" width="18"
+                     height="18" viewBox="0 0 18 18">
+                    <path d="m18 16.5-5.14-5.18h-.35a7 7 0 1 0-1.19 1.19v.35L16.5 18l1.5-1.5ZM12 7A5 5 0 1 1 2 7a5 5 0 0 1 10 0Z"></path>
+                </svg>
+                <div class="s-popover p0 wmx100 wmn4 sm:wmn-initial js-top-search-popover" id="top-search" role="menu">
+                    <div class="s-popover--arrow"></div>
+                    <div class="js-spinner p24 d-flex ai-center jc-center d-none">
+                        <div class="s-spinner s-spinner__sm fc-orange-400">
+                            <div class="v-visible-sr">Loading…</div>
+                        </div>
+                    </div>
+
+                    <span class="v-visible-sr js-screen-reader-info"></span>
+                    <div class="js-ac-results overflow-y-auto hmx3 d-none"></div>
+
+                    <div class="js-search-hints" aria-describedby="Tips for searching"></div>
+                </div>
+            </div>
+        </form>
+
+
+        <!--РЕГИСТРАЦИЯ-->
+        <nav class="h100 ml-auto overflow-x-auto pr12">
+            <ol class="s-topbar--content" role="menubar">
+
+                <li class="js-topbar-dialog-corral" role="presentation">
+
+
+                    <div class="topbar-dialog siteSwitcher-dialog dno" role="menu">
+                        <div class="header fw-wrap">
+                            <h3 class="flex--item">
+                                <a href="">текущее сообщество</a>
+                            </h3>
+                            <div class="flex--item fl1">
+                                <div class="ai-center d-flex jc-end">
+                                    <button class="js-close-button s-btn s-btn__muted p0 ml8 d-none sm:d-block"
+                                            type="button" aria-label="Close">
+                                        <svg aria-hidden="true" class="svg-icon iconClear" width="18" height="18"
+                                             viewBox="0 0 18 18">
+                                            <path d="M15 4.41 13.59 3 9 7.59 4.41 3 3 4.41 7.59 9 3 13.59 4.41 15 9 10.41 13.59 15 15 13.59 10.41 9 15 4.41Z"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-content bg-powder-050 current-site-container">
+                            <ul class="current-site ">
+                                <li class="d-flex">
+                                    <div class="fl1">
+                                        <a href=""
+                                           class="current-site-link site-link js-gps-track d-flex gs8 gsx" data-id="609"
+                                           data-gps-track="site_switcher.click({ item_type:3 })">
+                                            <div class="favicon favicon-ru site-icon flex--item"
+                                                 title="Stack Overflow на русском"></div>
+                                            <span class="flex--item fl1">
+            Stack Overflow на русском
+        </span>
+                                        </a>
+
+                                    </div>
+
+                                <div class="header" id="your-communities-header">
+                                        <h3>
+                                            Ваши сообщества </h3>
+
+                                    </div>
+                                    <div class="modal-content" id="your-communities-section">
+
+                                        <div class="call-to-login">
+                                            Чтобы изменить список, <a
+                                                href=""
+                                                class="login-link js-gps-track"
+                                                data-gps-track="site_switcher.click({ item_type:10 })">зарегистрируйтесь</a>
+                                            или <a
+                                                href=""
+                                                class="login-link js-gps-track"
+                                                data-gps-track="site_switcher.click({ item_type:11 })">войдите</a>.
+                                        </div>
+                                    </div>
+
+                                    <div class="header">
+                                        <h3><a href="">другие сообщества stack
+                                            exchange</a>
+                                        </h3>
+                                        <a href="" class="float-right">блог компании</a>
+                                    </div>
+                                    <div class="modal-content">
+                                        <div class="child-content"></div>
+                                </div>
+                        </div>
+
+                <li role="none">
+                    <button class="s-topbar--item s-btn s-btn__icon s-btn__muted d-none sm:d-inline-flex js-searchbar-trigger"
+                            role="menuitem" aria-label="Поиск" aria-haspopup="true" aria-controls="search"
+                            title="Click to show search">
+                        <svg aria-hidden="true" class="svg-icon iconSearch" width="18" height="18" viewBox="0 0 18 18">
+                            <path d="m18 16.5-5.14-5.18h-.35a7 7 0 1 0-1.19 1.19v.35L16.5 18l1.5-1.5ZM12 7A5 5 0 1 1 2 7a5 5 0 0 1 10 0Z"></path>
+                        </svg>
+                    </button>
+                </li>
+
+                <li role="none">
+                    <a href="Войти"
+                       class="s-topbar--item s-topbar--item__unset s-btn s-btn__filled ws-nowrap js-gps-track"
+                       role="menuitem" rel="nofollow" data-gps-track="login.click" data-ga="[" top="" navigation","login=""
+                    button="" click",null,null,null]"="">Войти</a>
+                </li>
+
+                <li role="none"><a
+                        href="Регистрация"
+                        class="s-topbar--item s-topbar--item__unset ml4 s-btn s-btn__primary ws-nowrap" role="menuitem"
+                        rel="nofollow" data-ga="[" sign="" up","sign="" up=""
+                    navigation","header",null,null]"="">Регистрация</a>
+                </li>
+            </ol>
+        </nav>
+    </div>
+</header>
+
+<!--===============H E A D E R======================================= -->
+
+
+<div class="container">
+
+    <div id="left-sidebar" data-is-here-when="md lg" class="left-sidebar js-pinned-left-sidebar ps-relative">
+        <div class="left-sidebar--sticky-container js-sticky-leftnav">
+            <nav role="navigation">
+                <ol class="nav-links">
+
+                    <li class="ps-relative" aria-current="false">
+                        <a href="/" class="pl8 js-gps-track nav-links--link"
+                           data-gps-track="top_nav.click({is_current: false, location:16, destination:8})"
+                           aria-controls="" data-controller="" data-s-popover-placement="right" aria-current="false"
+                           data-s-popover-auto-show="true" data-s-popover-hide-on-outside-click="never">
+                            <div class="d-flex ai-center">
+                                <div class="flex--item truncate">
+                                    Главная
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+
+                    <li>
+                        <ol class="nav-links">
+                            <li class="fs-fine tt-uppercase ml8 mt16 mb4 fc-light">Публичные</li>
+
+
+                            <li class="ps-relative" aria-current="false">
+                                <a id="nav-questions" href="/questions"
+                                   class="pl8 js-gps-track nav-links--link -link__with-icon"
+                                   data-gps-track="top_nav.click({is_current: false, location:16, destination:1})"
+                                   aria-controls="" data-controller="" data-s-popover-placement="right"
+                                   aria-current="false" data-s-popover-auto-show="true"
+                                   data-s-popover-hide-on-outside-click="never">
+                                    <svg aria-hidden="true" class="svg-icon iconGlobe" width="18" height="18"
+                                         viewBox="0 0 18 18">
+                                        <path d="M9 1C4.64 1 1 4.64 1 9c0 4.36 3.64 8 8 8 4.36 0 8-3.64 8-8 0-4.36-3.64-8-8-8ZM8 15.32a6.46 6.46 0 0 1-4.3-2.74 6.46 6.46 0 0 1-.93-5.01L7 11.68v.8c0 .88.12 1.32 1 1.32v1.52Zm5.72-2c-.2-.66-1-1.32-1.72-1.32h-1v-2c0-.44-.56-1-1-1H6V7h1c.44 0 1-.56 1-1V5h2c.88 0 1.4-.72 1.4-1.6v-.33a6.45 6.45 0 0 1 3.83 4.51 6.45 6.45 0 0 1-1.51 5.73v.01Z"></path>
+                                    </svg>
+                                    <span class="-link--channel-name">Вопросы</span>
+                                </a>
+                            </li>
+
+
+                            <li class="ps-relative  youarehere" aria-current="true">
+                                <a id="nav-tags" href="/tags" class=" js-gps-track nav-links--link"
+                                   data-gps-track="top_nav.click({is_current: true, location:16, destination:2})"
+                                   aria-controls="" data-controller="" data-s-popover-placement="right"
+                                   aria-current="false" data-s-popover-auto-show="true"
+                                   data-s-popover-hide-on-outside-click="never">
+                                    <div class="d-flex ai-center">
+                                        <div class="flex--item truncate">
+                                            Метки
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+
+
+                            <li class="ps-relative" aria-current="false">
+                                <a id="nav-users" href="/users" class=" js-gps-track nav-links--link"
+                                   data-gps-track="top_nav.click({is_current: false, location:16, destination:3})"
+                                   aria-controls="" data-controller="" data-s-popover-placement="right"
+                                   aria-current="false" data-s-popover-auto-show="true"
+                                   data-s-popover-hide-on-outside-click="never">
+                                    <div class="d-flex ai-center">
+                                        <div class="flex--item truncate">
+                                            Участники
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+
+
+                            <li class="ps-relative" aria-current="false">
+                                <a id="nav-unanswered" href="/unanswered" class=" js-gps-track nav-links--link"
+                                   data-gps-track="top_nav.click({is_current: false, location:16, destination:5})"
+                                   aria-controls="" data-controller="" data-s-popover-placement="right"
+                                   aria-current="false" data-s-popover-auto-show="true"
+                                   data-s-popover-hide-on-outside-click="never">
+                                    <div class="d-flex ai-center">
+                                        <div class="flex--item truncate">
+                                            Неотвеченные
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+
+                        </ol>
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+<!--=======================content==========================================-->
+    <div id="content" class="snippet-hidden">
+
+        <div id="mainbar-full">
+            <h1 class="fs-headline1 mb16">
+                Метки
+            </h1>
+
+            <p class="fs-body2 wmx6 mb16">
+                Метка — это ключевое слово, позволяющее отнести ваш вопрос в одну категорию с другими похожими
+                вопросами. Благодаря подбору правильных меток другие участники смогут проще найти ваш вопрос и быстрее
+                дать на него ответ.
+            </p>
+
+            <div class="d-flex fw-wrap gs4 mb24 ai-center">
+
+                <a class="flex--item s-link fs-body1" href="/tags/synonyms">Показать все синонимы меток</a>
+            </div>
+
+            <div class="d-flex fw-wrap">
+                <div class="flex--item ps-relative mb12">
+                    <input id="tagfilter" class="s-input s-input__search h100 js-tag-filter" autocomplete="off"
+                           name="tagfilter" type="text" maxlength="35" placeholder="Фильтрация по имени" autofocus="">
+                    <svg aria-hidden="true" class="s-input-icon s-input-icon__search svg-icon iconSearch" width="18"
+                         height="18" viewBox="0 0 18 18">
+                        <path d="m18 16.5-5.14-5.18h-.35a7 7 0 1 0-1.19 1.19v.35L16.5 18l1.5-1.5ZM12 7A5 5 0 1 1 2 7a5 5 0 0 1 10 0Z"></path>
+                    </svg>
+                </div>
+
+                <div class="flex--item ml-auto mb12 d-flex s-btn-group js-filter-btn">
+                    <a class="js-sort-preference-change youarehere is-selected flex--item s-btn s-btn__muted s-btn__outlined"
+                       href="/tags?tab=popular" data-nav-xhref="" title="наиболее популярные метки" data-value="popular"
+                       data-shortcut="" aria-current="page">
+                        Популярные</a>
+                    <a class="js-sort-preference-change flex--item s-btn s-btn__muted s-btn__outlined"
+                       href="/tags?tab=name" data-nav-xhref="" title="метки в алфавитном порядке" data-value="name"
+                       data-shortcut="">
+                        Имя</a>
+                    <a class="js-sort-preference-change flex--item s-btn s-btn__muted s-btn__outlined"
+                       href="/tags?tab=new" data-nav-xhref="" title="недавно созданные метки" data-value="new"
+                       data-shortcut="">
+                        Новые</a>
+                </div>
+
+            </div>
+
+            <div id="tags_list">
+
+
+                <div id="tags-browser" class="d-grid grid__4 lg:grid__3 md:grid__2 sm:grid__1 g12">
+                    <div class="grid--item s-card js-tag-cell d-flex fd-column">
+                        <div class="d-flex jc-space-between ai-center mb12">
+                            <div class="flex--item">
+                                <a href="/questions/tagged/javascript" class="post-tag"
+                                   title="показать вопросы с меткой [javascript]"
+                                   aria-label="показать вопросы с меткой [javascript]" rel="tag"
+                                   aria-labelledby="javascript-container">javascript</a>
+                            </div>
+                        </div>
+
+                        <div class="flex--item fc-medium mb12 v-truncate4">
+                            JavaScript (не путать с Java) — динамический, интерпретируемый язык со слабой типизацией,
+                            обычно используемый для написания скриптов на стороне клиента. Эта метка предназначена для
+                            вопросов, связанных…
+                        </div>
+
+                        <div class="mt-auto d-flex jc-space-between fs-caption fc-black-400">
+                            <div class="flex--item">64117 вопросов</div>
+                            <div class="flex--item s-anchors s-anchors__inherit"><a
+                                    href="/questions/tagged/javascript?sort=newest&days=1"
+                                    title="26 вопросов с меткой [javascript] за последние 24 часа">26 задано сегодня</a>,
+                                <a href="/questions/tagged/javascript?sort=newest&days=7"
+                                   title="161 вопрос с меткой [javascript] за последние 7 дней">161 за неделю</a></div>
+                        </div>
+                    </div>
+                    <div class="grid--item s-card js-tag-cell d-flex fd-column">
+                        <div class="d-flex jc-space-between ai-center mb12">
+                            <div class="flex--item">
+                                <a href="/questions/tagged/python" class="post-tag"
+                                   title="показать вопросы с меткой [python]"
+                                   aria-label="показать вопросы с меткой [python]" rel="tag"
+                                   aria-labelledby="python-container">python</a>
+                            </div>
+                        </div>
+
+                        <div class="flex--item fc-medium mb12 v-truncate4">
+                            Python — высокоуровневый язык с динамической типизацией, ориентированный на создание легко
+                            читаемого кода. Имеет две основные версии — 2 и 3. Используйте дополнительную метку
+                            [python-2.x] или [python-…
+                        </div>
+
+                        <div class="mt-auto d-flex jc-space-between fs-caption fc-black-400">
+                            <div class="flex--item">55435 вопросов</div>
+                            <div class="flex--item s-anchors s-anchors__inherit"><a
+                                    href="/questions/tagged/python?sort=newest&days=1"
+                                    title="50 вопросов с меткой [python] за последние 24 часа">50 задано сегодня</a>, <a
+                                    href="/questions/tagged/python?sort=newest&days=7"
+                                    title="376 вопросов с меткой [python] за последние 7 дней">376 за неделю</a></div>
+                        </div>
+                    </div>
+                    <div class="grid--item s-card js-tag-cell d-flex fd-column">
+                        <div class="d-flex jc-space-between ai-center mb12">
+                            <div class="flex--item">
+                                <a href="/questions/tagged/php" class="post-tag" title="показать вопросы с меткой [php]"
+                                   aria-label="показать вопросы с меткой [php]" rel="tag"
+                                   aria-labelledby="php-container">php</a>
+                            </div>
+                        </div>
+
+                        <div class="flex--item fc-medium mb12 v-truncate4">
+                            PHP — скриптовый язык программирования общего назначения, активно применяемый для разработки
+                            веб-приложений. Используйте эту метку, если у вас возникли вопросы по применению данного
+                            языка или о самом …
+                        </div>
+
+                        <div class="mt-auto d-flex jc-space-between fs-caption fc-black-400">
+                            <div class="flex--item">49641 вопрос</div>
+                            <div class="flex--item s-anchors s-anchors__inherit"><a
+                                    href="/questions/tagged/php?sort=newest&days=7"
+                                    title="49 вопросов с меткой [php] за последние 7 дней">49 задано за неделю</a>, <a
+                                    href="/questions/tagged/php?sort=newest&days=30"
+                                    title="289 вопросов с меткой [php] за последние 30 дней">289 за месяц</a></div>
+                        </div>
+                    </div>
+                    <div class="grid--item s-card js-tag-cell d-flex fd-column">
+                        <div class="d-flex jc-space-between ai-center mb12">
+                            <div class="flex--item">
+                                <a href="/questions/tagged/java" class="post-tag"
+                                   title="показать вопросы с меткой [java]"
+                                   aria-label="показать вопросы с меткой [java]" rel="tag"
+                                   aria-labelledby="java-container">java</a>
+                            </div>
+                        </div>
+
+                        <div class="flex--item fc-medium mb12 v-truncate4">
+                            Java (не путать с JavaScript) — строго типизированный объектно-ориентированный язык
+                            программирования. Приложения Java обычно транслируются в специальный байт-код, поэтому они
+                            могут работать на любой к…
+                        </div>
+
+                        <div class="mt-auto d-flex jc-space-between fs-caption fc-black-400">
+                            <div class="flex--item">45797 вопросов</div>
+                            <div class="flex--item s-anchors s-anchors__inherit"><a
+                                    href="/questions/tagged/java?sort=newest&days=1"
+                                    title="7 вопросов с меткой [java] за последние 24 часа">7 задано сегодня</a>, <a
+                                    href="/questions/tagged/java?sort=newest&days=7"
+                                    title="80 вопросов с меткой [java] за последние 7 дней">80 за неделю</a></div>
+                        </div>
+                    </div>
+                    <div class="grid--item s-card js-tag-cell d-flex fd-column">
+                        <div class="d-flex jc-space-between ai-center mb12">
+                            <div class="flex--item">
+                                <a href="/questions/tagged/c%23" class="post-tag" title="показать вопросы с меткой [c#]"
+                                   aria-label="показать вопросы с меткой [c#]" rel="tag" aria-labelledby="c#-container">c#</a>
+                            </div>
+                        </div>
+
+                        <div class="flex--item fc-medium mb12 v-truncate4">
+                            C# (произносится «си шарп») — мультипарадигменный язык программирования, флагманский язык
+                            фреймворка .NET. Указывайте в вопросах метку используемой реализации Common Language
+                            Infrastructure ([.net], […
+                        </div>
+
+                        <div class="mt-auto d-flex jc-space-between fs-caption fc-black-400">
+                            <div class="flex--item">40355 вопросов</div>
+                            <div class="flex--item s-anchors s-anchors__inherit"><a
+                                    href="/questions/tagged/c%23?sort=newest&days=1"
+                                    title="11 вопросов с меткой [c#] за последние 24 часа">11 задано сегодня</a>, <a
+                                    href="/questions/tagged/c%23?sort=newest&days=7"
+                                    title="107 вопросов с меткой [c#] за последние 7 дней">107 за неделю</a></div>
+                        </div>
+                    </div>
+                    <div class="grid--item s-card js-tag-cell d-flex fd-column">
+                        <div class="d-flex jc-space-between ai-center mb12">
+                            <div class="flex--item">
+                                <a href="/questions/tagged/html" class="post-tag"
+                                   title="показать вопросы с меткой [html]"
+                                   aria-label="показать вопросы с меткой [html]" rel="tag"
+                                   aria-labelledby="html-container">html</a>
+                            </div>
+                        </div>
+
+                        <div class="flex--item fc-medium mb12 v-truncate4">
+                            HTML, или язык гипертекстовой разметки – это стандартный язык разметки для документов,
+                            предназначенных для отображения в веб-браузере. Последняя действующая версия спецификации –
+                            HTML5.3. Как правило,…
+                        </div>
+
+                        <div class="mt-auto d-flex jc-space-between fs-caption fc-black-400">
+                            <div class="flex--item">34045 вопросов</div>
+                            <div class="flex--item s-anchors s-anchors__inherit"><a
+                                    href="/questions/tagged/html?sort=newest&days=1"
+                                    title="16 вопросов с меткой [html] за последние 24 часа">16 задано сегодня</a>, <a
+                                    href="/questions/tagged/html?sort=newest&days=7"
+                                    title="75 вопросов с меткой [html] за последние 7 дней">75 за неделю</a></div>
+                        </div>
+                    </div>
+                    <div class="grid--item s-card js-tag-cell d-flex fd-column">
+                        <div class="d-flex jc-space-between ai-center mb12">
+                            <div class="flex--item">
+                                <a href="/questions/tagged/android" class="post-tag"
+                                   title="показать вопросы с меткой [android]"
+                                   aria-label="показать вопросы с меткой [android]" rel="tag"
+                                   aria-labelledby="android-container">android</a>
+                            </div>
+                        </div>
+
+                        <div class="flex--item fc-medium mb12 v-truncate4">
+                            Android — это операционная система от Google, основанная на ядре Linux, для цифровых
+                            устройств: телефонов, планшетов, автомобилей, телевизоров, часов и очков Google Glass.
+                            Пожалуйста, используйте спец…
+                        </div>
+
+                        <div class="mt-auto d-flex jc-space-between fs-caption fc-black-400">
+                            <div class="flex--item">31696 вопросов</div>
+                            <div class="flex--item s-anchors s-anchors__inherit"><a
+                                    href="/questions/tagged/android?sort=newest&days=1"
+                                    title="6 вопросов с меткой [android] за последние 24 часа">6 задано сегодня</a>, <a
+                                    href="/questions/tagged/android?sort=newest&days=7"
+                                    title="37 вопросов с меткой [android] за последние 7 дней">37 за неделю</a></div>
+                        </div>
+                    </div>
+                    <div class="grid--item s-card js-tag-cell d-flex fd-column">
+                        <div class="d-flex jc-space-between ai-center mb12">
+                            <div class="flex--item">
+                                <a href="/questions/tagged/c%2b%2b" class="post-tag"
+                                   title="показать вопросы с меткой [c++]" aria-label="показать вопросы с меткой [c++]"
+                                   rel="tag" aria-labelledby="c++-container">c++</a>
+                            </div>
+                        </div>
+
+                        <div class="flex--item fc-medium mb12 v-truncate4">
+                            C++ - это универсальный язык программирования. Первоначально он был разработан как
+                            расширение для языка Си и имеет аналогичный синтаксис, но теперь это совершенно другой язык.
+                            Используйте этот тег для…
+                        </div>
+
+                        <div class="mt-auto d-flex jc-space-between fs-caption fc-black-400">
+                            <div class="flex--item">30662 вопроса</div>
+                            <div class="flex--item s-anchors s-anchors__inherit"><a
+                                    href="/questions/tagged/c%2b%2b?sort=newest&days=1"
+                                    title="14 вопросов с меткой [c++] за последние 24 часа">14 задано сегодня</a>, <a
+                                    href="/questions/tagged/c%2b%2b?sort=newest&days=7"
+                                    title="106 вопросов с меткой [c++] за последние 7 дней">106 за неделю</a></div>
+                        </div>
+                    </div>
+                    <div class="grid--item s-card js-tag-cell d-flex fd-column">
+                        <div class="d-flex jc-space-between ai-center mb12">
+                            <div class="flex--item">
+                                <a href="/questions/tagged/css" class="post-tag" title="показать вопросы с меткой [css]"
+                                   aria-label="показать вопросы с меткой [css]" rel="tag"
+                                   aria-labelledby="css-container">css</a>
+                            </div>
+                        </div>
+
+                        <div class="flex--item fc-medium mb12 v-truncate4">
+                            CSS, или каскадные таблицы стилей, — формальный язык описания внешнего вида документа, язык
+                            стилей, определяющий отображение HTML-документов.
+                        </div>
+
+                        <div class="mt-auto d-flex jc-space-between fs-caption fc-black-400">
+                            <div class="flex--item">27397 вопросов</div>
+                            <div class="flex--item s-anchors s-anchors__inherit"><a
+                                    href="/questions/tagged/css?sort=newest&days=1"
+                                    title="10 вопросов с меткой [css] за последние 24 часа">10 задано сегодня</a>, <a
+                                    href="/questions/tagged/css?sort=newest&days=7"
+                                    title="49 вопросов с меткой [css] за последние 7 дней">49 за неделю</a></div>
+                        </div>
+                    </div>
+                    <div class="grid--item s-card js-tag-cell d-flex fd-column">
+                        <div class="d-flex jc-space-between ai-center mb12">
+                            <div class="flex--item">
+                                <a href="/questions/tagged/jquery" class="post-tag"
+                                   title="показать вопросы с меткой [jquery]"
+                                   aria-label="показать вопросы с меткой [jquery]" rel="tag"
+                                   aria-labelledby="jquery-container">jquery</a>
+                            </div>
+                        </div>
+
+                        <div class="flex--item fc-medium mb12 v-truncate4">
+                            Популярная JavaScript-библиотека. Метка применяетcя к вопросам использования JQuery и ее
+                            дополнений. Должна быть дополнена меткой [javascript].
+                        </div>
+
+                        <div class="mt-auto d-flex jc-space-between fs-caption fc-black-400">
+                            <div class="flex--item">20606 вопросов</div>
+                            <div class="flex--item s-anchors s-anchors__inherit"><a
+                                    href="/questions/tagged/jquery?sort=newest&days=7"
+                                    title="9 вопросов с меткой [jquery] за последние 7 дней">9 задано за неделю</a>, <a
+                                    href="/questions/tagged/jquery?sort=newest&days=30"
+                                    title="46 вопросов с меткой [jquery] за последние 30 дней">46 за месяц</a></div>
+                        </div>
+                    </div>
+                    <div class="grid--item s-card js-tag-cell d-flex fd-column">
+                        <div class="d-flex jc-space-between ai-center mb12">
+                            <div class="flex--item">
+                                <a href="/questions/tagged/python-3.x" class="post-tag"
+                                   title="показать вопросы с меткой [python-3.x]"
+                                   aria-label="показать вопросы с меткой [python-3.x]" rel="tag"
+                                   aria-labelledby="python-3.x-container">python-3.x</a>
+                            </div>
+                        </div>
+
+                        <div class="flex--item fc-medium mb12 v-truncate4">
+                            Python 3 — это самая последняя версия языка Python, вышедшая в конце 2008 года. Метка
+                            предназначена для вопросов, непосредственно связанных с особенностями работы с Python версий
+                            3.x. Устанавливайте е…
+                        </div>
+
+                        <div class="mt-auto d-flex jc-space-between fs-caption fc-black-400">
+                            <div class="flex--item">16908 вопросов</div>
+                            <div class="flex--item s-anchors s-anchors__inherit"><a
+                                    href="/questions/tagged/python-3.x?sort=newest&days=1"
+                                    title="11 вопросов с меткой [python-3.x] за последние 24 часа">11 задано сегодня</a>,
+                                <a href="/questions/tagged/python-3.x?sort=newest&days=7"
+                                   title="69 вопросов с меткой [python-3.x] за последние 7 дней">69 за неделю</a></div>
+                        </div>
+                    </div>
+                    <div class="grid--item s-card js-tag-cell d-flex fd-column">
+                        <div class="d-flex jc-space-between ai-center mb12">
+                            <div class="flex--item">
+                                <a href="/questions/tagged/mysql" class="post-tag"
+                                   title="показать вопросы с меткой [mysql]"
+                                   aria-label="показать вопросы с меткой [mysql]" rel="tag"
+                                   aria-labelledby="mysql-container">mysql</a>
+                            </div>
+                        </div>
+
+                        <div class="flex--item fc-medium mb12 v-truncate4">
+                            Популярная реляционная СУБД, полностью поддерживающая стандартный SQL. Используйте метку
+                            только для вопросов, специфических для MySQL, иначе используйте [sql]. Обязательно
+                            указывайте версию.
+                        </div>
+
+                        <div class="mt-auto d-flex jc-space-between fs-caption fc-black-400">
+                            <div class="flex--item">15931 вопрос</div>
+                            <div class="flex--item s-anchors s-anchors__inherit"><a
+                                    href="/questions/tagged/mysql?sort=newest&days=7"
+                                    title="19 вопросов с меткой [mysql] за последние 7 дней">19 задано за неделю</a>, <a
+                                    href="/questions/tagged/mysql?sort=newest&days=30"
+                                    title="100 вопросов с меткой [mysql] за последние 30 дней">100 за месяц</a></div>
+                        </div>
+                    </div>
+                    <div class="grid--item s-card js-tag-cell d-flex fd-column">
+                        <div class="d-flex jc-space-between ai-center mb12">
+                            <div class="flex--item">
+                                <a href="/questions/tagged/sql" class="post-tag" title="показать вопросы с меткой [sql]"
+                                   aria-label="показать вопросы с меткой [sql]" rel="tag"
+                                   aria-labelledby="sql-container">sql</a>
+                            </div>
+                        </div>
+
+                        <div class="flex--item fc-medium mb12 v-truncate4">
+                            Структурированный язык запросов SQL(Structed Query Language) — формальный язык
+                            программирования для манипуляции данными в реляционных базах данных. Чтобы задать хороший
+                            вопрос, используйте инструкцию …
+                        </div>
+
+                        <div class="mt-auto d-flex jc-space-between fs-caption fc-black-400">
+                            <div class="flex--item">12852 вопроса</div>
+                            <div class="flex--item s-anchors s-anchors__inherit"><a
+                                    href="/questions/tagged/sql?sort=newest&days=7"
+                                    title="32 вопроса с меткой [sql] за последние 7 дней">32 задано за неделю</a>, <a
+                                    href="/questions/tagged/sql?sort=newest&days=30"
+                                    title="136 вопросов с меткой [sql] за последние 30 дней">136 за месяц</a></div>
+                        </div>
+                    </div>
+                    <div class="grid--item s-card js-tag-cell d-flex fd-column">
+                        <div class="d-flex jc-space-between ai-center mb12">
+                            <div class="flex--item">
+                                <a href="/questions/tagged/linux" class="post-tag"
+                                   title="показать вопросы с меткой [linux]"
+                                   aria-label="показать вопросы с меткой [linux]" rel="tag"
+                                   aria-labelledby="linux-container">linux</a>
+                            </div>
+                        </div>
+
+                        <div class="flex--item fc-medium mb12 v-truncate4">
+                            Linux — общее название UNIX-подобных операционных систем, основанных на одноимённом ядре и
+                            GNU. Используйте эту метку, если решение вопроса требуется именно для данной ОС, либо если
+                            вопрос о самой ОС.…
+                        </div>
+
+                        <div class="mt-auto d-flex jc-space-between fs-caption fc-black-400">
+                            <div class="flex--item">8879 вопросов</div>
+                            <div class="flex--item s-anchors s-anchors__inherit"><a
+                                    href="/questions/tagged/linux?sort=newest&days=1"
+                                    title="6 вопросов с меткой [linux] за последние 24 часа">6 задано сегодня</a>, <a
+                                    href="/questions/tagged/linux?sort=newest&days=7"
+                                    title="18 вопросов с меткой [linux] за последние 7 дней">18 за неделю</a></div>
+                        </div>
+                    </div>
+                    <div class="grid--item s-card js-tag-cell d-flex fd-column">
+                        <div class="d-flex jc-space-between ai-center mb12">
+                            <div class="flex--item">
+                                <a href="/questions/tagged/c" class="post-tag" title="показать вопросы с меткой [c]"
+                                   aria-label="показать вопросы с меткой [c]" rel="tag"
+                                   aria-labelledby="c-container">c</a>
+                            </div>
+                        </div>
+
+                        <div class="flex--item fc-medium mb12 v-truncate4">
+                            C — это классический компилируемый стандартизированный слабо статически типизированный
+                            императивный язык программирования с ручным управлением памятью, созданный в 1970-х годах
+                            Брайаном Керниганом и Д…
+                        </div>
+
+                        <div class="mt-auto d-flex jc-space-between fs-caption fc-black-400">
+                            <div class="flex--item">8761 вопрос</div>
+                            <div class="flex--item s-anchors s-anchors__inherit"><a
+                                    href="/questions/tagged/c?sort=newest&days=1"
+                                    title="8 вопросов с меткой [c] за последние 24 часа">8 задано сегодня</a>, <a
+                                    href="/questions/tagged/c?sort=newest&days=7"
+                                    title="36 вопросов с меткой [c] за последние 7 дней">36 за неделю</a></div>
+                        </div>
+                    </div>
+                    <div class="grid--item s-card js-tag-cell d-flex fd-column">
+                        <div class="d-flex jc-space-between ai-center mb12">
+                            <div class="flex--item">
+                                <a href="/questions/tagged/%d0%bc%d0%b0%d1%81%d1%81%d0%b8%d0%b2%d1%8b" class="post-tag"
+                                   title="показать вопросы с меткой [массивы]"
+                                   aria-label="показать вопросы с меткой [массивы]" rel="tag"
+                                   aria-labelledby="массивы-container">массивы</a>
+                            </div>
+                        </div>
+
+                        <div class="flex--item fc-medium mb12 v-truncate4">
+                            Массив — тип данных в виде набора элементов, расположенных в памяти непосредственно друг за
+                            другом. Массив, в отличие от списка, является структурой с произвольным доступом при
+                            указании индекса нужног…
+                        </div>
+
+                        <div class="mt-auto d-flex jc-space-between fs-caption fc-black-400">
+                            <div class="flex--item">7952 вопроса</div>
+                            <div class="flex--item s-anchors s-anchors__inherit"><a
+                                    href="/questions/tagged/%d0%bc%d0%b0%d1%81%d1%81%d0%b8%d0%b2%d1%8b?sort=newest&days=1"
+                                    title="7 вопросов с меткой [массивы] за последние 24 часа">7 задано сегодня</a>, <a
+                                    href="/questions/tagged/%d0%bc%d0%b0%d1%81%d1%81%d0%b8%d0%b2%d1%8b?sort=newest&days=7"
+                                    title="34 вопроса с меткой [массивы] за последние 7 дней">34 за неделю</a></div>
+                        </div>
+                    </div>
+                    <div class="grid--item s-card js-tag-cell d-flex fd-column">
+                        <div class="d-flex jc-space-between ai-center mb12">
+                            <div class="flex--item">
+                                <a href="/questions/tagged/wordpress" class="post-tag"
+                                   title="показать вопросы с меткой [wordpress]"
+                                   aria-label="показать вопросы с меткой [wordpress]" rel="tag"
+                                   aria-labelledby="wordpress-container">wordpress</a>
+                            </div>
+                        </div>
+
+                        <div class="flex--item fc-medium mb12 v-truncate4">
+                            WordPress — система управления содержимым сайта с открытым исходным кодом, распространяемая
+                            под лицензией GNU GPLv2 (или выше). Написана на PHP (5.6+), в качестве сервера базы данных
+                            использует MySQL …
+                        </div>
+
+                        <div class="mt-auto d-flex jc-space-between fs-caption fc-black-400">
+                            <div class="flex--item">6690 вопросов</div>
+                            <div class="flex--item s-anchors s-anchors__inherit"><a
+                                    href="/questions/tagged/wordpress?sort=newest&days=7"
+                                    title="14 вопросов с меткой [wordpress] за последние 7 дней">14 задано за неделю</a>,
+                                <a href="/questions/tagged/wordpress?sort=newest&days=30"
+                                   title="71 вопрос с меткой [wordpress] за последние 30 дней">71 за месяц</a></div>
+                        </div>
+                    </div>
+                    <div class="grid--item s-card js-tag-cell d-flex fd-column">
+                        <div class="d-flex jc-space-between ai-center mb12">
+                            <div class="flex--item">
+                                <a href="/questions/tagged/django" class="post-tag"
+                                   title="показать вопросы с меткой [django]"
+                                   aria-label="показать вопросы с меткой [django]" rel="tag"
+                                   aria-labelledby="django-container">django</a>
+                            </div>
+                        </div>
+
+                        <div class="flex--item fc-medium mb12 v-truncate4">
+                            Django — свободно распространяемый фреймворк для построения веб-приложений с помощью языка
+                            программирования Python, используя шаблон проектирования MVC.
+                            Встроенная поддержка СУБД postgresql, mysql, s…
+                        </div>
+
+                        <div class="mt-auto d-flex jc-space-between fs-caption fc-black-400">
+                            <div class="flex--item">6230 вопросов</div>
+                            <div class="flex--item s-anchors s-anchors__inherit"><a
+                                    href="/questions/tagged/django?sort=newest&days=1"
+                                    title="6 вопросов с меткой [django] за последние 24 часа">6 задано сегодня</a>, <a
+                                    href="/questions/tagged/django?sort=newest&days=7"
+                                    title="36 вопросов с меткой [django] за последние 7 дней">36 за неделю</a></div>
+                        </div>
+                    </div>
+                    <div class="grid--item s-card js-tag-cell d-flex fd-column">
+                        <div class="d-flex jc-space-between ai-center mb12">
+                            <div class="flex--item">
+                                <a href="/questions/tagged/node.js" class="post-tag"
+                                   title="показать вопросы с меткой [node.js]"
+                                   aria-label="показать вопросы с меткой [node.js]" rel="tag"
+                                   aria-labelledby="node.js-container">node.js</a>
+                            </div>
+                        </div>
+
+                        <div class="flex--item fc-medium mb12 v-truncate4">
+                            Node.js (или Node) — программная платформа, основанная на движке V8, предлагающая
+                            событийно-ориентированное и асинхронное (или реактивное) программирование с неблокирующим
+                            вводом/выводом.
+                        </div>
+
+                        <div class="mt-auto d-flex jc-space-between fs-caption fc-black-400">
+                            <div class="flex--item">6033 вопроса</div>
+                            <div class="flex--item s-anchors s-anchors__inherit"><a
+                                    href="/questions/tagged/node.js?sort=newest&days=7"
+                                    title="20 вопросов с меткой [node.js] за последние 7 дней">20 задано за неделю</a>,
+                                <a href="/questions/tagged/node.js?sort=newest&days=30"
+                                   title="85 вопросов с меткой [node.js] за последние 30 дней">85 за месяц</a></div>
+                        </div>
+                    </div>
+                    <div class="grid--item s-card js-tag-cell d-flex fd-column">
+                        <div class="d-flex jc-space-between ai-center mb12">
+                            <div class="flex--item">
+                                <a href="/questions/tagged/reactjs" class="post-tag"
+                                   title="показать вопросы с меткой [reactjs]"
+                                   aria-label="показать вопросы с меткой [reactjs]" rel="tag"
+                                   aria-labelledby="reactjs-container">reactjs</a>
+                            </div>
+                        </div>
+
+                        <div class="flex--item fc-medium mb12 v-truncate4">
+                            Используйте эту метку для вопросов о React.js — JavaScript библиотеки для создания
+                            пользовательских интерфейсов.
+                        </div>
+
+                        <div class="mt-auto d-flex jc-space-between fs-caption fc-black-400">
+                            <div class="flex--item">5867 вопросов</div>
+                            <div class="flex--item s-anchors s-anchors__inherit"><a
+                                    href="/questions/tagged/reactjs?sort=newest&days=1"
+                                    title="6 вопросов с меткой [reactjs] за последние 24 часа">6 задано сегодня</a>, <a
+                                    href="/questions/tagged/reactjs?sort=newest&days=7"
+                                    title="43 вопроса с меткой [reactjs] за последние 7 дней">43 за неделю</a></div>
+                        </div>
+                    </div>
+                    <div class="grid--item s-card js-tag-cell d-flex fd-column">
+                        <div class="d-flex jc-space-between ai-center mb12">
+                            <div class="flex--item">
+                                <a href="/questions/tagged/json" class="post-tag"
+                                   title="показать вопросы с меткой [json]"
+                                   aria-label="показать вопросы с меткой [json]" rel="tag"
+                                   aria-labelledby="json-container">json</a>
+                            </div>
+                        </div>
+
+                        <div class="flex--item fc-medium mb12 v-truncate4">
+                            JSON (JavaScript Object Notation) — независимый от конкретного языка формат для обмена
+                            текстовыми данными. Используйте эту метку, когда передаёте данные, используя протокол JSON.
+                            НЕ ИСПОЛЬЗУЙТЕ ЭТУ МЕ…
+                        </div>
+
+                        <div class="mt-auto d-flex jc-space-between fs-caption fc-black-400">
+                            <div class="flex--item">5834 вопроса</div>
+                            <div class="flex--item s-anchors s-anchors__inherit"><a
+                                    href="/questions/tagged/json?sort=newest&days=1"
+                                    title="5 вопросов с меткой [json] за последние 24 часа">5 задано сегодня</a>, <a
+                                    href="/questions/tagged/json?sort=newest&days=7"
+                                    title="21 вопрос с меткой [json] за последние 7 дней">21 за неделю</a></div>
+                        </div>
+                    </div>
+                    <div class="grid--item s-card js-tag-cell d-flex fd-column">
+                        <div class="d-flex jc-space-between ai-center mb12">
+                            <div class="flex--item">
+                                <a href="/questions/tagged/ajax" class="post-tag"
+                                   title="показать вопросы с меткой [ajax]"
+                                   aria-label="показать вопросы с меткой [ajax]" rel="tag"
+                                   aria-labelledby="ajax-container">ajax</a>
+                            </div>
+                        </div>
+
+                        <div class="flex--item fc-medium mb12 v-truncate4">
+                            AJAX (Асинхронный JavaScript и XML) - технология построения интерактивных веб-приложений,
+                            заключающаяся в фоновом обмене данными с веб-сервером, позволяющим обновлять страницы, не
+                            перезагружая их.
+                        </div>
+
+                        <div class="mt-auto d-flex jc-space-between fs-caption fc-black-400">
+                            <div class="flex--item">5665 вопросов</div>
+                            <div class="flex--item s-anchors s-anchors__inherit"><a
+                                    href="/questions/tagged/ajax?sort=newest&days=30"
+                                    title="19 вопросов с меткой [ajax] за последние 30 дней">19 задано за месяц</a>, <a
+                                    href="/questions/tagged/ajax?sort=newest&days=365"
+                                    title="279 вопросов с меткой [ajax] за последние 365 дней">279 за год</a></div>
+                        </div>
+                    </div>
+                    <div class="grid--item s-card js-tag-cell d-flex fd-column">
+                        <div class="d-flex jc-space-between ai-center mb12">
+                            <div class="flex--item">
+                                <a href="/questions/tagged/wpf" class="post-tag" title="показать вопросы с меткой [wpf]"
+                                   aria-label="показать вопросы с меткой [wpf]" rel="tag"
+                                   aria-labelledby="wpf-container">wpf</a>
+                            </div>
+                        </div>
+
+                        <div class="flex--item fc-medium mb12 v-truncate4">
+                            WPF (Windows Presentation Foundation) представляет собой обширный фреймворк для создания
+                            программ с графическим интерфейсом, с легко расширяемыми и настраиваемыми компонентами. WPF
+                            включён в состав .N…
+                        </div>
+
+                        <div class="mt-auto d-flex jc-space-between fs-caption fc-black-400">
+                            <div class="flex--item">5656 вопросов</div>
+                            <div class="flex--item s-anchors s-anchors__inherit"><a
+                                    href="/questions/tagged/wpf?sort=newest&days=7"
+                                    title="18 вопросов с меткой [wpf] за последние 7 дней">18 задано за неделю</a>, <a
+                                    href="/questions/tagged/wpf?sort=newest&days=30"
+                                    title="68 вопросов с меткой [wpf] за последние 30 дней">68 за месяц</a></div>
+                        </div>
+                    </div>
+                    <div class="grid--item s-card js-tag-cell d-flex fd-column">
+                        <div class="d-flex jc-space-between ai-center mb12">
+                            <div class="flex--item">
+                                <a href="/questions/tagged/%d0%b1%d0%b0%d0%b7%d0%b0-%d0%b4%d0%b0%d0%bd%d0%bd%d1%8b%d1%85"
+                                   class="post-tag" title="показать вопросы с меткой [база-данных]"
+                                   aria-label="показать вопросы с меткой [база-данных]" rel="tag"
+                                   aria-labelledby="база-данных-container">база-данных</a>
+                            </div>
+                        </div>
+
+                        <div class="flex--item fc-medium mb12 v-truncate4">
+                            База данных – это информационная модель, позволяющая упорядоченно хранить данные о группе
+                            объектов, обладающих одинаковым набором свойств. Используйте метку, если у вас вопросы по
+                            дизайну базы данных.…
+                        </div>
+
+                        <div class="mt-auto d-flex jc-space-between fs-caption fc-black-400">
+                            <div class="flex--item">5612 вопросов</div>
+                            <div class="flex--item s-anchors s-anchors__inherit"><a
+                                    href="/questions/tagged/%d0%b1%d0%b0%d0%b7%d0%b0-%d0%b4%d0%b0%d0%bd%d0%bd%d1%8b%d1%85?sort=newest&days=7"
+                                    title="11 вопросов с меткой [база-данных] за последние 7 дней">11 задано за
+                                неделю</a>, <a
+                                    href="/questions/tagged/%d0%b1%d0%b0%d0%b7%d0%b0-%d0%b4%d0%b0%d0%bd%d0%bd%d1%8b%d1%85?sort=newest&days=30"
+                                    title="54 вопроса с меткой [база-данных] за последние 30 дней">54 за месяц</a></div>
+                        </div>
+                    </div>
+                    <div class="grid--item s-card js-tag-cell d-flex fd-column">
+                        <div class="d-flex jc-space-between ai-center mb12">
+                            <div class="flex--item">
+                                <a href="/questions/tagged/%d0%b0%d0%bb%d0%b3%d0%be%d1%80%d0%b8%d1%82%d0%bc"
+                                   class="post-tag" title="показать вопросы с меткой [алгоритм]"
+                                   aria-label="показать вопросы с меткой [алгоритм]" rel="tag"
+                                   aria-labelledby="алгоритм-container">алгоритм</a>
+                            </div>
+                        </div>
+
+                        <div class="flex--item fc-medium mb12 v-truncate4">
+                            Алгоритм — формализованная инструкция, описывающая требования к входным данным и порядок
+                            операций с ними для получения требуемого результата. Отмечайте этой меткой вопросы, где
+                            разработка или реализац…
+                        </div>
+
+                        <div class="mt-auto d-flex jc-space-between fs-caption fc-black-400">
+                            <div class="flex--item">5363 вопроса</div>
+                            <div class="flex--item s-anchors s-anchors__inherit"><a
+                                    href="/questions/tagged/%d0%b0%d0%bb%d0%b3%d0%be%d1%80%d0%b8%d1%82%d0%bc?sort=newest&days=7"
+                                    title="15 вопросов с меткой [алгоритм] за последние 7 дней">15 задано за неделю</a>,
+                                <a href="/questions/tagged/%d0%b0%d0%bb%d0%b3%d0%be%d1%80%d0%b8%d1%82%d0%bc?sort=newest&days=30"
+                                   title="59 вопросов с меткой [алгоритм] за последние 30 дней">59 за месяц</a></div>
+                        </div>
+                    </div>
+                    <div class="grid--item s-card js-tag-cell d-flex fd-column">
+                        <div class="d-flex jc-space-between ai-center mb12">
+                            <div class="flex--item">
+                                <a href="/questions/tagged/unity3d" class="post-tag"
+                                   title="показать вопросы с меткой [unity3d]"
+                                   aria-label="показать вопросы с меткой [unity3d]" rel="tag"
+                                   aria-labelledby="unity3d-container">unity3d</a>
+                            </div>
+                        </div>
+
+                        <div class="flex--item fc-medium mb12 v-truncate4">
+                            Unity3D — многоплатформенный движок для разработки 3D/2D-игр и интерактивного контента.
+                        </div>
+
+                        <div class="mt-auto d-flex jc-space-between fs-caption fc-black-400">
+                            <div class="flex--item">5304 вопроса</div>
+                            <div class="flex--item s-anchors s-anchors__inherit"><a
+                                    href="/questions/tagged/unity3d?sort=newest&days=1"
+                                    title="5 вопросов с меткой [unity3d] за последние 24 часа">5 задано сегодня</a>, <a
+                                    href="/questions/tagged/unity3d?sort=newest&days=7"
+                                    title="22 вопроса с меткой [unity3d] за последние 7 дней">22 за неделю</a></div>
+                        </div>
+                    </div>
+                    <div class="grid--item s-card js-tag-cell d-flex fd-column">
+                        <div class="d-flex jc-space-between ai-center mb12">
+                            <div class="flex--item">
+                                <a href="/questions/tagged/.net" class="post-tag"
+                                   title="показать вопросы с меткой [.net]"
+                                   aria-label="показать вопросы с меткой [.net]" rel="tag"
+                                   aria-labelledby=".net-container">.net</a>
+                            </div>
+                        </div>
+
+                        <div class="flex--item fc-medium mb12 v-truncate4">
+                            .NET Framework — программная платформа, выпущенная компанией Microsoft в 2002 году. Основой
+                            платформы является общеязыковая среда исполнения Common Language Runtime (CLR), которая
+                            подходит для разных …
+                        </div>
+
+                        <div class="mt-auto d-flex jc-space-between fs-caption fc-black-400">
+                            <div class="flex--item">5040 вопросов</div>
+                            <div class="flex--item s-anchors s-anchors__inherit"><a
+                                    href="/questions/tagged/.net?sort=newest&days=7"
+                                    title="15 вопросов с меткой [.net] за последние 7 дней">15 задано за неделю</a>, <a
+                                    href="/questions/tagged/.net?sort=newest&days=30"
+                                    title="40 вопросов с меткой [.net] за последние 30 дней">40 за месяц</a></div>
+                        </div>
+                    </div>
+                    <div class="grid--item s-card js-tag-cell d-flex fd-column">
+                        <div class="d-flex jc-space-between ai-center mb12">
+                            <div class="flex--item">
+                                <a href="/questions/tagged/windows" class="post-tag"
+                                   title="показать вопросы с меткой [windows]"
+                                   aria-label="показать вопросы с меткой [windows]" rel="tag"
+                                   aria-labelledby="windows-container">windows</a>
+                            </div>
+                        </div>
+
+                        <div class="flex--item fc-medium mb12 v-truncate4">
+                            Windows — семейство графических операционных систем, разработанных Microsoft. Используйте
+                            эту метку, если решение вопроса требуется именно для данной ОС, либо если вопрос о самой ОС.
+                        </div>
+
+                        <div class="mt-auto d-flex jc-space-between fs-caption fc-black-400">
+                            <div class="flex--item">5038 вопросов</div>
+                            <div class="flex--item s-anchors s-anchors__inherit"><a
+                                    href="/questions/tagged/windows?sort=newest&days=7"
+                                    title="18 вопросов с меткой [windows] за последние 7 дней">18 задано за неделю</a>,
+                                <a href="/questions/tagged/windows?sort=newest&days=30"
+                                   title="52 вопроса с меткой [windows] за последние 30 дней">52 за месяц</a></div>
+                        </div>
+                    </div>
+                    <div class="grid--item s-card js-tag-cell d-flex fd-column">
+                        <div class="d-flex jc-space-between ai-center mb12">
+                            <div class="flex--item">
+                                <a href="/questions/tagged/%d1%80%d0%b5%d0%b3%d1%83%d0%bb%d1%8f%d1%80%d0%bd%d1%8b%d0%b5-%d0%b2%d1%8b%d1%80%d0%b0%d0%b6%d0%b5%d0%bd%d0%b8%d1%8f"
+                                   class="post-tag" title="показать вопросы с меткой [регулярные-выражения]"
+                                   aria-label="показать вопросы с меткой [регулярные-выражения]" rel="tag"
+                                   aria-labelledby="регулярные-выражения-container">регулярные-выражения</a>
+                            </div>
+                        </div>
+
+                        <div class="flex--item fc-medium mb12 v-truncate4">
+                            Регулярные выражения в программировании — это формальный язык, описывающий шаблон, по
+                            которому в тексте будет осуществлён поиск подстроки. Вместе с этой меткой обязательно
+                            указывайте метку реализации …
+                        </div>
+
+                        <div class="mt-auto d-flex jc-space-between fs-caption fc-black-400">
+                            <div class="flex--item">5006 вопросов</div>
+                            <div class="flex--item s-anchors s-anchors__inherit"><a
+                                    href="/questions/tagged/%d1%80%d0%b5%d0%b3%d1%83%d0%bb%d1%8f%d1%80%d0%bd%d1%8b%d0%b5-%d0%b2%d1%8b%d1%80%d0%b0%d0%b6%d0%b5%d0%bd%d0%b8%d1%8f?sort=newest&days=7"
+                                    title="7 вопросов с меткой [регулярные-выражения] за последние 7 дней">7 задано за
+                                неделю</a>, <a
+                                    href="/questions/tagged/%d1%80%d0%b5%d0%b3%d1%83%d0%bb%d1%8f%d1%80%d0%bd%d1%8b%d0%b5-%d0%b2%d1%8b%d1%80%d0%b0%d0%b6%d0%b5%d0%bd%d0%b8%d1%8f?sort=newest&days=30"
+                                    title="50 вопросов с меткой [регулярные-выражения] за последние 30 дней">50 за
+                                месяц</a></div>
+                        </div>
+                    </div>
+                    <div class="grid--item s-card js-tag-cell d-flex fd-column">
+                        <div class="d-flex jc-space-between ai-center mb12">
+                            <div class="flex--item">
+                                <a href="/questions/tagged/qt" class="post-tag" title="показать вопросы с меткой [qt]"
+                                   aria-label="показать вопросы с меткой [qt]" rel="tag" aria-labelledby="qt-container">qt</a>
+                            </div>
+                        </div>
+
+                        <div class="flex--item fc-medium mb12 v-truncate4">
+                            Qt — кроссплатформенный инструментарий разработки ПО с графическим пользовательским
+                            интерфейсом на C++ и других языках программирования. Обязательно добавьте метку
+                            используемого языка.
+                        </div>
+
+                        <div class="mt-auto d-flex jc-space-between fs-caption fc-black-400">
+                            <div class="flex--item">4397 вопросов</div>
+                            <div class="flex--item s-anchors s-anchors__inherit"><a
+                                    href="/questions/tagged/qt?sort=newest&days=7"
+                                    title="9 вопросов с меткой [qt] за последние 7 дней">9 задано за неделю</a>, <a
+                                    href="/questions/tagged/qt?sort=newest&days=30"
+                                    title="35 вопросов с меткой [qt] за последние 30 дней">35 за месяц</a></div>
+                        </div>
+                    </div>
+                    <div class="grid--item s-card js-tag-cell d-flex fd-column">
+                        <div class="d-flex jc-space-between ai-center mb12">
+                            <div class="flex--item">
+                                <a href="/questions/tagged/laravel" class="post-tag"
+                                   title="показать вопросы с меткой [laravel]"
+                                   aria-label="показать вопросы с меткой [laravel]" rel="tag"
+                                   aria-labelledby="laravel-container">laravel</a>
+                            </div>
+                        </div>
+
+                        <div class="flex--item fc-medium mb12 v-truncate4">
+                            Laravel — бесплатный PHP-фреймворк с открытым исходным кодом, предназначенный для разработки
+                            с использованием архитектурной модели MVC. Исходный код Laravel размещен на GitHub и
+                            распространяется под л…
+                        </div>
+
+                        <div class="mt-auto d-flex jc-space-between fs-caption fc-black-400">
+                            <div class="flex--item">4312 вопросов</div>
+                            <div class="flex--item s-anchors s-anchors__inherit"><a
+                                    href="/questions/tagged/laravel?sort=newest&days=7"
+                                    title="7 вопросов с меткой [laravel] за последние 7 дней">7 задано за неделю</a>, <a
+                                    href="/questions/tagged/laravel?sort=newest&days=30"
+                                    title="39 вопросов с меткой [laravel] за последние 30 дней">39 за месяц</a></div>
+                        </div>
+                    </div>
+                    <div class="grid--item s-card js-tag-cell d-flex fd-column">
+                        <div class="d-flex jc-space-between ai-center mb12">
+                            <div class="flex--item">
+                                <a href="/questions/tagged/css3" class="post-tag"
+                                   title="показать вопросы с меткой [css3]"
+                                   aria-label="показать вопросы с меткой [css3]" rel="tag"
+                                   aria-labelledby="css3-container">css3</a>
+                            </div>
+                        </div>
+
+                        <div class="flex--item fc-medium mb12 v-truncate4">
+                            CSS3 — третья версия формального языка описания внешнего вида документа CSS.
+                        </div>
+
+                        <div class="mt-auto d-flex jc-space-between fs-caption fc-black-400">
+                            <div class="flex--item">4311 вопросов</div>
+                            <div class="flex--item s-anchors s-anchors__inherit"><a
+                                    href="/questions/tagged/css3?sort=newest&days=30"
+                                    title="9 вопросов с меткой [css3] за последние 30 дней">9 задано за месяц</a>, <a
+                                    href="/questions/tagged/css3?sort=newest&days=365"
+                                    title="259 вопросов с меткой [css3] за последние 365 дней">259 за год</a></div>
+                        </div>
+                    </div>
+                    <div class="grid--item s-card js-tag-cell d-flex fd-column">
+                        <div class="d-flex jc-space-between ai-center mb12">
+                            <div class="flex--item">
+                                <a href="/questions/tagged/html5" class="post-tag"
+                                   title="показать вопросы с меткой [html5]"
+                                   aria-label="показать вопросы с меткой [html5]" rel="tag"
+                                   aria-labelledby="html5-container">html5</a>
+                            </div>
+                        </div>
+
+                        <div class="flex--item fc-medium mb12 v-truncate4">
+                            HTML5 (HyperText Markup Language, version 5) — пятая версия языка разметки, служащего для
+                            структурирования и представления содержимого страниц для всемирной паутины.
+                        </div>
+
+                        <div class="mt-auto d-flex jc-space-between fs-caption fc-black-400">
+                            <div class="flex--item">4272 вопроса</div>
+                            <div class="flex--item s-anchors s-anchors__inherit"><a
+                                    href="/questions/tagged/html5?sort=newest&days=30"
+                                    title="19 вопросов с меткой [html5] за последние 30 дней">19 задано за месяц</a>, <a
+                                    href="/questions/tagged/html5?sort=newest&days=365"
+                                    title="389 вопросов с меткой [html5] за последние 365 дней">389 за год</a></div>
+                        </div>
+                    </div>
+                    <div class="grid--item s-card js-tag-cell d-flex fd-column">
+                        <div class="d-flex jc-space-between ai-center mb12">
+                            <div class="flex--item">
+                                <a href="/questions/tagged/winforms" class="post-tag"
+                                   title="показать вопросы с меткой [winforms]"
+                                   aria-label="показать вопросы с меткой [winforms]" rel="tag"
+                                   aria-labelledby="winforms-container">winforms</a>
+                            </div>
+                        </div>
+
+                        <div class="flex--item fc-medium mb12 v-truncate4">
+                            WinForms — неформальное название программного интерфейса Windows Forms для создания
+                            графического интерфейса, входит в состав Microsoft .NET Framework. WinForms является
+                            обёрткой на управляемом коде на…
+                        </div>
+
+                        <div class="mt-auto d-flex jc-space-between fs-caption fc-black-400">
+                            <div class="flex--item">4235 вопросов</div>
+                            <div class="flex--item s-anchors s-anchors__inherit"><a
+                                    href="/questions/tagged/winforms?sort=newest&days=7"
+                                    title="15 вопросов с меткой [winforms] за последние 7 дней">15 задано за неделю</a>,
+                                <a href="/questions/tagged/winforms?sort=newest&days=30"
+                                   title="60 вопросов с меткой [winforms] за последние 30 дней">60 за месяц</a></div>
+                        </div>
+                    </div>
+                    <div class="grid--item s-card js-tag-cell d-flex fd-column">
+                        <div class="d-flex jc-space-between ai-center mb12">
+                            <div class="flex--item">
+                                <a href="/questions/tagged/%d0%b2%d0%b5%d0%b1-%d0%bf%d1%80%d0%be%d0%b3%d1%80%d0%b0%d0%bc%d0%bc%d0%b8%d1%80%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5"
+                                   class="post-tag" title="показать вопросы с меткой [веб-программирование]"
+                                   aria-label="показать вопросы с меткой [веб-программирование]" rel="tag"
+                                   aria-labelledby="веб-программирование-container">веб-программирование</a>
+                            </div>
+                        </div>
+
+                        <div class="flex--item fc-medium mb12 v-truncate4">
+                            Метку можно использовать для вопросов, связанных с разработкой веб-приложений.
+                        </div>
+
+                        <div class="mt-auto d-flex jc-space-between fs-caption fc-black-400">
+                            <div class="flex--item">3994 вопроса</div>
+                            <div class="flex--item s-anchors s-anchors__inherit"><a
+                                    href="/questions/tagged/%d0%b2%d0%b5%d0%b1-%d0%bf%d1%80%d0%be%d0%b3%d1%80%d0%b0%d0%bc%d0%bc%d0%b8%d1%80%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5?sort=newest&days=7"
+                                    title="11 вопросов с меткой [веб-программирование] за последние 7 дней">11 задано за
+                                неделю</a>, <a
+                                    href="/questions/tagged/%d0%b2%d0%b5%d0%b1-%d0%bf%d1%80%d0%be%d0%b3%d1%80%d0%b0%d0%bc%d0%bc%d0%b8%d1%80%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5?sort=newest&days=30"
+                                    title="41 вопрос с меткой [веб-программирование] за последние 30 дней">41 за
+                                месяц</a></div>
+                        </div>
+                    </div>
+                    <div class="grid--item s-card js-tag-cell d-flex fd-column">
+                        <div class="d-flex jc-space-between ai-center mb12">
+                            <div class="flex--item">
+                                <a href="/questions/tagged/ubuntu" class="post-tag"
+                                   title="показать вопросы с меткой [ubuntu]"
+                                   aria-label="показать вопросы с меткой [ubuntu]" rel="tag"
+                                   aria-labelledby="ubuntu-container">ubuntu</a>
+                            </div>
+                        </div>
+
+                        <div class="flex--item fc-medium mb12 v-truncate4">
+                            Дистрибутив операционной системы GNU/Linux, основанный на пакетной базе дистрибутива Debian.
+                            Отмечайте исключительно вопросы, специфичные для этого дистрибутива, иначе используйте метку
+                            [linux].
+                        </div>
+
+                        <div class="mt-auto d-flex jc-space-between fs-caption fc-black-400">
+                            <div class="flex--item">3937 вопросов</div>
+                            <div class="flex--item s-anchors s-anchors__inherit"><a
+                                    href="/questions/tagged/ubuntu?sort=newest&days=7"
+                                    title="10 вопросов с меткой [ubuntu] за последние 7 дней">10 задано за неделю</a>,
+                                <a href="/questions/tagged/ubuntu?sort=newest&days=30"
+                                   title="38 вопросов с меткой [ubuntu] за последние 30 дней">38 за месяц</a></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="s-pagination site609 themed pager float-right">
+                    <div class="s-pagination--item is-selected" aria-current="" page
+                    ""="">1
+                </div>
+                <a class="s-pagination--item js-pagination-item" href="/tags?page=2&tab=popular" rel=""
+                   title="Перейти на страницу 2">2</a>
+                <a class="s-pagination--item js-pagination-item" href="/tags?page=3&tab=popular" rel=""
+                   title="Перейти на страницу 3">3</a>
+                <a class="s-pagination--item js-pagination-item" href="/tags?page=4&tab=popular" rel=""
+                   title="Перейти на страницу 4">4</a>
+                <a class="s-pagination--item js-pagination-item" href="/tags?page=5&tab=popular" rel=""
+                   title="Перейти на страницу 5">5</a>
+                <div class="s-pagination--item s-pagination--item__clear">…</div>
+                <a class="s-pagination--item js-pagination-item" href="/tags?page=162&tab=popular" rel=""
+                   title="Перейти на страницу 162">162</a>
+                <a class="s-pagination--item js-pagination-item" href="/tags?page=2&tab=popular" rel="next"
+                   title="Перейти на страницу 2"> Далее</a></div>
+
+
+        </div>
+
+    </div>
+</div>
+</div>
+<!--=======================content==========================================-->
+
+
+<!--=======================F O O T E R==========================================-->
+<footer id="footer" class="site-footer js-footer" role="contentinfo">
+    <div class="site-footer--container">
+        <nav class="site-footer--nav">
+            <div class="site-footer--col">
+                <h5 class="-title"><a href="/">Stack Overflow на русском</a></h5>
+            </div>
+
+            <div class="site-footer--col">
+                <h5 class="-title"><a class="js-gps-track" data-gps-track="footer.click({ location: 16, link: 1 })"
+                                      href="">Компания</a></h5>
+            </div>
+
+            <div class="site-footer--col site-footer--categories-nav">
+                <div>
+                    <h5 class="-title"><a href=""
+                                          data-gps-track="footer.click({ location: 16, link: 30 })">Stack Exchange
+                        Network</a></h5>
+                </div>
+            </div>
+        </nav>
+
+    </div>
+
+</footer>
+
+
+
+<!-- Вариант 1: пакет jQuery и Bootstrap (включает Popper) -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous">
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+        crossorigin="anonymous">
+</script>
+
+<script type="text/javascript" src="/js/sidebar.js"></script>
+<script type="text/javascript" src="/js/header.js"></script>
+<script type="text/javascript" src="/js/footer.js"></script>
+
+</body>
+</html>

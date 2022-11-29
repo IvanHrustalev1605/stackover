@@ -40,7 +40,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
 
     @Override
     public void configure(WebSecurity web) {
-        web.ignoring()
+        web
+                .ignoring()
                 .antMatchers("/swagger-ui/**", "/v3/api-docs/**",
                         "/error", "/webjars/**", "/login", "resources/static/**");
     }
@@ -55,9 +56,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
         http
                 // делаем страницу регистрации недоступной для авторизированных пользователей
                 .authorizeRequests()
-                // ограничиваем доступ api/user/** - разрешен только USER
+                // Ограничить доступ api/user/** - разрешен только USER
                 .antMatchers("api/user/**").hasRole("USER")
-                // всем остальным разрешаем доступ
+                // Всем остальным разрешить доступ
                 .antMatchers("/**").permitAll()
                 .and()
                 .logout()
@@ -67,8 +68,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOrigins("*")
-                .allowedMethods("*");
+        registry.addMapping("/**") //обращаться к нашему приложению можно по любому внутреннему url
+                .allowedOrigins("*") // все сайты могут делать запросы
+                .allowedMethods("*"); //запрос можно делать абсолютно всеми методами (GET, POST, PUT и т.д.)
     }
 }
