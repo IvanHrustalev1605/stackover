@@ -16,8 +16,66 @@
     </style>
 </head>
 <body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="#">StackOver</a>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Главная <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Метки</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#">Неотвеченные</a>
+            </li>
+        </ul>
+        <nav class="navbar navbar-light bg-light justify-content-between">
+            <a class="navbar-brand"></a>
+            <form class="form-inline">
+                <input class="form-control mr-sm-2" type="search" placeholder="Поиск" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Поиск</button>
+            </form>
+        </nav>
+
+        <nav class="navbar navbar-light bg-light">
+            <form class="form-inline">
+                <button class="btn btn-outline-success" type="button">Вход</button>
+                <button class="btn btn-sm btn-outline-secondary" type="button">Регистрация</button>
+            </form>
+        </nav>
+    </div>
+</nav>
+
+
+
+
 <div class="container">
-    <form class="text-center mt-5">
+    <form class="text-center mt-3 mb-5">
+
+        <div id="openid-buttons" class="mx-auto d-flex flex__fl-grow1 fd-column gs8 gsy mb16 wmx3">
+            <button class="flex--item s-btn s-btn__icon s-btn__google bar-md ba bc-black-100" data-provider='google' data-oauthserver='https://accounts.google.com/o/oauth2/auth' data-oauthversion='2.0'>
+                <svg aria-hidden="true" class="native svg-icon iconGoogle" width="18" height="18" viewBox="0 0 18 18"><path d="M16.51 8H8.98v3h4.3c-.18 1-.74 1.48-1.6 2.04v2.01h2.6a7.8 7.8 0 0 0 2.38-5.88c0-.57-.05-.66-.15-1.18Z" fill="#4285F4"/><path d="M8.98 17c2.16 0 3.97-.72 5.3-1.94l-2.6-2a4.8 4.8 0 0 1-7.18-2.54H1.83v2.07A8 8 0 0 0 8.98 17Z" fill="#34A853"/><path d="M4.5 10.52a4.8 4.8 0 0 1 0-3.04V5.41H1.83a8 8 0 0 0 0 7.18l2.67-2.07Z" fill="#FBBC05"/><path d="M8.98 4.18c1.17 0 2.23.4 3.06 1.2l2.3-2.3A8 8 0 0 0 1.83 5.4L4.5 7.49a4.77 4.77 0 0 1 4.48-3.3Z" fill="#EA4335"/></svg>
+                Зарегистрироваться через Google        </button>
+            <button class="flex--item s-btn s-btn__icon s-btn__github bar-md ba bc-black-100" data-provider='github' data-oauthserver='https://github.com/login/oauth/authorize' data-oauthversion='2.0'>
+                <svg aria-hidden="true" class="svg-icon iconGitHub" width="18" height="18" viewBox="0 0 18 18"><path d="M9 1a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38l-.01-1.49c-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.42 7.42 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48l-.01 2.2c0 .21.15.46.55.38A8.01 8.01 0 0 0 9 1Z" fill="#010101"/></svg>
+                Зарегистрироваться через GitHub        </button>
+            <button class="flex--item s-btn s-btn__icon s-btn__facebook bar-md" data-provider='facebook' data-oauthserver='https://www.facebook.com/v2.0/dialog/oauth' data-oauthversion='2.0'>
+                <svg aria-hidden="true" class="svg-icon iconFacebook" width="18" height="18" viewBox="0 0 18 18"><path d="M3 1a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H3Zm6.55 16v-6.2H7.46V8.4h2.09V6.61c0-2.07 1.26-3.2 3.1-3.2.88 0 1.64.07 1.87.1v2.16h-1.29c-1 0-1.19.48-1.19 1.18V8.4h2.39l-.31 2.42h-2.08V17h-2.5Z" fill="#4167B2"/></svg>
+                Зарегистрироваться через Facebook        </button>
+            <button class="flex--item s-btn s-btn__icon s-btn__vk bar-md ba bc-black-100" data-provider='vk' data-oauthserver='https://oauth.vk.com/authorize' data-oauthversion='2.0'>
+                <svg aria-hidden="true" class="native svg-icon iconVK" width="18" height="18" viewBox="0 0 18 18"><path d="M8.44 14.93h1.04s.3-.04.47-.22c.15-.17.15-.48.15-.48s-.03-1.47.62-1.68c.64-.22 1.45 1.41 2.31 2.04.66.48 1.16.38 1.16.38l2.3-.04s1.22-.08.64-1.08c-.04-.08-.32-.75-1.7-2.1-1.45-1.42-1.25-1.2.49-3.65 1.05-1.5 1.48-2.4 1.34-2.8-.12-.36-.9-.27-.9-.27l-2.6.02s-.19-.02-.33.07c-.14.09-.22.3-.22.3s-.42 1.16-.97 2.14c-1.16 2.08-1.63 2.2-1.81 2.06-.43-.3-.32-1.2-.32-1.85 0-2.01.29-3.38-.56-3.6a4.5 4.5 0 0 0-1.22-.13 5.3 5.3 0 0 0-2.15.24c-.3.15-.52.5-.39.51.17.03.56.11.77.41.27.39.25 1.77.25 1.77s.16 2.38-.35 2.67c-.36.2-.83-.21-1.87-2.1-.53-.96-.93-2.03-.93-2.03s-.07-.2-.21-.3c-.16-.13-.4-.18-.4-.18l-2.47.02s-.37.02-.5.19c-.12.14-.01.46-.01.46S2 10.5 4.19 12.9c2.01 2.21 4.29 2.07 4.29 2.07l-.04-.04Z" fill="#507299"/></svg>
+                Зарегистрироваться через &#x412;&#x41A;&#x43E;&#x43D;&#x442;&#x430;&#x43A;&#x442;&#x435;        </button>
+            <button class="flex--item s-btn s-btn__icon s-btn__yandex bar-md ba bc-black-100" data-provider='yandex' data-oauthserver='https://oauth.yandex.ru/authorize' data-oauthversion='2.0'>
+                <svg aria-hidden="true" class="native svg-icon iconYandex" width="18" height="18" viewBox="0 0 18 18"><path d="M11.26 2.48h-.92c-1.38 0-2.73.92-2.73 3.58 0 2.57 1.23 3.4 2.73 3.4h.92V2.48Zm-1.43 8.41L7.1 17.02h-2l3-6.55c-1.4-.72-2.34-2.02-2.34-4.41 0-3.36 2.12-5.03 4.65-5.03h2.57v16h-1.72v-6.14H9.83Z" fill="red"/></svg>
+                Зарегистрироваться через &#x42F;&#x43D;&#x434;&#x435;&#x43A;&#x441;        </button>
+        </div>
+
         <div class="container">
             <h1>Регистрация</h1>
             <p>Чтобы создать аккаунт, заполните все поля</p>
@@ -45,6 +103,20 @@
             <br/>
         </div>
     </form>
+</div>
+
+<div class="card text-center">
+    <div class="card-header">
+
+    </div>
+    <div class="card-body">
+
+        <p class="card-text">Уже есть учётная запись?</p>
+        <a href="#" class="btn btn-primary">Войдите</a>
+    </div>
+    <div class="card-footer text-muted">
+        2 days ago
+    </div>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
