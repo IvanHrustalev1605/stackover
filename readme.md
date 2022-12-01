@@ -619,8 +619,8 @@ DB_PASS - твой пароль
 
 2. Их необходимо указать в конфигурации проекта:
 
-![](src\main\resources\static\images\configurations.png)
+![](src/main/resources/static/images/configurations.png)
 
 3. В override parameters указывать значения для своей локальной базы данных:
 
-![](src\main\resources\static\images\OMG.png)
+![](src/main/resources/static/images/OMG.png)
