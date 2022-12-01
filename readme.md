@@ -19,6 +19,20 @@
 
 ![](src/main/resources/static/images/git_tutor/git_clone_clone.png)
 
+### Разделение на 2 профиля 
+
+1. В properties проекта в профиле local используем параметры типа ${POSTGRESQL_SERVER} для настроек подключения к базе данных:
+
+![](src/main/resources/static/images/properties.png)
+
+2. Их можно прописать в конфигурации проекта:
+
+![](src\main\resources\static\images\configurations.png)
+
+3. В override parameters указывать значения для своей локальной базы данных:
+
+![](src\main\resources\static\images\configuration properties.png)
+
 ### Перед внесением изменений в код
 
 ### Создание merge request
