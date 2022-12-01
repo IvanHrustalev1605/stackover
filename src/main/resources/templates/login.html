@@ -3,7 +3,7 @@
 <head>
     <script type="text/javascript" src="/webjars/jquery/3.6.1/dist/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/bootstrap/5.2.2/dist/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/webjars/popper.js/1.16.1-lts/dist/popper.min.js"></script>
+<!--    <script type="text/javascript" src="/webjars/popper.js/1.16.1-lts/dist/popper.min.js"></script>-->
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -16,21 +16,27 @@
 
 </head>
 <body class="bg-light">
+
 <div class="container">
-    <div id="content" class="d-flex col-12">
-        <div id="form-container" class="card col-3 mx-auto bg-white shadow my-5">
-            <form id="login-form" class="d-flex">
-                <div class="container">
-                    <div class="d-grid">
-                        <label for="email" class="mt-3"><strong>Почта</strong></label>
-                        <input id="email">
-                        <label for="password" class="mt-3"><strong>Пароль</strong></label>
-                        <input id="password">
-                        <button type="submit" class="btn btn-primary rounded-1 my-3 ">Войти</button>
+    <div class="row">
+
+        <div id="content" class="col-8 d-flex">
+
+            <div id="form-container" class="card col-4 mx-auto bg-white shadow my-5">
+                <form id="login-form" class="form-control">
+                    <div class="container-fluid">
+                        <div class="d-grid">
+                            <label for="email" class="mt-3"><strong>Почта</strong></label>
+                            <input id="email">
+                            <label for="password" class="mt-3"><strong>Пароль</strong></label>
+                            <input id="password">
+                            <button type="submit" class="btn btn-primary rounded-1 my-3 ">Войти</button>
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
+        <div class="col-2"></div>
     </div>
 </div>
 
