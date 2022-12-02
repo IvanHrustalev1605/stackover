@@ -24,8 +24,8 @@ public class TestEntityInit implements CommandLineRunner {
     @Override
     public void run(String... args) {
 
-        if (ddlAuto.contains("validate")) {
-            testDataInitService.createEntity();
-        }
+//        if (ddlAuto.contains("validate")) {
+//            testDataInitService.createEntity();
+//        }
     }
 }
