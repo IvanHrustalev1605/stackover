@@ -151,3 +151,4 @@ public class User implements UserDetails {
         return Objects.hash(id, email, password, fullName);
     }
 }
+
