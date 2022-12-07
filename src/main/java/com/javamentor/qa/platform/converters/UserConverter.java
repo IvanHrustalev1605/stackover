@@ -1,4 +1,4 @@
-package com.javamentor.qa.platform.webapp.configs.converters;
+package com.javamentor.qa.platform.converters;
 
 import com.javamentor.qa.platform.models.dto.UserRegistrationDto;
 import com.javamentor.qa.platform.models.entity.user.Role;

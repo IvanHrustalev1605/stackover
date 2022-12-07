@@ -1,9 +1,9 @@
-package com.javamentor.qa.platform.webapp.configs.controllers.rest;
+package com.javamentor.qa.platform.webapp.controllers.rest;
 
 import com.javamentor.qa.platform.models.dto.UserRegistrationDto;
 import com.javamentor.qa.platform.models.entity.user.User;
 import com.javamentor.qa.platform.service.abstracts.model.UserService;
-import com.javamentor.qa.platform.webapp.configs.converters.UserConverter;
+import com.javamentor.qa.platform.converters.UserConverter;
 import com.javamentor.qa.platform.mailSender.UserMailSender;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
