@@ -6,30 +6,46 @@ import com.javamentor.qa.platform.service.abstracts.dto.PaginationDtoService;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
-
 /**
-
  Из контроллера к нам будет прилетать Map
  private final Map<String, PaginationDto<T>> paginationDaoMap;
  которую потом используем в методе getPageDto
-
  */
 @Service
 public abstract class PaginationDtoServiceImpl <T> implements PaginationDtoService <T> {
 
-    @Override
-    public PageDto <T> getPageDto(Map<String, Object> param) {
+    private final Map<String, PaginationDto<T>> paginationDaoMap;
 
-        PaginationDto<T> paginationDto = (PaginationDto<T>) param.get("PaginationDto<T>");
+    protected PaginationDtoServiceImpl(Map<String, PaginationDto<T>> paginationDaoMap) {
+        this.paginationDaoMap = paginationDaoMap;
+    }
+
+    @Override
+    public PageDto <T> getPageDto(Map<String, Object> parameters) {
+
+        String keyPagination = (String) parameters.get("workPagination");
+        PaginationDto<T> paginationDto = paginationDaoMap.get(keyPagination);
 
         PageDto<T> pageDto = new PageDto<>();
-        pageDto.setCurrentPageNumber((Integer) param.get("pageNumber"));
-        pageDto.setTotalPageCount
-                ((int) Math.ceil((double) paginationDto.getTotalResultCount(param)
-                        / (int) param.get("pageSize")));
-        pageDto.setItemsOnPage((Integer) param.get("itemsOnPage"));
-        pageDto.setTotalResultCount(paginationDto.getTotalResultCount(param));
-        pageDto.setItems(paginationDto.getItems(param));
+
+        // общее количества данных в БД
+        int allItems = paginationDto.getTotalResultCount(parameters);
+        pageDto.setTotalResultCount(allItems);
+
+        // данные из БД
+        pageDto.setItems(paginationDto.getItems(parameters));
+
+        // количество данных на странице
+        pageDto.setItemsOnPage((int) parameters.get("itemsOnPage"));
+
+        // номер страницы
+        pageDto.setCurrentPageNumber((int) parameters.get("currentPage"));
+
+        // количество страниц
+        int totalPage = (allItems % (int) parameters.get("itemsOnPage") == 0 ?
+                allItems / (int) parameters.get("itemsOnPage") :
+                allItems / (int) parameters.get("itemsOnPage") + 1);
+        pageDto.setTotalPageCount(totalPage);
 
         return pageDto;
     }

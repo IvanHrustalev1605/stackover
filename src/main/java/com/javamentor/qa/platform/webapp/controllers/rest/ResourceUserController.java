@@ -1,6 +1,5 @@
 package com.javamentor.qa.platform.webapp.controllers.rest;
 
-
 import com.javamentor.qa.platform.models.dto.UserDto;
 import com.javamentor.qa.platform.service.abstracts.dto.UserDtoService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -27,7 +26,6 @@ public class ResourceUserController {
 
     private final UserDtoService userDtoService;
 
-    @Autowired
     public ResourceUserController(UserDtoService userDtoService) {
         this.userDtoService = userDtoService;
     }
