@@ -1,4 +1,14 @@
 package com.javamentor.qa.platform.dao.abstracts.dto;
 
-public interface AnswerDtoDao {
+
+import com.javamentor.qa.platform.models.dto.AnswerDto;
+
+import java.util.List;
+
+public interface AnswerDtoDao  {
+
+    List<AnswerDto> getAllAnswerDtoQuestionId(Long userId, Long questionId);
+
+
+
 }
