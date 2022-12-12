@@ -14,4 +14,13 @@ public class TagDaoImpl extends ReadWriteDaoImpl<Tag, Long> implements TagDao {
     @PersistenceContext
     private EntityManager entityManager;
 
+    @Override
+    public Tag checkTagInDatabaseByName(String name) {
+        return (Tag) entityManager.createQuery("""
+                        SELECT t
+                        FROM Tag t
+                        WHERE t.name =:name
+                        """)
+                .setParameter("name", name).getSingleResult();
+    }
 }
