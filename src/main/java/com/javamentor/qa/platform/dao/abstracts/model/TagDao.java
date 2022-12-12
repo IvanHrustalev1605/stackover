@@ -4,4 +4,5 @@ import com.javamentor.qa.platform.dao.abstracts.repository.ReadWriteDao;
 import com.javamentor.qa.platform.models.entity.question.Tag;
 
 public interface TagDao extends ReadWriteDao<Tag, Long> {
+    Tag checkTagInDatabaseByName(String name);
 }
