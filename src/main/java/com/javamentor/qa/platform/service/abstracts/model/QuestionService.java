@@ -10,4 +10,5 @@ import java.util.Optional;
 
 public interface QuestionService extends ReadWriteService<Question, Long> {
     Optional<QuestionDto> createQuestion(QuestionCreateDto questionCreateDto, User user);
+    Long getCountQuestionByUser(Long userId);
 }
