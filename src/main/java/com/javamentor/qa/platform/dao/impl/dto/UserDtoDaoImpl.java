@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -17,8 +18,7 @@ public class UserDtoDaoImpl extends ReadWriteDaoImpl<UserDto, Long> implements U
     @PersistenceContext
     private EntityManager entityManager;
 
-
-    public Optional<UserDto> getById(Long id){
+    public Optional<UserDto> getById(Long id) {
 
         return SingleResultUtil.getSingleResultOrNull(entityManager.createQuery("""
                 SELECT new com.javamentor.qa.platform.models.dto.UserDto (
@@ -38,6 +38,26 @@ public class UserDtoDaoImpl extends ReadWriteDaoImpl<UserDto, Long> implements U
                 WHERE u.id = :id
                 GROUP BY u.id
                 """, UserDto.class).setParameter("id", id));
+
+    }
+
+    public List<UserDto> getAll() {
+
+        return entityManager.createQuery("""
+                SELECT new com.javamentor.qa.platform.models.dto.UserDto (
+                u.id,
+                u.email,
+                u.fullName,
+                u.imageLink,
+                u.city,
+                (SELECT COALESCE(SUM(r.count), 0) FROM Reputation r WHERE r.author.id = u.id),
+                u.persistDateTime,
+                (SELECT COUNT(DISTINCT a) + COUNT(DISTINCT q)
+                FROM VoteAnswer a, VoteQuestion q
+                WHERE a.user.id = u.id AND q.user.id = u.id
+                ))
+                FROM User u
+                 """).getResultList();
 
     }
 }

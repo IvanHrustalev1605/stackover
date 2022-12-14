@@ -16,6 +16,7 @@ public abstract class PaginationDtoServiceImpl <T> implements PaginationDtoServi
 
     private final Map<String, PaginationDto<T>> paginationDaoMap;
 
+
     protected PaginationDtoServiceImpl(Map<String, PaginationDto<T>> paginationDaoMap) {
         this.paginationDaoMap = paginationDaoMap;
     }
@@ -24,7 +25,8 @@ public abstract class PaginationDtoServiceImpl <T> implements PaginationDtoServi
     public PageDto <T> getPageDto(Map<String, Object> parameters) {
 
         String keyPagination = (String) parameters.get("workPagination");
-        PaginationDto<T> paginationDto = paginationDaoMap.get(keyPagination);
+
+        PaginationDto<T> paginationDto = paginationDaoMap.get(keyPagination); //paginationDaoMap
 
         PageDto<T> pageDto = new PageDto<>();
 
