@@ -1,6 +1,6 @@
 package com.javamentor.qa.platform.exception;
 
-import com.javamentor.qa.platform.models.AppError;
+import com.javamentor.qa.platform.models.dto.AppError;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

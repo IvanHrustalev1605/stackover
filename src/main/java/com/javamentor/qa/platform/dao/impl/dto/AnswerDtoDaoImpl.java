@@ -17,7 +17,7 @@ public class AnswerDtoDaoImpl implements AnswerDtoDao {
     @Override
     public List<AnswerDto> getAllAnswerDtoQuestionId(Long userId, Long questionId) {
         return entityManager.createQuery("""
-                SELECT new com.javamentor.qa.platform.models.dto.AnswerDto (
+                SELECT new com.javamentor.qa.platform.models.dto.AnswerDto(
                 ans.id,
                 ans.user.id,
                 ans.question.id,
