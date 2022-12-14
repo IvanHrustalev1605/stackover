@@ -14,4 +14,13 @@ public class QuestionDaoImpl extends ReadWriteDaoImpl<Question, Long> implements
     @PersistenceContext
     private EntityManager entityManager;
 
+    public Long getCountAllQuestionsByUserName(Long userId) {
+        return (Long) entityManager.createQuery("""
+                        SELECT 
+                            COUNT(q)
+                            from Question q
+                                WHERE q.user.id =:user_id
+                            """)
+                .setParameter("user_id", userId).getSingleResult();
+    }
 }

@@ -43,4 +43,8 @@ public class QuestionServiceImpl extends ReadWriteServiceImpl<Question, Long> im
 
         return Optional.ofNullable(QuestionMapper.INSTANCE.toQuestionDto(question));
     }
+
+    public Long getCountQuestionByUser(Long userId) {
+        return questionDao.getCountAllQuestionsByUserName(userId);
+    }
 }
