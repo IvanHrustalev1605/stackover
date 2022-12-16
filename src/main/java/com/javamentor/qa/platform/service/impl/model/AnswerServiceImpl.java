@@ -28,5 +28,10 @@ public class AnswerServiceImpl extends ReadWriteServiceImpl<Answer, Long> implem
         }
 
     }
+
+    @Override
+    public Optional<Answer> getAnswerByAnswerIdAndUserId(Long answerId, Long userId) {
+        return answerDao.getAnswerByAnswerIdAndUserId(answerId, userId);
+    }
 }
 
