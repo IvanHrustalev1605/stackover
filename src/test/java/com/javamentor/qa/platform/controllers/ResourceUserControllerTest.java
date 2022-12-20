@@ -18,7 +18,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 @AutoConfigureMockMvc //Включаем автоматическую настройку MockMvc
 @SpringBootTest(classes = JmApplication.class, webEnvironment=SpringBootTest.WebEnvironment.RANDOM_PORT)
 //Загружаем application context нашего приложения, рандомный порт для тестов веб-слоя - хороший тон :)
-public class ResourceUserControllerTests {
+public class ResourceUserControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
