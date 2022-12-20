@@ -33,4 +33,8 @@ public class TagServiceImpl extends ReadWriteServiceImpl<Tag, Long> implements T
         return newtags;
     }
 
+    @Override
+    public List<Tag> backListTag(List<String> names) {
+        return tagDao.backListTag(names);
+    }
 }
