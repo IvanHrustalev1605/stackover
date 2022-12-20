@@ -26,7 +26,6 @@ public class AnswerServiceImpl extends ReadWriteServiceImpl<Answer, Long> implem
             deletedAnswer.get().setIsDeleted(true);
             answerDao.update(deletedAnswer.get());
         }
-
     }
 
     @Override
