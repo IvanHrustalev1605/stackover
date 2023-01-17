@@ -17,15 +17,13 @@ public class TestEntityInit implements CommandLineRunner {
 
     @Autowired
     public TestEntityInit(TestDataInitService testDataInitService) {
-
         this.testDataInitService = testDataInitService;
     }
 
     @Override
     public void run(String... args) {
-
-//        if (ddlAuto.contains("validate")) {
-//            testDataInitService.createEntity();
-//        }
+        if (ddlAuto.contains("update")) {
+            testDataInitService.createEntity();
+        }
     }
 }

@@ -588,39 +588,3 @@ this.mockMvc
 ```
 
 5. Если ожидаемые результаты не совпадут, тест сообщит об ошибке и распечатает все параметры. В ином случае вы увидите сообщение о том, что тест успешно пройден.
-
-### Профили конфигурации Spring
-
-1. В properties проекта в профиле local используем параметры типа ${DB_SERVER} для настроек подключения к базе данных.
-   
-Имена переменных должны совпадать с теми, что записаны в файле application-....properties.
-Значения - это данные для подключения к вашей локальной БД.
-
-Вписываем в VM Option `-ea -Dspring.profiles.active=local/dev` - выбираем профиль для запуска
-
-Environment variables `HIBERNATE_DDL=;DB_BASE=;DB_SERVER=;DB_PORT=;DB_NAME=;DB_USERNAME=;DB_PASS=`
-
-где
-
-HIBERNATE_DDL - настройка ddl
-
-DB_BASE - тип используемой БД
-
-DB_SERVER - адрес сервера (по умолчанию localhost)
-
-DB_PORT - порт
-
-DB_NAME - название БД
-
-DB_USERNAME - твой логин
-
-DB_PASS - твой пароль
-
-
-2. Их необходимо указать в конфигурации проекта:
-
-![](src/main/resources/static/images/configurations.png)
-
-3. В override parameters указывать значения для своей локальной базы данных:
-
-![](src/main/resources/static/images/OMG.png)

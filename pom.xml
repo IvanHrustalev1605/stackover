@@ -9,12 +9,12 @@
         <relativePath/>
     </parent>
     <groupId>com.jm.qa.platform</groupId>
-    <artifactId>stackover</artifactId>
+    <artifactId>jm</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>stackover</name>
+    <name>jm</name>
     <description>Kata</description>
     <properties>
-        <java.version>19</java.version>
+        <java.version>17</java.version>
         <swagger2.version>2.9.2</swagger2.version>
         <mapstruct.version>1.4.2.Final</mapstruct.version>
         <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
@@ -34,6 +34,7 @@
             <artifactId>hibernate-core</artifactId>
             <version>5.4.18.Final</version>
         </dependency>
+
         <!-- hot swapping, enable live reload -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -57,11 +58,6 @@
             <artifactId>spring-boot-starter-websocket</artifactId>
             <version>2.2.6.RELEASE</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-mail</artifactId>
-        </dependency>
-
 
         <dependency>
             <groupId>org.postgresql</groupId>
@@ -94,33 +90,10 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- JWT -->
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-api</artifactId>
-            <version>0.11.5</version>
-        </dependency>
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-impl</artifactId>
-            <version>0.11.5</version>
-        </dependency>
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-jackson</artifactId>
-            <version>0.11.5</version>
-        </dependency>
-
         <!-- Swagger -->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-boot-starter</artifactId>
-            <version>3.0.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
             <version>3.0.0</version>
         </dependency>
         <!-- /Swagger -->
@@ -169,11 +142,13 @@
             <artifactId>thymeleaf-layout-dialect</artifactId>
             <version>2.5.1</version>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
             <version>2.4.5</version>
         </dependency>
+
     </dependencies>
 
     <build>
@@ -185,7 +160,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
                 <configuration>
                     <source>15</source>
                     <target>15</target>
@@ -215,4 +189,3 @@
     </build>
 
 </project>
-

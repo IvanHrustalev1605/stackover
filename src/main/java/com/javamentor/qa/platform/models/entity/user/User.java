@@ -21,7 +21,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Collections;
@@ -93,13 +92,6 @@ public class User implements UserDetails {
     @NonNull
     private Role role;
 
-    public User(@NonNull String email, @NonNull String password, String fullName, @NonNull Role role) {
-        this.email = email;
-        this.password = password;
-        this.fullName = fullName;
-        this.role = role;
-    }
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singleton(role);
@@ -151,4 +143,3 @@ public class User implements UserDetails {
         return Objects.hash(id, email, password, fullName);
     }
 }
-
