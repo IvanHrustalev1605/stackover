@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Login</title>
+    <style>
+        form {
+            margin: 0 auto;
+            width: 250px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<br><br><br><br><br><br><br><br><br><br><br>
+<!--   main-->
+<div class="container">
+
+    <form class="form-signin" method="post" action="/login">
+<!--иконка-->
+        <div class="ta-center fs-title mx-auto mb24">
+            <a href="https://stackoverflow.com">
+
+                <svg aria-hidden="true" class="native svg-icon iconLogoGlyphMd" width="32" height="37" viewBox="0 0 32 37"><path d="M26 33v-9h4v13H0V24h4v9h22Z" fill="#BCBBBB"></path><path d="m21.5 0-2.7 2 9.9 13.3 2.7-2L21.5 0ZM26 18.4 13.3 7.8l2.1-2.5 12.7 10.6-2.1 2.5ZM9.1 15.2l15 7 1.4-3-15-7-1.4 3Zm14 10.79.68-2.95-16.1-3.35L7 23l16.1 2.99ZM23 30H7v-3h16v3Z" fill="#F48024"></path></svg>                    </a>
+        </div>
+        <br>
+<!--\иконка-->
+
+
+        <p>
+            <label for="email" class="sr-only">Email</label>
+            <input type="text" id="email" name="email" class="form-control" placeholder="Email address" required="" autofocus="">
+        </p>
+        <p>
+            <label for="password" class="sr-only">Password</label>
+            <input type="password" id="password" name="pass" class="form-control" placeholder="Password" required="">
+        </p>
+
+
+
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+
+        <!--reg ref-->
+        <div class="mx-auto ta-center fs-body1 p16 pb0 mb24 w100 wmx3">
+            Don’t have an account? <a href="/regpage">Sign up</a>
+        </div>
+        <!--reg ref-->
+    </form>
+
+
+
+
+
+
+
+</div>
+<!--   конец main-->
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+        crossorigin="anonymous"></script>
+<script type="text/javascript" src="/js/sidebar.js"></script>
+<script type="text/javascript" src="/js/header.js"></script>
+<script type="text/javascript" src="/js/footer.js"></script>
+</body>
+</html>
+
