@@ -51,14 +51,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
         filter.setEncoding("UTF-8");
         filter.setForceEncoding(true);
         http.csrf().disable();
-        http.cors().disable();
+        http.cors().disable(); //откл корс
         http
-                // делаем страницу регистрации недоступной для авторизированных пользователей
                 .authorizeRequests()
-                // ограничиваем доступ api/user/** - разрешен только USER
-                .antMatchers("api/user/**").hasRole("USER")
-                // всем остальным разрешаем доступ
-                .antMatchers("/**").permitAll()
+                .antMatchers("/js/**", "/css/**", "/images/**").permitAll() // доступ для CSS HTML JS
+                .antMatchers("api/user/**").hasRole("USER")  // ограничиваем доступ api/user/** - разрешен только USER
+                .antMatchers("/regpage").not().fullyAuthenticated() //Доступ только для не зарегистрированных пользователей
+                .antMatchers("/**").permitAll()   // всем остальным разрешаем доступ
+
                 .and()
                 .logout()
                 .logoutUrl("/logout")
