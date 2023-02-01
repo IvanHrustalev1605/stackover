@@ -588,3 +588,30 @@ this.mockMvc
 ```
 
 5. Если ожидаемые результаты не совпадут, тест сообщит об ошибке и распечатает все параметры. В ином случае вы увидите сообщение о том, что тест успешно пройден.
+
+# Работа с профилями БД
+## Выбор профиля
+
+Можно выбрать 2 профиля: **dev** или **local**.
+
+Для этого нужно открыть **"Edit Configurations..."** и в поле **"Active profiles"** прописать нужный профиль.
+
+Либо можно в поле **VM Options** прописать ``-Dspring.profiles.active=НАЗВАНИЕ_ПРОФИЛЯ``
+
+![](src/main/resources/static/images/profiles_tutor/profiles_edit_configuration.png)
+![](src/main/resources/static/images/profiles_tutor/profiles_active_profile.png)
+
+## Настройка переменных среды для подключения к БД
+
+В **Environment variables** нужно прописать переменные среды и их значения:
+- DB_USERNAME - логин от БД
+- DB_PASSWORD - пароль от БД
+- DB_HOST - адрес сервера БД (локально - localhost)
+- DB_PORT - порт БД (5432 для postgresql по-умолчанию)
+- DB_SCHEMA - название БД.
+- HBM2DDL - значение hbm2ddl
+
+Если поля **Environment variables** нет, можно нажать **Alt+E** и оно появится.
+
+![](src/main/resources/static/images/profiles_tutor/profiles_environment_variables.png)
+![](src/main/resources/static/images/profiles_tutor/profiles_environment_variables_window.png)
