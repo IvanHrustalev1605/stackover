@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Метки</title>
+    <style>
+        form {
+            margin: 0 auto;
+            width: 250px;
+        }
+
+        .s-input-icon.s-input-icon__search {
+            right: auto;
+            left: 0.7em;
+            color: hsl(210,8%,85%);
+        }
+
+        .mb16 {
+            margin-bottom: 16px; !important
+        }
+
+        .jc-space-between {
+            justify-content: space-between !important
+        }
+
+        #content {
+            max-width: 1100px;
+            width: calc(100% - 164px);
+            background-color: hsl(0,0%,100%);
+            border-radius: 0;
+            border: 0 solid hsl(210, 8%, 85%);
+            border-left-width: 1px;
+            padding: 24px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div id="content" class="snippet-hidden">
+        <div id="mainbar-full">
+            <h1 class="fs-headline1 mb16"> Метки </h1>
+
+            <p class="fs-body2 wmx6 mb16"> Метка - это ключевое слово, которое объединяет ваш вопрос с другими похожими
+                вопросами. Использование правильных меток облегчает другим поиск вашего вопроса и ответ на него.</p>
+
+            <div class="d-flex fw-wrap gs4 mb24 ai-center">
+                <a class="flex--item s-link fs-body1" href="#">Показать все синонимы метки </a>
+            </div>
+
+            <div class="d-flex fw-wrap">
+                <div class="flex--item ps-relative mb12">
+                    <label for="tagfilter">
+                        <input id="tagfilter" class="s-input s-input__search h100 js-tag-filter" autocomplete="off" name="tagfilter" type="text" maxlength="35" placeholder="Фильтровать по метке" autofocus>
+                    </label>
+                    <svg aria-hidden="true" class="s-input-icon s-input-icon__search svg-icon iconSearch" width="18" height="18" viewBox="0 0 18 18">
+                        <path d="m18 16.5-5.14-5.18h-.35a7 7 0 1 0-1.19 1.19v.35L16.5 18l1.5-1.5ZM12 7A5 5 0 1 1 2 7a5 5 0 0 1 10 0Z"/>
+                    </svg>
+                </div>
+                <div class="flex--item ml-auto mb12 d-flex s-btn-group js-filter-btn">
+                    <a class="js-sort-preference-change youarehere is-selected flex--item s-btn s-btn__muted s-btn__outlined"
+                       href="#" data-nav-xhref="" title="Наиболее популярные метки" data-value="popular"
+                       data-shortcut="" aria-current="page"> Популярные</a>
+                    <a class="js-sort-preference-change flex--item s-btn s-btn__muted s-btn__outlined"
+                       href="#" data-nav-xhref="" title="Метки в алфавитном порядке" data-value="name"
+                       data-shortcut="">По алфавиту</a>
+                    <a class="js-sort-preference-change flex--item s-btn s-btn__muted s-btn__outlined"
+                       href="#" data-nav-xhref="" title="Недавно созданные метки" data-value="new"
+                       data-shortcut=""> Недавно добавлены</a>
+                </div>
+            </div>
+            <div id="tags_list">
+                <div id="tags-browser" class="d-grid grid__4 lg:grid__3 md:grid__2 sm:grid__1 g12">
+                    <div class="grid--item s-card js-tag-cell d-flex fd-column">
+                        <div class="d-flex jc-space-between ai-center mb12">
+                            <div class="flex--item">
+                                <a href="#" class="post-tag" title="show questions tagged {var};"
+                                   aria-label="show questions tagged {var};" rel="tag"
+                                   aria-labelledby="{var}-container">Название метки</a>
+                            </div>
+                        </div>
+                        <div class="flex--item fc-medium mb12 v-truncate4">
+                            Текст, связанный с меткой.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        </div>
+
+                        <div class="mt-auto d-flex jc-space-between fs-caption fc-black-400">
+                            <div class="flex--item">00 вопросов</div>
+                            <div class="flex--item s-anchors s-anchors__inherit">
+                                <a href="#" title="{№} questions tagged {var} in the last 365 days">00 запросов в этом году</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid--item s-card js-tag-cell d-flex fd-column">
+                        <div class="d-flex jc-space-between ai-center mb12">
+                            <div class="flex--item">
+                                <a href="#" class="post-tag" title="show questions tagged {var};"
+                                   aria-label="show questions tagged {var};" rel="tag"
+                                   aria-labelledby="{var}-container">Название метки</a>
+                            </div>
+                        </div>
+                        <div class="flex--item fc-medium mb12 v-truncate4">
+                            Текст, связанный с меткой. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        </div>
+
+                        <div class="mt-auto d-flex jc-space-between fs-caption fc-black-400">
+                            <div class="flex--item">00 вопросов</div>
+                            <div class="flex--item s-anchors s-anchors__inherit">
+                                <a href="#" title="{№} questions tagged {var} in the last 365 days">00 запросов в этом году</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid--item s-card js-tag-cell d-flex fd-column">
+                        <div class="d-flex jc-space-between ai-center mb12">
+                            <div class="flex--item">
+                                <a href="#" class="post-tag" title="show questions tagged {var};"
+                                   aria-label="show questions tagged {var};" rel="tag"
+                                   aria-labelledby="{var}-container">Название метки</a>
+                            </div>
+                        </div>
+                        <div class="flex--item fc-medium mb12 v-truncate4">
+                            Текст, связанный с меткой. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        </div>
+
+                        <div class="mt-auto d-flex jc-space-between fs-caption fc-black-400">
+                            <div class="flex--item">00 вопросов</div>
+                            <div class="flex--item s-anchors s-anchors__inherit">
+                                <a href="#" title="{№} questions tagged {var} in the last 365 days">00 запросов в этом году</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid--item s-card js-tag-cell d-flex fd-column">
+                        <div class="d-flex jc-space-between ai-center mb12">
+                            <div class="flex--item">
+                                <a href="#" class="post-tag" title="show questions tagged {var};"
+                                   aria-label="show questions tagged {var};" rel="tag"
+                                   aria-labelledby="{var}-container">Название метки</a>
+                            </div>
+                        </div>
+                        <div class="flex--item fc-medium mb12 v-truncate4">
+                            Текст, связанный с меткой. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        </div>
+
+                        <div class="mt-auto d-flex jc-space-between fs-caption fc-black-400">
+                            <div class="flex--item">00 вопросов</div>
+                            <div class="flex--item s-anchors s-anchors__inherit">
+                                <a href="#" title="{№} questions tagged {var} in the last 365 days">00 запросов в этом году</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid--item s-card js-tag-cell d-flex fd-column">
+                        <div class="d-flex jc-space-between ai-center mb12">
+                            <div class="flex--item">
+                                <a href="#" class="post-tag" title="show questions tagged {var};"
+                                   aria-label="show questions tagged {var};" rel="tag"
+                                   aria-labelledby="{var}-container">Название метки</a>
+                            </div>
+                        </div>
+                        <div class="flex--item fc-medium mb12 v-truncate4">
+                            Текст, связанный с меткой. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        </div>
+
+                        <div class="mt-auto d-flex jc-space-between fs-caption fc-black-400">
+                            <div class="flex--item">00 вопросов</div>
+                            <div class="flex--item s-anchors s-anchors__inherit">
+                                <a href="#" title="{№} questions tagged {var} in the last 365 days">00 запросов в этом году</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="s-pagination themed pager float-right">
+                    <div class="s-pagination--item is-selected" aria-current="page">1</div>
+                    <a class="s-pagination--item js-pagination-item" href="#" rel="" title="Go to page 2">2</a>
+                    <a class="s-pagination--item js-pagination-item" href="#" rel="" title="Go to page 3">3</a>
+                    <div class="s-pagination--item s-pagination--item__clear" >…</div>
+                    <a class="s-pagination--item js-pagination-item" href="#" rel="" title="Go to page 1904">1904</a>
+                    <a class="s-pagination--item js-pagination-item" href="#" rel="next" title="Go to page 2"> След</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+        crossorigin="anonymous"></script>
+<script type="text/javascript" src="/js/header.js"></script>
+<script type="text/javascript" src="/js/sidebar.js"></script>
+<script type="text/javascript" src="/js/footer.js"></script>
+</body>
+</html>
