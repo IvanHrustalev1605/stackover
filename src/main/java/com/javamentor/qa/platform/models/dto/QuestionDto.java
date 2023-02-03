@@ -54,7 +54,7 @@ public class QuestionDto {
 //    @Schema(description = "голос авторизованного пользователя за вопрос")
 //    private VoteTypeQ voteType;
 //
-//    @Schema(description = "список тэгов")
+//    @Schema(description = "список тегов")
 //    private List<TagDto> listTagDto;
 
 

@@ -1,10 +1,12 @@
 package com.javamentor.qa.platform.dao.impl.dto;
 
 import com.javamentor.qa.platform.dao.abstracts.dto.QuestionDtoDao;
+import com.javamentor.qa.platform.models.dto.QuestionDto;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import java.util.Optional;
 
 @Repository
@@ -14,7 +16,7 @@ public class QuestionDtoDaoImpl implements QuestionDtoDao {
     private EntityManager entityManager;
 
     @Override
-    public Optional<Long> getById(Long questionId, Long authorizedUserId) {
-        return Optional.empty();
+    public Optional<QuestionDto> getById(Long questionId, Long authorizedUserId) {
+        return Optional.ofNullable(entityManager.find(QuestionDto.class, questionId));
     }
 }
