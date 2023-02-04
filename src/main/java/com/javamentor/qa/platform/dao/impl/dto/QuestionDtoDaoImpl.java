@@ -2,7 +2,6 @@ package com.javamentor.qa.platform.dao.impl.dto;
 
 import com.javamentor.qa.platform.converters.QuestionDtoConverter;
 import com.javamentor.qa.platform.dao.abstracts.dto.QuestionDtoDao;
-import com.javamentor.qa.platform.dao.impl.repository.ReadWriteDaoImpl;
 import com.javamentor.qa.platform.models.dto.QuestionDto;
 import com.javamentor.qa.platform.models.entity.question.Question;
 import org.springframework.stereotype.Repository;
@@ -12,7 +11,7 @@ import javax.persistence.PersistenceContext;
 import java.util.Optional;
 
 @Repository
-public class QuestionDtoDaoImpl extends ReadWriteDaoImpl<Question, Long> implements QuestionDtoDao {
+public class QuestionDtoDaoImpl implements QuestionDtoDao {
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -22,6 +21,9 @@ public class QuestionDtoDaoImpl extends ReadWriteDaoImpl<Question, Long> impleme
     public Optional<QuestionDto> getById(Long questionId, Long authorizedUserId) {
 //        Question question = entityManager.find(Question.class, questionId);
         Question question = new Question();
+        question.setId(1l);
+        question.setTitle("Question 1");
+        question.setDescription("Some desc");
         return Optional.ofNullable(QuestionDtoConverter.INSTANCE.toQuestionDto(question));
     }
 
