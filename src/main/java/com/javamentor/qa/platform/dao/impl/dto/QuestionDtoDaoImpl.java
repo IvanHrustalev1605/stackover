@@ -21,7 +21,7 @@ public class QuestionDtoDaoImpl implements QuestionDtoDao {
     public Optional<QuestionDto> getById(Long questionId, Long authorizedUserId) {
 //        Question question = entityManager.find(Question.class, questionId);
         Question question = new Question();
-        question.setId(1l);
+        question.setId(1L);
         question.setTitle("Question 1");
         question.setDescription("Some desc");
         return Optional.ofNullable(QuestionDtoConverter.INSTANCE.toQuestionDto(question));
