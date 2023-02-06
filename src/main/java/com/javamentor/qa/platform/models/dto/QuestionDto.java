@@ -1,5 +1,6 @@
 package com.javamentor.qa.platform.models.dto;
 
+import com.javamentor.qa.platform.models.entity.question.VoteType;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
@@ -10,6 +11,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(description = "вопрос")
+@Setter
 public class QuestionDto {
 
     @Parameter(description = "вопроса")
@@ -51,11 +53,9 @@ public class QuestionDto {
     @Schema(description = "кол-во голосов за вопрос")
     private Long countVote;
 
-//    @Schema(description = "голос авторизованного пользователя за вопрос")
-//    private VoteTypeQ voteType;
-//
+    @Schema(description = "голос авторизованного пользователя за вопрос")
+    private VoteType voteType;
+
 //    @Schema(description = "список тегов")
 //    private List<TagDto> listTagDto;
-
-
 }

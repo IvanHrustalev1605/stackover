@@ -28,7 +28,8 @@ public class ResourceQuestionController {
     @GetMapping("/{id}")
     public ResponseEntity<Optional<QuestionDto>> getQuestionDto(@PathVariable("id") long id,
                                                                 @AuthenticationPrincipal User user) {
-        return ResponseEntity.ok(questionDtoDao.getById(id, 1l));
+        Optional<QuestionDto> questionDto = questionDtoDao.getById(id, 1l);
+        return ResponseEntity.ok(questionDto);
     }
 
 }

@@ -87,6 +87,9 @@ public class User implements UserDetails {
     @Column
     private String nickname;
 
+    @Column
+    private Long reputationCount;
+
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = Role.class, cascade = {CascadeType.PERSIST})
     @JoinColumn(name = "role_id", nullable = false)
     @NonNull
