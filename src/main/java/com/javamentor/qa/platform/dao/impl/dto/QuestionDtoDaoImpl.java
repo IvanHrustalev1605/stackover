@@ -4,7 +4,6 @@ import com.javamentor.qa.platform.dao.abstracts.dto.QuestionDtoDao;
 import com.javamentor.qa.platform.dao.impl.repository.ReadOnlyDaoImpl;
 import com.javamentor.qa.platform.models.dto.QuestionDto;
 import com.javamentor.qa.platform.models.entity.question.Question;
-import com.javamentor.qa.platform.models.entity.question.VoteType;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
