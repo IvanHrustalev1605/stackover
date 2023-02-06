@@ -19,8 +19,6 @@ public class QuestionDtoDaoImpl extends ReadOnlyDaoImpl<Question, Long> implemen
 
     @Override
     public Optional<QuestionDto> getById(Long questionId, Long authorizedUserId) {
-        VoteType vote = VoteType.UP;
-        System.out.println(vote.name());
 
         return Optional.of(entityManager.createQuery("""
                     SELECT NEW com.javamentor.qa.platform.models.dto.QuestionDto(
