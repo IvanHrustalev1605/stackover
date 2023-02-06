@@ -30,7 +30,7 @@ public class QuestionDtoDaoImpl extends ReadOnlyDaoImpl<Question, Long> implemen
                         a.user.fullName,
                         a.user.imageLink,
                         a.description,
-                        a.view_count,
+                        a.viewCount,
                         a.user.reputationCount,
                         (SELECT COUNT(an) FROM Answer an WHERE an.question.id = :questionId),
                         (SELECT COALESCE(SUM(CASE WHEN vq.vote = 'UP' THEN 1 WHEN vq.vote = 'DOWN' THEN -1 END), 0)

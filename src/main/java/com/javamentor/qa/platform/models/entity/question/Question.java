@@ -62,7 +62,7 @@ public class Question implements Serializable {
 
     @NotNull
     @Column
-    private Long view_count;
+    private Long viewCount;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id")
