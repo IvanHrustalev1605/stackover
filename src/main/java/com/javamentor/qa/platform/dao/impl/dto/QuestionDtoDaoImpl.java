@@ -27,7 +27,7 @@ public class QuestionDtoDaoImpl implements QuestionDtoDao {
                         a.user.fullName,
                         a.user.imageLink,
                         a.description,
-                        a.viewCount,
+                        (SELECT COUNT(qv) FROM QuestionViewed qv where qv.question.id = :questionId),
                         (SELECT COUNT(r.count) FROM Reputation r WHERE r.author.id = :userId),
                         (SELECT COUNT(an) FROM Answer an WHERE an.question.id = :questionId),
                         (SELECT COALESCE(SUM(CASE WHEN vq.vote = 'UP' THEN 1 WHEN vq.vote = 'DOWN' THEN -1 END), 0)
