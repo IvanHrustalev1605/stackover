@@ -21,7 +21,7 @@ public class TagDtoServiceImpl implements TagDtoService {
         List<Tag> tagList = new ArrayList<>();
         List<Tag> allTags = tagService.getAll();
         Tag newTag = new Tag();
-        for (Tag tag : allTags ) {               //перебираем текущие тэги со всеми, нашли пару - вернули, иначе персист
+        for (Tag tag : allTags) {               //перебираем текущие тэги со всеми, нашли пару - вернули, иначе персист
             for (TagDto tagDto : tagDtos) {
                 if (tag.getName().equals(tagDto.getName())) {
                     newTag = tag;

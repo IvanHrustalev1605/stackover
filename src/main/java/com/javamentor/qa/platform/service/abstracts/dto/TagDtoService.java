@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface TagDtoService {
 
-        List<Tag> checkTags(List<TagDto> tagDtoList);
+    List<Tag> checkTags(List<TagDto> tagDtoList);
 
 }
