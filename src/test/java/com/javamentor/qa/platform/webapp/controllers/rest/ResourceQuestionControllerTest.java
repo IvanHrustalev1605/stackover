@@ -40,12 +40,9 @@ class ResourceQuestionControllerTest {
 
         QuestionDto x = QuestionConverter.INSTANCE.questionToQuestionDto(question);
 
-
         assertEquals("test", x.getTitle());
         assertEquals("testdisc", x.getDescription());
-      //  assertEquals(y, x.getListTagDto());
         Assertions.assertTrue(y.size() == x.getListTagDto().size());
-
 
     }
 }

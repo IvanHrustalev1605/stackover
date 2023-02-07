@@ -23,31 +23,24 @@ public class QuestionDtoServiceImpl implements QuestionDtoService {
 
     @Override
     public QuestionDto addQuestion(QuestionCreateDto questionCreateDto, User user) {
-        //TODO
-        //валидация tittle empty\null+
-        //валидация description empty\null+
-        //валидация tags empty\null + проверка\добавление тэга в БД+
 
-        if (Objects.equals(questionCreateDto.getTitle(), "") | questionCreateDto.getTitle() == null) {
+
+        if (questionCreateDto.getTitle().isEmpty()) {
             throw new RuntimeException("title cant be empty or null");
         }
-        if (Objects.equals(questionCreateDto.getDescription(), "") | questionCreateDto.getDescription() == null) {
+        if (questionCreateDto.getDescription().isEmpty()) {
             throw new RuntimeException("Description cant be empty or null");
         }
-        if (Objects.equals(questionCreateDto.getTags(), "") | questionCreateDto.getTags() == null) {
+        if (questionCreateDto.getTags().isEmpty())  {
             throw new RuntimeException("Tags cant be empty or null");
         }
 
-    // получаю QuestionCreateDto и Юзера, надо создать Question,  получить QuestionDto+
 
-        Question question = new Question(); //создали сущность
-        question.setTitle(questionCreateDto.getTitle()); //присвоили поля из questionCreateDto
-        question.setDescription(questionCreateDto.getDescription());
+        Question question = QuestionConverter.INSTANCE.questionCreateDtoToQuestion(questionCreateDto);
         question.setUser(user);
         question.setTags(tagDtoService.checkTags(questionCreateDto.getTags()));
         questionService.persist(question);
-
-        return QuestionConverter.INSTANCE.questionToQuestionDto(question); //маппим question в QuestionDto и возвращаем
+        return QuestionConverter.INSTANCE.questionToQuestionDto(question);
     }
 
 }
