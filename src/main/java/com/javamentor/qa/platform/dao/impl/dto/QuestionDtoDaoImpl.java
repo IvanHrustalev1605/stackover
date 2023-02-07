@@ -19,7 +19,7 @@ public class QuestionDtoDaoImpl implements QuestionDtoDao {
     @Override
     public Optional<QuestionDto> getById(Long questionId, Long authorizedUserId) {
 
-        return SingleResultUtil.getSingleResultOrNull( (Query) entityManager.createQuery("""
+        return SingleResultUtil.getSingleResultOrNull(entityManager.createQuery("""
                     SELECT NEW com.javamentor.qa.platform.models.dto.QuestionDto(
                         a.id,
                         a.title,
