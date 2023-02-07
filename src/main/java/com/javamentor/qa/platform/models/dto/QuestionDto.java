@@ -3,15 +3,18 @@ package com.javamentor.qa.platform.models.dto;
 import com.javamentor.qa.platform.models.entity.question.VoteType;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(description = "вопрос")
-@Setter
 public class QuestionDto {
 
     @Parameter(description = "вопроса")

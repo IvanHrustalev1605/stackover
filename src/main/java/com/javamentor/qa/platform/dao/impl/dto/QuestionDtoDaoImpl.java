@@ -1,17 +1,17 @@
 package com.javamentor.qa.platform.dao.impl.dto;
 
 import com.javamentor.qa.platform.dao.abstracts.dto.QuestionDtoDao;
-import com.javamentor.qa.platform.dao.impl.repository.ReadOnlyDaoImpl;
+import com.javamentor.qa.platform.dao.util.SingleResultUtil;
 import com.javamentor.qa.platform.models.dto.QuestionDto;
-import com.javamentor.qa.platform.models.entity.question.Question;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.util.Optional;
 
 @Repository
-public class QuestionDtoDaoImpl extends ReadOnlyDaoImpl<Question, Long> implements QuestionDtoDao {
+public class QuestionDtoDaoImpl implements QuestionDtoDao {
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -19,7 +19,7 @@ public class QuestionDtoDaoImpl extends ReadOnlyDaoImpl<Question, Long> implemen
     @Override
     public Optional<QuestionDto> getById(Long questionId, Long authorizedUserId) {
 
-        return Optional.of(entityManager.createQuery("""
+        return SingleResultUtil.getSingleResultOrNull( (Query) entityManager.createQuery("""
                     SELECT NEW com.javamentor.qa.platform.models.dto.QuestionDto(
                         a.id,
                         a.title,
@@ -28,10 +28,10 @@ public class QuestionDtoDaoImpl extends ReadOnlyDaoImpl<Question, Long> implemen
                         a.user.imageLink,
                         a.description,
                         a.viewCount,
-                        a.user.reputationCount,
+                        (SELECT COUNT(r.count) FROM Reputation r WHERE r.author.id = :userId),
                         (SELECT COUNT(an) FROM Answer an WHERE an.question.id = :questionId),
                         (SELECT COALESCE(SUM(CASE WHEN vq.vote = 'UP' THEN 1 WHEN vq.vote = 'DOWN' THEN -1 END), 0)
-                                                                   FROM VoteQuestion vq WHERE vq.question.id = :questionId),            
+                                                                   FROM VoteQuestion vq WHERE vq.question.id = :questionId),
                         a.persistDateTime,
                         a.lastUpdateDateTime, 
                         (SELECT COUNT(vq) FROM VoteQuestion vq WHERE vq.question.id = :questionId),
@@ -41,9 +41,6 @@ public class QuestionDtoDaoImpl extends ReadOnlyDaoImpl<Question, Long> implemen
                     WHERE a.id = :questionId
                     """, QuestionDto.class)
                 .setParameter("questionId", questionId)
-                .setParameter("userId", authorizedUserId)
-                .getSingleResult());
+                .setParameter("userId", authorizedUserId));
     }
-
-
 }

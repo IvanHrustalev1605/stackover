@@ -23,7 +23,7 @@ public class ResourceQuestionController {
     private final QuestionDtoService questionDtoService;
     private final QuestionService questionService;
 
-    ResourceQuestionController(QuestionDtoService questionDtoService,
+    public ResourceQuestionController(QuestionDtoService questionDtoService,
                                QuestionService questionService) {
         this.questionDtoService = questionDtoService;
         this.questionService = questionService;
