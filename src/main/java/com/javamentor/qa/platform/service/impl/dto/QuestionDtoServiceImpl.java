@@ -11,9 +11,9 @@ import java.util.Optional;
 @Service
 public class QuestionDtoServiceImpl implements QuestionDtoService {
 
-    public final QuestionDtoDao questionDtoDao;
+    private final QuestionDtoDao questionDtoDao;
 
-    QuestionDtoServiceImpl(QuestionDtoDao questionDtoDao) {
+    public QuestionDtoServiceImpl(QuestionDtoDao questionDtoDao) {
         this.questionDtoDao = questionDtoDao;
     }
 
