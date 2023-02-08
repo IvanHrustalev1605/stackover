@@ -1,6 +1,5 @@
 package com.javamentor.qa.platform.models.dto;
 
-import com.javamentor.qa.platform.models.entity.question.Tag;
 import com.javamentor.qa.platform.models.entity.question.VoteType;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -47,6 +46,6 @@ public class QuestionDto {
     @Schema(description = "Голос авторизованного пользователя за вопрос")
     private VoteType voteType;
 //    @Schema(description = "Список тегов")
-//    private List<Tag> listTagDto;
+//    private List<TagDto> listTagDto;
 }
 

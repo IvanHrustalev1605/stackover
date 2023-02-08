@@ -34,8 +34,7 @@ public class QuestionDtoDaoImpl implements QuestionDtoDao {
                         a.persistDateTime,
                         a.lastUpdateDateTime, 
                         (SELECT COUNT(vq) FROM VoteQuestion vq WHERE vq.question.id = :questionId),
-                        (SELECT vq.vote FROM VoteQuestion vq WHERE vq.user.id = :userId),
-                        (SELECT t FROM Tag t JOIN t.questions q WHERE q.id = :questiondId)
+                        (SELECT vq.vote FROM VoteQuestion vq WHERE vq.user.id = :userId)
                     )
                     FROM Question a
                     WHERE a.id = :questionId
