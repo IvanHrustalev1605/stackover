@@ -15,7 +15,7 @@ public class QuestionCreateDto {
     private String title;
     @Schema(description = "Содержание вопроса")
     private String description;
-    @Schema(description = "Список тэгов")
+    @Schema(description = "Список тегов")
     private List<TagDto> tags;
 
 }

@@ -78,7 +78,7 @@ public class ResourceQuestionController {
             return ResponseEntity.badRequest().build();
         }
 
-        return questionDtoService.getById(questionId, user.getId())
+        return questionDtoService.getById(questionId, 1L)
                 .map(ResponseEntity::ok)
                 .orElseGet(ResponseEntity.notFound()::build);
     }

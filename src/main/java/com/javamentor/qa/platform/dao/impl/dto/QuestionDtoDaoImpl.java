@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import java.util.Optional;
 
 @Repository
@@ -18,7 +17,7 @@ public class QuestionDtoDaoImpl implements QuestionDtoDao {
 
     @Override
     public Optional<QuestionDto> getById(Long questionId, Long authorizedUserId) {
-
+        // cant get List<TagDto>
         return SingleResultUtil.getSingleResultOrNull(entityManager.createQuery("""
                     SELECT NEW com.javamentor.qa.platform.models.dto.QuestionDto(
                         a.id,
@@ -35,7 +34,8 @@ public class QuestionDtoDaoImpl implements QuestionDtoDao {
                         a.persistDateTime,
                         a.lastUpdateDateTime, 
                         (SELECT COUNT(vq) FROM VoteQuestion vq WHERE vq.question.id = :questionId),
-                        (SELECT vq.vote FROM VoteQuestion vq WHERE vq.user.id = :userId)
+                        (SELECT vq.vote FROM VoteQuestion vq WHERE vq.user.id = :userId),
+                        (SELECT t FROM Tag t JOIN t.questions q WHERE q.id = :questiondId)
                     )
                     FROM Question a
                     WHERE a.id = :questionId

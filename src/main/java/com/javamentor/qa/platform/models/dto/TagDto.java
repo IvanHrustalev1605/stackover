@@ -9,13 +9,13 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(description = "Тэг dto")
+@Schema(description = "Тег dto")
 public class TagDto {
-    @Parameter(description = "ID Тэга")
+    @Parameter(description = "ID Тега")
     private Long id;
-    @Schema(description = "Название тэгп")
+    @Schema(description = "Название тега")
     private String name;
-    @Schema(description = "Описание тэга")
+    @Schema(description = "Описание тега")
     private String description;
 
 }
