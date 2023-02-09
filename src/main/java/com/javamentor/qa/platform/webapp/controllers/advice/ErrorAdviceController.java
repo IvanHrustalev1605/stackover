@@ -1,4 +1,4 @@
-package com.javamentor.qa.platform.webapp.controllers.rest;
+package com.javamentor.qa.platform.webapp.controllers.advice;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
