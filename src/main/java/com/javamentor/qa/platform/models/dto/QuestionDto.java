@@ -1,19 +1,21 @@
 package com.javamentor.qa.platform.models.dto;
 
-import com.javamentor.qa.platform.models.entity.question.Question;
+import com.javamentor.qa.platform.models.entity.question.VoteType;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.List;
-@Data
+
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "Вопрос dto")
-
 public class QuestionDto {
     @Parameter(description = "ID вопроса")
     private Long id;
@@ -25,19 +27,25 @@ public class QuestionDto {
     private String authorName;
     @Schema(description = "Аватар автора")
     private String authorImage;
-    @Schema(description = "содержимое вопроса")
+    @Schema(description = "Содержание вопроса")
     private String description;
+    @Schema(description = "Количество просмотров")
+    private Long viewCount;
     @Schema(description = "Репутация автора")
     private Long authorReputation;
-    @Schema(description = "счетчик ответов")
-    private int countAnswer;
-    @Schema(description = "счетчик рейтинга")
-    private int countValuable;
+    @Schema(description = "Счетчик ответов")
+    private Long countAnswer;
+    @Schema(description = "Счетчик рейтинга")
+    private Long countValuable;
     @Schema(description = "Дата создания вопроса")
     private LocalDateTime persistDateTime;
-    @Schema(description = "дата последнего обновления вопроса")
+    @Schema(description = "Дата последнего обновления вопроса")
     private LocalDateTime lastUpdateDateTime;
-    @Schema(description = "Список тегов")
-    private List<TagDto> listTagDto;
-
+    @Schema(description = "Кол-во голосов за вопрос")
+    private Long countVote;
+    @Schema(description = "Голос авторизованного пользователя за вопрос")
+    private VoteType voteType;
+//    @Schema(description = "Список тегов")
+//    private List<TagDto> listTagDto;
 }
+
