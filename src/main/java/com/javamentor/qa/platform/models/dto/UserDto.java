@@ -33,4 +33,5 @@ public class UserDto {
     private Long votes;
 //    @Schema(description = "список топ-3 тэгов пользователя")
 //    private List<TagDto> listTop3TagDto;
+
 }

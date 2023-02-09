@@ -13,5 +13,4 @@ public class TrackedTagDaoImpl extends ReadWriteDaoImpl<TrackedTag, Long> implem
 
     @PersistenceContext
     private EntityManager entityManager;
-
 }
