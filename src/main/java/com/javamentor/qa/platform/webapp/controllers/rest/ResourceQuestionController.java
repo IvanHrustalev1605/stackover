@@ -4,6 +4,7 @@ import com.javamentor.qa.platform.models.dto.QuestionCreateDto;
 import com.javamentor.qa.platform.models.dto.QuestionDto;
 import com.javamentor.qa.platform.models.entity.user.User;
 import com.javamentor.qa.platform.service.abstracts.dto.QuestionDtoService;
+import com.javamentor.qa.platform.service.abstracts.model.VoteQuestionService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.Operation;
 import com.javamentor.qa.platform.service.abstracts.model.QuestionService;
@@ -31,11 +32,13 @@ public class ResourceQuestionController {
 
     private final QuestionDtoService questionDtoService;
     private final QuestionService questionService;
+    private final VoteQuestionService voteQuestionService;
 
     public ResourceQuestionController(QuestionDtoService questionDtoService,
-                                      QuestionService questionService) {
+                                      QuestionService questionService, VoteQuestionService voteQuestionService) {
         this.questionDtoService = questionDtoService;
         this.questionService = questionService;
+        this.voteQuestionService = voteQuestionService;
     }
 
     @PostMapping
@@ -82,5 +85,12 @@ public class ResourceQuestionController {
                 .map(ResponseEntity::ok)
                 .orElseGet(ResponseEntity.notFound()::build);
     }
+
+    @PostMapping("/{questionId}/upVote")
+    @Operation(summary = "api возвращает общее количество голосов (сумму up vote)")
+    public ResponseEntity<Long> upVote (@PathVariable ("questionId") Long id, @AuthenticationPrincipal User user) {
+        return ResponseEntity.ok(voteQuestionService.voteUpQuestion(user.getId(), id));
+    }
+
 
 }

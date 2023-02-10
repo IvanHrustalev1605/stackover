@@ -23,4 +23,9 @@ public class ReputationServiceImpl extends ReadWriteServiceImpl<Reputation, Long
     public Optional<Reputation> getReputationByAnswerAndUser(Long answerId, Long userId) {
         return reputationDao.getReputationByAnswerAndUser(answerId, userId);
     }
+    @Override
+    public Optional<Reputation> getReputationByVoteQuestion(Long userId, Long questionId) {
+        return reputationDao.getReputationByVoteQuestion(userId, questionId);
+    }
+
 }
