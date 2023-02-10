@@ -92,6 +92,9 @@ public class User implements UserDetails {
     @NonNull
     private Role role;
 
+    @Column
+    private String verifCode;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singleton(role);

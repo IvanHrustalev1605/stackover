@@ -24,4 +24,10 @@ public class UserServiceImpl extends ReadWriteServiceImpl<User, Long> implements
     public Optional<User> getByEmail(String email) {
         return userDao.getByEmail(email);
     }
+
+    @Transactional
+    @Override
+    public Optional<User> getByVerifCode(String verifCode) {
+        return userDao.getByVerifCode(verifCode);
+    }
 }
