@@ -18,7 +18,7 @@ public class TrackedTagDaoImpl extends ReadWriteDaoImpl<TrackedTag, Long> implem
     public boolean existTrackedTadByUser(Long tagId, Long userId) {
         return SingleResultUtil.getSingleResultOrNull(entityManager.createQuery("""
                         SELECT a FROM TrackedTag a
-                        WHERE a.id = :tagId AND a.user.id = :userId
+                        WHERE a.trackedTag.id = :tagId AND a.user.id = :userId
                         """, TrackedTag.class)
                 .setParameter("tagId", tagId)
                 .setParameter("userId", userId)).isPresent();
