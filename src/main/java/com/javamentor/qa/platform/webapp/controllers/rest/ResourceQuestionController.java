@@ -83,4 +83,9 @@ public class ResourceQuestionController {
                 .orElseGet(ResponseEntity.notFound()::build);
     }
 
+    @GetMapping("/count")
+    @ApiOperation("Возвращает общее количество вопросов")
+    public ResponseEntity<Long> getCountQuestion() {
+        return ResponseEntity.ok(questionService.getCountQuestion());
+    }
 }
