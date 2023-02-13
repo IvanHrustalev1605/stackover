@@ -5,11 +5,9 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.javamentor.qa.platform.models.dto.TagDto;
 import com.javamentor.qa.platform.models.entity.question.Tag;
-import com.javamentor.qa.platform.models.entity.user.User;
 import com.javamentor.qa.platform.service.abstracts.dto.TagDtoService;
 import com.javamentor.qa.platform.service.abstracts.model.TagService;
 import com.javamentor.qa.platform.service.abstracts.model.TrackedTagService;
-import com.javamentor.qa.platform.service.abstracts.model.UserService;
 import com.javamentor.qa.platform.webapp.configs.JmApplication;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,7 +22,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.mockito.BDDMockito.given;
@@ -44,19 +41,9 @@ public class TestResourceTagController {
     private TrackedTagService trackedTagService;
     @MockBean
     private TagDtoService tagDtoService;
-    @MockBean
-    private UserService userService;
 
     @Test
     public void addTrackedTag_TagFound_ShouldReturnTagDto() throws Exception {
-
-        User user = new User();
-        user.setId(1L);
-        user.setEmail("user@mail.ru");
-        user.setFullName("User User");
-        user.setPersistDateTime(LocalDateTime.now());
-        user.setLastUpdateDateTime(LocalDateTime.now());
-        user.setNickname("User");
 
         Tag tag = new Tag();
         tag.setId(1L);
@@ -75,7 +62,6 @@ public class TestResourceTagController {
         given(tagService.existsById(1L)).willReturn(true);
         given(trackedTagService.existTrackedTadByUser(1L, 1L)).willReturn(false);
         given(tagService.getById(1L)).willReturn(Optional.of(tag));
-        given(userService.getById(1L)).willReturn(Optional.of(user));
         given(tagDtoService.getById(1L)).willReturn(Optional.of(tagDto));
 
         mockMvc.perform(MockMvcRequestBuilders.post("/api/user/tag/{id}/tracked", 1))
