@@ -1,11 +1,12 @@
 package com.javamentor.qa.platform.webapp.controllers.rest;
 
 import com.javamentor.qa.platform.models.dto.TagDto;
+import com.javamentor.qa.platform.models.entity.question.Tag;
 import com.javamentor.qa.platform.models.entity.question.TrackedTag;
 import com.javamentor.qa.platform.models.entity.user.User;
-import com.javamentor.qa.platform.service.abstracts.dto.TagDtoService;
 import com.javamentor.qa.platform.service.abstracts.model.TagService;
 import com.javamentor.qa.platform.service.abstracts.model.TrackedTagService;
+import com.javamentor.qa.platform.webapp.converters.TagConverter;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.http.HttpStatus;
@@ -22,14 +23,11 @@ public class ResourceTagController {
 
     private final TagService tagService;
     private final TrackedTagService trackedTagService;
-    private final TagDtoService tagDtoService;
 
     public ResourceTagController(TagService tagService,
-                                 TrackedTagService trackedTagService,
-                                 TagDtoService tagDtoService) {
+                                 TrackedTagService trackedTagService) {
         this.tagService = tagService;
         this.trackedTagService = trackedTagService;
-        this.tagDtoService = tagDtoService;
     }
 
     @PostMapping("/{id}/tracked")
@@ -42,16 +40,16 @@ public class ResourceTagController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        if (!trackedTagService.existTrackedTadByUser(id, user.getId())) {
-            TrackedTag trackedTag = new TrackedTag(tagService.getById(id).get(), user);
-            trackedTagService.persist(trackedTag);
-        } else {
-            return ResponseEntity.badRequest().build();
+        Tag tag = tagService.getById(id).get();
+
+        if (trackedTagService.existTrackedTadByUser(id, user.getId())) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        return tagDtoService.getById(id)
-                .map(ResponseEntity::ok)
-                .orElseGet(ResponseEntity.notFound()::build);
+        TrackedTag trackedTag = new TrackedTag(tag, user);
+        trackedTagService.saveTrackedTag(trackedTag);
+
+        return new ResponseEntity<>(TagConverter.INSTANCE.tagToTagDto(tag), HttpStatus.OK);
     }
 
 }

@@ -22,4 +22,9 @@ public class TrackedTagServiceImpl extends ReadWriteServiceImpl<TrackedTag, Long
         return trackedTagDao.existTrackedTadByUser(tagId, userId);
     }
 
+    @Override
+    public void saveTrackedTag(TrackedTag trackedTag) {
+        trackedTagDao.persist(trackedTag);
+    }
+
 }

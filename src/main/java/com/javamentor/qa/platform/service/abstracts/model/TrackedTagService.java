@@ -7,4 +7,6 @@ public interface TrackedTagService extends ReadWriteService<TrackedTag, Long> {
 
     boolean existTrackedTadByUser(Long tagId, Long userId);
 
+    void saveTrackedTag(TrackedTag trackedTag);
+
 }

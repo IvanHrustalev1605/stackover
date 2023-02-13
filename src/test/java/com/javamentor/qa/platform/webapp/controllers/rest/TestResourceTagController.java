@@ -96,8 +96,14 @@ public class TestResourceTagController {
     @Test
     public void trackedTagAlreadyExist_ShouldReturn404Status() throws Exception {
 
+        Tag tag = new Tag();
+        tag.setId(1L);
+        tag.setName("tag1");
+        tag.setDescription("desc1");
+
         given(tagService.existsById(1L)).willReturn(true);
         given(trackedTagService.existTrackedTadByUser(1L, 1L)).willReturn(true);
+        given(tagService.getById(1L)).willReturn(Optional.of(tag));
 
         mockMvc.perform(MockMvcRequestBuilders.post("/api/user/tag/{id}/tracked", 1))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
