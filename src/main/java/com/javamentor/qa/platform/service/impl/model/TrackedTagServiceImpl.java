@@ -31,13 +31,11 @@ public class TrackedTagServiceImpl extends ReadWriteServiceImpl<TrackedTag, Long
     @Override
     public Optional<TagDto> saveTrackedTagByTagAndUser(Long tagId, User user) {
 
-        Tag tag;
-
-        if(!tagService.existsById(tagId) || trackedTagDao.existTrackedTadByUser(tagId, user.getId())) {
+        if (!tagService.existsById(tagId) || trackedTagDao.existTrackedTadByUser(tagId, user.getId())) {
             return Optional.empty();
         }
 
-        tag = tagService.getById(tagId).get();
+        Tag tag = tagService.getById(tagId).get();
         trackedTagDao.persist(new TrackedTag(tag, user));
         return Optional.ofNullable(TagConverter.INSTANCE.tagToTagDto(tag));
     }
