@@ -1,18 +1,18 @@
 package com.javamentor.qa.platform.webapp.controllers.rest;
 
+import com.javamentor.qa.platform.models.dto.IgnoredTagDto;
 import com.javamentor.qa.platform.models.dto.TagDto;
 import com.javamentor.qa.platform.models.entity.user.User;
+import com.javamentor.qa.platform.service.abstracts.dto.IgnoredTagDtoService;
 import com.javamentor.qa.platform.service.abstracts.model.TrackedTagService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -20,9 +20,12 @@ import java.util.Optional;
 public class ResourceTagController {
 
     private final TrackedTagService trackedTagService;
+    private final IgnoredTagDtoService ignoredTagDtoService;
 
-    public ResourceTagController(TrackedTagService trackedTagService) {
+    public ResourceTagController(TrackedTagService trackedTagService,
+                                 IgnoredTagDtoService ignoredTagDtoService) {
         this.trackedTagService = trackedTagService;
+        this.ignoredTagDtoService = ignoredTagDtoService;
     }
 
     @PostMapping("/{id}/tracked")
@@ -33,6 +36,13 @@ public class ResourceTagController {
         Optional<TagDto> tagDtoOptional = trackedTagService.saveTrackedTagByTagAndUser(id, user);
         return tagDtoOptional.map(userDto -> new ResponseEntity<>(userDto, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @GetMapping("/ignored")
+    @ApiOperation("Возвращает все теги, который пользователь добавил в игнор")
+    @ApiResponse(responseCode = "200", description = "Теги успешно получены")
+    public ResponseEntity<List<IgnoredTagDto>> getUserIgnoredTags(@AuthenticationPrincipal User user) {
+        return ResponseEntity.ok(ignoredTagDtoService.getIgnoredTagsByUserId(user.getId()));
     }
 
 }

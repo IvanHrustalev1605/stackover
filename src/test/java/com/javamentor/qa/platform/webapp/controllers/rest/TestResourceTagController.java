@@ -3,11 +3,15 @@ package com.javamentor.qa.platform.webapp.controllers.rest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.github.database.rider.core.api.dataset.DataSet;
 import com.javamentor.qa.platform.dao.abstracts.model.TrackedTagDao;
+import com.javamentor.qa.platform.models.dto.IgnoredTagDto;
 import com.javamentor.qa.platform.models.dto.TagDto;
 import com.javamentor.qa.platform.models.entity.question.Tag;
+import com.javamentor.qa.platform.service.abstracts.dto.IgnoredTagDtoService;
 import com.javamentor.qa.platform.service.abstracts.model.TagService;
 import com.javamentor.qa.platform.webapp.configs.JmApplication;
+import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +25,13 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.util.List;
 import java.util.Optional;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+
 
 @RunWith(SpringRunner.class)
 @WithUserDetails("user@mail.ru")
@@ -32,12 +39,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = JmApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class TestResourceTagController {
 
+    // TODO: Переписать на интеграционный тест когда будет настроен DBRider
+
     @Autowired
     private MockMvc mockMvc;
     @MockBean
     private TagService tagService;
     @MockBean
     private TrackedTagDao trackedTagDao;
+    @MockBean
+    private IgnoredTagDtoService ignoredTagDtoService;
 
     @Test
     public void addTrackedTag_TagFound_ShouldReturnTagDto() throws Exception {
@@ -91,5 +102,20 @@ public class TestResourceTagController {
                 .andExpect(MockMvcResultMatchers.status().isNotFound());
     }
 
+    @Test
+    @DataSet("datasets/dataset.yml")
+    void getUserIgnoredTags_ShouldReturnListOfIgnoredTags() throws Exception {
+        // given
+        IgnoredTagDto tag1 = new IgnoredTagDto(1L, "tag 1");
+        IgnoredTagDto tag2 = new IgnoredTagDto(2L, "tag 2");
+        given(ignoredTagDtoService.getIgnoredTagsByUserId(any())).willReturn(List.of(tag1, tag2));
+
+        // when
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/user/tag/ignored"))
+
+                //then
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.hasSize(2)));
+    }
 
 }
