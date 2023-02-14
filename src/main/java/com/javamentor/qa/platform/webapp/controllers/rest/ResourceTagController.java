@@ -34,7 +34,7 @@ public class ResourceTagController {
     @ApiResponse(responseCode = "404", description = "Тег не найден")
     public ResponseEntity<TagDto> addTagToTracked(@PathVariable("id") Long id, @AuthenticationPrincipal User user) {
         Optional<TagDto> tagDtoOptional = trackedTagService.saveTrackedTagByTagAndUser(id, user);
-        return tagDtoOptional.map(userDto -> new ResponseEntity<>(userDto, HttpStatus.OK))
+        return tagDtoOptional.map(tagDto -> new ResponseEntity<>(tagDto, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
