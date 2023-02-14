@@ -104,7 +104,7 @@ public class TestResourceTagController {
 
     @Test
     @DataSet("datasets/dataset.yml")
-    void getUserIgnoredTags_ShouldReturnListOfIgnoredTags() throws Exception {
+    public void getUserIgnoredTags_ShouldReturnListOfIgnoredTags() throws Exception {
         // given
         IgnoredTagDto tag1 = new IgnoredTagDto(1L, "tag 1");
         IgnoredTagDto tag2 = new IgnoredTagDto(2L, "tag 2");
