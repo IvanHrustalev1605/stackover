@@ -37,9 +37,17 @@ public class VoteQuestionServiceImpl extends ReadWriteServiceImpl<VoteQuestion, 
         reputation.setCount(reputation.getCount()+10); //даем +10
         reputationService.persist(reputation);
 
-        //вернуть сумму voteUp
-        return questionService.getById(questionId).get().getVoteQuestions().stream()
-                .filter(voteQuestion -> voteQuestion.getVote() == VoteType.UP).count();
+//        //вернуть сумму voteUp в вопросе
+//        return questionService.getById(questionId).get().getVoteQuestions().stream()
+//                .filter(voteQuestion -> voteQuestion.getVote() == VoteType.UP).count();
+//
+        return getSumVoteUp(questionId);
+
+    }
+
+    @Override
+    public Long getSumVoteUp(Long questionId) {
+        return voteQuestionDao.getSumVoteUp(questionId);
     }
 }
 

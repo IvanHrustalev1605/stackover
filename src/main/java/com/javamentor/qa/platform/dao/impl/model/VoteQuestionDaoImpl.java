@@ -14,4 +14,17 @@ public class VoteQuestionDaoImpl extends ReadWriteDaoImpl<VoteQuestion, Long> im
     @PersistenceContext
     private EntityManager entityManager;
 
+
+    @Override
+    public Long getSumVoteUp(Long questionId) { //считаем голоса ЗА из бд
+        return entityManager.createQuery("""
+                        SELECT 
+                            COUNT(v)
+                            FROM VoteQuestion v
+                            WHERE v.question.id =:questionId AND v.vote = 'UP'
+                            """, Long.class)
+                .setParameter("questionId", questionId).getSingleResult();
+    }
+
+
 }
