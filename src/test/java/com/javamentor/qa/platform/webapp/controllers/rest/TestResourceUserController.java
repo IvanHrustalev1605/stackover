@@ -1,9 +1,11 @@
-package com.javamentor.qa.platform.controllers;
+package com.javamentor.qa.platform.webapp.controllers.rest;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.javamentor.qa.platform.models.dto.UserDto;
 import com.javamentor.qa.platform.service.abstracts.dto.UserDtoService;
 import com.javamentor.qa.platform.webapp.configs.JmApplication;
-import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,18 +13,22 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.mockito.BDDMockito.given;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc
+@TestPropertySource(locations="classpath:application-test.properties")
 @SpringBootTest(classes = JmApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class TestResourceUserController {
 
@@ -32,24 +38,30 @@ public class TestResourceUserController {
     @MockBean
     private UserDtoService userDtoService;
 
-    private static final UserDto TEST_USER_DTO = new UserDto(100L, "user100@mail.ru", "User100", "https://user/image.jpg", "Moscow", 100L, LocalDateTime.of(2023, 2, 8, 0, 0, 1), 20L);
-
     @Test
     public void ResourceUserController_Successful_Test() throws Exception {
-        given(this.userDtoService.getUserDtoById(100L)).willReturn(Optional.of(TEST_USER_DTO));
+
+        UserDto userDto = new UserDto();
+        userDto.setId(100L);
+        userDto.setEmail("user100@mail.ru");
+        userDto.setFullName("User100");
+        userDto.setLinkImage("https://user/image.jpg");
+        userDto.setCity("Moscow");
+        userDto.setReputation(100L);
+        userDto.setRegistrationDate(LocalDateTime.now());
+        userDto.setVotes(20L);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+
+        given(this.userDtoService.getUserDtoById(100L)).willReturn(Optional.of(userDto));
 
         this.mockMvc
-                .perform(MockMvcRequestBuilders.get("/api/user/{id}", 100)
-                        .contentType(MediaType.APPLICATION_JSON))
+                .perform(MockMvcRequestBuilders.get("/api/user/{id}", 100))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.fullName", Matchers.is("User100")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.email", Matchers.is("user100@mail.ru")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.linkImage", Matchers.is("https://user/image.jpg")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.city", Matchers.is("Moscow")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.reputation", Matchers.is(100)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.registrationDate", Matchers.is("2023-02-08T00:00:01")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.votes", Matchers.is(20)));
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(content().json(objectMapper.writeValueAsString(userDto)));
 
     }
 
