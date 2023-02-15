@@ -10,17 +10,16 @@ import org.mapstruct.factory.Mappers;
 @Mapper(componentModel = "spring")
 public interface QuestionConverter {
 
-    QuestionConverter INSTANCE = Mappers.getMapper(QuestionConverter.class );
-    @Mapping(source = "tags", target = "listTagDto")
+    QuestionConverter INSTANCE = Mappers.getMapper(QuestionConverter.class);
+
+    //    @Mapping(source = "tags", target = "listTagDto")
     @Mapping(source = "user.id", target = "id")
     @Mapping(source = "user.fullName", target = "authorName")
-    QuestionDto questionToQuestionDto (Question question);
+    QuestionDto questionToQuestionDto(Question question);
 
 
-    QuestionCreateDto questionToQuestionCreateDto (Question question);
+    QuestionCreateDto questionToQuestionCreateDto(Question question);
 
-    Question questionCreateDtoToQuestion (QuestionCreateDto questionCreateDto);
-
-
+    Question questionCreateDtoToQuestion(QuestionCreateDto questionCreateDto);
 
 }
