@@ -3,13 +3,18 @@ package com.javamentor.qa.platform.webapp.controllers.rest;
 import com.javamentor.qa.platform.exception.TagAlreadyExistsException;
 import com.javamentor.qa.platform.exception.TagNotFoundException;
 import com.javamentor.qa.platform.models.dto.IgnoredTagDto;
+import com.javamentor.qa.platform.models.dto.TrackedTagDto;
 import com.javamentor.qa.platform.models.dto.TagDto;
 import com.javamentor.qa.platform.models.entity.user.User;
 import com.javamentor.qa.platform.service.abstracts.dto.IgnoredTagDtoService;
 import com.javamentor.qa.platform.service.abstracts.model.TrackedTagService;
+import com.javamentor.qa.platform.service.abstracts.dto.TrackedTagDtoService;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,11 +33,14 @@ public class ResourceTagController {
 
     private final TrackedTagService trackedTagService;
     private final IgnoredTagDtoService ignoredTagDtoService;
+    private final TrackedTagDtoService trackedTagDtoService;
 
     public ResourceTagController(TrackedTagService trackedTagService,
-                                 IgnoredTagDtoService ignoredTagDtoService) {
+                                 IgnoredTagDtoService ignoredTagDtoService,
+                                 TrackedTagDtoService trackedTagDtoService) {
         this.trackedTagService = trackedTagService;
         this.ignoredTagDtoService = ignoredTagDtoService;
+        this.trackedTagDtoService = trackedTagDtoService;
     }
 
     @PostMapping("/{id}/tracked")
