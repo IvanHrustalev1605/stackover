@@ -78,7 +78,7 @@ public class TestResourceTagController {
     }
 
     @Test
-    public void notExistTag_ShouldReturn400Status() throws Exception {
+    public void notExistTag_ShouldReturn404Status() throws Exception {
 
         given(tagService.existsById(1L)).willReturn(false);
 
@@ -87,7 +87,7 @@ public class TestResourceTagController {
     }
 
     @Test
-    public void trackedTagAlreadyExist_ShouldReturn404Status() throws Exception {
+    public void trackedTagAlreadyExist_ShouldReturn400Status() throws Exception {
 
         Tag tag = new Tag();
         tag.setId(1L);
@@ -99,7 +99,7 @@ public class TestResourceTagController {
         given(tagService.getById(1L)).willReturn(Optional.of(tag));
 
         mockMvc.perform(MockMvcRequestBuilders.post("/api/user/tag/{id}/tracked", 1))
-                .andExpect(MockMvcResultMatchers.status().isNotFound());
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
     }
 
     @Test

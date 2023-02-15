@@ -2,6 +2,8 @@ package com.javamentor.qa.platform.service.impl.model;
 
 import com.javamentor.qa.platform.dao.abstracts.model.TrackedTagDao;
 import com.javamentor.qa.platform.dao.abstracts.repository.ReadWriteDao;
+import com.javamentor.qa.platform.exception.TagAlreadyExistsException;
+import com.javamentor.qa.platform.exception.TagNotFoundException;
 import com.javamentor.qa.platform.models.dto.TagDto;
 import com.javamentor.qa.platform.models.entity.question.Tag;
 import com.javamentor.qa.platform.models.entity.question.TrackedTag;
@@ -31,8 +33,12 @@ public class TrackedTagServiceImpl extends ReadWriteServiceImpl<TrackedTag, Long
     @Override
     public Optional<TagDto> saveTrackedTagByTagAndUser(Long tagId, User user) {
 
-        if (!tagService.existsById(tagId) || trackedTagDao.existTrackedTadByUser(tagId, user.getId())) {
-            return Optional.empty();
+        if (!tagService.existsById(tagId)) {
+            throw new TagNotFoundException();
+        }
+
+        if (trackedTagDao.existTrackedTadByUser(tagId, user.getId())) {
+            throw new TagAlreadyExistsException();
         }
 
         Tag tag = tagService.getById(tagId).get();
