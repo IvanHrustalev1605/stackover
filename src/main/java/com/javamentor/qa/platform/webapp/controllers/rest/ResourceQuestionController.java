@@ -87,6 +87,7 @@ public class ResourceQuestionController {
                 .orElseGet(ResponseEntity.notFound()::build);
     }
 
+<<<<<<< src/main/java/com/javamentor/qa/platform/webapp/controllers/rest/ResourceQuestionController.java
     @PostMapping("/{questionId}/upVote")
     @Operation(summary = "api возвращает общее количество голосов (сумму up vote)")
     @ApiResponses({
@@ -113,5 +114,17 @@ public class ResourceQuestionController {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+    @GetMapping("/count")
+    @ApiOperation("Возвращает общее количество вопросов")
+    public ResponseEntity<Long> getCountQuestion() {
+        return ResponseEntity.ok(questionService.getCountQuestion());
+    }
 
+=======
+    @GetMapping("/count")
+    @ApiOperation("Возвращает общее количество вопросов")
+    public ResponseEntity<Long> getCountQuestion() {
+        return ResponseEntity.ok(questionService.getCountQuestion());
+    }
+>>>>>>> src/main/java/com/javamentor/qa/platform/webapp/controllers/rest/ResourceQuestionController.java
 }

@@ -1,0 +1,56 @@
+ROLE:
+  - ID: 100
+    NAME: "ROLE_USER"
+
+user_entity:
+  - id: 100
+    about: "about"
+    city: "city"
+    email: "user@mail.ru"
+    full_name: "User User"
+    image_link: "link"
+    is_deleted: "false"
+    is_enabled: "true"
+    last_redaction_date: "[DAY, NOW]"
+    link_github: "www.github.com"
+    link_site: "www.site.ru"
+    link_vk: "www.vk.ru"
+    nickname: "U$er"
+    password: "password"
+    persist_date: "[DAY, NOW]"
+    role_id: 100
+    verifCode: "code"
+
+question:
+  - id: 100
+    description: "description"
+    is_deleted: false
+    last_redaction_date: "[DAY,NOW]"
+    persist_date: "[DAY,NOW]"
+    title: "title"
+    user_id: 100
+
+answer:
+  - id: 100
+    date_accept_time: "[DAY,NOW]"
+    html_body: "htmlBody"
+    is_deleted: false
+    is_deleted_by_moderator: false
+    is_helpful: false
+    persist_date: "[DAY,NOW]"
+    update_date: "[DAY,NOW]"
+    question_id: 100
+    user_id: 100
+
+reputation:
+  - id: 100
+    persist_date: "[DAY,NOW]"
+    author_id: 100
+    sender_id: 100
+    count: 0
+    type: 1
+    question_id: 100
+    answer_id: 100
+
+
+

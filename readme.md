@@ -615,3 +615,39 @@ this.mockMvc
 
 ![](src/main/resources/static/images/profiles_tutor/profiles_environment_variables.png)
 ![](src/main/resources/static/images/profiles_tutor/profiles_environment_variables_window.png)
+
+
+# Тестирование api с помощью Postman
+
+## Получение токена
+
+1. Для авторизации необходимо отправить POST запрос на url http://localhost:8080/api/auth/token 
+2. В теле запроса (вкладка Body) выбрать формат raw
+3. В открывшемся поле записать json в виде:
+   ```json
+   {
+       "login": "user@mail.ru",
+       "pass": "user"
+   }
+   ```
+   , где login - email пользователя, pass - пароль
+4. В результате будет получен json ответ с токеном
+5. Токен будет валидным 60 минут. 
+
+![](src/main/resources/static/images/postman_tutor/postman-get-api-token.png)
+
+## Отправление запросов к api
+
+В каждом запросе к api необходимо указывать токен в заголовке Authorization
+
+1. На странице тестируемого запроса выбрать вкладку Authorization.
+2. Выбрать тип токена - **Bearer Token**
+3. В поле **Token** вставить значение токена
+
+![](src/main/resources/static/images/postman_tutor/postman-send-request.png)
+
+## Использование коллекций
+
+Чтобы не вводить значение токена для каждого тестируемого запроса - можно создать коллекцию и сохранить токен в ней. При этом токен будет использован для каждого запроса, который будет создан в этой коллекции
+
+![](src/main/resources/static/images/postman_tutor/postman-create-collection.png)
