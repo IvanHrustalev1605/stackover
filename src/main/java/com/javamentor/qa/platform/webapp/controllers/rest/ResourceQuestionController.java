@@ -114,9 +114,4 @@ public class ResourceQuestionController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/count")
-    @ApiOperation("Возвращает общее количество вопросов")
-    public ResponseEntity<Long> getCountQuestion() {
-        return ResponseEntity.ok(questionService.getCountQuestion());
-    }
 }
