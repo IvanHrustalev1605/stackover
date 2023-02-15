@@ -9,19 +9,14 @@ import com.javamentor.qa.platform.models.entity.user.reputation.Reputation;
 import com.javamentor.qa.platform.models.entity.user.reputation.ReputationType;
 import com.javamentor.qa.platform.service.abstracts.model.*;
 import com.javamentor.qa.platform.webapp.configs.JmApplication;
-import org.assertj.core.api.Assertions;
-import org.dbunit.Assertion;
-import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -91,7 +86,8 @@ public class ResourceAnswerControllerTest {
         given(voteAnswerService.downVoteAnswer(answer, user, 5, VoteType.DOWN)).willReturn(1L);
 
         mockMvc
-                .perform(MockMvcRequestBuilders.post("/api/user/question/{questionId}/answer/{id}/downVote", 1, 1) //делаем запрос
+                .perform(MockMvcRequestBuilders.post("/api/user/question/{questionId}/answer/{id}/downVote", 1, 1)
+                         //делаем запрос
                 )
                 .andExpect(MockMvcResultMatchers.status().isOk()) //хотим получить статус ОК
                 .andDo(MockMvcResultHandlers.print())
