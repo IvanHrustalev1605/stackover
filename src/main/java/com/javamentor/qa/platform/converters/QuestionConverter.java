@@ -22,6 +22,4 @@ public interface QuestionConverter {
 
     Question questionCreateDtoToQuestion(QuestionCreateDto questionCreateDto);
 
-
-
 }
