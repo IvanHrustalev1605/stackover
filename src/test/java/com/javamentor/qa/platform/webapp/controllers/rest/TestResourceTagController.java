@@ -1,14 +1,13 @@
 package com.javamentor.qa.platform.webapp.controllers.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.github.database.rider.core.api.dataset.DataSet;
 import com.javamentor.qa.platform.dao.abstracts.model.TrackedTagDao;
 import com.javamentor.qa.platform.models.dto.IgnoredTagDto;
-import com.javamentor.qa.platform.models.dto.TrackedTagDto;
 import com.javamentor.qa.platform.models.dto.TagDto;
+import com.javamentor.qa.platform.models.dto.TrackedTagDto;
 import com.javamentor.qa.platform.models.entity.question.Tag;
 import com.javamentor.qa.platform.service.abstracts.dto.IgnoredTagDtoService;
 import com.javamentor.qa.platform.service.abstracts.dto.TrackedTagDtoService;
@@ -58,7 +57,6 @@ public class TestResourceTagController {
     @MockBean
     private TrackedTagDtoService trackedTagDtoService;
 
-    // TODO: Переписать на интеграционный тест когда будет настроен DBRider
     @Test
     public void addTrackedTag_TagFound_ShouldReturnTagDto() throws Exception {
 
