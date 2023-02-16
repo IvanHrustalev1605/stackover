@@ -4,9 +4,11 @@ import com.javamentor.qa.platform.models.dto.QuestionCreateDto;
 import com.javamentor.qa.platform.models.dto.QuestionDto;
 import com.javamentor.qa.platform.models.entity.user.User;
 import com.javamentor.qa.platform.service.abstracts.dto.QuestionDtoService;
+import com.javamentor.qa.platform.service.abstracts.model.VoteQuestionService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.Operation;
 import com.javamentor.qa.platform.service.abstracts.model.QuestionService;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,11 +33,13 @@ public class ResourceQuestionController {
 
     private final QuestionDtoService questionDtoService;
     private final QuestionService questionService;
+    private final VoteQuestionService voteQuestionService;
 
     public ResourceQuestionController(QuestionDtoService questionDtoService,
-                                      QuestionService questionService) {
+                                      QuestionService questionService, VoteQuestionService voteQuestionService) {
         this.questionDtoService = questionDtoService;
         this.questionService = questionService;
+        this.voteQuestionService = voteQuestionService;
     }
 
     @PostMapping
@@ -83,9 +87,31 @@ public class ResourceQuestionController {
                 .orElseGet(ResponseEntity.notFound()::build);
     }
 
-    @GetMapping("/count")
-    @ApiOperation("Возвращает общее количество вопросов")
-    public ResponseEntity<Long> getCountQuestion() {
-        return ResponseEntity.ok(questionService.getCountQuestion());
+    @PostMapping("/{questionId}/upVote")
+    @Operation(summary = "api возвращает общее количество голосов (сумму up vote)")
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Голос За учтен",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = QuestionDto.class)
+                    )
+            ),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Голос За не учтен"
+            ),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Вопрос не найден"
+            )
+    })
+    public ResponseEntity<Long> upVote (@PathVariable ("questionId") Long id, @AuthenticationPrincipal User user) {
+        if (questionService.getById(id).isPresent()) {
+            return ResponseEntity.ok(voteQuestionService.voteUpQuestion(user.getId(), id));
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
 }
