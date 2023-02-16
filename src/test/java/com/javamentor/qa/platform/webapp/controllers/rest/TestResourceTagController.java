@@ -58,7 +58,7 @@ public class TestResourceTagController {
     private TrackedTagDtoService trackedTagDtoService;
 
     @Test
-    public void addTrackedTag_TagFound_ShouldReturnTagDto() throws Exception {
+    public void addTagToTracked_TagFound_ShouldReturnTagDto() throws Exception {
 
         Tag tag = new Tag();
         tag.setId(1L);
@@ -85,7 +85,7 @@ public class TestResourceTagController {
     }
 
     @Test
-    public void notExistTag_ShouldReturn404Status() throws Exception {
+    public void addTagToTracked_TagDoesNotExist_ShouldReturn404Status() throws Exception {
 
         given(tagService.existsById(1L)).willReturn(false);
 
@@ -94,7 +94,7 @@ public class TestResourceTagController {
     }
 
     @Test
-    public void trackedTagAlreadyExist_ShouldReturn400Status() throws Exception {
+    public void addTagToTracked_TagAlreadyExists_ShouldReturn400Status() throws Exception {
 
         Tag tag = new Tag();
         tag.setId(1L);

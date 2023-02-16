@@ -1,5 +1,7 @@
 package com.javamentor.qa.platform.webapp.controllers.advice;
 
+import com.javamentor.qa.platform.exception.TagAlreadyExistsException;
+import com.javamentor.qa.platform.exception.TagNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -12,6 +14,20 @@ public class ErrorAdviceController extends ResponseEntityExceptionHandler {
     public ResponseEntity<String> AdviceHandler(Exception e) {
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(e.getMessage());
+    }
+
+    @ExceptionHandler(TagNotFoundException.class)
+    public ResponseEntity<String> tagNotFoundHandler(Exception e) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(e.getMessage());
+    }
+
+    @ExceptionHandler(TagAlreadyExistsException.class)
+    public ResponseEntity<String> tagAlreadyExistHandler(Exception e) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
                 .body(e.getMessage());
     }
 }

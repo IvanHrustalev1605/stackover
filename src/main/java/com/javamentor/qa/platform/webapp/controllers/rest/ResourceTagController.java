@@ -32,9 +32,11 @@ public class ResourceTagController {
     private final IgnoredTagDtoService ignoredTagDtoService;
     private final TrackedTagService trackedTagService;
 
-    public ResourceTagController(IgnoredTagDtoService ignoredTagDtoService,
-                                 TrackedTagDtoService trackedTagDtoService,
-                                 TrackedTagService trackedTagService) {
+    public ResourceTagController(
+            IgnoredTagDtoService ignoredTagDtoService,
+            TrackedTagDtoService trackedTagDtoService,
+            TrackedTagService trackedTagService
+    ) {
         this.ignoredTagDtoService = ignoredTagDtoService;
         this.trackedTagDtoService = trackedTagDtoService;
         this.trackedTagService = trackedTagService;
@@ -54,14 +56,10 @@ public class ResourceTagController {
     @ApiResponse(responseCode = "400", description = "Тег уже добавлен в отслеживаемые")
     @ApiResponse(responseCode = "404", description = "Тег не найден")
     public ResponseEntity<TagDto> addTagToTracked(@PathVariable("id") Long id, @AuthenticationPrincipal User user) {
-        try {
-            TagDto tagDto = trackedTagService.saveTrackedTagByTagAndUser(id, user).get();
-            return new ResponseEntity<>(tagDto, HttpStatus.OK);
-        } catch (TagNotFoundException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } catch (TagAlreadyExistsException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+        return trackedTagService
+                .saveTrackedTagByTagAndUser(id, user)
+                .map(ResponseEntity::ok)
+                .get();
     }
 
     @ApiOperation("Возвращает все отслеживаемые теги авторизированного пользователя")
