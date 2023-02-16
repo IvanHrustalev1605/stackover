@@ -11,24 +11,18 @@ import com.javamentor.qa.platform.models.entity.user.User;
 import com.javamentor.qa.platform.service.abstracts.dto.CommentAnswerDtoService;
 import com.javamentor.qa.platform.service.abstracts.model.AnswerService;
 import com.javamentor.qa.platform.service.abstracts.model.CommentAnswerService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@RequiredArgsConstructor
 public class CommentAnswerDtoServiceImpl implements CommentAnswerDtoService {
     private final CommentAnswerService commentAnswerService;
     private final CommentAnswerDtoDao commentAnswerDtoDao;
     private final AnswerService answerService;
 
-    public CommentAnswerDtoServiceImpl(
-            CommentAnswerService commentAnswerService,
-            CommentAnswerDtoDao commentAnswerDtoDao,
-            AnswerService answerService
-    ) {
-        this.commentAnswerService = commentAnswerService;
-        this.commentAnswerDtoDao = commentAnswerDtoDao;
-        this.answerService = answerService;
-    }
+
 
     @Override
     @Transactional

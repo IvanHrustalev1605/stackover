@@ -17,6 +17,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import javassist.NotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -32,6 +33,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("api/user/question/{questionId}/answer")
 public class ResourceAnswerController {
 
@@ -41,19 +43,6 @@ public class ResourceAnswerController {
     private final AnswerDtoService answerDtoService;
     private final QuestionService questionService;
 
-    public ResourceAnswerController(
-            AnswerService answerService,
-            VoteAnswerService voteAnswerService,
-            CommentAnswerDtoService commentAnswerDtoService,
-            AnswerDtoService answerDtoService,
-            QuestionService questionService
-    ) {
-        this.answerService = answerService;
-        this.voteAnswerService = voteAnswerService;
-        this.commentAnswerDtoService = commentAnswerDtoService;
-        this.answerDtoService = answerDtoService;
-        this.questionService = questionService;
-    }
 
     @GetMapping
     @ApiOperation("Получение списка ответов к вопросу по его id")
@@ -109,7 +98,6 @@ public class ResourceAnswerController {
     @ApiResponse(responseCode = "404", description = "Ответа не существует")
     @PostMapping(value = "/{answerId}/comment")
     public ResponseEntity<CommentAnswerDto> addComment(
-            @PathVariable Long questionId,
             @PathVariable Long answerId,
             @RequestBody String text,
             @AuthenticationPrincipal User user
@@ -118,10 +106,8 @@ public class ResourceAnswerController {
             return ResponseEntity.badRequest().build();
         }
 
-        Long commentAnswerId = commentAnswerDtoService.addComment(user, answerId, text);
-        CommentAnswerDto dto = commentAnswerDtoService.getCommentAnswerDto(commentAnswerId);
-
-        return ResponseEntity.ok(dto);
+        return ResponseEntity.ok(commentAnswerDtoService
+                .getCommentAnswerDto(commentAnswerDtoService.addComment(user, answerId, text)));
     }
 
     @DeleteMapping("/{answerId}")
