@@ -1,13 +1,18 @@
 package com.javamentor.qa.platform.webapp.controllers.rest;
 
+import com.javamentor.qa.platform.models.dto.QuestionCommentDto;
 import com.javamentor.qa.platform.models.dto.QuestionCreateDto;
 import com.javamentor.qa.platform.models.dto.QuestionDto;
 import com.javamentor.qa.platform.models.entity.user.User;
+import com.javamentor.qa.platform.service.abstracts.dto.CommentDtoService;
 import com.javamentor.qa.platform.service.abstracts.dto.QuestionDtoService;
 import com.javamentor.qa.platform.service.abstracts.model.VoteQuestionService;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import io.swagger.v3.oas.annotations.Operation;
 import com.javamentor.qa.platform.service.abstracts.model.QuestionService;
+import javassist.NotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,23 +29,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
-
+@RequiredArgsConstructor
 @RequestMapping("/api/user/question")
-
 public class ResourceQuestionController {
-
     private final QuestionDtoService questionDtoService;
     private final QuestionService questionService;
+    private final CommentDtoService commentDtoService;
     private final VoteQuestionService voteQuestionService;
-
-    public ResourceQuestionController(QuestionDtoService questionDtoService,
-                                      QuestionService questionService, VoteQuestionService voteQuestionService) {
-        this.questionDtoService = questionDtoService;
-        this.questionService = questionService;
-        this.voteQuestionService = voteQuestionService;
-    }
 
     @PostMapping
     @Operation(summary = "Добавляет новый вопрос, возвращает QuestionDto")
@@ -114,4 +112,27 @@ public class ResourceQuestionController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    @GetMapping("/{id}/comment")
+    @ApiOperation("Получение списка dto комментариев к вопросу по id вопроса")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully retrieved list of QuestionCommentDTO"),
+            @ApiResponse(responseCode = "404", description = "Not found - The question does not exist")
+    })
+    public ResponseEntity<List<QuestionCommentDto>> getAllCommentsOnQuestion(
+            @PathVariable("id")
+            @ApiParam(name="id",
+                    value = "Question id",
+                    example = "3") Long questionId) {
+        try {
+            return ResponseEntity.ok(commentDtoService.getAllCommentsOnQuestion(questionId));
+        } catch (NotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/count")
+    @ApiOperation("Возвращает общее количество вопросов")
+    public ResponseEntity<Long> getCountQuestion() {
+        return ResponseEntity.ok(questionService.getCountQuestion());
+    }
 }
