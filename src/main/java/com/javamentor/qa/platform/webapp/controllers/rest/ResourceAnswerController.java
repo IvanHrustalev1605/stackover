@@ -92,7 +92,6 @@ public class ResourceAnswerController {
     @ApiOperation("Уменьшение оценки ответа и репутации автора ответа")
     @ApiResponse(responseCode = "200", description = "Оценка ответа снижена")
     @ApiResponse(responseCode = "404", description = "Ответ не найден")
-
     public ResponseEntity<Long> downVoteAnswer(@PathVariable("id") Long id, @AuthenticationPrincipal User user) {
 
         Optional<Answer> answer = answerService.getAnswerByIdAndUserId(id, 1L);

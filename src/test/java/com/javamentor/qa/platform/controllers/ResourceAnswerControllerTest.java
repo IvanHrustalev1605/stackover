@@ -86,9 +86,7 @@ public class ResourceAnswerControllerTest {
         given(voteAnswerService.downVoteAnswer(answer, user, 5, VoteType.DOWN)).willReturn(1L);
 
         mockMvc
-                .perform(MockMvcRequestBuilders.post("/api/user/question/{questionId}/answer/{id}/downVote", 1, 1)
-                         //делаем запрос
-                )
+                .perform(MockMvcRequestBuilders.post("/api/user/question/{questionId}/answer/{id}/downVote", 1, 1))
                 .andExpect(MockMvcResultMatchers.status().isOk()) //хотим получить статус ОК
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(content().json(Long.toString(1L)));
