@@ -14,6 +14,7 @@ import com.javamentor.qa.platform.service.abstracts.dto.AnswerDtoService;
 import com.javamentor.qa.platform.service.abstracts.dto.CommentAnswerDtoService;
 import com.javamentor.qa.platform.service.abstracts.model.QuestionService;
 import com.javamentor.qa.platform.webapp.configs.JmApplication;
+import javassist.NotFoundException;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -31,7 +32,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -58,14 +58,13 @@ public class TestResourceAnswerController {
                 false, LocalDateTime.now(), 5L, 3L, "user2.png", "User2", 6L, VoteType.UP);
 
         List<AnswerDto> answers = List.of(answerDto, answerDto1);
-        Optional<List<AnswerDto>> answersOptional = Optional.of(answers);
 
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
         objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 
         given(questionService.existsById(1L)).willReturn(true);
-        given(answerDtoService.getAllAnswersDtoByQuestionId(1L, 1L)).willReturn(answersOptional);
+        given(answerDtoService.getAllAnswersDtoByQuestionId(1L, 1L)).willReturn(answers);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/user/question/{questionId}/answer", 1L))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -74,10 +73,8 @@ public class TestResourceAnswerController {
 
     @Test
     public void getAllAnswers_AnswersNotFound_ShouldReturn404Status() throws Exception {
-        Optional<List<AnswerDto>> answers = Optional.empty();
-
         given(questionService.existsById(1L)).willReturn(true);
-        given(answerDtoService.getAllAnswersDtoByQuestionId(1L, 1L)).willReturn(answers);
+        given(answerDtoService.getAllAnswersDtoByQuestionId(1L, 1L)).willThrow(new NotFoundException("Answers not found"));
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/user/question/{questionId}/answer", 1L))
                 .andExpect(MockMvcResultMatchers.status().isNotFound());
