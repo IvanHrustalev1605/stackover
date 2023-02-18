@@ -56,10 +56,6 @@ public class ResourceAnswerController {
                     )
             ),
             @ApiResponse(
-                    responseCode = "400",
-                    description = "Вопроса с таким id не существует"
-            ),
-            @ApiResponse(
                     responseCode = "404",
                     description = "Ответы на вопрос не найдены"
             )
@@ -68,20 +64,17 @@ public class ResourceAnswerController {
             @PathVariable("questionId") Long questionId,
             @AuthenticationPrincipal User user
     ) {
-        if (!questionService.existsById(questionId)) {
-            return ResponseEntity.badRequest().build();
+        try {
+            return ResponseEntity.ok(answerDtoService.getAllAnswersDtoByQuestionId(questionId, user.getId()));
+        } catch (NotFoundException e) {
+            return ResponseEntity.notFound().build();
         }
-
-        return answerDtoService.getAllAnswersDtoByQuestionId(questionId, user.getId())
-                               .map(ResponseEntity::ok)
-                               .orElseGet(ResponseEntity.notFound()::build);
     }
 
     @PostMapping("/{id}/downVote")
     @ApiOperation("Уменьшение оценки ответа и репутации автора ответа")
     @ApiResponse(responseCode = "200", description = "Оценка ответа снижена")
     @ApiResponse(responseCode = "404", description = "Ответ не найден")
-
     public ResponseEntity<Long> downVoteAnswer(@PathVariable("id") Long id, @AuthenticationPrincipal User user) {
 
         Optional<Answer> answer = answerService.getAnswerByIdAndUserId(id, 1L);
@@ -98,6 +91,7 @@ public class ResourceAnswerController {
     @ApiResponse(responseCode = "404", description = "Ответа не существует")
     @PostMapping(value = "/{answerId}/comment")
     public ResponseEntity<CommentAnswerDto> addComment(
+            @PathVariable Long questionId,
             @PathVariable Long answerId,
             @RequestBody String text,
             @AuthenticationPrincipal User user
