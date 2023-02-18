@@ -4,9 +4,11 @@ import com.javamentor.qa.platform.models.dto.CommentAnswerDto;
 import com.javamentor.qa.platform.models.dto.question.answer.AnswerDto;
 import com.javamentor.qa.platform.models.entity.question.VoteType;
 import com.javamentor.qa.platform.models.entity.question.answer.Answer;
+import com.javamentor.qa.platform.models.entity.question.answer.CommentAnswer;
 import com.javamentor.qa.platform.models.entity.user.User;
 import com.javamentor.qa.platform.service.abstracts.dto.CommentAnswerDtoService;
 import com.javamentor.qa.platform.service.abstracts.dto.AnswerDtoService;
+import com.javamentor.qa.platform.service.abstracts.model.CommentAnswerService;
 import com.javamentor.qa.platform.service.abstracts.model.QuestionService;
 import com.javamentor.qa.platform.service.abstracts.model.AnswerService;
 import com.javamentor.qa.platform.service.abstracts.model.VoteAnswerService;
@@ -42,6 +44,7 @@ public class ResourceAnswerController {
     private final CommentAnswerDtoService commentAnswerDtoService;
     private final AnswerDtoService answerDtoService;
     private final QuestionService questionService;
+    private final CommentAnswerService commentAnswerService;
 
 
     @GetMapping
@@ -94,14 +97,14 @@ public class ResourceAnswerController {
             @PathVariable Long questionId,
             @PathVariable Long answerId,
             @RequestBody String text,
-            @AuthenticationPrincipal User user
-    ) {
+            @AuthenticationPrincipal User user)
+    {
+
         if (text.isBlank()) {
             return ResponseEntity.badRequest().build();
         }
 
-        return ResponseEntity.ok(commentAnswerDtoService
-                .getCommentAnswerDto(commentAnswerDtoService.addComment(user, answerId, text)));
+        return ResponseEntity.ok(commentAnswerService.addCommentToAnswer(user, answerId, text));
     }
 
     @DeleteMapping("/{answerId}")
