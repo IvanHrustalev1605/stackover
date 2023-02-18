@@ -5,5 +5,7 @@ import com.javamentor.qa.platform.models.entity.question.answer.CommentAnswer;
 import com.javamentor.qa.platform.models.entity.user.User;
 
 public interface CommentAnswerDtoService {
-    CommentAnswerDto addCommentToAnswerDto(CommentAnswer commentAnswer);
+
+    CommentAnswerDto getCommentAnswerDtoById(Long answerId);
+
 }

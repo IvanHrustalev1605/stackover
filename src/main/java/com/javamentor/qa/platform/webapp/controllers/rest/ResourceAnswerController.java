@@ -94,7 +94,6 @@ public class ResourceAnswerController {
     @ApiResponse(responseCode = "404", description = "Ответа не существует")
     @PostMapping(value = "/{answerId}/comment")
     public ResponseEntity<CommentAnswerDto> addComment(
-            @PathVariable Long questionId,
             @PathVariable Long answerId,
             @RequestBody String text,
             @AuthenticationPrincipal User user)
@@ -103,8 +102,8 @@ public class ResourceAnswerController {
         if (text.isBlank()) {
             return ResponseEntity.badRequest().build();
         }
-
-        return ResponseEntity.ok(commentAnswerService.addCommentToAnswer(user, answerId, text));
+        commentAnswerService.addCommentToAnswer(user, answerId, text);
+        return ResponseEntity.ok(commentAnswerDtoService.getCommentAnswerDtoById(answerId));
     }
 
     @DeleteMapping("/{answerId}")
