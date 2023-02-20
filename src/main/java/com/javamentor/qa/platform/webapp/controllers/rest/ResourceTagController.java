@@ -1,12 +1,11 @@
 package com.javamentor.qa.platform.webapp.controllers.rest;
 
-import com.javamentor.qa.platform.exception.TagAlreadyExistsException;
-import com.javamentor.qa.platform.exception.TagNotFoundException;
 import com.javamentor.qa.platform.models.dto.IgnoredTagDto;
 import com.javamentor.qa.platform.models.dto.TagDto;
 import com.javamentor.qa.platform.models.dto.TrackedTagDto;
 import com.javamentor.qa.platform.models.entity.user.User;
 import com.javamentor.qa.platform.service.abstracts.dto.IgnoredTagDtoService;
+import com.javamentor.qa.platform.service.abstracts.dto.TagDtoService;
 import com.javamentor.qa.platform.service.abstracts.dto.TrackedTagDtoService;
 import com.javamentor.qa.platform.service.abstracts.model.TrackedTagService;
 import io.swagger.annotations.ApiOperation;
@@ -31,15 +30,18 @@ public class ResourceTagController {
     private final TrackedTagDtoService trackedTagDtoService;
     private final IgnoredTagDtoService ignoredTagDtoService;
     private final TrackedTagService trackedTagService;
+    private final TagDtoService tagDtoService;
 
     public ResourceTagController(
             IgnoredTagDtoService ignoredTagDtoService,
             TrackedTagDtoService trackedTagDtoService,
-            TrackedTagService trackedTagService
+            TrackedTagService trackedTagService,
+            TagDtoService tagDtoService
     ) {
         this.ignoredTagDtoService = ignoredTagDtoService;
         this.trackedTagDtoService = trackedTagDtoService;
         this.trackedTagService = trackedTagService;
+        this.tagDtoService = tagDtoService;
     }
 
 
@@ -74,4 +76,10 @@ public class ResourceTagController {
         return new ResponseEntity<>(trackedTagDtoList, HttpStatus.OK);
     }
 
+    @ApiOperation("Возвращает лист содержащий топ-3 тегов пользователя")
+    @ApiResponse(responseCode = "200", description = "Список тегов получен успешно")
+    @GetMapping("/top-3tags")
+    public ResponseEntity<List<TagDto>> getTop3TagsUser(@AuthenticationPrincipal User user) {
+        return ResponseEntity.ok(tagDtoService.getTop3TagsByUserId(user.getId()));
+    }
 }
