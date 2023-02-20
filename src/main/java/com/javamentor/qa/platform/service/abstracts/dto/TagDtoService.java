@@ -9,4 +9,6 @@ public interface TagDtoService {
 
     List<Tag> checkTags(List<TagDto> tagDtoList);
 
+    List<TagDto> getTop3TagsByUserId(Long userId);
+
 }
