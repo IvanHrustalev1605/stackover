@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface IgnoredTagDao extends ReadWriteDao<IgnoredTag, Long> {
     List<IgnoredTag> getIgnoredTagsByUserId(Long userId);
+    boolean existsByTagIdAndUserId(Long tagId, Long userId);
 }
