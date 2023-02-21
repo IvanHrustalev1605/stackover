@@ -132,6 +132,7 @@ public class ResourceQuestionController {
 
     @GetMapping("/count")
     @ApiOperation("Возвращает общее количество вопросов")
+    @ApiResponse(responseCode = "200", description = "Количество вопросов возвращено успешно")
     public ResponseEntity<Long> getCountQuestion() {
         return ResponseEntity.ok(questionService.getCountQuestion());
     }
