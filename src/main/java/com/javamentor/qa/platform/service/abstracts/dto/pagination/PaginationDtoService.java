@@ -1,4 +1,4 @@
-package com.javamentor.qa.platform.service.abstracts.dto;
+package com.javamentor.qa.platform.service.abstracts.dto.pagination;
 
 import com.javamentor.qa.platform.models.dto.PageDto;
 
