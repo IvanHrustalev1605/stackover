@@ -19,10 +19,11 @@ public class IgnoredTagDaoImpl extends ReadWriteDaoImpl<IgnoredTag, Long> implem
     public List<IgnoredTag> getIgnoredTagsByUserId(Long userId) {
         return entityManager
                 .createQuery("""
-                                     SELECT tag.ignoredTag
-                                     FROM IgnoredTag tag
-                                     WHERE tag.user.id = :userId
-                                     """, IgnoredTag.class)
+                        select new com.javamentor.qa.platform.models.entity.question.IgnoredTag(
+                        it.ignoredTag,
+                        it.user)
+                        from IgnoredTag it where it.user.id =: userId
+                        """, IgnoredTag.class)
                 .setParameter("userId", userId)
                 .getResultList();
     }
