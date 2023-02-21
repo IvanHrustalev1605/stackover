@@ -32,9 +32,9 @@ public class TestResourceQuestionController extends BaseTest {
     @Test
     public void getQuestion_QuestionFound_ShouldReturnQuestionDto() throws Exception {
         QuestionDto questionDto = new QuestionDto(1L, "Title", 1L,
-                                                  "YLL", "image", "Desc",
-                                                  10L, 10L, 2L, -1L,
-                                                  LocalDateTime.now(), LocalDateTime.now(), 1L, VoteType.DOWN);
+                "YLL", "image", "Desc",
+                10L, 10L, 2L, -1L,
+                LocalDateTime.now(), LocalDateTime.now(), 1L, VoteType.DOWN);
 
         Optional<QuestionDto> questionOptional = Optional.of(questionDto);
 
@@ -46,8 +46,8 @@ public class TestResourceQuestionController extends BaseTest {
         given(questionDtoService.getById(1L, 1L)).willReturn(questionOptional);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/user/question/{questionId}", 1L))
-               .andExpect(MockMvcResultMatchers.status().isOk())
-               .andExpect(content().json(objectMapper.writeValueAsString(questionDto)));
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(content().json(objectMapper.writeValueAsString(questionDto)));
     }
 
     @Test
@@ -58,7 +58,7 @@ public class TestResourceQuestionController extends BaseTest {
         given(questionDtoService.getById(1L, 1L)).willReturn(questionDto);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/user/question/{questionId}", 1L))
-               .andExpect(MockMvcResultMatchers.status().isNotFound());
+                .andExpect(MockMvcResultMatchers.status().isNotFound());
     }
 
     @Test
@@ -66,7 +66,7 @@ public class TestResourceQuestionController extends BaseTest {
         given(questionService.existsById(1L)).willReturn(false);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/user/question/{questionId}", 1L))
-               .andExpect(MockMvcResultMatchers.status().isBadRequest());
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
     }
 
     @Test
@@ -82,12 +82,11 @@ public class TestResourceQuestionController extends BaseTest {
         when(questionService.getCountQuestion()).thenCallRealMethod();
 
         mockMvc.perform(MockMvcRequestBuilders
-                                .get("/api/user/question/count")
-                                .header(HttpHeaders.AUTHORIZATION, "Bearer " + token))
+                        .get("/api/user/question/count")
+                        .header(HttpHeaders.AUTHORIZATION, "Bearer " + token))
 
-               // then
-               .andExpect(MockMvcResultMatchers.status().isOk())
-               .andExpect(MockMvcResultMatchers.content().json("2"));
+                // then
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().json("2"));
     }
 }
-
