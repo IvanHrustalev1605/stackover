@@ -50,6 +50,8 @@ public class TestResourceAnswerController {
     @MockBean
     private CommentAnswerDtoService commentAnswerDtoService;
 
+
+
     @Test
     public void getAllAnswers_AnswersFound_ShouldReturnAnswersDtoList() throws Exception {
         AnswerDto answerDto = new AnswerDto(1L, 1L, 1L, "answer text", LocalDateTime.now(),
@@ -146,8 +148,8 @@ public class TestResourceAnswerController {
         commentAnswerDto.setPersistDate(dateTime);
         commentAnswerDto.setLastRedactionDate(dateTime);
 
-        given(commentAnswerDtoService.addComment(BDDMockito.any(), BDDMockito.eq(1L), BDDMockito.eq("comment text"))).willReturn(1L);
-        BDDMockito.given(commentAnswerDtoService.getCommentAnswerDto(1L)).willReturn(commentAnswerDto);
+//        given(commentAnswerDtoService.addComment(BDDMockito.any(), BDDMockito.eq(1L), BDDMockito.eq("comment text"))).willReturn(1L);
+//        BDDMockito.given(commentAnswerDtoService.getCommentAnswerDto(1L)).willReturn(commentAnswerDto);
 
         // when
         mockMvc.perform(MockMvcRequestBuilders
