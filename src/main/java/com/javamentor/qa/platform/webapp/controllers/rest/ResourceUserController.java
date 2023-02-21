@@ -6,7 +6,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import org.springframework.http.HttpStatus;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,17 +14,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Optional;
-
 @RestController
 @RequestMapping("/api/user")
+@RequiredArgsConstructor
 public class ResourceUserController {
 
     public final UserDtoService userDtoService;
-
-    public ResourceUserController(UserDtoService userDtoService) {
-        this.userDtoService = userDtoService;
-    }
 
     @ApiOperation("Возвращает UserDto по его id")
     @ApiResponses(value = {
@@ -33,9 +28,6 @@ public class ResourceUserController {
     })
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserDto> getUserDtoById(@ApiParam("id пользователя") @PathVariable("id") Long id) {
-        Optional<UserDto> userDtoOptional = userDtoService.getUserDtoById(id);
-        return userDtoOptional.map(userDto -> new ResponseEntity<>(userDto, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
-
+        return ResponseEntity.ok(userDtoService.getUserDtoById(id));
     }
 }
