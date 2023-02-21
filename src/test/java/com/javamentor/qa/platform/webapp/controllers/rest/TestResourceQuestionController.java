@@ -3,40 +3,30 @@ package com.javamentor.qa.platform.webapp.controllers.rest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.github.database.rider.core.api.dataset.DataSet;
+import com.javamentor.qa.platform.config.BaseTest;
 import com.javamentor.qa.platform.models.dto.QuestionDto;
-import com.javamentor.qa.platform.models.dto.TagDto;
-import com.javamentor.qa.platform.models.entity.question.Tag;
 import com.javamentor.qa.platform.models.entity.question.VoteType;
 import com.javamentor.qa.platform.service.abstracts.dto.QuestionDtoService;
 import com.javamentor.qa.platform.service.abstracts.model.QuestionService;
-import com.javamentor.qa.platform.webapp.configs.JmApplication;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.boot.test.mock.mockito.SpyBean;
+import org.springframework.http.HttpHeaders;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 
-@RunWith(SpringRunner.class)
-@AutoConfigureMockMvc
-@SpringBootTest(classes = JmApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class TestResourceQuestionController {
-    @Autowired
-    private MockMvc mockMvc;
+public class TestResourceQuestionController extends BaseTest {
     @MockBean
     private QuestionDtoService questionDtoService;
-    @MockBean
+    @SpyBean
     private QuestionService questionService;
 
     @Test
@@ -80,16 +70,24 @@ public class TestResourceQuestionController {
     }
 
     @Test
+    @DataSet(
+            cleanBefore = true,
+            value = "datasets/ResourceQuestionController/getCountQuestion.yml",
+            skipCleaningFor = {"databasechangelog", "databasechangeloglock"})
     public void getCountQuestion_ShouldReturnTotalNumberOfQuestions() throws Exception {
         // given
-        given(questionService.getCountQuestion()).willReturn(10L);
+        var token = getToken("user@mail.test", "password");
 
         // when
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/user/question/count"))
+        when(questionService.getCountQuestion()).thenCallRealMethod();
+
+        mockMvc.perform(MockMvcRequestBuilders
+                                .get("/api/user/question/count")
+                                .header(HttpHeaders.AUTHORIZATION, "Bearer " + token))
 
                // then
                .andExpect(MockMvcResultMatchers.status().isOk())
-               .andExpect(MockMvcResultMatchers.content().json("10"));
+               .andExpect(MockMvcResultMatchers.content().json("2"));
     }
 }
 
