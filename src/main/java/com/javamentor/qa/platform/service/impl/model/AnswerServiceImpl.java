@@ -27,15 +27,11 @@ public class AnswerServiceImpl extends ReadWriteServiceImpl<Answer, Long> implem
 
     @Override
     public void markAnswerAsDeletedById(Long id) throws NotFoundException {
-       if (answerDao.getById(id).isEmpty()) {
-           throw new NotFoundException(String.format("The answer with id = %s does not exist", id));
-       } else {
-           answerDao.getById(id).ifPresent(x -> {
-               if (!x.getIsDeleted()) {
-                   x.setIsDeleted(true);
-                   answerDao.update(x);
-               }
-           });
-       }
+        Answer existingAnswer  = answerDao.getById(id)
+                .orElseThrow(() -> new NotFoundException(String.format("The Answer with id = %s does not exist", id)));
+        if (!existingAnswer.getIsDeleted()) {
+            existingAnswer.setIsDeleted(true);
+            answerDao.update(existingAnswer);
+        }
     }
 }

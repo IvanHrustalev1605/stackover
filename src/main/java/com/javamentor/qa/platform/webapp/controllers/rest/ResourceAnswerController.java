@@ -80,8 +80,10 @@ public class ResourceAnswerController {
 
     @PostMapping("/{id}/downVote")
     @ApiOperation("Уменьшение оценки ответа и репутации автора ответа")
-    @ApiResponse(responseCode = "200", description = "Оценка ответа снижена")
-    @ApiResponse(responseCode = "404", description = "Ответ не найден")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Оценка ответа снижена"),
+            @ApiResponse(responseCode = "404", description = "Ответ не найден")
+    })
     public ResponseEntity<Long> downVoteAnswer(@PathVariable("id") Long id, @AuthenticationPrincipal User user) {
 
         Optional<Answer> answer = answerService.getAnswerByIdAndUserId(id, 1L);
@@ -115,8 +117,10 @@ public class ResourceAnswerController {
 
     @DeleteMapping("/{answerId}")
     @ApiOperation("Удаление ответа по id")
-    @ApiResponse(responseCode = "204", description = "Ответ успешно удален")
-    @ApiResponse(responseCode = "404", description = "Ответ не найден")
+    @ApiResponses({
+            @ApiResponse(responseCode = "204", description = "Ответ успешно удален"),
+            @ApiResponse(responseCode = "404", description = "Ответ не найден")
+    })
     public ResponseEntity<Void> markAnswerAsDeletedById(@PathVariable Long answerId) {
         try {
             answerService.markAnswerAsDeletedById(answerId);
@@ -126,3 +130,16 @@ public class ResourceAnswerController {
         }
     }
 }
+/*@ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Ответы на вопросы найдены",
+                    content = @Content(
+                            mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = AnswerDto.class))
+                    )
+            ),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Ответы на вопрос не найдены"
+            )*/
