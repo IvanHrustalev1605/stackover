@@ -1,77 +1,58 @@
-package com.javamentor.qa.platform.webapp.controllers.rest;
+package com.javamentor.qa.platform.controllers;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.javamentor.qa.platform.models.dto.UserDto;
-import com.javamentor.qa.platform.service.abstracts.dto.UserDtoService;
-import com.javamentor.qa.platform.webapp.configs.JmApplication;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import com.github.database.rider.core.api.dataset.DataSet;
+import com.javamentor.qa.platform.config.BaseTest;
+import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Test;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.time.LocalDateTime;
-import java.util.Optional;
-
-import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-
-@RunWith(SpringRunner.class)
-@AutoConfigureMockMvc
-@TestPropertySource(locations="classpath:application-test.properties")
-@SpringBootTest(classes = JmApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class TestResourceUserController {
-
-    @Autowired
-    private MockMvc mockMvc;
-
-    @MockBean
-    private UserDtoService userDtoService;
-
+public class TestResourceUserController extends BaseTest {
     @Test
+    @DataSet(
+            cleanBefore = true,
+            value = "datasets/ResourceUserController/getUserDtoById.yml",
+            skipCleaningFor = {"databasechangelog", "databasechangeloglock"})
     public void ResourceUserController_Successful_Test() throws Exception {
+        // given
+        var token = getToken("user@mail.test", "password");
 
-        UserDto userDto = new UserDto();
-        userDto.setId(100L);
-        userDto.setEmail("user100@mail.ru");
-        userDto.setFullName("User100");
-        userDto.setLinkImage("https://user/image.jpg");
-        userDto.setCity("Moscow");
-        userDto.setReputation(100L);
-        userDto.setRegistrationDate(LocalDateTime.now());
-        userDto.setVotes(20L);
+        // when
+        this.mockMvc.perform(MockMvcRequestBuilders
+                                     .get("/api/user/{id}", 100)
+                                     .header(HttpHeaders.AUTHORIZATION, "Bearer " + token))
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new JavaTimeModule());
-        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-
-        given(this.userDtoService.getUserDtoById(100L)).willReturn(Optional.of(userDto));
-
-        this.mockMvc
-                .perform(MockMvcRequestBuilders.get("/api/user/{id}", 100))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andDo(MockMvcResultHandlers.print())
-                .andExpect(content().json(objectMapper.writeValueAsString(userDto)));
-
+                    // then
+                    .andExpect(MockMvcResultMatchers.status().isOk())
+                    .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
+                    .andExpect(MockMvcResultMatchers.jsonPath("$.fullName", Matchers.is("John Dow")))
+                    .andExpect(MockMvcResultMatchers.jsonPath("$.email", Matchers.is("user@mail.test")))
+                    .andExpect(MockMvcResultMatchers.jsonPath("$.linkImage", Matchers.is("john_dow.jpg")))
+                    .andExpect(MockMvcResultMatchers.jsonPath("$.city", Matchers.is("Moscow")))
+                    .andExpect(MockMvcResultMatchers.jsonPath("$.reputation", Matchers.is(10)))
+                    .andExpect(MockMvcResultMatchers.jsonPath("$.registrationDate", Matchers.is("2023-01-01T00:00:00")))
+                    .andExpect(MockMvcResultMatchers.jsonPath("$.votes", Matchers.is(6)));
     }
 
     @Test
+    @DataSet(
+            cleanBefore = true,
+            value = "datasets/ResourceUserController/getUserDtoById.yml",
+            skipCleaningFor = {"databasechangelog", "databasechangeloglock"})
     public void ResourceUserController_Unsuccessful_Test() throws Exception {
+        // given
+        var token = getToken("user@mail.test", "password");
 
-        this.mockMvc
-                .perform(MockMvcRequestBuilders.get("/api/user/{id}", 1)
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isNotFound());
+        // when
+        this.mockMvc.perform(MockMvcRequestBuilders
+                                     .get("/api/user/{id}", 105)
+                                     .header(HttpHeaders.AUTHORIZATION, "Bearer " + token))
 
+                    // then
+                    .andExpect(MockMvcResultMatchers.status().isNotFound());
     }
 }
