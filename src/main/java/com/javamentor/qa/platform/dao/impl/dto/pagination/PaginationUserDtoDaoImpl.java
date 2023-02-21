@@ -20,9 +20,9 @@ public class PaginationUserDtoDaoImpl implements PaginationUserDtoDao {
 
     @Override
     public int getCountOfAllItems(Map<String, Object> parameters) {
-        return Math.toIntExact(entityManager.createQuery("SELECT COUNT (u) " +
-                        "FROM User u", Long.class)
-                .getSingleResult());
+        return entityManager.createQuery("SELECT CAST(COUNT (u) AS integer)" +
+                        "FROM User u", Integer.class)
+                .getSingleResult();
     }
 
     @Override
