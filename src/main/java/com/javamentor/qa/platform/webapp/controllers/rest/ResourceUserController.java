@@ -37,7 +37,7 @@ public class ResourceUserController {
     })
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserDto> getUserDtoById(@ApiParam("id пользователя") @PathVariable("id") Long id) {
-        Optional<UserDto> userDtoOptional = Optional.ofNullable(userDtoService.getUserDtoById(id));
+        Optional<UserDto> userDtoOptional = userDtoService.getUserDtoById(id);
         return userDtoOptional.map(userDto -> new ResponseEntity<>(userDto, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
 

@@ -19,14 +19,16 @@ public class UserDtoDaoImpl extends ReadWriteDaoImpl<UserDto, Long> implements U
     public Optional<UserDto> getById(Long id) {
         return SingleResultUtil.getSingleResultOrNull(entityManager.createQuery("""
                  SELECT new com.javamentor.qa.platform.models.dto.UserDto(
-                 u.id, 
-                 u.email, 
-                 u.fullName, 
-                 u.imageLink, 
-                 u.city, 
-                (SELECT sum(r.count) FROM Reputation r WHERE r.author.id = u.id), 
+                 u.id,
+                 u.email,
+                 u.fullName,
+                 u.imageLink,
+                 u.city,
+                (SELECT sum(r.count) FROM Reputation r WHERE r.author.id = u.id),
                 u.persistDateTime,
-                (SELECT count(a.voteType) + count(distinct q.vote) FROM VoteAnswer a, VoteQuestion q where a.user.id = u.id and q.user.id = u.id))
+                (SELECT count(a.voteType) + count(distinct q.vote) FROM VoteAnswer a,
+                VoteQuestion q where a.user.id = u.id and q.user.id = u.id))
                  FROM User u WHERE u.id =: id""", UserDto.class).setParameter("id", id));
     }
+
 }
