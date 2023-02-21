@@ -1,6 +1,7 @@
 package com.javamentor.qa.platform.service.impl.dto;
 
 import com.javamentor.qa.platform.dao.abstracts.dto.TagDtoDao;
+import com.javamentor.qa.platform.models.dto.RelatedTagDto;
 import com.javamentor.qa.platform.models.dto.TagDto;
 import com.javamentor.qa.platform.models.entity.question.Tag;
 import com.javamentor.qa.platform.service.abstracts.dto.TagDtoService;
@@ -46,5 +47,10 @@ public class TagDtoServiceImpl implements TagDtoService {
                         .stream()
                         .map(tagConverter::tagToTagDto)
                         .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<RelatedTagDto> getTenTopTags() {
+        return tagDtoDao.getTopTags();
     }
 }
