@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/user/tag/")
@@ -46,8 +47,11 @@ public class ResourceTagController {
     @GetMapping("/ignored")
     @ApiOperation("Возвращает все теги, который пользователь добавил в игнор")
     @ApiResponse(responseCode = "200", description = "Теги успешно получены")
-    public ResponseEntity<List<IgnoredTagDto>> getUserIgnoredTags(@AuthenticationPrincipal User user) {
-        return ResponseEntity.ok(ignoredTagDtoService.getIgnoredTagsByUserId(user.getId()));
+    @ApiResponse(responseCode = "404", description = "NOT FOUND - У авторизированного пользователя нет отслеживаемых тегов")
+    public ResponseEntity<List<IgnoredTagDto>> getUserIgnoredTags(@ApiParam("Авторизированный пользователь") @AuthenticationPrincipal User user) {
+        return Optional.ofNullable(ignoredTagDtoService.getIgnoredTagsByUserId(user.getId()))
+                .map(value -> new ResponseEntity<>(value, HttpStatus.OK))
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping("/{id}/tracked")
