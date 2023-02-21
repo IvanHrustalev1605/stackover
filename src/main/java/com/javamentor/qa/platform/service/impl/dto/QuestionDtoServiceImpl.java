@@ -15,7 +15,6 @@ import java.util.Optional;
 
 @Service
 public class QuestionDtoServiceImpl implements QuestionDtoService {
-
     private final TagDtoService tagDtoService;
     private final QuestionService questionService;
     private final QuestionDtoDao questionDtoDao;

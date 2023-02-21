@@ -7,7 +7,6 @@ import com.javamentor.qa.platform.models.entity.question.answer.Answer;
 import com.javamentor.qa.platform.models.entity.user.User;
 import com.javamentor.qa.platform.service.abstracts.dto.CommentAnswerDtoService;
 import com.javamentor.qa.platform.service.abstracts.dto.AnswerDtoService;
-import com.javamentor.qa.platform.service.abstracts.model.QuestionService;
 import com.javamentor.qa.platform.service.abstracts.model.AnswerService;
 import com.javamentor.qa.platform.service.abstracts.model.VoteAnswerService;
 import io.swagger.annotations.ApiOperation;
@@ -39,20 +38,17 @@ public class ResourceAnswerController {
     private final VoteAnswerService voteAnswerService;
     private final CommentAnswerDtoService commentAnswerDtoService;
     private final AnswerDtoService answerDtoService;
-    private final QuestionService questionService;
 
     public ResourceAnswerController(
             AnswerService answerService,
             VoteAnswerService voteAnswerService,
             CommentAnswerDtoService commentAnswerDtoService,
-            AnswerDtoService answerDtoService,
-            QuestionService questionService
+            AnswerDtoService answerDtoService
     ) {
         this.answerService = answerService;
         this.voteAnswerService = voteAnswerService;
         this.commentAnswerDtoService = commentAnswerDtoService;
         this.answerDtoService = answerDtoService;
-        this.questionService = questionService;
     }
 
     @GetMapping
@@ -67,10 +63,6 @@ public class ResourceAnswerController {
                     )
             ),
             @ApiResponse(
-                    responseCode = "400",
-                    description = "Вопроса с таким id не существует"
-            ),
-            @ApiResponse(
                     responseCode = "404",
                     description = "Ответы на вопрос не найдены"
             )
@@ -79,20 +71,17 @@ public class ResourceAnswerController {
             @PathVariable("questionId") Long questionId,
             @AuthenticationPrincipal User user
     ) {
-        if (!questionService.existsById(questionId)) {
-            return ResponseEntity.badRequest().build();
+        try {
+            return ResponseEntity.ok(answerDtoService.getAllAnswersDtoByQuestionId(questionId, user.getId()));
+        } catch (NotFoundException e) {
+            return ResponseEntity.notFound().build();
         }
-
-        return answerDtoService.getAllAnswersDtoByQuestionId(questionId, user.getId())
-                               .map(ResponseEntity::ok)
-                               .orElseGet(ResponseEntity.notFound()::build);
     }
 
     @PostMapping("/{id}/downVote")
     @ApiOperation("Уменьшение оценки ответа и репутации автора ответа")
     @ApiResponse(responseCode = "200", description = "Оценка ответа снижена")
     @ApiResponse(responseCode = "404", description = "Ответ не найден")
-
     public ResponseEntity<Long> downVoteAnswer(@PathVariable("id") Long id, @AuthenticationPrincipal User user) {
 
         Optional<Answer> answer = answerService.getAnswerByIdAndUserId(id, 1L);

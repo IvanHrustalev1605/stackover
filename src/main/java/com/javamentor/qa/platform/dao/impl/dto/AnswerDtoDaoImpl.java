@@ -3,7 +3,6 @@ package com.javamentor.qa.platform.dao.impl.dto;
 import com.javamentor.qa.platform.dao.abstracts.dto.AnswerDtoDao;
 import com.javamentor.qa.platform.models.dto.question.answer.AnswerDto;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -17,7 +16,6 @@ public class AnswerDtoDaoImpl implements AnswerDtoDao {
     private EntityManager entityManager;
 
     @Override
-    @Transactional
     public Optional<List<AnswerDto>> getAllAnswersDtoByQuestionId(Long questionId, Long userId) {
         return Optional.of(entityManager.createQuery("""
                     SELECT NEW com.javamentor.qa.platform.models.dto.question.answer.AnswerDto(

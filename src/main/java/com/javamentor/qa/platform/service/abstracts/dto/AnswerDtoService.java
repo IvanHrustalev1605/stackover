@@ -1,10 +1,10 @@
 package com.javamentor.qa.platform.service.abstracts.dto;
 
 import com.javamentor.qa.platform.models.dto.question.answer.AnswerDto;
+import javassist.NotFoundException;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface AnswerDtoService {
-    Optional<List<AnswerDto>> getAllAnswersDtoByQuestionId(Long id, Long userId);
+    List<AnswerDto> getAllAnswersDtoByQuestionId(Long id, Long userId) throws NotFoundException;
 }
