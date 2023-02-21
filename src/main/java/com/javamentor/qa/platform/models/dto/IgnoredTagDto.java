@@ -10,10 +10,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(description = "Тег dto")
+@Schema(description = "DTO игнорируемого пользователем тега")
 public class IgnoredTagDto {
-    @Parameter(description = "ID Тега")
+    @Parameter(description = "ID игнорируемого тега")
     private Long id;
-    @Schema(description = "Название тега")
+    @Schema(description = "Название игнорируемого тега")
     private String name;
 }

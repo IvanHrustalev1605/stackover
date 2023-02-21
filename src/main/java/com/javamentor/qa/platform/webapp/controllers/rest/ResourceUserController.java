@@ -8,10 +8,13 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import org.springframework.http.HttpStatus;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,16 +22,11 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/user")
+@RequiredArgsConstructor
 public class ResourceUserController {
 
     public final UserDtoService userDtoService;
     public final PaginationDtoService<UserDto> paginationDtoService;
-
-    public ResourceUserController(UserDtoService userDtoService,
-                                  PaginationDtoService<UserDto> paginationDtoService) {
-        this.userDtoService = userDtoService;
-        this.paginationDtoService = paginationDtoService;
-    }
 
     @ApiOperation("Возвращает UserDto по его id")
     @ApiResponses(value = {

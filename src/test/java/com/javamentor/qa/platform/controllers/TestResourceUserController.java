@@ -17,7 +17,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 import static org.mockito.BDDMockito.given;
 
@@ -36,7 +35,7 @@ public class TestResourceUserController {
 
     @Test
     public void ResourceUserController_Successful_Test() throws Exception {
-        given(this.userDtoService.getUserDtoById(100L)).willReturn(Optional.of(TEST_USER_DTO));
+        given(this.userDtoService.getUserDtoById(100L)).willReturn(TEST_USER_DTO);
 
         this.mockMvc
                 .perform(MockMvcRequestBuilders.get("/api/user/{id}", 100)

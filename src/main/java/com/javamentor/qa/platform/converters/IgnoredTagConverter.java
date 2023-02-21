@@ -7,7 +7,7 @@ import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface IgnoredTagConverter {
-    @Mapping(source = "id", target = "id")
+    @Mapping(source = "ignoredTag.id", target = "id")
     @Mapping(source = "ignoredTag.name", target = "name")
     IgnoredTagDto ignoredTagToIgnoredTagDto(IgnoredTag ignoredTag);
 }

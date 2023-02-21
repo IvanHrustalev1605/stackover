@@ -1,9 +1,9 @@
 package com.javamentor.qa.platform.exception;
 
-import javassist.NotFoundException;
-
-public class TagNotFoundException extends IllegalArgumentException {
+public class TagNotFoundException extends RuntimeException {
     public TagNotFoundException() {
         super("Тег с таким id не найден!");
     }
+
+    public TagNotFoundException(String message) { super(message); }
 }

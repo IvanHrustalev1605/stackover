@@ -6,7 +6,7 @@ user_entity:
   - id: 100
     about: "about"
     city: "city"
-    email: "user@mail.ru"
+    email: "user@mail.test"
     full_name: "User User"
     image_link: "link"
     is_deleted: "false"
@@ -16,41 +16,32 @@ user_entity:
     link_site: "www.site.ru"
     link_vk: "www.vk.ru"
     nickname: "U$er"
-    password: "password"
+    password: "$2a$12$ocWHzknsmLhVXCLS/OZ2VOf3Ib4JnLpFThDpV8R84iQrtsRepGZKS" # password
     persist_date: "2023-01-01"
     role_id: 100
     verif_code: "code"
 
 question:
   - id: 100
-    description: "description"
+    description: "description 0"
     is_deleted: false
     last_redaction_date: "2023-01-01"
     persist_date: "2023-01-01"
-    title: "title"
+    title: "title 0"
     user_id: 100
 
-answer:
-  - id: 100
-    date_accept_time: "2023-01-01"
-    html_body: "htmlBody"
+  - id: 101
+    description: "description 1"
     is_deleted: false
-    is_deleted_by_moderator: false
-    is_helpful: false
+    last_redaction_date: "2023-01-01"
     persist_date: "2023-01-01"
-    update_date: "2023-01-01"
-    question_id: 100
+    title: "title 1"
     user_id: 100
 
-reputation:
-  - id: 100
+  - id: 102
+    description: "description 2"
+    is_deleted: true
+    last_redaction_date: "2023-01-01"
     persist_date: "2023-01-01"
-    author_id: 100
-    sender_id: 100
-    count: 0
-    type: 1
-    question_id: 100
-    answer_id: 100
-
-
-
+    title: "title 2"
+    user_id: 100
