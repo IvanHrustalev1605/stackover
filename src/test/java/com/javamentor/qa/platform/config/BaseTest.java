@@ -59,7 +59,6 @@ public abstract class BaseTest {
             value = "datasets/base_test.yml",
             skipCleaningFor = {"databasechangelog", "databasechangeloglock"})
     public void simpleTest() {
-
     }
 
 }
