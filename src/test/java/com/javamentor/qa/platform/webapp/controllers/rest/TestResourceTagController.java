@@ -33,7 +33,6 @@ import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 
-
 public class TestResourceTagController extends BaseTest {
 
     @SpyBean
@@ -222,4 +221,30 @@ public class TestResourceTagController extends BaseTest {
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isNotFound());
     }
+
+    @Test
+    @DataSet(
+            cleanBefore = true,
+            value = "datasets/ResourceTagController/getTenTopTags.yml",
+            skipCleaningFor = {"databasechangelog", "databasechangeloglock"})
+    public void getTenDtoTags() throws Exception {
+        var token = getToken("user@mail.test", "password");
+
+        this.mockMvc.perform(MockMvcRequestBuilders
+                .get("/api/user/tag/related")
+                .header(HttpHeaders.AUTHORIZATION, "Bearer " + token))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$").isArray())
+                .andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.hasSize(10)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].id", Matchers.is(101)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].countQuestion", Matchers.is(4)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[4].id", Matchers.is(104)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[4].countQuestion", Matchers.is(3)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[6].id", Matchers.is(106)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[6].countQuestion", Matchers.is(1)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[9].id", Matchers.is(107)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[9].countQuestion", Matchers.is(0)));
+    }
+
 }

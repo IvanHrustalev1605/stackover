@@ -2,6 +2,7 @@ package com.javamentor.qa.platform.webapp.controllers.rest;
 
 import com.javamentor.qa.platform.exception.TagNotFoundException;
 import com.javamentor.qa.platform.models.dto.IgnoredTagDto;
+import com.javamentor.qa.platform.models.dto.RelatedTagDto;
 import com.javamentor.qa.platform.models.dto.TagDto;
 import com.javamentor.qa.platform.models.dto.TrackedTagDto;
 import com.javamentor.qa.platform.models.entity.user.User;
@@ -26,6 +27,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Optional;
+
+import static org.springframework.http.ResponseEntity.status;
 
 @RestController
 @RequiredArgsConstructor
@@ -87,4 +90,15 @@ public class ResourceTagController {
     public ResponseEntity<TagDto> addTagToIgnored(@PathVariable("id") Long tagId, @AuthenticationPrincipal User user) {
         return ResponseEntity.ok(ignoredTagService.addIgnoredTag(tagId, user));
     }
+
+
+    @ApiOperation("Возвращает лист содержащий топ-10 тегов RelatedTagDto")
+    @ApiResponse(responseCode = "200", description = "Список тегов получен успешно")
+    @ApiResponse(responseCode = "400", description = "Bad Request - проблема в запросе")
+    @ApiResponse(responseCode = "404", description = "NOT FOUND - Список топ-10 тегов не найден")
+    @GetMapping("/related")
+    public ResponseEntity<List<RelatedTagDto>> getTenTags() {
+        return status(HttpStatus.OK).body(tagDtoService.getTenTopTags());
+    }
+
 }
