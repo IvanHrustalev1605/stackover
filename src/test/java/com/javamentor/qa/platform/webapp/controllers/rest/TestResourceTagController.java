@@ -13,9 +13,11 @@ import com.javamentor.qa.platform.models.entity.question.Tag;
 import com.javamentor.qa.platform.service.abstracts.dto.IgnoredTagDtoService;
 import com.javamentor.qa.platform.service.abstracts.dto.TrackedTagDtoService;
 import com.javamentor.qa.platform.service.abstracts.model.TagService;
+import lombok.SneakyThrows;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithUserDetails;
@@ -34,7 +36,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class TestResourceTagController extends BaseTest {
 
-    @MockBean
+    @SpyBean
     private TagService tagService;
     @MockBean
     private TrackedTagDao trackedTagDao;
@@ -179,4 +181,45 @@ public class TestResourceTagController extends BaseTest {
                     .andExpect(MockMvcResultMatchers.jsonPath("$[2].id", Matchers.is(102)));
     }
 
+    @Test
+    @SneakyThrows
+    @DataSet(cleanBefore = true,
+            value = "datasets/ResourceTagController/addTagToIgnored.yml",
+            skipCleaningFor = {"databasechangelog", "databasechangeloglock"})
+    public void addTagToIgnored_TagAddedToIgnored_ShouldReturnTagDto() {
+        String token = getToken("user@mail.test", "password");
+        TagDto tagDto = new TagDto(100L, "Tag 0", "Tag 0 description");
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/user/tag/{tagId}/ignored", 100).header(HttpHeaders.AUTHORIZATION, "Bearer " + token))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().json(objectMapper.writeValueAsString(tagDto)));
+    }
+
+    @Test
+    @SneakyThrows
+    @DataSet(cleanBefore = true,
+            value = "datasets/ResourceTagController/addTagToIgnored.yml",
+            skipCleaningFor = {"databasechangelog", "databasechangeloglock"})
+    public void addTagToIgnored_TagAlreadyIgnored_ShouldReturn400Status() {
+        String token = getToken("user@mail.test", "password");
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/user/tag/{tagId}/ignored", 101).header(HttpHeaders.AUTHORIZATION, "Bearer " + token))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
+    }
+
+    @Test
+    @SneakyThrows
+    @DataSet(cleanBefore = true,
+            value = "datasets/ResourceTagController/addTagToIgnored.yml",
+            skipCleaningFor = {"databasechangelog", "databasechangeloglock"})
+    public void addTagToIgnored_TagNotFound_ShouldReturn404Status() {
+        String token = getToken("user@mail.test", "password");
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/user/tag/{tagId}/ignored", 200).header(HttpHeaders.AUTHORIZATION, "Bearer " + token))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isNotFound());
+    }
 }

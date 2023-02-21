@@ -8,11 +8,13 @@ import com.javamentor.qa.platform.models.entity.user.User;
 import com.javamentor.qa.platform.service.abstracts.dto.IgnoredTagDtoService;
 import com.javamentor.qa.platform.service.abstracts.dto.TagDtoService;
 import com.javamentor.qa.platform.service.abstracts.dto.TrackedTagDtoService;
+import com.javamentor.qa.platform.service.abstracts.model.IgnoredTagService;
 import com.javamentor.qa.platform.service.abstracts.model.TrackedTagService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -33,6 +35,7 @@ public class ResourceTagController {
     private final TrackedTagDtoService trackedTagDtoService;
     private final IgnoredTagDtoService ignoredTagDtoService;
     private final TrackedTagService trackedTagService;
+    private final IgnoredTagService ignoredTagService;
     private final TagDtoService tagDtoService;
 
     @GetMapping("/ignored")
@@ -74,5 +77,14 @@ public class ResourceTagController {
     @GetMapping("/top-3tags")
     public ResponseEntity<List<TagDto>> getTop3TagsUser(@AuthenticationPrincipal User user) {
         return ResponseEntity.ok(tagDtoService.getTop3TagsByUserId(user.getId()));
+    }
+
+    @ApiOperation("Добавляет тег в игнорируемые и возвращает TagDto")
+    @ApiResponse(responseCode = "200", description = "Тег добавлен в игнорируемые")
+    @ApiResponse(responseCode = "400", description = "Тег уже добавлен в игнорируемые")
+    @ApiResponse(responseCode = "404", description = "Тег не найден")
+    @PostMapping(value = "/{id}/ignored")
+    public ResponseEntity<TagDto> addTagToIgnored(@PathVariable("id") Long tagId, @AuthenticationPrincipal User user) {
+        return ResponseEntity.ok(ignoredTagService.addIgnoredTag(tagId, user));
     }
 }
