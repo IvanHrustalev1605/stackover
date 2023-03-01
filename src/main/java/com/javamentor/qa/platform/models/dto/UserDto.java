@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -32,17 +31,6 @@ public class UserDto {
     private LocalDateTime registrationDate;
     @Schema(description = "количество голосов пользователя")
     private Long votes;
-    @Schema(description = "список топ-3 тэгов пользователя")
-    private List<TagDto> listTop3TagDto;
-
-    public UserDto(Long id, String email, String fullName, String linkImage, String city, Long reputation, LocalDateTime registrationDate, Long votes) {
-        this.id = id;
-        this.email = email;
-        this.fullName = fullName;
-        this.linkImage = linkImage;
-        this.city = city;
-        this.reputation = reputation;
-        this.registrationDate = registrationDate;
-        this.votes = votes;
-    }
+//    @Schema(description = "список топ-3 тэгов пользователя")
+//    private List<TagDto> listTop3TagDto;
 }

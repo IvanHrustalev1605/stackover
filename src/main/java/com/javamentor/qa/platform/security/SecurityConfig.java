@@ -1,7 +1,5 @@
 package com.javamentor.qa.platform.security;
 
-import com.javamentor.qa.platform.security.jwt.JWTConfigurer;
-import com.javamentor.qa.platform.security.jwt.TokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,7 +21,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
 
     private final UserDetailsServiceImpl userDetailsService;
-    private final TokenProvider tokenProvider;
 
     @Override
     public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
@@ -54,20 +51,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
         filter.setEncoding("UTF-8");
         filter.setForceEncoding(true);
         http.csrf().disable();
-        http.cors().disable(); //откл корс
+        http.cors().disable();
         http
-            .authorizeRequests()
-                .antMatchers("/js/**", "/css/**", "/images/**", "/api/auth/token").permitAll() // доступ для CSS HTML JS
-                .antMatchers("api/user/**").hasRole("USER")  // ограничиваем доступ api/user/** - разрешен только USER
-                .antMatchers("/api/auth/**").authenticated()
-                .antMatchers("/regpage").not().fullyAuthenticated() //Доступ только для не зарегистрированных пользователей
-                .antMatchers("/**").permitAll()   // всем остальным разрешаем доступ
-            .and()
+                // делаем страницу регистрации недоступной для авторизированных пользователей
+                .authorizeRequests()
+                // ограничиваем доступ api/user/** - разрешен только USER
+                .antMatchers("api/user/**").hasRole("USER")
+                // всем остальным разрешаем доступ
+                .antMatchers("/**").permitAll()
+                .and()
                 .logout()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/")
-            .and()
-                .apply(securityConfigurerAdapter());
+                .logoutSuccessUrl("/");
     }
 
     @Override
@@ -75,9 +70,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
         registry.addMapping("/**")
                 .allowedOrigins("*")
                 .allowedMethods("*");
-    }
-
-    private JWTConfigurer securityConfigurerAdapter() {
-        return new JWTConfigurer(tokenProvider);
     }
 }
