@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<header>header</header>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-1">
+
+            <h1>Ask a public question</h1>
+
+            <div class="alert alert-primary" role="alert">
+                <p>You’re ready to <a href="#" class="alert-link"> ask </a> a <a href="#" class="alert-link">
+                    programming-related question.</a> and this form will help guide you through the process.
+                    Looking to ask a non-programming question? See <a href="#" class="alert-link"> the topics here</a>
+                    to find a relevant site.
+                </p>
+                <p>
+                    <h7>Steps</h7>
+                </p>
+                <li>Summarize your problem in a one-line title.</li>
+                <li>Describe your problem in more detail.</li>
+                <li>Describe what you tried and what you expected to happen.</li>
+                <li>Add “tags” which help surface your question to members of the community.</li>
+                <li>Review your question and post it to the site.</li>
+            </div>
+            <form>
+                <div class="form-group">
+                    <label for="question">Title</label>
+                    <input type="text" class="form-control" id="question" aria-describedby="questionHelp"
+                           placeholder="Enter your question">
+                    <small id="questionHelp" class="form-text text-muted">Please provide a clear and concise
+                        question.</small>
+                </div>
+                <div class="form-group">
+                    <label for="question">What are the details of your problem?</label>
+                    <input type="text" class="form-control" id="detailProblem" aria-describedby="detailProblemHelp"
+                           placeholder="Enter your problem">
+                    <small id="detailProblemHelp" class="form-text text-muted">Introduce the problem and expand on what
+                        you put in the title. Minimum 20 characters.</small>
+                </div>
+                <div class="form-group">
+                    <label for="question">What did you try and what were you expecting?</label>
+                    <input type="text" class="form-control" id="tried" aria-describedby="triedProblemHelp"
+                           placeholder="Enter what you tried">
+                    <small id="triedProblemHelp" class="form-text text-muted">Describe what you tried, what you expected
+                        to happen, and what actually resulted. Minimum 20 characters.</small>
+                </div>
+                <div class="form-group">
+                    <label for="tags">Tags</label>
+                    <input type="text" class="form-control" id="tags" placeholder="Enter tags">
+                    <small id="tagsHelp" class="form-text text-muted">Please provide relevant tags for your
+                        question.</small>
+                </div>
+                <div class="form-group">
+                    <label for="question">Review questions already on Stack Overflow to see if your question is a
+                        duplicate.</label>
+                    <input type="text" class="form-control" id="duplicate" aria-describedby="duplicateProblemHelp"
+                           placeholder="Do any of these posts answer your question?">
+                    <small id="duplicateProblemHelp" class="form-text text-muted">Clicking on these questions will open
+                        them in a new tab for you to review. Your progress here will be saved so you can come back and
+                        continue.</small>
+                </div>
+                <div class="col-md-7 offset-md-4">
+                    <button type="next" class="btn btn-danger">Discard</button>
+                    <button type="next" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<footer>footer</footer>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+        crossorigin="anonymous"></script>
+<script type="text/javascript" src="/js/sidebar.js"></script>
+<script type="text/javascript" src="/js/header.js"></script>
+<script type="text/javascript" src="/js/footer.js"></script>
+</body>
+</html>
