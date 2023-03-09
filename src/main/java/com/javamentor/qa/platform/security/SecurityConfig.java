@@ -53,11 +53,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
         http.csrf().disable();
         http.cors().disable();
         http
-                // делаем страницу регистрации недоступной для авторизированных пользователей
                 .authorizeRequests()
-                // ограничиваем доступ api/user/** - разрешен только USER
+                .antMatchers("/images/**", "/css/**", "/js/**").permitAll()
                 .antMatchers("api/user/**").hasRole("USER")
-                // всем остальным разрешаем доступ
                 .antMatchers("/**").permitAll()
                 .and()
                 .logout()
