@@ -1,0 +1,39 @@
+package com.javamentor.qa.platform.controller;
+
+import com.javamentor.qa.platform.models.entity.question.answer.Answer;
+import com.javamentor.qa.platform.models.entity.user.User;
+import com.javamentor.qa.platform.service.abstracts.model.AnswerService;
+import com.javamentor.qa.platform.service.impl.model.VoteAnswerServiceImpl;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Optional;
+
+@RestController
+@RequestMapping("api/user/question/{questionId}/answer/{id}")
+@Api(description = "Контроллер для ")
+public class ResourceAnswerController {
+private final VoteAnswerServiceImpl voteAnswerService;
+private final AnswerService answerService;
+public ResourceAnswerController(VoteAnswerServiceImpl voteAnswerService, AnswerService answerService) {
+    this.voteAnswerService = voteAnswerService;
+    this.answerService = answerService;
+}
+
+@PostMapping("/upVote")
+@ApiOperation("Увеличение оценки ответа")
+public ResponseEntity<Long> upVote(@PathVariable("id") Long answerId, @AuthenticationPrincipal User user){
+    Optional<Answer> answerOptional = answerService.getAnswerForVote(answerId, user.getId());
+    return answerOptional.map(
+                    answer -> new ResponseEntity<>(voteAnswerService.upVote(answer, user), HttpStatus.OK))
+            .orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
+}
+}
+

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.Optional;
 
 @Repository
 public class AnswerDaoImpl extends ReadWriteDaoImpl<Answer, Long> implements AnswerDao {
@@ -14,4 +15,8 @@ public class AnswerDaoImpl extends ReadWriteDaoImpl<Answer, Long> implements Ans
     @PersistenceContext
     private EntityManager entityManager;
 
+    @Override
+    public Optional<Answer> getAnswerForVote(Long answerId, Long userId) {
+        return null;
+    }
 }
