@@ -17,6 +17,6 @@ public class AnswerDaoImpl extends ReadWriteDaoImpl<Answer, Long> implements Ans
 
     @Override
     public Optional<Answer> getAnswerForVote(Long answerId, Long userId) {
-        return null;
+        return Optional.empty();
     }
 }

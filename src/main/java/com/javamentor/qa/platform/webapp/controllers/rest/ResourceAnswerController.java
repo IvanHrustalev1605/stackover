@@ -1,4 +1,4 @@
-package com.javamentor.qa.platform.controller;
+package com.javamentor.qa.platform.webapp.controllers.rest;
 
 import com.javamentor.qa.platform.models.entity.question.answer.Answer;
 import com.javamentor.qa.platform.models.entity.user.User;
@@ -19,7 +19,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("api/user/question/{questionId}/answer/{id}")
-@Api(description = "Контроллер для ")
+@Api(description = "Контроллер для взаимодействия с ответами ")
 public class ResourceAnswerController {
     private final VoteAnswerServiceImpl voteAnswerService;
     private final AnswerService answerService;
@@ -30,6 +30,7 @@ public class ResourceAnswerController {
 
     @PostMapping("/upVote")
     @ApiResponse(responseCode = "400", description = "Не удалось проголосовать")
+    @ApiResponse(responseCode = "200", description = "Удалось успешно проголосовать")
     public ResponseEntity<Long> upVote(@Parameter(description = "Уникальный id ответа")
                                        @PathVariable("id") Long answerId,
                                        @Parameter(description = "Пользователь прошедший аутентификацию")
