@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("api/user/question/{questionId}/answer/{id}")
+@RequestMapping("api/user/question/{questionId}/answer")
 @Api(description = "Контроллер для взаимодействия с ответами ")
 public class ResourceAnswerController {
     private final VoteAnswerServiceImpl voteAnswerService;
@@ -28,9 +28,9 @@ public class ResourceAnswerController {
         this.answerService = answerService;
     }
 
-    @PostMapping("/upVote")
-    @ApiResponse(responseCode = "400", description = "Не удалось проголосовать")
+    @PostMapping("/{id}/upVote")
     @ApiResponse(responseCode = "200", description = "Удалось успешно проголосовать")
+    @ApiResponse(responseCode = "400", description = "Не удалось проголосовать")
     public ResponseEntity<Long> upVote(@Parameter(description = "Уникальный id ответа")
                                        @PathVariable("id") Long answerId,
                                        @Parameter(description = "Пользователь прошедший аутентификацию")
