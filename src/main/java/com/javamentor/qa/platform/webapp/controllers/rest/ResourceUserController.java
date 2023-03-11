@@ -1,4 +1,4 @@
-package com.javamentor.qa.platform.controller;
+package com.javamentor.qa.platform.webapp.controllers.rest;
 
 import com.javamentor.qa.platform.models.dto.UserDto;
 import com.javamentor.qa.platform.service.abstracts.dto.UserDtoService;
@@ -30,13 +30,13 @@ public class ResourceUserController {
             @ApiResponse(code = 200, message = "UserDTO успешно получен."),
             @ApiResponse(code = 400, message = "Неправильный запрос.") })
     public ResponseEntity<UserDto> getUserDtoById(@PathVariable("id") Long id) {
+        if (userDtoService.getById(id).isPresent()) {
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(userDtoService.getById(id).get());
+        }
         return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(userDtoService.getById(id).get());
-    }
-
-    @ExceptionHandler(NoResultException.class)
-    public ResponseEntity handleException(NoResultException exception) {
-        return ResponseEntity.notFound().build();
+                .status(HttpStatus.NOT_FOUND)
+                .body(new UserDto());
     }
 }
