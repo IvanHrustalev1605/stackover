@@ -1,4 +1,4 @@
-package com.javamentor.qa.platform.controller;
+package com.javamentor.qa.platform.webapp.controllers;
 
 import com.javamentor.qa.platform.models.dto.AnswerDto;
 import com.javamentor.qa.platform.models.entity.user.User;
@@ -28,9 +28,15 @@ public class ResourceAnswerController {
     @GetMapping
     public ResponseEntity<List<AnswerDto>> getAllAnswers(@PathVariable("questionId") Long questionId, @AuthenticationPrincipal User user) {
 
-        Optional<List<AnswerDto>> answerDtoList = answerDtoService.getAllAnswersDtoByQuestionId(questionId, user.getId());
+        if (questionId != null) {
+            Optional<List<AnswerDto>> answerDtoList = answerDtoService.getAllAnswersDtoByQuestionId(questionId, user.getId());
 
-        return answerDtoList.map(answerDos -> new ResponseEntity<>(answerDos, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+            return  new ResponseEntity<>(answerDtoList.get(), HttpStatus.OK);
 
+        } else {
+
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+        }
     }
 }
