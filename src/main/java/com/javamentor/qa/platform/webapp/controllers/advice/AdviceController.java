@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import javax.persistence.NoResultException;
+
 @ControllerAdvice
 public class AdviceController {
 
@@ -25,4 +27,8 @@ public class AdviceController {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
     }
 
+    @ExceptionHandler(NoResultException.class)
+    public ResponseEntity handleException(NoResultException exception) {
+        return ResponseEntity.notFound().build();
+    }
 }
