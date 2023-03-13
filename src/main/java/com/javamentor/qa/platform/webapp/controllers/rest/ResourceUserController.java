@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.persistence.NoResultException;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/user")
@@ -30,13 +31,9 @@ public class ResourceUserController {
             @ApiResponse(code = 200, message = "UserDTO успешно получен."),
             @ApiResponse(code = 400, message = "Неправильный запрос.") })
     public ResponseEntity<UserDto> getUserDtoById(@PathVariable("id") Long id) {
-        if (userDtoService.getById(id).isPresent()) {
-            return ResponseEntity
-                    .status(HttpStatus.OK)
-                    .body(userDtoService.getById(id).get());
-        }
-        return ResponseEntity
-                .status(HttpStatus.NOT_FOUND)
-                .body(new UserDto());
+
+        Optional<UserDto> user = userDtoService.getById(id);
+        return user.map(userDto -> new ResponseEntity<>(userDto, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(new UserDto(),HttpStatus.NOT_FOUND));
     }
 }

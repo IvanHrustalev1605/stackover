@@ -19,20 +19,24 @@ public class UserDtoDaoImpl extends ReadWriteDaoImpl<UserDto, Long> implements U
 
     @Override
     public Optional<UserDto> getById(Long id) {
-         return  SingleResultUtil.getSingleResultOrNull(entityManager.createQuery("""
-                SELECT NEW com.javamentor.qa.platform.models.dto.UserDto(
-                    u.id,
-                    u.email,
-                    u.fullName,
-                    u.imageLink,
-                    u.city,
-                    CAST((SELECT SUM(r.count) FROM Reputation r WHERE r.author.id = :user) AS long),
-                    u.persistDateTime,
-                    CAST((
-                        SELECT COUNT(DISTINCT va.answer) + COUNT(DISTINCT vq.question) 
-                        FROM VoteAnswer va, VoteQuestion vq
-                        WHERE va.user.id = :user AND vq.user.id = :user) AS long))
-                FROM User u WHERE u.id = :user""", UserDto.class)
-                .setParameter("user", id));
+        return SingleResultUtil.getSingleResultOrNull(entityManager.createQuery("""
+                SELECT new com.javamentor.qa.platform.models.dto.UserDto(
+                      u.id,
+                      u.email,
+                      u.fullName,
+                      u.imageLink,
+                      u.city,
+                      COALESCE(SUM(r.count), 0),
+                      u.persistDateTime,
+                      (SELECT COUNT(DISTINCT va) + COUNT(DISTINCT vq)
+                              FROM VoteAnswer va, VoteQuestion vq
+                             WHERE va.user.id = :userId
+                               AND vq.user.id = :userId))
+                FROM User u
+                LEFT JOIN Reputation r ON u.id = r.author.id
+                WHERE u.id = :userId
+                GROUP BY u.id
+                """, UserDto.class)
+                .setParameter("userId", id));
     }
 }
