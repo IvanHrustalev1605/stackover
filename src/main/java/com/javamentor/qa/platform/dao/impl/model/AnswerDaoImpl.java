@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.lang.reflect.ParameterizedType;
 import java.util.Optional;
 
 @Repository
@@ -36,10 +35,8 @@ public class AnswerDaoImpl extends ReadWriteDaoImpl<Answer, Long> implements Ans
     public Optional<Answer> getAnswerForVote(Long answerId, Long userId) {
         return SingleResultUtil.getSingleResultOrNull(
                 entityManager.createQuery("""
-                select r from Answer r where r.id = :answerId and r.user.id <> :userId
-                and not exists (
-                    select v from VoteAnswer v where v.answer.id = :answerId and v.user.id = :userId
-                )
+                select r from Answer r where r.id = :answerId
+                and not r.user.id = :userId
                 """)
                         .setParameter("answerId", answerId)
                         .setParameter("userId", userId));
