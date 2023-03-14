@@ -1,11 +1,11 @@
 package com.javamentor.qa.platform.service.impl.model;
 
 import com.javamentor.qa.platform.dao.abstracts.model.QuestionDao;
-import com.javamentor.qa.platform.dao.abstracts.repository.ReadWriteDao;
 import com.javamentor.qa.platform.models.entity.question.Question;
 import com.javamentor.qa.platform.service.abstracts.model.QuestionService;
 import com.javamentor.qa.platform.service.impl.repository.ReadWriteServiceImpl;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -13,13 +13,15 @@ import java.util.Optional;
 public class QuestionServiceImpl extends ReadWriteServiceImpl<Question, Long> implements QuestionService {
     private final QuestionDao questionDao;
 
-    public QuestionServiceImpl(ReadWriteDao<Question, Long> readWriteDao, QuestionDao questionDao) {
-        super(readWriteDao);
+    public QuestionServiceImpl(QuestionDao questionDao) {
+        super(questionDao);
         this.questionDao = questionDao;
     }
 
     @Override
-    public Optional<Integer> getCountQuestion() {
+    @Transactional(readOnly = true)
+    public Optional<Long> getCountQuestion() {
         return questionDao.getCountQuestion();
     }
+
 }

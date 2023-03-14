@@ -6,5 +6,5 @@ import com.javamentor.qa.platform.service.abstracts.repository.ReadWriteService;
 import java.util.Optional;
 
 public interface QuestionService extends ReadWriteService<Question, Long> {
-    Optional<Integer> getCountQuestion();
+    Optional<Long> getCountQuestion();
 }

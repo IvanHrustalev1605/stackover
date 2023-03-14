@@ -6,5 +6,5 @@ import com.javamentor.qa.platform.models.entity.question.Question;
 import java.util.Optional;
 
 public interface QuestionDao extends ReadWriteDao<Question, Long> {
-    Optional<Integer> getCountQuestion();
+    Optional<Long> getCountQuestion();
 }
