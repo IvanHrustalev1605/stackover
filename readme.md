@@ -588,3 +588,29 @@ this.mockMvc
 ```
 
 5. Если ожидаемые результаты не совпадут, тест сообщит об ошибке и распечатает все параметры. В ином случае вы увидите сообщение о том, что тест успешно пройден.
+
+
+## Работа c профилями
+
+Доступно два профиля - **dev** и **local**
+
+Профиль выбирается в конфигурации проекта - **Edit configuration** 
+
+![](src/main/resources/static/images/profiles_tutor/profiles_edit_configuration.PNG)
+
+В поле **Active profiles** нужно вписать название профиля
+
+(Можно вписывать несколько профилей через запятую, приоритет будет у последнего)
+
+
+В поле **Environment variables** нужно вписать переменные среды:
+ - DB_HOST - адрес сервера с бд (localhost для профиля **local**)
+ - DB_PORT - порт бд (5432 - для postgresql)
+ - DB_SCHEMA - схема бд
+ - DB_USERNAME - логин бд
+ - DB_PASSWORD - пароль бд
+ - DDL_AUTO -  hbm2dll
+
+Если поля **Environment variables** нет - нужно нажать **Alt + E**
+![](src/main/resources/static/images/profiles_tutor/profiles_active_profiles.PNG)
+![](src/main/resources/static/images/profiles_tutor/profiles_environment_variables.PNG)

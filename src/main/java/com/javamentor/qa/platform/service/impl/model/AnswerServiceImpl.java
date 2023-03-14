@@ -2,6 +2,7 @@ package com.javamentor.qa.platform.service.impl.model;
 
 import com.javamentor.qa.platform.dao.abstracts.model.AnswerDao;
 import com.javamentor.qa.platform.dao.abstracts.repository.ReadWriteDao;
+import com.javamentor.qa.platform.dao.abstracts.model.AnswerDao;
 import com.javamentor.qa.platform.models.entity.question.answer.Answer;
 import com.javamentor.qa.platform.service.impl.repository.ReadWriteServiceImpl;
 import com.javamentor.qa.platform.service.abstracts.model.AnswerService;
@@ -21,5 +22,10 @@ public class AnswerServiceImpl extends ReadWriteServiceImpl<Answer, Long> implem
     @Override
     public Optional<Answer> getAnswerForVote(Long answerId, Long userId) {
         return answerDao.getAnswerForVote(answerId,userId);
+    }
+
+    @Override
+    public void setDeleteById(Long answerId, Long questionId) {
+        answerDao.setDeleteById(answerId, questionId);
     }
 }
