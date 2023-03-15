@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.Optional;
 
 @Repository
 public class QuestionDaoImpl extends ReadWriteDaoImpl<Question, Long> implements QuestionDao {
@@ -14,4 +15,12 @@ public class QuestionDaoImpl extends ReadWriteDaoImpl<Question, Long> implements
     @PersistenceContext
     private EntityManager entityManager;
 
+    @Override
+    public Optional<Long> getCountQuestion() {
+        return Optional.of( entityManager.createQuery("""
+                select COUNT (*)
+                from Question as q
+                where q.isDeleted = false
+                """,Long.class).getSingleResult());
+    }
 }
