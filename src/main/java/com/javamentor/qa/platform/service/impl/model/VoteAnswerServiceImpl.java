@@ -22,22 +22,23 @@ public class VoteAnswerServiceImpl extends ReadWriteServiceImpl<VoteAnswer, Long
 private final ReputationService reputationService;
 private final VoteAnswerDao voteAnswerDao;
 
-public VoteAnswerServiceImpl(ReadWriteDao<VoteAnswer, Long> readWriteDao, ReputationService reputationService, VoteAnswerDao voteAnswerDao) {
+    public VoteAnswerServiceImpl(ReadWriteDao<VoteAnswer, Long> readWriteDao, ReputationService reputationService, VoteAnswerDao voteAnswerDao) {
         super(readWriteDao);
-    this.reputationService = reputationService;
-    this.voteAnswerDao = voteAnswerDao;
-}
-
-@Override
-public Long upVote(Answer answer, com.javamentor.qa.platform.models.entity.user.User user) {
-    if (!Objects.equals(answer.getUser().getId(), user.getId())) {
-        return vote(answer, user, 10, VoteType.UP);
-    } else {
-        throw new VoteException("Нельзя голосовать за свой ответ");
+        this.reputationService = reputationService;
+        this.voteAnswerDao = voteAnswerDao;
     }
-}
 
-@Override
+
+    @Override
+    public Long upVote(Answer answer, com.javamentor.qa.platform.models.entity.user.User user) {
+        if (!Objects.equals(answer.getUser().getId(), user.getId())) {
+            return vote(answer, user, 10, VoteType.UP);
+        } else {
+            throw new VoteException("Нельзя голосовать за свой ответ");
+        }
+    }
+
+    @Override
 public Long vote(Answer answer, User sender, Integer repCount, VoteType voteType) {
 
     Optional<VoteAnswer> voteAnswerOptional = voteAnswerDao.getByAnswerIdAndUserId(answer.getId(), sender.getId());
@@ -69,4 +70,31 @@ public Long vote(Answer answer, User sender, Integer repCount, VoteType voteType
     }
     return voteAnswerDao.sumVote(answer.getId());
 }
+
+    @Override
+    public Long voteDownForAnswer(User user, Answer answer, VoteType voteType) {
+        Optional<VoteAnswer> voteAnswer = voteAnswerDao.getVoteAnswerByAnswerIdAndUserId(answer.getId(), user.getId());
+        if (voteAnswer.isPresent()) {
+            voteAnswer.get().setVoteType(voteType);
+            voteAnswerDao.update(voteAnswer.get());
+        } else {
+            voteAnswerDao.persist(new VoteAnswer(user, answer, voteType));
+        }
+
+        Optional<Reputation> reputation = reputationService.getReputationByUserId(answer.getUser().getId(), ReputationType.Answer);
+
+        if (reputation.isPresent()) {
+            reputation.get().setCount(reputation.get().getCount() - 5);
+        } else {
+            Reputation newReputation = new Reputation();
+            newReputation.setAnswer(answer);
+            newReputation.setAuthor(answer.getUser());
+            newReputation.setSender(user);
+            newReputation.setCount(-5);
+            newReputation.setType(ReputationType.Answer);
+            reputationService.persist(newReputation);
+        }
+
+        return voteAnswerDao.countVotes(answer.getId());
+    }
 }
