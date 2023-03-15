@@ -1,0 +1,24 @@
+user_entity:
+  - id: 100
+    email: "userTest@gmail.com"
+    password: "root"
+    full_name: "Ivan_Ivanov"
+    persist_date: "[DAY, NOW]"
+    is_enabled: "true"
+    is_deleted: "false"
+    city: "Moscow"
+    link_site: "www.site.ru"
+    link_github: "www.github.com"
+    link_vk: "www.vk.ru"
+    about: "about"
+    image_link: "image"
+    last_redaction_date: "[DAY, NOW]"
+    nickname: "nickname"
+    role_id: 100
+
+role:
+  - id: 100
+    name: ROLE_USER
+
+
+
