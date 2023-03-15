@@ -6,6 +6,9 @@ import com.javamentor.qa.platform.models.entity.user.User;
 import com.javamentor.qa.platform.service.abstracts.model.RoleService;
 import com.javamentor.qa.platform.service.abstracts.model.UserService;
 import com.javamentor.qa.platform.webapp.converters.UserConverter;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -48,7 +51,7 @@ public class RegistrationController {
     private final UserService userService;
     private final RoleService roleService;
     private final EntityManager entityManager;
-    private final String SENDER_PASS = "Lw3Y2grM9cy4s2bBpwMq";
+    private final String SENDER_PASS = "";
     private final String SERVER_ADDRESS = "http://localhost:8080/api/user/registration/verify/";
     private final int SMTP_PORT = 465;
 
@@ -59,6 +62,12 @@ public class RegistrationController {
         this.entityManager = entityManager;
     }
 
+
+    @ApiOperation(value = "Получение запроса на регистрацию нового пользователя.")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Пользователь создан. Письмо со ссылкой подтверждения email успешно отправлено."),
+            @ApiResponse(code = 409, message = "Пользователь с таким email уже зарегистрирован."),
+            @ApiResponse(code = 400, message = "Пользователь не создан. Письмо не отправлено.") })
     @PostMapping("/")
     @Transactional
     public ResponseEntity<String> receiveUserRegistrationInfo(@RequestBody UserRegistrationDto urDto) {
@@ -96,13 +105,18 @@ public class RegistrationController {
                     urDto.getFirstName(), urDto.getLastName(), SERVER_ADDRESS, confirmationToken),"text/html");
             Transport.send(message);
             userService.persist(user);
-            return ResponseEntity.ok().build();
+            return ResponseEntity.status(201).build();
 
         } catch (MessagingException | UnsupportedEncodingException e) {
             return ResponseEntity.badRequest().build();
         }
     }
 
+
+    @ApiOperation(value = "Подтверждение email пользователя по токену.")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Email подтвержден. Пользователь активирован."),
+            @ApiResponse(code = 498, message = "Срок действия токена прошел.") })
     @GetMapping("/verify/{token}")
     public ResponseEntity<String> emailVerification(@PathVariable("token") String token) {
         Optional<User> queryUser = SingleResultUtil.getSingleResultOrNull(entityManager
@@ -116,7 +130,7 @@ public class RegistrationController {
             queryUser.get().setAbout("");
             queryUser.get().setIsEnabled(true);
             userService.update(queryUser.get());
-            return ResponseEntity.ok().build();
+            return ResponseEntity.status(201).build();
         }
         return ResponseEntity.badRequest().build();
     }
