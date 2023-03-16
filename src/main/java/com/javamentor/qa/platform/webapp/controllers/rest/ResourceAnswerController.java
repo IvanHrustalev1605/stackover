@@ -1,6 +1,7 @@
 package com.javamentor.qa.platform.webapp.controllers.rest;
 
 import com.javamentor.qa.platform.models.dto.AnswerDto;
+import com.javamentor.qa.platform.models.entity.question.VoteType;
 import com.javamentor.qa.platform.models.entity.question.answer.Answer;
 import com.javamentor.qa.platform.models.entity.user.User;
 import com.javamentor.qa.platform.service.abstracts.dto.AnswerDtoService;
@@ -82,4 +83,19 @@ public class ResourceAnswerController {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
+
+    @PostMapping("/{id}/downVote")
+    @ApiOperation(value = "Уменьшение оценки ответа")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Оценка ответа уменьшена"),
+            @ApiResponse(code = 400, message = "Не удалось проголосовать")
+    })
+    public ResponseEntity<Long> voteDownForAnswer(@PathVariable("id") Long answerId, @AuthenticationPrincipal User user) {
+        Optional<Answer> answer = answerService.getAnswerForVote(answerId, user.getId());
+        return answer.map(
+                        value -> new ResponseEntity<>(voteAnswerService.voteDownForAnswer(user, value, VoteType.DOWN), HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
+    }
+
 }
