@@ -66,7 +66,7 @@ public class ResourceAnswerController {
                                        @AuthenticationPrincipal User user) {
         Optional<Answer> answerOptional = answerService.getAnswerForVote(answerId, user.getId());
         return answerOptional.map(
-                answer -> new ResponseEntity<>(voteAnswerService.upVote(answer, user), HttpStatus.OK))
+                        answer -> new ResponseEntity<>(voteAnswerService.upVote(answer, user), HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
     }
 
@@ -83,7 +83,6 @@ public class ResourceAnswerController {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-
 
     @PostMapping("/{id}/downVote")
     @ApiOperation(value = "Уменьшение оценки ответа")
