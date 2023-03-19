@@ -1,0 +1,34 @@
+package com.javamentor.qa.platform.webapp.controllers.rest;
+
+import com.javamentor.qa.platform.models.dto.QuestionCreateDto;
+import com.javamentor.qa.platform.models.dto.QuestionDto;
+import com.javamentor.qa.platform.models.entity.user.User;
+import com.javamentor.qa.platform.service.abstracts.dto.QuestionDtoService;
+import io.swagger.annotations.*;
+import lombok.AllArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
+
+
+@RestController
+@RequestMapping("/api/user/question")
+@AllArgsConstructor
+@Api(description = "Добавление вопроса")
+public class ResourceQuestionController {
+    private QuestionDtoService questionDtoService;
+
+    @PostMapping
+    @ApiOperation(value = "Добавление вопроса")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Запрос выполнен"),
+            @ApiResponse(code = 400, message = "Некорректные данные")})
+    public QuestionDto createQuestion(@Valid @RequestBody QuestionCreateDto questionCreateDto,
+                                      @AuthenticationPrincipal User user) {
+        return questionDtoService.createQuestion(questionCreateDto, user);
+    }
+}
