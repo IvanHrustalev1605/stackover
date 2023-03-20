@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/user/tag/related")
+@RequestMapping("/api/user/tag")
 public class ResourceTagController {
     private final TagDtoService tagDtoService;
 
@@ -23,7 +23,7 @@ public class ResourceTagController {
         this.tagDtoService = tagDtoService;
     }
 
-    @GetMapping
+    @GetMapping("/related")
     @ApiOperation(value = "Получает список топ 10 DTO тегов")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Список  топ 10 тегов DTO успешно получен"),
