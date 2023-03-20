@@ -18,9 +18,12 @@ public class TagDtoDaoImpl implements TagDtoDao {
     @Override
     public Optional<List<RelatedTagDto>> getTopTags() {
         return Optional.ofNullable(entityManager.createQuery("""
-                            SELECT NEW com.javamentor.qa.platform.models.dto.RelatedTagDto (t.id,t.name,
-                            (select count(*) from Question q join t.questions t1 where q.id =t1.id))
+                            SELECT NEW com.javamentor.qa.platform.models.dto.RelatedTagDto (t.id ,t.name,
+                            (select count(*) from t.questions t1 where t1.id in (select id from Question))
+                            )
                             FROM Tag as t
+                            order by 3 desc
                 """, RelatedTagDto.class).setMaxResults(10).getResultList());
     }
+
 }
