@@ -26,10 +26,10 @@ public class ResourceTagController {
     @GetMapping
     @ApiOperation(value = "Получает список топ 10 DTO тегов")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Список тегов DTO успешно получен"),
+            @ApiResponse(code = 200, message = "Список  топ 10 тегов DTO успешно получен"),
             @ApiResponse(code = 400, message = "Неправильный запрос")
     })
-    public ResponseEntity<List<RelatedTagDto>> getAllAnswers() {
+    public ResponseEntity<List<RelatedTagDto>> getTop10Tags() {
         Optional<List<RelatedTagDto>> relatedTagDtoList = tagDtoService.getTopTags();
         return relatedTagDtoList.map(relatedTagDos -> new ResponseEntity<>(relatedTagDos, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
