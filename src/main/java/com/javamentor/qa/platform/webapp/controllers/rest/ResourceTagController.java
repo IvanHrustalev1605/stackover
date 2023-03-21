@@ -17,6 +17,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/user/tag")
 public class ResourceTagController {
+
     private final TagDtoService tagDtoService;
 
     public ResourceTagController(TagDtoService tagDtoService) {
@@ -31,6 +32,7 @@ public class ResourceTagController {
     })
     public ResponseEntity<List<RelatedTagDto>> getTop10Tags() {
         Optional<List<RelatedTagDto>> relatedTagDtoList = tagDtoService.getTopTags();
-        return relatedTagDtoList.map(relatedTagDos -> new ResponseEntity<>(relatedTagDos, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        return relatedTagDtoList.map(relatedTagDos -> new ResponseEntity<>(relatedTagDos, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 }

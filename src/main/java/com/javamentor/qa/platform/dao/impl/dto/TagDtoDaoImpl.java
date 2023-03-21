@@ -15,6 +15,7 @@ public class TagDtoDaoImpl implements TagDtoDao {
     @PersistenceContext
     private EntityManager entityManager;
 
+    //TODO
     @Override
     public Optional<List<RelatedTagDto>> getTopTags() {
         return Optional.ofNullable(entityManager.createQuery("""
@@ -24,7 +25,9 @@ public class TagDtoDaoImpl implements TagDtoDao {
                             (select count(*) from t.questions t1 where t1.id in (select id from Question)))
                             FROM Tag as t
                             order by 3 desc
-                """, RelatedTagDto.class).setMaxResults(10).getResultList());
+                """, RelatedTagDto.class)
+                .setMaxResults(10)
+                .getResultList());
     }
 
 }
