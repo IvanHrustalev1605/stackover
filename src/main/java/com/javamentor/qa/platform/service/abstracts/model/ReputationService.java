@@ -10,4 +10,5 @@ import java.util.Optional;
 public interface ReputationService extends ReadWriteService<Reputation, Long> {
     Optional<Reputation> getByAnswerIdAndUserId(Long answerId, Long userId);
     Optional<Reputation> getReputationByUserId(Long userId, ReputationType type);
+    void UpReputationForQuestion(Long questionId, User user);
 }
