@@ -24,4 +24,8 @@ public class QuestionServiceImpl extends ReadWriteServiceImpl<Question, Long> im
         return questionDao.getCountQuestion();
     }
 
+    @Override
+    public Optional<Question> getQuestionForVote(Long questionId, Long userId) {
+        return questionDao.getQuestionForVote(questionId,userId);
+    }
 }
