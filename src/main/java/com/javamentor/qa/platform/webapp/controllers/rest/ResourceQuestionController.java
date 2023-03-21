@@ -32,9 +32,8 @@ public class ResourceQuestionController {
     @ApiResponses({
             @ApiResponse(code = 200, message = "Запрос выполнен"),
             @ApiResponse(code = 400, message = "Некорректные данные")})
-    public ResponseEntity<QuestionDto> createQuestion(@Valid @RequestBody QuestionCreateDto questionCreateDto,
+    public QuestionDto createQuestion(@Valid @RequestBody QuestionCreateDto questionCreateDto,
                                                       @AuthenticationPrincipal User user) {
-        return new ResponseEntity<>(questionDtoService.createQuestion(questionCreateDto, user), HttpStatus.CREATED);
-
+        return questionDtoService.createQuestion(questionCreateDto, user);
     }
 }
