@@ -4,8 +4,13 @@ import com.javamentor.qa.platform.models.dto.QuestionCreateDto;
 import com.javamentor.qa.platform.models.dto.QuestionDto;
 import com.javamentor.qa.platform.models.entity.user.User;
 import com.javamentor.qa.platform.service.abstracts.dto.QuestionDtoService;
-import io.swagger.annotations.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,8 +32,9 @@ public class ResourceQuestionController {
     @ApiResponses({
             @ApiResponse(code = 200, message = "Запрос выполнен"),
             @ApiResponse(code = 400, message = "Некорректные данные")})
-    public QuestionDto createQuestion(@Valid @RequestBody QuestionCreateDto questionCreateDto,
-                                      @AuthenticationPrincipal User user) {
-        return questionDtoService.createQuestion(questionCreateDto, user);
+    public ResponseEntity<QuestionDto> createQuestion(@Valid @RequestBody QuestionCreateDto questionCreateDto,
+                                                      @AuthenticationPrincipal User user) {
+        return new ResponseEntity<>(questionDtoService.createQuestion(questionCreateDto, user), HttpStatus.CREATED);
+
     }
 }
