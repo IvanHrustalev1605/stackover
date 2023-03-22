@@ -125,7 +125,7 @@ public class RegistrationController {
         if (queryUser.isPresent()) {
             if (ChronoUnit.MINUTES.between(
                     queryUser.get().getPersistDateTime(), LocalDateTime.now()) > EXPIRATION_TIME_IN_MINUTES) {
-                ResponseEntity.status(498).build();
+                return ResponseEntity.status(498).build();
             }
             queryUser.get().setAbout("");
             queryUser.get().setIsEnabled(true);

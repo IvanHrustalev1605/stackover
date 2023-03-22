@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TestDataInitService {
@@ -69,6 +70,22 @@ public class TestDataInitService {
         }
         if (userService.getByEmail(admin.getEmail()).isEmpty()) {
             entityManager.persist(admin);
+        }
+
+        //Обновление паролей для пользователей с учетом Bcrypt. Для user'a новый пароль "user", для admin'a "admin".
+        Optional<User> user1 = userService.getByEmail(user.getEmail());
+        Optional<User> user2 = userService.getByEmail(admin.getEmail());
+        if (user1.isPresent()) {
+            if (user1.get().getPassword().equals("j5dfhyd34*2f")) {
+                user1.get().setPassword("$2a$12$9MUhEo3u5XYd5DRFDHYv4ed0frbEtc5jBIj.CnXlEXTOnL.ynxQiO");
+                userService.update(user1.get());
+            }
+        }
+        if (user2.isPresent()) {
+            if (user2.get().getPassword().equals("j5d23d34*2f")) {
+                user2.get().setPassword("$2a$12$kd.LyaLKXAYBwAU7Id6TUukZjrNzPly732jJbaJuTuDLaPtNhRnIO");
+                userService.update(user2.get());
+            }
         }
         entityManager.flush();
     }
