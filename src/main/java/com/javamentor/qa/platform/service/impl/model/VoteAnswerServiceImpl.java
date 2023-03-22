@@ -19,15 +19,14 @@ import java.util.Optional;
 
 @Service
 public class VoteAnswerServiceImpl extends ReadWriteServiceImpl<VoteAnswer, Long> implements VoteAnswerService {
-private final ReputationService reputationService;
-private final VoteAnswerDao voteAnswerDao;
+    private final ReputationService reputationService;
+    private final VoteAnswerDao voteAnswerDao;
 
     public VoteAnswerServiceImpl(ReadWriteDao<VoteAnswer, Long> readWriteDao, ReputationService reputationService, VoteAnswerDao voteAnswerDao) {
         super(readWriteDao);
         this.reputationService = reputationService;
         this.voteAnswerDao = voteAnswerDao;
     }
-
 
     @Override
     public Long upVote(Answer answer, com.javamentor.qa.platform.models.entity.user.User user) {
@@ -39,37 +38,37 @@ private final VoteAnswerDao voteAnswerDao;
     }
 
     @Override
-public Long vote(Answer answer, User sender, Integer repCount, VoteType voteType) {
+    public Long vote(Answer answer, User sender, Integer repCount, VoteType voteType) {
 
-    Optional<VoteAnswer> voteAnswerOptional = voteAnswerDao.getByAnswerIdAndUserId(answer.getId(), sender.getId());
-    Optional<Reputation> reputationOptional = reputationService.getByAnswerIdAndUserId(answer.getId(), sender.getId());
-    VoteAnswer voteAnswer;
-    Reputation reputation;
-    if (reputationOptional.isPresent() && voteAnswerOptional.isPresent()) {
-        voteAnswer = voteAnswerOptional.get();
-        reputation = reputationOptional.get();
-    } else {
-        voteAnswer = new VoteAnswer();
-        reputation = new Reputation();
+        Optional<VoteAnswer> voteAnswerOptional = voteAnswerDao.getByAnswerIdAndUserId(answer.getId(), sender.getId());
+        Optional<Reputation> reputationOptional = reputationService.getByAnswerIdAndUserId(answer.getId(), sender.getId());
+        VoteAnswer voteAnswer;
+        Reputation reputation;
+        if (reputationOptional.isPresent() && voteAnswerOptional.isPresent()) {
+            voteAnswer = voteAnswerOptional.get();
+            reputation = reputationOptional.get();
+        } else {
+            voteAnswer = new VoteAnswer();
+            reputation = new Reputation();
+        }
+
+        voteAnswer.setAnswer(answer);
+        voteAnswer.setVoteType(voteType);
+        voteAnswer.setUser(sender);
+
+        reputation.setType(ReputationType.VoteAnswer);
+        reputation.setSender(sender);
+        reputation.setAnswer(answer);
+        reputation.setCount(repCount);
+        reputation.setAuthor(answer.getUser());
+        try {
+            voteAnswerDao.update(voteAnswer);
+            reputationService.update(reputation);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return voteAnswerDao.sumVote(answer.getId());
     }
-
-    voteAnswer.setAnswer(answer);
-    voteAnswer.setVoteType(voteType);
-    voteAnswer.setUser(sender);
-
-    reputation.setType(ReputationType.VoteAnswer);
-    reputation.setSender(sender);
-    reputation.setAnswer(answer);
-    reputation.setCount(repCount);
-    reputation.setAuthor(answer.getUser());
-    try {
-        voteAnswerDao.update(voteAnswer);
-        reputationService.update(reputation);
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-    return voteAnswerDao.sumVote(answer.getId());
-}
 
     @Override
     public Long voteDownForAnswer(User user, Answer answer, VoteType voteType) {

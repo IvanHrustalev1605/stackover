@@ -9,6 +9,6 @@ import java.util.Optional;
 
 public interface IgnoredTagService extends ReadWriteService<IgnoredTag, Long> {
 
-    public Optional<TagDto> addTagToIgnoreList(Long tagId, User user);
+    Optional<TagDto> addTagToIgnoreList(Long tagId, User user);
 
 }

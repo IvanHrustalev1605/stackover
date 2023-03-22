@@ -20,6 +20,6 @@ public class AnswerDtoServiceImpl implements AnswerDtoService {
 
     @Override
     public Optional<List<AnswerDto>> getAllAnswersDtoByQuestionId(Long questionId, Long userId) {
-            return answerDtoDao.getAllAnswersDtoByQuestionId(questionId, userId);
+        return answerDtoDao.getAllAnswersDtoByQuestionId(questionId, userId);
     }
 }

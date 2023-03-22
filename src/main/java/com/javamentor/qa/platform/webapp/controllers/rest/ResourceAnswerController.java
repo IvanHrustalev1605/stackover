@@ -76,7 +76,8 @@ public class ResourceAnswerController {
             @ApiResponse(code = 200, message = "Список ответов DTO успешно получен"),
             @ApiResponse(code = 400, message = "Неправильный запрос")
     })
-    public ResponseEntity<List<AnswerDto>> getAllAnswers(@PathVariable("questionId") Long questionId, @AuthenticationPrincipal User user) {
+    public ResponseEntity<List<AnswerDto>> getAllAnswers(@PathVariable("questionId") Long questionId,
+                                                         @AuthenticationPrincipal User user) {
         if (questionService.existsById(questionId)) {
             Optional<List<AnswerDto>> answerDtoList = answerDtoService.getAllAnswersDtoByQuestionId(questionId, user.getId());
             return new ResponseEntity<>(answerDtoList.get(), HttpStatus.OK);

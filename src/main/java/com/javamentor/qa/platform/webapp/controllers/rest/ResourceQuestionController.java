@@ -19,13 +19,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
-
 @RestController
 @RequestMapping("/api/user/question")
 @AllArgsConstructor
 @Api(description = "Добавление вопроса")
 public class ResourceQuestionController {
-    private QuestionDtoService questionDtoService;
+
+    private final QuestionDtoService questionDtoService;
 
     @PostMapping
     @ApiOperation(value = "Добавление вопроса")
