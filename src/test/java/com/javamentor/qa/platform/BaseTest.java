@@ -2,6 +2,8 @@ package com.javamentor.qa.platform;
 
 import com.github.database.rider.core.api.configuration.DBUnit;
 import com.github.database.rider.junit5.api.DBRider;
+import com.javamentor.qa.platform.models.entity.user.User;
+import com.javamentor.qa.platform.security.jwt.JwtService;
 import com.javamentor.qa.platform.webapp.configs.JmApplication;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,10 @@ public abstract class BaseTest {
 
     @Autowired
     private MockMvc mockMvc;
+
+    public String getTokenJWT(User user) {
+        return JwtService.generateToken(user);
+    }
 
 
 }
