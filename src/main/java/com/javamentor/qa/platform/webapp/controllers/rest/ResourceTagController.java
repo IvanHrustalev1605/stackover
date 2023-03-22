@@ -37,18 +37,14 @@ public class ResourceTagController {
 
 
     @ApiOperation(value = "Добавление тега в список игнорируемых.")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Тег успешно добавлен в список игнорируемых для текущего пользователя."),
-            @ApiResponse(code = 404, message = "Запрошенного тега не существует.") })
-    @Transactional
+    @ApiResponses(value =
+        @ApiResponse(code = 200, message = "Тег успешно добавлен в список игнорируемых для текущего пользователя."))
     @PostMapping("/{id}/ignored")
     public ResponseEntity<TagDto> addTagToIgnoreList(@Parameter(description = "id тега, который нужно добавить в игнор.")
                                                      @PathVariable("id") Long tagId,
                                                      @Parameter(description = "Пользователь прошедший аутентификацию")
                                                      @AuthenticationPrincipal User user) {
-        Optional<TagDto> ignoredTag = ignoredTagService.addTagToIgnoreList(tagId, user);
-        return ignoredTag.map(tagDto -> new ResponseEntity<>(tagDto, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        return new ResponseEntity<>(ignoredTagService.addTagToIgnoreList(tagId, user).get(), HttpStatus.OK);
     }
 
 
