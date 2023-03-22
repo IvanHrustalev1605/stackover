@@ -4,6 +4,7 @@ import com.javamentor.qa.platform.dao.abstracts.model.ReputationDao;
 import com.javamentor.qa.platform.dao.impl.repository.ReadWriteDaoImpl;
 import com.javamentor.qa.platform.dao.util.SingleResultUtil;
 import com.javamentor.qa.platform.models.entity.user.reputation.Reputation;
+import com.javamentor.qa.platform.models.entity.user.reputation.ReputationType;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -24,5 +25,15 @@ public class ReputationDaoImpl extends ReadWriteDaoImpl<Reputation, Long> implem
                                         """)
                         .setParameter("answerId", answerId)
                         .setParameter("userId", userId));
+    }
+
+    @Override
+    public Optional<Reputation> getReputationByUserId(Long id, ReputationType type) {
+        return SingleResultUtil.getSingleResultOrNull(entityManager.createQuery("""
+                                          select r from Reputation as r
+                                          where r.author.id = :authorId and r.type = :type
+                                          """, Reputation.class)
+                .setParameter("authorId", id)
+                .setParameter("type", type));
     }
 }
