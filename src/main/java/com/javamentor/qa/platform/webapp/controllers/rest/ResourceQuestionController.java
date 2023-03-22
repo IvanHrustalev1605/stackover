@@ -1,6 +1,9 @@
 package com.javamentor.qa.platform.webapp.controllers.rest;
 
 import com.javamentor.qa.platform.models.entity.user.User;
+import com.javamentor.qa.platform.service.abstracts.model.ReputationService;
+import com.javamentor.qa.platform.service.abstracts.model.UserService;
+import com.javamentor.qa.platform.service.abstracts.model.VoteQuestionService;
 import com.javamentor.qa.platform.service.impl.model.ReputationServiceImpl;
 import com.javamentor.qa.platform.service.impl.model.UserServiceImpl;
 import com.javamentor.qa.platform.service.impl.model.VoteQuestionServiceImpl;
@@ -13,11 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("api/user/question/{questionId}/")
+@RequestMapping("api/user/question/")
 public class ResourceQuestionController {
-    private final VoteQuestionServiceImpl voteQuestionService;
-    private final ReputationServiceImpl reputationService;
-    private final UserServiceImpl userService;
+    private final VoteQuestionService voteQuestionService;
+    private final ReputationService reputationService;
+    private final UserService userService;
 
     public ResourceQuestionController(VoteQuestionServiceImpl voteQuestionService, ReputationServiceImpl reputationService, UserServiceImpl userService) {
         this.voteQuestionService = voteQuestionService;
@@ -25,9 +28,9 @@ public class ResourceQuestionController {
         this.userService = userService;
     }
 
-    @PostMapping("/upVote")
+    @PostMapping("/{questionId}/upVote")
     public ResponseEntity<Long> voteAndGiveRep(@PathVariable("questionId") Long questionId, @AuthenticationPrincipal User user) {
 
-        return new ResponseEntity<>( voteQuestionService.voteUp(questionId, userService.getByEmail(user.getUsername()).get()),HttpStatus.OK);
+        return new ResponseEntity<>( voteQuestionService.voteUp(questionId, userService.getByEmail("user@mail.com").get()),HttpStatus.OK);
     }
 }

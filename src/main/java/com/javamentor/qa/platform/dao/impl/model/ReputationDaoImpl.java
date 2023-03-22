@@ -7,6 +7,7 @@ import com.javamentor.qa.platform.models.entity.question.Question;
 import com.javamentor.qa.platform.models.entity.user.User;
 import com.javamentor.qa.platform.models.entity.user.reputation.Reputation;
 import com.javamentor.qa.platform.models.entity.user.reputation.ReputationType;
+import com.javamentor.qa.platform.service.abstracts.model.QuestionService;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -15,12 +16,12 @@ import java.util.Optional;
 
 @Repository
 public class ReputationDaoImpl extends ReadWriteDaoImpl<Reputation, Long> implements ReputationDao {
-    private QuestionDaoImpl questionDao;
+    private QuestionService questionService;
     @PersistenceContext
     private EntityManager entityManager;
-    public ReputationDaoImpl(EntityManager entityManager, QuestionDaoImpl questionDao) {
+    public ReputationDaoImpl(EntityManager entityManager, QuestionService questionService) {
         this.entityManager = entityManager;
-        this.questionDao = questionDao;
+        this.questionService = questionService;
     }
     @Override
     public Optional<Reputation> getByAnswerIdAndUserId(Long answerId, Long userId) {
@@ -42,19 +43,7 @@ public class ReputationDaoImpl extends ReadWriteDaoImpl<Reputation, Long> implem
                 .setParameter("authorId", id)
                 .setParameter("type", type));
     }
-    @Override
-    public void UpReputationForQuestion(User user, Long questionId) {
-        if (getByQuestionId(questionId).isEmpty()) {
-            Reputation reputation = new Reputation();
-            reputation.setCount(10);
-            Question question = questionDao.findQuestionById(questionId).get();
-            reputation.setQuestion(question);
-            reputation.setType(ReputationType.Question);
-            reputation.setAuthor(question.getUser());
-            reputation.setSender(user);
-            entityManager.persist(reputation);
-        }
-    }
+
     @Override
     public Optional<Reputation> getByQuestionId(Long questionId) {
         return SingleResultUtil.getSingleResultOrNull(entityManager.createQuery("select r from Reputation r where r.question.id = :questionId",Reputation.class)
