@@ -31,6 +31,6 @@ public class ResourceQuestionController {
     @PostMapping("/{questionId}/upVote")
     public ResponseEntity<Long> voteAndGiveRep(@PathVariable("questionId") Long questionId, @AuthenticationPrincipal User user) {
 
-        return new ResponseEntity<>( voteQuestionService.voteUp(questionId, userService.getByEmail("user@mail.com").get()),HttpStatus.OK);
+        return new ResponseEntity<>( voteQuestionService.voteUp(questionId, userService.getByEmail(user.getUsername()).get()),HttpStatus.OK);
     }
 }
