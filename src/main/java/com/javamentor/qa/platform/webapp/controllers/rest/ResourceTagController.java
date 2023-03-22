@@ -1,12 +1,9 @@
 package com.javamentor.qa.platform.webapp.controllers.rest;
 
 import com.javamentor.qa.platform.models.dto.TagDto;
-import com.javamentor.qa.platform.models.entity.question.IgnoredTag;
-import com.javamentor.qa.platform.models.entity.question.Tag;
 import com.javamentor.qa.platform.models.entity.user.User;
 import com.javamentor.qa.platform.service.abstracts.dto.TagDtoService;
 import com.javamentor.qa.platform.service.abstracts.model.IgnoredTagService;
-import com.javamentor.qa.platform.service.abstracts.model.TagService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -20,6 +17,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.javamentor.qa.platform.models.dto.RelatedTagDto;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -27,14 +28,13 @@ import java.util.Optional;
 public class ResourceTagController {
 
     private final IgnoredTagService ignoredTagService;
-    private final TagService tagService;
     private final TagDtoService tagDtoService;
 
-    public ResourceTagController(IgnoredTagService ignoredTagService, TagService tagService, TagDtoService tagDtoService) {
+    public ResourceTagController(IgnoredTagService ignoredTagService, TagDtoService tagDtoService) {
         this.ignoredTagService = ignoredTagService;
-        this.tagService = tagService;
         this.tagDtoService = tagDtoService;
     }
+
 
     @ApiOperation(value = "Добавление тега в список игнорируемых.")
     @ApiResponses(value = {
@@ -46,12 +46,21 @@ public class ResourceTagController {
                                                      @PathVariable("id") Long tagId,
                                                      @Parameter(description = "Пользователь прошедший аутентификацию")
                                                      @AuthenticationPrincipal User user) {
-        Optional<Tag> requestedTag = tagService.getById(tagId);
-        if (requestedTag.isPresent()) {
-            ignoredTagService.persist(new IgnoredTag(tagService.getById(tagId).get(), user));
-            return new ResponseEntity<>(tagDtoService.getById(tagId).get(), HttpStatus.OK);
-        }
+        Optional<TagDto> ignoredTag = ignoredTagService.addTagToIgnoreList(tagId, user);
+        return ignoredTag.map(tagDto -> new ResponseEntity<>(tagDto, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
 
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+    @GetMapping("/related")
+    @ApiOperation(value = "Получает список топ 10 DTO тегов")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Список  топ 10 тегов DTO успешно получен"),
+            @ApiResponse(code = 400, message = "Неправильный запрос")
+    })
+    public ResponseEntity<List<RelatedTagDto>> getTop10Tags() {
+        Optional<List<RelatedTagDto>> relatedTagDtoList = tagDtoService.getTopTags();
+        return relatedTagDtoList.map(relatedTagDos -> new ResponseEntity<>(relatedTagDos, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 }
