@@ -60,19 +60,4 @@ public class QuestionController {
         return count.map(aLong -> new ResponseEntity<>(aLong, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
     }
-
-    @PostMapping("/{questionId}/downVote")
-    @ApiOperation(value = "Голос против вопроса")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Оценка вопроса уменьшена"),
-            @ApiResponse(code = 400, message = "Не удалось проголосовать")
-    })
-    public ResponseEntity<Long> voteDownForQuestion(@PathVariable("questionId") Long questionId,
-                                                    @AuthenticationPrincipal User user) {
-        Optional<Question> question = questionService.getQuestionForVote(questionId, user.getId());
-        return question.map(
-                        value -> new ResponseEntity<>(voteQuestionService.voteDownForQuestion(user, value, VoteType.DOWN), HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
-    }
-
 }
