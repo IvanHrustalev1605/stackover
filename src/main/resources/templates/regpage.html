@@ -72,7 +72,7 @@
 </head>
 <body style="background-color: #e0e0e0">
 <div class="container">
-    <div class="row align-items-center ">
+    <div class="row align-items-center" id="main-window">
         <div class="col-xs-8 col-sm8 col-md-6 col-lg-5 mx-auto">
             <sidebar class="col-xs-4 col-sm-4 col-md-4 col-lg-4 mx-auto sidebar">
                 <h1>Регистрация</h1>
@@ -93,14 +93,18 @@
                         Sign up with Facebook
                     </button>
                 </form>
-
                 <div class="my-3 rounded mybtn" style="background-color: #ffffff">
-                    <div class="card-body1">
+                    <div class="card-body1" id="card-body1">
                         <form>
                             <div class="form-group">
-                                <label for="fullName">Имя пользователя</label>
+                                <label for="firstName">Имя</label>
                                 <input type="text" class="form-control" placeholder="Введите ваше имя"
-                                       name="fullName" id="fullName" required>
+                                       name="firstName" id="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Фамилия</label>
+                                <input type="text" class="form-control" placeholder="Введите вашу фамилию"
+                                       name="lastName" id="lastName" required>
                             </div>
                             <div class="form-group">
                                 <label for="email">Email</label>
@@ -112,7 +116,7 @@
                                 <input type="password" class="form-control" placeholder="Придумайте пароль"
                                        name="password" id="password" required>
                             </div>
-                            <button type="submit" id="register" class="btn btn-login btn-block ">
+                            <button type="button" id="register-btn" class="btn btn-login btn-block">
                                 Зарегистрироваться
                             </button>
                         </form>
@@ -131,17 +135,49 @@
                         </div>
                     </div>
                 </div>
-
+            </sidebar>
         </div>
     </div>
 </div>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
         crossorigin="anonymous"></script>
+
 <script type="text/javascript" src="/js/sidebar.js"></script>
 <script type="text/javascript" src="/js/header.js"></script>
 <script type="text/javascript" src="/js/footer.js"></script>
+<script>
+    const submit_button = document.getElementById('register-btn');
+    submit_button.addEventListener('click', () => {
+        submit_button.disabled = true;
+        submit_button.classList.remove('btn-login');
+        submit_button.classList.add('btn-light');
+        let firstName = document.getElementById('firstName').value;
+        let lastName = document.getElementById('lastName').value;
+        let email = document.getElementById('email').value;
+        let password = document.getElementById('password').value;
+        fetch(`http://localhost:8080/api/user/registration/`, {
+            method: 'POST',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify({firstName, lastName, email, password})
+        }).then(function(response) {
+            console.log(response);
+            if (response.status === 201) {
+                document.getElementById('main-window').innerHTML = `<h1>Письмо со ссылкой на активацию отправлено на ${email}.</h1>`;
+            } else if (response.status === 409) {
+                submit_button.disabled = false;
+                submit_button.classList.remove('btn-light');
+                submit_button.classList.add('btn-login');
+                const form_parent = document.getElementById('card-body1');
+                let username_exist = document.createElement('p');
+                username_exist.innerText = 'Email уже занят другим пользователем.';
+                form_parent.appendChild(username_exist);
+            } else if (response.status === 400) {
+                document.getElementById('main-window').innerHTML = `<h1>Возникла ошибка сервера. Повторите попытку.</h1>`;
+            }
+        });
+    });
+</script>
 </body>
 </html>
