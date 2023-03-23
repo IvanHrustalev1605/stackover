@@ -3,8 +3,11 @@ package com.javamentor.qa.platform.dao.impl.model;
 import com.javamentor.qa.platform.dao.abstracts.model.ReputationDao;
 import com.javamentor.qa.platform.dao.impl.repository.ReadWriteDaoImpl;
 import com.javamentor.qa.platform.dao.util.SingleResultUtil;
+import com.javamentor.qa.platform.models.entity.question.Question;
+import com.javamentor.qa.platform.models.entity.user.User;
 import com.javamentor.qa.platform.models.entity.user.reputation.Reputation;
 import com.javamentor.qa.platform.models.entity.user.reputation.ReputationType;
+import com.javamentor.qa.platform.service.abstracts.model.QuestionService;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -13,9 +16,13 @@ import java.util.Optional;
 
 @Repository
 public class ReputationDaoImpl extends ReadWriteDaoImpl<Reputation, Long> implements ReputationDao {
-
+    private QuestionService questionService;
     @PersistenceContext
     private EntityManager entityManager;
+    public ReputationDaoImpl(EntityManager entityManager, QuestionService questionService) {
+        this.entityManager = entityManager;
+        this.questionService = questionService;
+    }
     @Override
     public Optional<Reputation> getByAnswerIdAndUserId(Long answerId, Long userId) {
         return SingleResultUtil.getSingleResultOrNull(
@@ -36,4 +43,11 @@ public class ReputationDaoImpl extends ReadWriteDaoImpl<Reputation, Long> implem
                 .setParameter("authorId", id)
                 .setParameter("type", type));
     }
+
+    @Override
+    public Optional<Reputation> getByQuestionId(Long questionId) {
+        return SingleResultUtil.getSingleResultOrNull(entityManager.createQuery("select r from Reputation r where r.question.id = :questionId",Reputation.class)
+                .setParameter("questionId", questionId));
+    }
 }
+
