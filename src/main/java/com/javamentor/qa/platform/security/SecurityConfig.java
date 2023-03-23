@@ -27,7 +27,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
 
     private final UserDetailsServiceImpl userDetailsService;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
-
+    private String[] staticResources  =  {
+            "/images/**",
+            "/js/**"
+    };
 
     @Override
     public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
@@ -56,8 +59,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
     @Override
     public void configure(WebSecurity web) {
         web.ignoring()
-                .antMatchers("/swagger-ui/**", "/v3/api-docs/**",
-                        "/error", "/webjars/**", "/login", "resources/static/**");
+                .antMatchers("/swagger-ui/**", "/v3/api-docs/**", "/register",
+                        "/api/user/registration/**", "/error", "/webjars/**", "/login");
     }
 
     @Override
@@ -69,6 +72,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
         http.cors().disable();
         http
                 .authorizeRequests()
+                .antMatchers(staticResources).permitAll()
                 .antMatchers("/api/auth/**").permitAll()
                 .antMatchers("/api/user/**").hasRole("USER")
                 .antMatchers("/api/auth/token").permitAll()
