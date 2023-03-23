@@ -40,7 +40,7 @@ public class VoteQuestionDaoImpl extends ReadWriteDaoImpl<VoteQuestion, Long> im
                 .setParameter("questionId", questionId)
                 .getSingleResult();
     }
-}
+
     @Override
     public Optional<VoteQuestion> getByQuestionIdAndUserId(Long questionId, Long userId) {
         return  SingleResultUtil.getSingleResultOrNull(
