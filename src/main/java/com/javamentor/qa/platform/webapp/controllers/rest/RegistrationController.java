@@ -92,7 +92,6 @@ public class RegistrationController {
                 return new PasswordAuthentication(fromAddress, SENDER_PASS);
             }
         });
-//        session.setDebug(true);
 
         try {
             MimeMessage message = new MimeMessage(session);
@@ -111,7 +110,6 @@ public class RegistrationController {
             return ResponseEntity.badRequest().build();
         }
     }
-
 
     @ApiOperation(value = "Подтверждение email пользователя по токену.")
     @ApiResponses(value = {

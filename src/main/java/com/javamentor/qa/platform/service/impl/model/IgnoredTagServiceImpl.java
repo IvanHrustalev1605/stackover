@@ -21,16 +21,14 @@ public class IgnoredTagServiceImpl extends ReadWriteServiceImpl<IgnoredTag, Long
 
     private final TagDtoService tagDtoService;
     private final TagService tagService;
-    private final IgnoredTagService ignoredTagService;
     private final IgnoredTagDao ignoredTagDao;
 
     public IgnoredTagServiceImpl(ReadWriteDao<IgnoredTag, Long> readWriteDao,
-                                 TagDtoService tagDtoService, TagService tagService, IgnoredTagService ignoredTagService,
+                                 TagDtoService tagDtoService, TagService tagService,
                                  IgnoredTagDao ignoredTagDao) {
         super(readWriteDao);
         this.tagDtoService = tagDtoService;
         this.tagService = tagService;
-        this.ignoredTagService = ignoredTagService;
         this.ignoredTagDao = ignoredTagDao;
     }
 
@@ -40,7 +38,7 @@ public class IgnoredTagServiceImpl extends ReadWriteServiceImpl<IgnoredTag, Long
     public Optional<TagDto> addTagToIgnoreList(Long tagId, User user) {
 
         //check for the record is already exist
-        if (ignoredTagService.getByIdAndUser(tagId, user).isPresent()) {
+        if (ignoredTagDao.getByIdAndUser(tagId, user).isPresent()) {
             throw new TagAlreadyExistsException("Тег уже был добавлен в игнорируемые ранее.");
         }
 
@@ -49,15 +47,7 @@ public class IgnoredTagServiceImpl extends ReadWriteServiceImpl<IgnoredTag, Long
             throw new TagNotFoundException("Тег с таким id не найден.");
         }
 
-        ignoredTagService.persist(new IgnoredTag(tagService.getById(tagId).get(), user));
+        ignoredTagDao.persist(new IgnoredTag(tagService.getById(tagId).get(), user));
         return tagDtoService.getById(tagId);
     }
-
-
-    @Override
-    public Optional<IgnoredTag> getByIdAndUser(Long tagId, User user) {
-        return ignoredTagDao.getByIdAndUser(tagId, user);
-    }
-
-
 }

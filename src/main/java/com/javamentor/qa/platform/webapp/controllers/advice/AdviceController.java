@@ -28,7 +28,7 @@ public class AdviceController {
     }
 
     @ExceptionHandler(NoResultException.class)
-    public ResponseEntity handleException(NoResultException exception) {
+    public ResponseEntity<String> handleException(NoResultException exception) {
         return ResponseEntity.notFound().build();
     }
 }

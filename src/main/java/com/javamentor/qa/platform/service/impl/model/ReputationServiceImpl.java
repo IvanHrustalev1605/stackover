@@ -6,7 +6,6 @@ import com.javamentor.qa.platform.models.entity.user.reputation.Reputation;
 import com.javamentor.qa.platform.models.entity.user.reputation.ReputationType;
 import com.javamentor.qa.platform.service.abstracts.model.ReputationService;
 import com.javamentor.qa.platform.service.impl.repository.ReadWriteServiceImpl;
-import com.javamentor.qa.platform.service.abstracts.model.ReputationService;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -19,10 +18,12 @@ public class ReputationServiceImpl extends ReadWriteServiceImpl<Reputation, Long
         super(readWriteDao);
         this.reputationDao = reputationDao;
     }
+
     @Override
     public Optional<Reputation> getByAnswerIdAndUserId(Long answerId, Long userId) {
         return reputationDao.getByAnswerIdAndUserId(answerId, userId);
     }
+
     @Override
     public Optional<Reputation> getReputationByUserId(Long id, ReputationType type) {
         return reputationDao.getReputationByUserId(id, type);

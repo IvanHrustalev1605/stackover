@@ -1,19 +1,17 @@
 package com.javamentor.qa.platform.webapp.controllers.rest;
 
 import com.javamentor.qa.platform.models.dto.QuestionCommentDto;
-import com.javamentor.qa.platform.models.entity.question.Question;
-import com.javamentor.qa.platform.models.entity.question.VoteType;
-import com.javamentor.qa.platform.models.entity.user.User;
 import com.javamentor.qa.platform.service.abstracts.dto.CommentDtoService;
 import com.javamentor.qa.platform.service.abstracts.model.QuestionService;
-import com.javamentor.qa.platform.service.abstracts.model.VoteQuestionService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,12 +21,10 @@ import java.util.Optional;
 public class QuestionController {
 
     private final CommentDtoService commentDtoService;
-    private final VoteQuestionService voteQuestionService;
     private final QuestionService questionService;
 
-    public QuestionController(CommentDtoService commentDtoService, VoteQuestionService voteQuestionService, QuestionService questionService) {
+    public QuestionController(CommentDtoService commentDtoService, QuestionService questionService) {
         this.commentDtoService = commentDtoService;
-        this.voteQuestionService = voteQuestionService;
         this.questionService = questionService;
     }
 
@@ -53,20 +49,7 @@ public class QuestionController {
     })
     public ResponseEntity<Long> getCountQuestion() {
         Optional<Long> count = questionService.getCountQuestion();
-        return count.map(aLong -> new ResponseEntity<>(aLong, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
-    }
-
-    @PostMapping("/{questionId}/downVote")
-    @ApiOperation(value = "Голос против вопроса")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Оценка вопроса уменьшена"),
-            @ApiResponse(code = 400, message = "Не удалось проголосовать")
-    })
-    public ResponseEntity<Long> voteDownForQuestion(@PathVariable("id") Long questionId, @AuthenticationPrincipal User user) {
-        Optional<Question> question = questionService.getQuestionForVote(questionId, user.getId());
-        return question.map(
-                        value -> new ResponseEntity<>(voteQuestionService.voteDownForQuestion(user, value, VoteType.DOWN), HttpStatus.OK))
+        return count.map(aLong -> new ResponseEntity<>(aLong, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
     }
-
 }

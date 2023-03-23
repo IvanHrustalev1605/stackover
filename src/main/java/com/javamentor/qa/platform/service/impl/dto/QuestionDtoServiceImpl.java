@@ -12,13 +12,12 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 @Service
 @AllArgsConstructor
 public class QuestionDtoServiceImpl implements QuestionDtoService {
-    private QuestionService questionService;
-    private QuestionMapper questionMapper;
-    private TagService tagService;
+    private final QuestionService questionService;
+    private final QuestionMapper questionMapper;
+    private final TagService tagService;
 
     @Override
     @Transactional
@@ -28,8 +27,7 @@ public class QuestionDtoServiceImpl implements QuestionDtoService {
         question.setTags(tagService.tags(question.getTags()));
         questionService.persist(question);
         question = questionService.getById(question.getId()).get();
-        QuestionDto questionDto = questionMapper.questionToQuestionDto(question);
 
-        return questionDto;
+        return questionMapper.questionToQuestionDto(question);
     }
 }

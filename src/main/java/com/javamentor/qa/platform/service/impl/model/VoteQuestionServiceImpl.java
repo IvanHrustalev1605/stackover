@@ -19,6 +19,7 @@ import java.util.Optional;
 public class VoteQuestionServiceImpl extends ReadWriteServiceImpl<VoteQuestion, Long> implements VoteQuestionService {
     private final VoteQuestionDao voteQuestionDao;
     private final ReputationService reputationService;
+
     public VoteQuestionServiceImpl(ReadWriteDao<VoteQuestion, Long> readWriteDao, ReputationService reputationService, VoteQuestionDao voteQuestionDao) {
         super(readWriteDao);
         this.reputationService = reputationService;
