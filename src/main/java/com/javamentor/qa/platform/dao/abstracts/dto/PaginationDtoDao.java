@@ -1,9 +1,9 @@
 package com.javamentor.qa.platform.dao.abstracts.dto;
 
 import java.util.List;
+import java.util.Map;
 
 public interface PaginationDtoDao<T> {
-    <P> List<P> getItems(P param);
-
-    <P> int getTotalResultCount(P param);
+    int getCountOfAllItems(Map<String, Object> parameters);
+    List<T> getItems(Map<String, Object> parameters);
 }
