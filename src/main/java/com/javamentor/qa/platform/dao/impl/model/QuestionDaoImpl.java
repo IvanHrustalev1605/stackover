@@ -35,4 +35,8 @@ public class QuestionDaoImpl extends ReadWriteDaoImpl<Question, Long> implements
                         .setParameter("questionId", questionId)
                         .setParameter("userId", userId));
     }
+    public Optional<Question> findQuestionById(Long questionId) {
+        return SingleResultUtil.getSingleResultOrNull(entityManager.createQuery("select r from Question r where r.id = :questionId")
+                .setParameter("questionId", questionId));
+    }
 }

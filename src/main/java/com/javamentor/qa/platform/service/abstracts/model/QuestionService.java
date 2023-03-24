@@ -8,4 +8,5 @@ import java.util.Optional;
 public interface QuestionService extends ReadWriteService<Question, Long> {
     Optional<Long> getCountQuestion();
     Optional<Question> getQuestionForVote(Long questionId, Long userId);
+    Optional<Question> findQuestionById(Long questionId);
 }

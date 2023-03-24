@@ -7,6 +7,7 @@ import com.javamentor.qa.platform.models.entity.question.VoteType;
 import com.javamentor.qa.platform.models.entity.user.User;
 import com.javamentor.qa.platform.service.abstracts.dto.QuestionDtoService;
 import com.javamentor.qa.platform.service.abstracts.model.QuestionService;
+import com.javamentor.qa.platform.service.abstracts.model.UserService;
 import com.javamentor.qa.platform.service.abstracts.model.VoteQuestionService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -33,6 +34,7 @@ public class ResourceQuestionController {
 
     private final QuestionDtoService questionDtoService;
     private final QuestionService questionService;
+    private final UserService userService;
     private final VoteQuestionService voteQuestionService;
 
     @PostMapping
@@ -57,5 +59,14 @@ public class ResourceQuestionController {
         return question.map(
                 value -> new ResponseEntity<>(voteQuestionService.voteDownForQuestion(user, value, VoteType.DOWN), HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
+    }
+
+    @PostMapping("/{questionId}/upVote")
+    @ApiOperation(value = "Проголосовать 'за' question и вернуть сумму голосов")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Оценка вопроса увеличена"),
+            @ApiResponse(code = 400, message = "Не удалось проголосовать")})
+    public ResponseEntity<Long> voteAndGiveRep(@PathVariable("questionId") Long questionId, @AuthenticationPrincipal User user) {
+        return new ResponseEntity<>( voteQuestionService.voteUp(questionId, userService.getByEmail(user.getUsername()).get()),HttpStatus.OK);
     }
 }
