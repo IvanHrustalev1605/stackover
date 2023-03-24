@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -16,6 +17,17 @@ public class IgnoredTagDaoImpl extends ReadWriteDaoImpl<IgnoredTag, Long> implem
 
     @PersistenceContext
     private EntityManager entityManager;
+
+    @Override
+    public List<IgnoredTag> getIgnoredTagByUserId(Long userId) {
+        return entityManager.createQuery("""
+                        select it.ignoredTag
+                        from IgnoredTag as it
+                        where it.user.id = :userId
+                        """, IgnoredTag.class)
+                .setParameter("userId", userId)
+                .getResultList();
+    }
 
     @Override
     public Optional<IgnoredTag> getByIdAndUser(Long tagId, User user) {

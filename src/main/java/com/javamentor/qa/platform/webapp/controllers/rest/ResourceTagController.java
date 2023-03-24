@@ -1,9 +1,11 @@
 package com.javamentor.qa.platform.webapp.controllers.rest;
 
+import com.javamentor.qa.platform.models.dto.IgnoredTagDto;
 import com.javamentor.qa.platform.models.dto.RelatedTagDto;
 import com.javamentor.qa.platform.models.dto.TagDto;
 import com.javamentor.qa.platform.models.dto.TrackedTagDto;
 import com.javamentor.qa.platform.models.entity.user.User;
+import com.javamentor.qa.platform.service.abstracts.dto.IgnoredTagDtoService;
 import com.javamentor.qa.platform.service.abstracts.dto.TagDtoService;
 import com.javamentor.qa.platform.service.abstracts.model.IgnoredTagService;
 import com.javamentor.qa.platform.service.abstracts.model.TrackedTagService;
@@ -33,6 +35,8 @@ public class ResourceTagController {
     private final TrackedTagService trackedTagService;
     private final IgnoredTagService ignoredTagService;
     private final TagDtoService tagDtoService;
+
+    private final IgnoredTagDtoService ignoredTagDtoService;
 
 
     @ApiOperation(value = "Добавление тега в список игнорируемых.")
@@ -71,5 +75,12 @@ public class ResourceTagController {
                 ? new ResponseEntity<>(trackedTagService.getListUserTrackedDto(user), HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
+    }
+
+    @GetMapping("/ignored")
+    @ApiOperation(value = "Получение списка игнорируемых тегов")
+    @ApiResponse(code = 200, message = "Игнорируемые теги получены")
+    public ResponseEntity<List<IgnoredTagDto>> getIgnoredTags(@AuthenticationPrincipal User user) {
+        return ResponseEntity.ok(ignoredTagDtoService.getIgnoredTagsByUserId(user.getId()));
     }
 }
