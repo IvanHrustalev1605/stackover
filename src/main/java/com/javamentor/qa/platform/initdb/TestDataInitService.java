@@ -65,10 +65,10 @@ public class TestDataInitService {
         admin.setNickname("KolyaMoscow");
         admin.setRole(new Role("ROLE_ADMIN"));
 
-        if (userService.getByEmail(user.getEmail()).isEmpty()) {
+       if (userService.getByEmail(user.getEmail()).isEmpty()) {
             entityManager.persist(user);
-        }
-        if (userService.getByEmail(admin.getEmail()).isEmpty()) {
+       }
+       if (userService.getByEmail(admin.getEmail()).isEmpty()) {
             entityManager.persist(admin);
         }
 
@@ -87,8 +87,8 @@ public class TestDataInitService {
                 userService.update(user2.get());
             }
         }
+       }
         entityManager.flush();
-    }
 
     List<Tag> tags = new ArrayList<>();
 
