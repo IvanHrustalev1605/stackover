@@ -46,14 +46,17 @@ public class RegistrationController {
     private String senderName;
     @Value("${email_host}")
     private String host;
+    @Value("${sender_pass}")
+    private String SENDER_PASS = "";
+    @Value("${server_address}")
+    private String SERVER_ADDRESS;
+    @Value("${smtp_port}")
+    private int SMTP_PORT;
 
     private final UserConverter userConverter;
     private final UserService userService;
     private final RoleService roleService;
     private final EntityManager entityManager;
-    private final String SENDER_PASS = "";
-    private final String SERVER_ADDRESS = "http://localhost:8080/api/user/registration/verify/";
-    private final int SMTP_PORT = 465;
 
     public RegistrationController(UserConverter userConverter, UserService userService, RoleService roleService, EntityManager entityManager) {
         this.userConverter = userConverter;
@@ -67,8 +70,8 @@ public class RegistrationController {
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Пользователь создан. Письмо со ссылкой подтверждения email успешно отправлено."),
             @ApiResponse(code = 409, message = "Пользователь с таким email уже зарегистрирован."),
-            @ApiResponse(code = 400, message = "Пользователь не создан. Письмо не отправлено.") })
-    @PostMapping("/")
+            @ApiResponse(code = 400, message = "Пользователь не создан. Письмо не отправлено.")})
+    @PostMapping()
     @Transactional
     public ResponseEntity<String> receiveUserRegistrationInfo(@RequestBody UserRegistrationDto urDto) {
 
@@ -86,6 +89,7 @@ public class RegistrationController {
         properties.put("mail.smtp.port", SMTP_PORT);
         properties.put("mail.smtp.ssl.enable", "true");
         properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.ssl.protocols", "TLSv1.2");
 
         Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
@@ -99,9 +103,10 @@ public class RegistrationController {
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(urDto.getEmail()));
             message.setSubject("Email confirmation");
             message.setContent(String.format("""
-                    <p>Hi %s %s!To confirm your email, click on the link below</p>
-                    <a href="%s%s">Confirm</a>""",
-                    urDto.getFirstName(), urDto.getLastName(), SERVER_ADDRESS, confirmationToken),"text/html");
+                            <p>Hi %s %s!To confirm your email, click on the link below</p>
+                            <a href="%s%s">Confirm</a>
+                            """,
+                    urDto.getFirstName(), urDto.getLastName(), SERVER_ADDRESS, confirmationToken), "text/html");
             Transport.send(message);
             userService.persist(user);
             return ResponseEntity.status(201).build();
@@ -114,12 +119,17 @@ public class RegistrationController {
     @ApiOperation(value = "Подтверждение email пользователя по токену.")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Email подтвержден. Пользователь активирован."),
-            @ApiResponse(code = 498, message = "Срок действия токена прошел.") })
+            @ApiResponse(code = 498, message = "Срок действия токена прошел.")})
     @GetMapping("/verify/{token}")
+    @Transactional
     public ResponseEntity<String> emailVerification(@PathVariable("token") String token) {
+
         Optional<User> queryUser = SingleResultUtil.getSingleResultOrNull(entityManager
-                .createQuery("SELECT u FROM User u WHERE u.about = :token", User.class)
+                .createQuery("SELECT u " +
+                             "FROM User u " +
+                             "WHERE u.about = :token", User.class)
                 .setParameter("token", token));
+
         if (queryUser.isPresent()) {
             if (ChronoUnit.MINUTES.between(
                     queryUser.get().getPersistDateTime(), LocalDateTime.now()) > EXPIRATION_TIME_IN_MINUTES) {
@@ -130,6 +140,7 @@ public class RegistrationController {
             userService.update(queryUser.get());
             return ResponseEntity.status(201).build();
         }
+
         return ResponseEntity.badRequest().build();
     }
 }
