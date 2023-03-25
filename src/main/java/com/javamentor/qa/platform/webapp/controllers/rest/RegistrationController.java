@@ -126,7 +126,7 @@ public class RegistrationController {
 
         Optional<User> queryUser = SingleResultUtil.getSingleResultOrNull(entityManager
                 .createQuery("SELECT u " +
-                             "FROM User u " +
+                             "FROM User as u " +
                              "WHERE u.about = :token", User.class)
                 .setParameter("token", token));
 
