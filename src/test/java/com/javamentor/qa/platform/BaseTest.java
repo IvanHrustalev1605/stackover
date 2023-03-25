@@ -3,7 +3,7 @@ package com.javamentor.qa.platform;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.database.rider.core.api.configuration.DBUnit;
 import com.github.database.rider.junit5.api.DBRider;
-import com.javamentor.qa.platform.models.dto.TokenResponseDTO;
+import com.javamentor.qa.platform.models.dto.AuthenticationRequestDTO;
 import com.javamentor.qa.platform.webapp.configs.JmApplication;
 import com.jayway.jsonpath.JsonPath;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -39,11 +39,15 @@ public abstract class BaseTest {
     @Autowired
     private ObjectMapper objectMapper;
 
+    public MockMvc getMockMvc() {
+        return mockMvc;
+    }
+
     public String getTokenJWT(String email, String password) throws Exception {
 
         return "Bearer " + JsonPath.read((mockMvc.perform(post("/api/auth/token")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(new TokenResponseDTO(email, password))))
+                .content(objectMapper.writeValueAsString(new AuthenticationRequestDTO(email, password))))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andReturn()).getResponse().getContentAsString(), "token");
