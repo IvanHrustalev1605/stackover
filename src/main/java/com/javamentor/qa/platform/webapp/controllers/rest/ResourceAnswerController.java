@@ -61,7 +61,7 @@ public class ResourceAnswerController {
             @ApiResponse(code = 400, message = "Не удалось проголосовать")
     })
     public ResponseEntity<Long> upVote(@Parameter(description = "Уникальный id ответа")
-                                       @PathVariable("id") Long answerId,
+                                       @PathVariable("questionId") Long answerId,
                                        @Parameter(description = "Пользователь прошедший аутентификацию")
                                        @AuthenticationPrincipal User user) {
         Optional<Answer> answerOptional = answerService.getAnswerForVote(answerId, user.getId());
@@ -91,7 +91,7 @@ public class ResourceAnswerController {
             @ApiResponse(code = 200, message = "Оценка ответа уменьшена"),
             @ApiResponse(code = 400, message = "Не удалось проголосовать")
     })
-    public ResponseEntity<Long> voteDownForAnswer(@PathVariable("id") Long answerId, @AuthenticationPrincipal User user) {
+    public ResponseEntity<Long> voteDownForAnswer(@PathVariable("questionId") Long answerId, @AuthenticationPrincipal User user) {
         Optional<Answer> answer = answerService.getAnswerForVote(answerId, user.getId());
         return answer.map(
                         value -> new ResponseEntity<>(voteAnswerService.voteDownForAnswer(user, value, VoteType.DOWN), HttpStatus.OK))
