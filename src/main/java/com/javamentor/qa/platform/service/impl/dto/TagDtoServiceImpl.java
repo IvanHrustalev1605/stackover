@@ -29,4 +29,10 @@ public class TagDtoServiceImpl implements TagDtoService {
     public Optional<List<RelatedTagDto>> getTopTags() {
         return tagDtoDao.getTopTags();
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<List<TagDto>> getTop3TagsByUserId(Long id) {
+        return tagDtoDao.getTop3TagsByUserId(id);
+    }
 }

@@ -83,4 +83,17 @@ public class ResourceTagController {
     public ResponseEntity<List<IgnoredTagDto>> getIgnoredTags(@AuthenticationPrincipal User user) {
         return ResponseEntity.ok(ignoredTagDtoService.getIgnoredTagsByUserId(user.getId()));
     }
+
+    @GetMapping("/api/user/tag/top-3tags/{id}")
+    @ApiOperation(value = "список из трёх топ тэгов пользователя", response = TagDto.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Запрос выполнен успешно"),
+            @ApiResponse(code = 400, message = "Ошибка при выполнении запроса")
+    })
+    public ResponseEntity<Optional<List<TagDto>>> getTop3TagsUser(@PathVariable Long id) {
+        Optional<List<TagDto>> optionalTagsList = tagDtoService.getTop3TagsByUserId(id);
+        return optionalTagsList.isPresent()
+            ? new ResponseEntity<>(optionalTagsList, HttpStatus.OK)
+            : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 }

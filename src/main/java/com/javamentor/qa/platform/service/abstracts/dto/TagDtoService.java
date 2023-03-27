@@ -10,4 +10,5 @@ public interface TagDtoService {
     Optional<List<RelatedTagDto>> getTopTags();
 
     Optional<TagDto> getById(Long id);
+    Optional<List<TagDto>> getTop3TagsByUserId(Long id);
 }
