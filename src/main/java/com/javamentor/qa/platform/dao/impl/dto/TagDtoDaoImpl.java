@@ -44,4 +44,21 @@ public class TagDtoDaoImpl implements TagDtoDao {
                 .getResultList());
     }
 
+    @Override
+    public Optional<List<TagDto>> getTop3TagsByUserId(Long id) {
+        return Optional.of(entityManager.createQuery("""
+            select new com.javamentor.qa.platform.models.dto.TagDto (topt.tid, topt.tname, topt.tdescription)
+            from (select t.id as tid, t.name as tname, t.description as tdescription, SUM(r.count) as rsum
+            from VoteAnswer va
+            inner join User u on u.id = va.user.id
+            inner join TrackedTag tract on u.id = tract.user.id
+            inner join Tag t on tract.trackedTag.id = t.id
+            inner join Reputation r on u.id = r.author.id
+            where u.id = :id
+            group by t.id, t.name, t.description, u.id, r.author.id, r.count
+            order by rsum desc
+            limit 3) as topt order by topt.rsum desc
+            """, TagDto.class).setParameter("id", id).getResultList());
+
+    }
 }

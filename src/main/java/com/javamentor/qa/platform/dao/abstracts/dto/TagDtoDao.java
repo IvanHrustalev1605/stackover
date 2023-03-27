@@ -10,4 +10,5 @@ public interface TagDtoDao {
 
     public Optional<TagDto> getById(Long id);
     Optional<List<RelatedTagDto>> getTopTags();
+    Optional<List<TagDto>> getTop3TagsByUserId(Long id);
 }
