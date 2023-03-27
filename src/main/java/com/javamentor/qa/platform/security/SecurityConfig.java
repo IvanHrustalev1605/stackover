@@ -40,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final SuccessHandler successHandler;
     private final CustomOAuth2UserService customOAuth2UserService;
-    private String[] staticResources  =  {
+    private final String[] staticResources  =  {
             "/images/**",
             "/js/**"
     };

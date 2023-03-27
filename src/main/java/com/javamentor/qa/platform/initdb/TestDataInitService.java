@@ -3,8 +3,8 @@ package com.javamentor.qa.platform.initdb;
 import com.javamentor.qa.platform.models.entity.question.Question;
 import com.javamentor.qa.platform.models.entity.question.Tag;
 import com.javamentor.qa.platform.models.entity.question.answer.Answer;
-import com.javamentor.qa.platform.models.entity.user.User;
 import com.javamentor.qa.platform.models.entity.user.Role;
+import com.javamentor.qa.platform.models.entity.user.User;
 import com.javamentor.qa.platform.models.entity.user.reputation.Reputation;
 import com.javamentor.qa.platform.service.abstracts.model.UserService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -65,10 +65,10 @@ public class TestDataInitService {
         admin.setNickname("KolyaMoscow");
         admin.setRole(new Role("ROLE_ADMIN"));
 
-       if (userService.getByEmail(user.getEmail()).isEmpty()) {
+        if (userService.getByEmail(user.getEmail()).isEmpty()) {
             entityManager.persist(user);
-       }
-       if (userService.getByEmail(admin.getEmail()).isEmpty()) {
+        }
+        if (userService.getByEmail(admin.getEmail()).isEmpty()) {
             entityManager.persist(admin);
         }
 
@@ -87,8 +87,7 @@ public class TestDataInitService {
                 userService.update(user2.get());
             }
         }
-       }
-        entityManager.flush();
+    }
 
     List<Tag> tags = new ArrayList<>();
 

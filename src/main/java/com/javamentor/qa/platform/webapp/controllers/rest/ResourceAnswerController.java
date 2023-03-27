@@ -1,11 +1,14 @@
 package com.javamentor.qa.platform.webapp.controllers.rest;
 
 import com.javamentor.qa.platform.models.dto.AnswerDto;
+import com.javamentor.qa.platform.models.dto.CommentAnswerDto;
 import com.javamentor.qa.platform.models.entity.question.VoteType;
 import com.javamentor.qa.platform.models.entity.question.answer.Answer;
 import com.javamentor.qa.platform.models.entity.user.User;
 import com.javamentor.qa.platform.service.abstracts.dto.AnswerDtoService;
+import com.javamentor.qa.platform.service.abstracts.dto.CommentAnswerDtoService;
 import com.javamentor.qa.platform.service.abstracts.model.AnswerService;
+import com.javamentor.qa.platform.service.abstracts.model.CommentAnswerService;
 import com.javamentor.qa.platform.service.abstracts.model.QuestionService;
 import com.javamentor.qa.platform.service.abstracts.model.VoteAnswerService;
 import io.swagger.annotations.ApiOperation;
@@ -18,6 +21,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,12 +36,16 @@ public class ResourceAnswerController {
     private final VoteAnswerService voteAnswerService;
     private final QuestionService questionService;
     private final AnswerDtoService answerDtoService;
+    private final CommentAnswerService commentAnswerService;
+    private final CommentAnswerDtoService commentAnswerDtoService;
 
-    public ResourceAnswerController(AnswerService answerService, VoteAnswerService voteAnswerService, QuestionService questionService, AnswerDtoService answerDtoService) {
+    public ResourceAnswerController(AnswerService answerService, VoteAnswerService voteAnswerService, QuestionService questionService, AnswerDtoService answerDtoService, CommentAnswerService commentAnswerService, CommentAnswerDtoService commentAnswerDtoService) {
         this.answerService = answerService;
         this.voteAnswerService = voteAnswerService;
         this.questionService = questionService;
         this.answerDtoService = answerDtoService;
+        this.commentAnswerService = commentAnswerService;
+        this.commentAnswerDtoService = commentAnswerDtoService;
     }
 
     @GetMapping(value = "/{answerId}")
@@ -96,6 +104,19 @@ public class ResourceAnswerController {
         return answer.map(
                         value -> new ResponseEntity<>(voteAnswerService.voteDownForAnswer(user, value, VoteType.DOWN), HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
+    }
+
+
+    @PostMapping(value = "/answer/{answerId}/comment")
+    public ResponseEntity<Optional<CommentAnswerDto>> addCommentToAnswer (@RequestBody User user,
+                                                                          @RequestBody Long answerId,
+                                                                          @PathVariable String comment)
+    {
+        if (comment.isBlank()) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        commentAnswerService.addCommentToAnswer(user, answerId, comment);
+        return new ResponseEntity<>(commentAnswerDtoService.getCommentAnswerDtoById(answerId), HttpStatus.OK);
     }
 
 }
