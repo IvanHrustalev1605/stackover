@@ -50,11 +50,4 @@ public class TrackedTagServiceImpl extends ReadWriteServiceImpl<TrackedTag, Long
         newTrackedTag.setUser(user);
         trackedTagDao.persist(newTrackedTag);
     }
-
-    @Override
-    public Optional<Long> getTrackedTagIdByTagId(Long TagId) {
-        return trackedTagDao.getByTagId(TagId);
-    }
-
-
 }

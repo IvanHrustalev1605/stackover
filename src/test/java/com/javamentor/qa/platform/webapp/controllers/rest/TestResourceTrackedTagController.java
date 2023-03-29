@@ -21,8 +21,9 @@ class TestResourceTrackedTagController extends BaseTest {
                         .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.id").value(1))
-                .andExpect(jsonPath("$.name").value("Tag 1"));
+                .andExpect(jsonPath("$.id").value(100))
+                .andExpect(jsonPath("$.name").value("Tag 1"))
+                .andExpect(jsonPath("$.description").value("description"));
 
 
     }

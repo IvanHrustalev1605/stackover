@@ -9,6 +9,7 @@ import com.javamentor.qa.platform.service.abstracts.dto.IgnoredTagDtoService;
 import com.javamentor.qa.platform.service.abstracts.dto.TagDtoService;
 import com.javamentor.qa.platform.service.abstracts.dto.TrackedTagDtoService;
 import com.javamentor.qa.platform.service.abstracts.model.IgnoredTagService;
+import com.javamentor.qa.platform.service.abstracts.model.TagService;
 import com.javamentor.qa.platform.service.abstracts.model.TrackedTagService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -38,7 +39,6 @@ public class ResourceTagController {
     private final TagDtoService tagDtoService;
     private final IgnoredTagDtoService ignoredTagDtoService;
 
-    private TrackedTagDtoService trackedTagDtoService;
 
 
     @ApiOperation(value = "Добавление тега в список игнорируемых.")
@@ -104,10 +104,10 @@ public class ResourceTagController {
             @ApiResponse(code = 200, message = "Тэг был успешно добавлен в отслеживаемые"),
             @ApiResponse(code = 500, message = "Сервер не смог корректно обработать Post запрос.")
     })
-    public ResponseEntity<TrackedTagDto> addTagToTrackedTag(@PathVariable("id") Long tagId,
+    public ResponseEntity<TagDto> addTagToTrackedTag(@PathVariable("id") Long tagId,
                                                      @AuthenticationPrincipal User user) {
         trackedTagService.addTagToTrackedTag(tagId,user);
-        return new ResponseEntity<>(trackedTagDtoService.getTrackedDtoByTagId(tagId).get(), HttpStatus.OK);
+        return new ResponseEntity<>(tagDtoService.getById(tagId).get(), HttpStatus.OK);
     }
 
 }
