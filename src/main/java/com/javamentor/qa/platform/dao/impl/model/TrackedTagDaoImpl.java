@@ -36,21 +36,11 @@ public class TrackedTagDaoImpl extends ReadWriteDaoImpl<TrackedTag, Long> implem
     }
 
     @Override
-    public Optional<TrackedTag> getTrackedTagByTagId(Long TagId) {
+    public Optional<TrackedTag> getTrackedTagByTagId(Long tagId) {
         return SingleResultUtil.getSingleResultOrNull(entityManager.createQuery("""
                 SELECT u
                 FROM TrackedTag u
                 WHERE u.trackedTag.id=:TagId
-                """, TrackedTag.class).setParameter("TagId", TagId));
-    }
-
-    @Override
-    public Optional<Long> getByTagId(Long tagId) {
-        return SingleResultUtil.getSingleResultOrNull(entityManager.createQuery("""
-                SELECT 
-                t.id
-                FROM TrackedTag t          
-                WHERE t.trackedTag.id = :tagId               
-                """,Long.class).setParameter("tagId", tagId));
+                """, TrackedTag.class).setParameter("TagId", tagId));
     }
 }

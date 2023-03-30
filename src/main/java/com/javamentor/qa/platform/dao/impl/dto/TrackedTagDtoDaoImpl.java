@@ -11,17 +11,5 @@ import java.util.Optional;
 
 @Repository
 public class TrackedTagDtoDaoImpl implements TrackedTagDtoDao {
-    @PersistenceContext
-    private EntityManager entityManager;
-    @Override
-    public Optional<TrackedTagDto> getTrackedDtoByTrackedTagId(Long TrackedTagId) {
-        return SingleResultUtil.getSingleResultOrNull(entityManager.createQuery("""
-                SELECT new com.javamentor.qa.platform.models.dto.TrackedTagDto(
-                      t.id,
-                      t.trackedTag.name
-                      )
-                FROM TrackedTag  t
-                WHERE t.id = :TrackedTagId
-                """,TrackedTagDto.class).setParameter("TrackedTagId", TrackedTagId));
-    }
+
 }
