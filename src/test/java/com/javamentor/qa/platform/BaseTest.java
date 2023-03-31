@@ -52,4 +52,7 @@ public abstract class BaseTest {
                 .andExpect(status().isOk())
                 .andReturn()).getResponse().getContentAsString(), "token");
     }
+    public MockMvc getMockMvc() {
+        return mockMvc;
+    }
 }
