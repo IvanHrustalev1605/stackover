@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -38,4 +39,27 @@ public class UserDtoDaoImpl extends ReadWriteDaoImpl<UserDto, Long> implements U
                 """, UserDto.class)
                 .setParameter("userId", id));
     }
+
+    @Override
+    public Optional<List<UserDto>> getUserDtoItemsForPagination(Long itemsOnPage, Long currentPage) {
+            return Optional.ofNullable(entityManager.createQuery("""
+                SELECT new com.javamentor.qa.platform.models.dto.UserDto(
+                u.id,
+                u.email,
+                u.fullName,
+                u.imageLink,
+                u.city,
+                    (SELECT COALESCE(SUM(r.count), 0)
+                        FROM Reputation r
+                        WHERE r.author.id = u.id),
+                u.persistDateTime,
+                    (SELECT COUNT(DISTINCT va) + COUNT(DISTINCT vq)
+                         FROM VoteAnswer va, VoteQuestion vq
+                         WHERE va.user.id = u.id
+                         AND vq.user.id = u.id))
+                FROM User u 
+                """,UserDto.class).setFirstResult((int) ((currentPage - 1) * itemsOnPage)).setMaxResults(Math.toIntExact(itemsOnPage))
+                    .getResultList());
+        }
+
 }
