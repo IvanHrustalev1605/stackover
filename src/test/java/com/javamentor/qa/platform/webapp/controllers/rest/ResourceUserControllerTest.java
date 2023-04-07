@@ -17,7 +17,7 @@ class ResourceUserControllerTest extends BaseTest {
     void getUsersWithPagination() throws Exception {
         String token = getTokenJWT("userTest@mail.com", "password");
 
-        getMockMvc().perform(MockMvcRequestBuilders.get("/api/user/{itemsOnPage}/{currentPage}", 2,1)
+        getMockMvc().perform(MockMvcRequestBuilders.get("/api/user?itemsOnPage={itemsOnPage}&currentPage={currentPage}", 2,1)
                         .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))

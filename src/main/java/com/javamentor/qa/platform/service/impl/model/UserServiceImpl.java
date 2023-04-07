@@ -24,9 +24,4 @@ public class UserServiceImpl extends ReadWriteServiceImpl<User, Long> implements
         return userDao.getByEmail(email);
     }
 
-    @Override
-    public Optional<Long> getCountUsers() {
-        return userDao.getCountUsers();
-    }
-
 }

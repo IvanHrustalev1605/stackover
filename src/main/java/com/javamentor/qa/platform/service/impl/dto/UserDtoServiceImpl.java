@@ -24,8 +24,4 @@ public class UserDtoServiceImpl extends ReadWriteServiceImpl<UserDto, Long> impl
         return userDtoDao.getById(id);
     }
 
-    @Override
-    public Optional<List<UserDto>> getUserDtoItemsForPagination(Long itemsOnPage, Long currentPage) {
-        return userDtoDao.getUserDtoItemsForPagination(itemsOnPage, currentPage);
-    }
 }
