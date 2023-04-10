@@ -7,6 +7,7 @@ import com.javamentor.qa.platform.service.abstracts.dto.UserDtoService;
 import com.javamentor.qa.platform.service.impl.repository.ReadWriteServiceImpl;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,4 +23,5 @@ public class UserDtoServiceImpl extends ReadWriteServiceImpl<UserDto, Long> impl
     public Optional<UserDto> getById(Long id) {
         return userDtoDao.getById(id);
     }
+
 }

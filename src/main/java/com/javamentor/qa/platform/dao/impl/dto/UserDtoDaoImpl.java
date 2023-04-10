@@ -5,7 +5,6 @@ import com.javamentor.qa.platform.dao.impl.repository.ReadWriteDaoImpl;
 import com.javamentor.qa.platform.dao.util.SingleResultUtil;
 import com.javamentor.qa.platform.models.dto.UserDto;
 import org.springframework.stereotype.Repository;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.Optional;
