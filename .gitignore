@@ -10,7 +10,6 @@
 .idea/
 *.iml
 *.iws
-/db
 
 # Mac
 .DS_Store
