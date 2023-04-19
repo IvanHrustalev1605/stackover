@@ -1,13 +1,13 @@
 package com.javamentor.qa.platform.initdb;
 
-import com.javamentor.qa.platform.dao.abstracts.model.RoleDao;
-import com.javamentor.qa.platform.dao.abstracts.model.UserDao;
 import com.javamentor.qa.platform.models.entity.question.Question;
 import com.javamentor.qa.platform.models.entity.question.Tag;
 import com.javamentor.qa.platform.models.entity.question.answer.Answer;
 import com.javamentor.qa.platform.models.entity.user.Role;
 import com.javamentor.qa.platform.models.entity.user.User;
 import com.javamentor.qa.platform.models.entity.user.reputation.Reputation;
+import com.javamentor.qa.platform.service.abstracts.model.RoleService;
+import com.javamentor.qa.platform.service.abstracts.model.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,8 +22,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TestDataInitService {
 
-    private final UserDao userDao;
-    private final RoleDao roleDao;
+    private final UserService userService;
+    private final RoleService roleService;
 
 
     @Transactional
@@ -39,7 +39,7 @@ public class TestDataInitService {
     private void createRoles() {
         List<Role> roles = List.of(new Role("ADMIN"), new Role("USER"));
 
-        roleDao.persistAll(roles);
+        roleService.persistAll(roles);
     }
     List<User> users = new ArrayList<>();
 
@@ -47,17 +47,18 @@ public class TestDataInitService {
         var alex = new User(null, "alex@mail.com", passwordEncoder().encode("123"),
                 "Alex Duncan", LocalDateTime.now(), true, false, "NYC",
                 null, null, null, "some", null,
-                null, null, roleDao.getByName("ADMIN").orElseThrow());
+                null, null, roleService.getByName("ADMIN").orElseThrow());
 
         var bob = new User(null, "bob@mail.com", passwordEncoder().encode("321"),
                 "Bob Jones ", LocalDateTime.now(), true, false, "Los Angeles",
                 null, null, null, "some", null,
-                null, null, roleDao.getByName("USER").orElseThrow());
+                null, null, roleService.getByName("USER").orElseThrow());
 
         users.add(alex);
         users.add(bob);
 
-        userDao.persistAll(users);
+        userService.persistAll(users);
+
     }
 
 
