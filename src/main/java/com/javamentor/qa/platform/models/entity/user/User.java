@@ -30,7 +30,7 @@ import java.util.Objects;
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor(force = true)
+@NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "user_entity")
 public class User implements UserDetails {
