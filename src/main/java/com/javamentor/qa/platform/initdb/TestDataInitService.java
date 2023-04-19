@@ -1,7 +1,7 @@
 package com.javamentor.qa.platform.initdb;
 
-import com.javamentor.qa.platform.dao.impl.model.RoleDaoImpl;
-import com.javamentor.qa.platform.dao.impl.model.UserDaoImpl;
+import com.javamentor.qa.platform.dao.abstracts.model.RoleDao;
+import com.javamentor.qa.platform.dao.abstracts.model.UserDao;
 import com.javamentor.qa.platform.models.entity.question.Question;
 import com.javamentor.qa.platform.models.entity.question.Tag;
 import com.javamentor.qa.platform.models.entity.question.answer.Answer;
@@ -22,16 +22,14 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TestDataInitService {
 
-    private final UserDaoImpl userDao;
-    private final RoleDaoImpl roleDao;
+    private final UserDao userDao;
+    private final RoleDao roleDao;
 
 
     @Transactional
     public void createEntity() {
-
         createRoles();
         createUsers();
-
     }
 
     public PasswordEncoder passwordEncoder() {
