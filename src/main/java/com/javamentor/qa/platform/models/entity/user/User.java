@@ -86,6 +86,13 @@ public class User implements UserDetails {
 
     @Column
     private String nickname;
+    @Column(name = "enabled")
+    private boolean enabled;
+    public User() {
+        super();
+        this.enabled = false;
+    }
+
 
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = Role.class, cascade = {CascadeType.PERSIST})
     @JoinColumn(name = "role_id", nullable = false)
