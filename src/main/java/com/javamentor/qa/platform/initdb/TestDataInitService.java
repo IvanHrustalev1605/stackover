@@ -25,7 +25,6 @@ public class TestDataInitService {
     private final UserService userService;
     private final RoleService roleService;
 
-
     @Transactional
     public void createEntity() {
         createRoles();
