@@ -19,6 +19,24 @@
             font-size: 20px;
             font-style: oblique;
         }
+        @media screen and (max-width: 700px){
+            #right-bar {
+                display: none;
+            }
+            #main-bar-title ,#navbar-toggle, #navbar-toggle-buttons {
+                flex-wrap: wrap;
+            }
+            #navbar-toggle-totalQuestions-h4 {
+                font-size: 1.1rem;
+            }
+
+        }
+        #content {
+            margin-left: auto;
+            margin-right: auto;
+            width: auto;
+            box-sizing: border-box;
+        }
     </style>
 </head>
 <body>
@@ -170,7 +188,7 @@
             </ul>
         </nav>
     </div>
-    <div id="right-bar" class="col-3" style="background-color: rgba(255,249,178,0.72)">
+    <div id="right-bar" class="col-3" style="background-color: rgba(255,249,178,0.72);box-sizing: border-box">
         <div id="right-bar-content" class="">
             <div id="right-bar-head">
                 <h5 class="h5">Связанные теги</h5>
