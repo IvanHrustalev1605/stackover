@@ -588,3 +588,36 @@ this.mockMvc
 ```
 
 5. Если ожидаемые результаты не совпадут, тест сообщит об ошибке и распечатает все параметры. В ином случае вы увидите сообщение о том, что тест успешно пройден.
+
+## Выбор и настройка профиля для подключения и работы с БД
+
+1. Для конфигурирования настроек профилей нажмите на "Edit Configurations" в меню запуска приложения (верхний правый угол)
+   ![](src/main/resources/static/images/profile_tutor/ide_profile_edit.png)
+
+2. В открывшемся окне выберите "Modify options" и добавьте при необходимости поля настройки профилей.
+
+   ![](src/main/resources/static/images/profile_tutor/ide_run_options.png)
+
+3. В поле "VM options" ведите команду -ea -Dspring.profiles.active=local/dev (указав необходимый).
+
+4. В поле "Environment variables" указать соответствующие переменные окружения (DB_BASE, DB_USERNAME, DB_PASSWORD и пр.).
+
+   ![](src/main/resources/static/images/profile_tutor/ide_environment_set.png)
+
+где
+
+DB_BASE - тип бд mysql или postgresql
+
+HIBERNATE_DDL - настройка ddl
+
+DB_SERVER - адрес сервера (по умолчанию localhost)
+
+DB_PORT - порт
+
+DB_NAME - название БД
+
+DB_USERNAME - твой логин
+
+DB_PASSWORD - твой пароль
+
+-ea -Dspring.profiles.active= dev/local - выбери профиль
