@@ -14,7 +14,6 @@ import javax.validation.constraints.NotEmpty;
 @Setter
 @Schema(description = "пользователь для регистрации")
 public class UserRegistrationDto {
-    private Long id;
     @NotEmpty
     @Schema(description = "имя пользователя")
     private String firstName;

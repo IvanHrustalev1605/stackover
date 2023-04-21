@@ -1,26 +1,14 @@
 package com.javamentor.qa.platform.models.entity.user;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.Setter;
-import lombok.ToString;
+import com.javamentor.qa.platform.models.entity.registration.VerificationToken;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Collections;
@@ -30,8 +18,8 @@ import java.util.Objects;
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "user_entity")
 public class User implements UserDetails {
 
@@ -88,16 +76,18 @@ public class User implements UserDetails {
     private String nickname;
     @Column(name = "enabled")
     private boolean enabled;
-    public User() {
-        super();
-        this.enabled = false;
-    }
 
 
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = Role.class, cascade = {CascadeType.PERSIST})
     @JoinColumn(name = "role_id", nullable = false)
     @NonNull
     private Role role;
+//    @OneToOne(cascade = CascadeType.MERGE)
+//    @JoinColumn(name = "id", referencedColumnName = "verify_id")
+//    private VerificationToken verificationToken;
+    public User(Object o, String s, String encode, String alexDuncan, LocalDateTime now, boolean b, boolean b1, String nyc, Object o1, Object o2, Object o3, String some, Object o4, Object o5, Object o6, Role admin) {
+
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

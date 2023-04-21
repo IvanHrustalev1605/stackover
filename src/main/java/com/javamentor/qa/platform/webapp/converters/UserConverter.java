@@ -12,7 +12,6 @@ public interface UserConverter {
     @Mapping(target = "fullName", source = "firstName")
     User userRegistrationDtoToUser(UserRegistrationDto userRegistrationDto);
     @Mapping(target = "firstName", source = "fullName")
-
     UserRegistrationDto userToUserRegistrationDto(User user);
 
 }

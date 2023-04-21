@@ -1,35 +1,43 @@
 package com.javamentor.qa.platform.controller;
 
 import com.javamentor.qa.platform.models.dto.UserRegistrationDto;
+import com.javamentor.qa.platform.models.entity.registration.OnRegistrationCompleteEvent;
+import com.javamentor.qa.platform.models.entity.user.User;
+import com.javamentor.qa.platform.service.abstracts.model.UserService;
+import com.javamentor.qa.platform.webapp.converters.UserRegistrationMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.*;
 
-@RestController("api/user/registration")
-@PropertySource("application.properties")
+import javax.servlet.http.HttpServletRequest;
+
+@RestController
+@RequestMapping("/api/user/registration")
 public class RegistrationController {
-    @Value("${EXPIRATION_TIME_IN_MINUTES}")
-    private int EXPIRATION_TIME_IN_MINUTES;
-    @Value("${ADDRESS_FROM_SEND}")
-    private String fromAddress;
-    @Value("${}")
-    private String senderName;
-    @Value("${spring.mail.host}")
-    private String host;
+    private UserRegistrationMapper userMapper;
+    private UserService userService;
+    private ApplicationEventPublisher eventPublisher;
+    private PasswordEncoder passwordEncoder;
 
-    private ApplicationEventPublisher applicationEventPublisher;
-
-    public RegistrationController(ApplicationEventPublisher applicationEventPublisher) {
-        this.applicationEventPublisher = applicationEventPublisher;
+    public RegistrationController(UserRegistrationMapper userMapper, UserService userService, ApplicationEventPublisher eventPublisher, PasswordEncoder passwordEncoder) {
+        this.userMapper = userMapper;
+        this.userService = userService;
+        this.eventPublisher = eventPublisher;
+        this.passwordEncoder = passwordEncoder;
     }
-    @PostMapping
-    public ResponseEntity registerUser(@RequestBody UserRegistrationDto user) {
-        return new ResponseEntity(HttpStatus.OK);
+    @PostMapping("/verify")
+    public ResponseEntity<User> registerUser(@RequestBody UserRegistrationDto user,
+                                             HttpServletRequest request) {
+        User userRegistered = userMapper.toEntity(user);
+        userRegistered.setPassword(passwordEncoder.encode(userRegistered.getPassword()));
+        userService.persist(userRegistered);
+        String appUrl = request.getContextPath();
+        eventPublisher.publishEvent(new OnRegistrationCompleteEvent(
+                appUrl, request.getLocale(), userRegistered
+        ));
+        return new ResponseEntity<User>(userRegistered, HttpStatus.OK);
     }
-
 }
