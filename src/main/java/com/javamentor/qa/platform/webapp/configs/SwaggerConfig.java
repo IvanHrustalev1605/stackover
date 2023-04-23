@@ -13,7 +13,7 @@ public class SwaggerConfig {
     public Docket api(){
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.javamentor.qa.platform.controllers"))
+                .apis(RequestHandlerSelectors.basePackage("com.javamentor.qa.platform.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }

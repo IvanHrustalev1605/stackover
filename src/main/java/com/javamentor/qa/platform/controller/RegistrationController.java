@@ -6,7 +6,10 @@ import com.javamentor.qa.platform.models.entity.registration.OnRegistrationCompl
 import com.javamentor.qa.platform.models.entity.user.User;
 import com.javamentor.qa.platform.service.abstracts.model.UserService;
 import com.javamentor.qa.platform.webapp.converters.UserRegistrationMapper;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/api/user/registration")
+@Api(description = "отправка ссылки на подтверждение регистрации")
 public class RegistrationController {
     private UserRegistrationMapper userMapper;
     private UserService userService;
@@ -29,11 +33,7 @@ public class RegistrationController {
         this.eventPublisher = eventPublisher;
         this.passwordEncoder = passwordEncoder;
     }
-    @GetMapping("/getUsers")
-    public ResponseEntity getAllUsers() {
-        return new ResponseEntity<>(userService.getByEmail("test@test.com"),HttpStatus.OK);
-    }
-    @ApiOperation("отправка ссылки на подтверждение регистрации")
+    @ApiOperation("Отправка пользователю email с токеном для подтверждения документации")
     @PostMapping("/verify")
     public ResponseEntity<User> registerUser(@RequestBody UserRegistrationDto user,
                                              HttpServletRequest request) {
