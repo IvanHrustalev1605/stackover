@@ -1,6 +1,4 @@
 package com.javamentor.qa.platform.models.entity.registration;
-
-import com.javamentor.qa.platform.models.dto.UserRegistrationDto;
 import com.javamentor.qa.platform.models.entity.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

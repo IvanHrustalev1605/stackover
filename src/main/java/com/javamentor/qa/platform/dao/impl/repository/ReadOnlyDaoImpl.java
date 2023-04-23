@@ -1,6 +1,7 @@
 package com.javamentor.qa.platform.dao.impl.repository;
 
 import com.javamentor.qa.platform.dao.util.SingleResultUtil;
+import com.javamentor.qa.platform.models.entity.registration.VerificationToken;
 import com.javamentor.qa.platform.models.entity.user.User;
 
 import javax.persistence.EntityManager;
@@ -63,4 +64,15 @@ public abstract class ReadOnlyDaoImpl<E, K> {
                 .setParameter("email", email);
         return SingleResultUtil.getSingleResultOrNull(query);
     }
+    public Long getAuthUserIdByToken(String token) {
+        TypedQuery<VerificationToken> query = entityManager.createQuery("""
+                        SELECT vt
+                        FROM VerificationToken vt
+                        WHERE vt.token=:token
+                        """, VerificationToken.class)
+                .setParameter("token", token);
+        VerificationToken tokenOptional = SingleResultUtil.getSingleResultOrNull(query).get();
+        return tokenOptional.getId();
+    }
+
 }

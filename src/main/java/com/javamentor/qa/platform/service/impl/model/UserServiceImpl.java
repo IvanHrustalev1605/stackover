@@ -15,7 +15,6 @@ public class UserServiceImpl extends ReadWriteServiceImpl<User, Long> implements
 
     private final UserDao userDao;
     private final PasswordEncoder passwordEncoder;
-
     public UserServiceImpl(UserDao userDao, PasswordEncoder passwordEncoder) {
         super(userDao);
         this.userDao = userDao;
@@ -29,6 +28,7 @@ public class UserServiceImpl extends ReadWriteServiceImpl<User, Long> implements
     }
 
     @Override
+    @Transactional
     public User registerNewUserAccount(User user) {
         if (userDao.getByEmail(user.getEmail()).isPresent()) {
             throw new RuntimeException("This email allreary been taken!");
@@ -39,6 +39,13 @@ public class UserServiceImpl extends ReadWriteServiceImpl<User, Long> implements
         createdUser.setFullName(user.getFullName());
         userDao.persist(createdUser);
         return createdUser;
+    }
+
+    @Override
+    public User getByToken(String token) {
+        Long authUserIdByToken = userDao.getAuthUserIdByToken(token);
+        Optional<User> userById = userDao.getById(authUserIdByToken);
+        return userById.orElse(null);
     }
 
 }
