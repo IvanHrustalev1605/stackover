@@ -29,6 +29,10 @@ public class RegistrationController {
         this.eventPublisher = eventPublisher;
         this.passwordEncoder = passwordEncoder;
     }
+    @GetMapping("/getUsers")
+    public ResponseEntity getAllUsers() {
+        return new ResponseEntity<>(userService.getByEmail("test@test.com"),HttpStatus.OK);
+    }
     @ApiOperation("отправка ссылки на подтверждение регистрации")
     @PostMapping("/verify")
     public ResponseEntity<User> registerUser(@RequestBody UserRegistrationDto user,

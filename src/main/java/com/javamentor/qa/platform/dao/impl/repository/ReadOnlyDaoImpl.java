@@ -53,17 +53,25 @@ public abstract class ReadOnlyDaoImpl<E, K> {
         }
         return false;
     }
-
     public Optional<User> getByEmail(String email) {
         TypedQuery<User> query = entityManager.createQuery("""
-                        SELECT u
-                        FROM User u
-                        JOIN FETCH u.role
-                        WHERE u.email=:email
+                        FROM User 
+                        
+                        WHERE email=:email
                         """, User.class)
                 .setParameter("email", email);
         return SingleResultUtil.getSingleResultOrNull(query);
     }
+//    public Optional<User> getByEmail(String email) {
+//        TypedQuery<User> query = entityManager.createQuery("""
+//                        SELECT u
+//                        FROM User u
+//                        JOIN FETCH u.role
+//                        WHERE u.email=:email
+//                        """, User.class)
+//                .setParameter("email", email);
+//        return SingleResultUtil.getSingleResultOrNull(query);
+//    }
     public Long getAuthUserIdByToken(String token) {
         TypedQuery<VerificationToken> query = entityManager.createQuery("""
                         SELECT vt
@@ -74,5 +82,6 @@ public abstract class ReadOnlyDaoImpl<E, K> {
         VerificationToken tokenOptional = SingleResultUtil.getSingleResultOrNull(query).get();
         return tokenOptional.getId();
     }
+
 
 }
