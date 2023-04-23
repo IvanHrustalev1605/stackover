@@ -47,6 +47,7 @@ public class RegistrationController {
         }
     }
     @GetMapping("/registrationConfirm")
+    @ApiOperation("Подтверждение регистрации")
     public ResponseEntity confirmRegistration(@RequestParam String token) {
         User user = userService.getByToken(token);
         if (user == null) {
