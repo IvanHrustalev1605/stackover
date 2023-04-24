@@ -73,16 +73,10 @@ public class User implements UserDetails {
 
     @Column
     private String nickname;
-    @Column(name = "enabled")
-    private boolean enabled;
-
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = Role.class, cascade = {CascadeType.PERSIST})
     @JoinColumn(name = "role_id", nullable = false)
     @NonNull
     private Role role;
-    public User(Object o, String s, String encode, String alexDuncan, LocalDateTime now, boolean b, boolean b1, String nyc, Object o1, Object o2, Object o3, String some, Object o4, Object o5, Object o6, Role admin) {
-
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -101,17 +95,18 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return true;
+        return false;
     }
+
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return false;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return true;
+        return false;
     }
 
     @Override

@@ -28,7 +28,7 @@ public class TestDataInitService {
     @Transactional
     public void createEntity() {
         createRoles();
-        createUsers();
+//        createUsers();
     }
 
     public PasswordEncoder passwordEncoder() {
@@ -42,23 +42,23 @@ public class TestDataInitService {
     }
     List<User> users = new ArrayList<>();
 
-    private void createUsers() {
-        var alex = new User(null, "alex@mail.com", passwordEncoder().encode("123"),
-                "Alex Duncan", LocalDateTime.now(), true, false, "NYC",
-                null, null, null, "some", null,
-                null, null, roleService.getByName("ADMIN").orElseThrow());
-
-        var bob = new User(null, "bob@mail.com", passwordEncoder().encode("321"),
-                "Bob Jones ", LocalDateTime.now(), true, false, "Los Angeles",
-                null, null, null, "some", null,
-                null, null, roleService.getByName("USER").orElseThrow());
-
-        users.add(alex);
-        users.add(bob);
-
-        userService.persistAll(users);
-
-    }
+//    private void createUsers() {
+//        var alex = new User(null, "alex@mail.com", passwordEncoder().encode("123"),
+//                "Alex Duncan", LocalDateTime.now(), true, false, "NYC",
+//                null, null, null, "some", null,
+//                null, null, roleService.getByName("ADMIN").orElseThrow());
+//
+//        var bob = new User(null, "bob@mail.com", passwordEncoder().encode("321"),
+//                "Bob Jones ", LocalDateTime.now(), true, false, "Los Angeles",
+//                null, null, null, "some", null,
+//                null, null, roleService.getByName("USER").orElseThrow());
+//
+//        users.add(alex);
+//        users.add(bob);
+//
+//        userService.persistAll(users);
+//
+//    }
 
 
     List<Tag> tags = new ArrayList<>();

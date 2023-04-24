@@ -53,5 +53,4 @@ public class UserServiceImpl extends ReadWriteServiceImpl<User, Long> implements
         Optional<User> userById = userDao.getById(authUserIdByToken);
         return userById.orElse(null);
     }
-
 }

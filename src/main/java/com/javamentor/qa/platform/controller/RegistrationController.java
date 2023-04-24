@@ -15,7 +15,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
@@ -35,6 +40,10 @@ public class RegistrationController {
         this.userService = userService;
         this.eventPublisher = eventPublisher;
         this.passwordEncoder = passwordEncoder;
+    }
+    @GetMapping("/getUser")
+    public ResponseEntity getUser() {
+        return new ResponseEntity(userService.getByEmail("khrustalev16@bk.ru"), HttpStatus.OK);
     }
     @ApiOperation("Отправка пользователю email с токеном для подтверждения документации")
     @PostMapping("/verify")
@@ -61,11 +70,10 @@ public class RegistrationController {
             throw new UsernameNotFoundException("Ошибка в данных на подтверждение регистрации. Попробуйте еще раз");
         }
         if (LocalDateTime.now().getNano() - userService.getTokenByToken(token).getExpiryDate().getNano() > EXPIRATION_TIME_IN_MINUTES * 6000000) {
+            user.setIsEnabled(false);
+            userService.persist(user);
             throw new VerificationTokenExpiredException("Извините, время подтверждения Вашего аккаунта истекло");
         }
-
-        user.setEnabled(true);
-        userService.persist(user);
-        return new ResponseEntity<>(  "Спасибо! Ваша учетная запись успешно подтверждена!", HttpStatus.OK);
+        return new ResponseEntity<>(  "Спасибо! Ваша учетная запись успешно подтверждена!"+user, HttpStatus.OK);
     }
 }

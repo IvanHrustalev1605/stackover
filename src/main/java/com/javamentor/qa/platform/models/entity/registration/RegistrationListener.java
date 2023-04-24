@@ -3,16 +3,13 @@ package com.javamentor.qa.platform.models.entity.registration;
 import com.javamentor.qa.platform.models.entity.user.User;
 import com.javamentor.qa.platform.service.abstracts.model.UserService;
 import com.javamentor.qa.platform.service.abstracts.model.VerifTokenService;
-import com.nimbusds.jose.crypto.PasswordBasedDecrypter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.mail.javamail.*;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.jwt.Jwt;
-
 
 import javax.mail.Message;
 import javax.mail.MessagingException;

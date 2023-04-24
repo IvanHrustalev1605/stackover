@@ -11,5 +11,4 @@ public interface UserService extends ReadWriteService<User, Long> {
     User registerNewUserAccount(User user);
     VerificationToken getTokenByToken(String token);
     User getByToken(String token);
-
 }
