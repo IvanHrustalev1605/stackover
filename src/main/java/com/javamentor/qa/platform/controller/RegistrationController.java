@@ -1,6 +1,7 @@
 package com.javamentor.qa.platform.controller;
 
 import com.javamentor.qa.platform.exception.UserAlreadyExistException;
+import com.javamentor.qa.platform.exception.VerificationTokenExpiredException;
 import com.javamentor.qa.platform.models.dto.UserRegistrationDto;
 import com.javamentor.qa.platform.models.entity.registration.OnRegistrationCompleteEvent;
 import com.javamentor.qa.platform.models.entity.user.User;
@@ -8,8 +9,7 @@ import com.javamentor.qa.platform.service.abstracts.model.UserService;
 import com.javamentor.qa.platform.webapp.converters.UserRegistrationMapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +18,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/api/user/registration")
 @Api(description = "отправка ссылки на подтверждение регистрации")
 public class RegistrationController {
+    @Value("${EXPIRATION_TIME_IN_MINUTES}")
+    private int EXPIRATION_TIME_IN_MINUTES;
     private UserRegistrationMapper userMapper;
     private UserService userService;
     private ApplicationEventPublisher eventPublisher;
@@ -57,8 +60,12 @@ public class RegistrationController {
         if (user == null) {
             throw new UsernameNotFoundException("Ошибка в данных на подтверждение регистрации. Попробуйте еще раз");
         }
+        if (LocalDateTime.now().getNano() - userService.getTokenByToken(token).getExpiryDate().getNano() > EXPIRATION_TIME_IN_MINUTES * 6000000) {
+            throw new VerificationTokenExpiredException("Извините, время подтверждения Вашего аккаунта истекло");
+        }
+
         user.setEnabled(true);
         userService.persist(user);
-        return new ResponseEntity<>("Спасибо! Ваша учетная запись успешно подтверждена!", HttpStatus.OK);
+        return new ResponseEntity<>(  "Спасибо! Ваша учетная запись успешно подтверждена!", HttpStatus.OK);
     }
 }

@@ -82,6 +82,16 @@ public abstract class ReadOnlyDaoImpl<E, K> {
         VerificationToken tokenOptional = SingleResultUtil.getSingleResultOrNull(query).get();
         return tokenOptional.getId();
     }
+    public VerificationToken getTokenByToken(String token) {
+        TypedQuery<VerificationToken> query = entityManager.createQuery("""
+                        SELECT vt
+                        FROM VerificationToken vt
+                        WHERE vt.token=:token
+                        """, VerificationToken.class)
+                .setParameter("token", token);
+        VerificationToken tokenOptional = SingleResultUtil.getSingleResultOrNull(query).get();
+        return tokenOptional;
+    }
 
 
 }

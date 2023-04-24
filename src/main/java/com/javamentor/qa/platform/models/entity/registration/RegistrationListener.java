@@ -20,8 +20,7 @@ import java.util.UUID;
 
 @Configuration
 public class RegistrationListener implements ApplicationListener<OnRegistrationCompleteEvent> {
-    @Value("${EXPIRATION_TIME_IN_MINUTES}")
-    private int EXPIRATION_TIME_IN_MINUTES;
+
     private UserService userService;
     private MessageSource messageSource;
     private VerifTokenService tokenService;
