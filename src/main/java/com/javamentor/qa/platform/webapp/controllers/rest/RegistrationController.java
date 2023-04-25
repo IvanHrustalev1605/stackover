@@ -1,4 +1,4 @@
-package com.javamentor.qa.platform.controller;
+package com.javamentor.qa.platform.webapp.controllers.rest;
 
 import com.javamentor.qa.platform.exception.UserAlreadyExistException;
 import com.javamentor.qa.platform.exception.VerificationTokenExpiredException;
@@ -6,7 +6,7 @@ import com.javamentor.qa.platform.models.dto.UserRegistrationDto;
 import com.javamentor.qa.platform.models.entity.registration.OnRegistrationCompleteEvent;
 import com.javamentor.qa.platform.models.entity.user.User;
 import com.javamentor.qa.platform.service.abstracts.model.UserService;
-import com.javamentor.qa.platform.webapp.converters.UserRegistrationMapper;
+import com.javamentor.qa.platform.converters.UserRegistrationMapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Value;
@@ -40,10 +40,6 @@ public class RegistrationController {
         this.userService = userService;
         this.eventPublisher = eventPublisher;
         this.passwordEncoder = passwordEncoder;
-    }
-    @GetMapping("/getUser")
-    public ResponseEntity getUser() {
-        return new ResponseEntity(userService.getByEmail("khrustalev16@bk.ru"), HttpStatus.OK);
     }
     @ApiOperation("Отправка пользователю email с токеном для подтверждения документации")
     @PostMapping("/verify")
