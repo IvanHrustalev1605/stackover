@@ -621,3 +621,40 @@ DB_USERNAME - твой логин
 DB_PASSWORD - твой пароль
 
 -ea -Dspring.profiles.active= dev/local - выбери профиль
+
+## Установка и пример работы Postman
+1. Скачиваем postman с официального сайта https://www.postman.com/downloads/. После того как скачали, зарегистрировались и зашли в программу, нажимаем на создание новой коллекции "запросов".
+  ![](src/main/resources/static/images/postman_tutor/1.png)
+2. Добавляем новую коллекцию.
+   ![](src/main/resources/static/images/postman_tutor/2.png)
+3. Прежде чем тестировать свои контроллеры, нам необходимо пройти аутентификацию и авторизацию(в нашем случае у нас аутентификация с помощью **jwt** токена). Чтобы мы не получали ошибку 403 во время запроса к своим тестируемым контроллерам. Теперь выбираем **POST!** запрос, так как мы будем **отсылать** тело запроса с нашими данными.
+ ![](src/main/resources/static/images/postman_tutor/3.png)
+4. Прописываем путь где крутится наше приложение. Если вы не меняли никаких настроек портов, то он будет **http://localhost:8080**.
+   ![](src/main/resources/static/images/postman_tutor/4.png)
+5. После этого заходим в свой контроллер аутентификации и смотрим по какому "mapping'у" у нас находится метод, который отдает наш jwt токен. Над классом указывается общий путь ко всем методам, а над каждым методом дополнительный. Складываем эти пути.
+   ![](src/main/resources/static/images/postman_tutor/5.png)
+6. Дописываем этот путь в адресную строку как на примере и заходим во вкладку **Body**.
+   ![](src/main/resources/static/images/postman_tutor/6.png)
+7. Ставим галочку на поле **raw**.
+   ![](src/main/resources/static/images/postman_tutor/7.png)
+8. В этом поле выбираем тип нашего "тела" запрос. В нашем случае это **Json**.
+   ![](src/main/resources/static/images/postman_tutor/8.png)
+9. Пишем **тело** нашего запроса со **своими** данными. (Если не добавлена регистрация, добавьте ручками в локальную бд данные User'a. Если вы добавляете данные в свою бд руками **НЕ ЗАБУДЬТЕ!!!** пароль добавлять в зашифрованном виде. В нашем приложении шифрация происходит с помощью Bcrypt. Ресурс по шифрации : https://bcrypt-generator.com/)
+   ![](src/main/resources/static/images/postman_tutor/9.png)
+10. Нажимаем кнопку Send и если все данные верны, то получаем роль и токен аутентификации.
+    ![](src/main/resources/static/images/postman_tutor/10-11.png)
+11. Сохраняем этот токен. В нашем случае он действителен 1 час.
+12. Открываем новую вкладку, чтобы написать запрос на тестируемый контроллер.
+    ![](src/main/resources/static/images/postman_tutor/12.png)
+13. Заходим на наш тестируемый контроллер и по аналогии смотри "mapping'и"
+    ![](src/main/resources/static/images/postman_tutor/13.png)
+14. Добавляем наш адрес в адресную строку. **НЕ ЗАБЫВАЕМ** указать тип запроса как в вашем контроллере. В нашем случае, мы хотим **получить** user'a по id, поэтому у нас **Get** запрос.
+    ![](src/main/resources/static/images/postman_tutor/14.png)
+15. Переходим во вкладку Headers.
+    ![](src/main/resources/static/images/postman_tutor/15.png)
+16. В столбце **Key** пишем заголовок **Authorization**, а в столбце пишем руками **Bearer_**.
+    ![](src/main/resources/static/images/postman_tutor/16.png)
+17. Теперь добавляем токен **ПОСЛЕ** Bearer_
+    ![](src/main/resources/static/images/postman_tutor/17.png)
+18. Нажимаем кнопку Send и если токен все еще действителен, то вы получите ответ.
+    ![](src/main/resources/static/images/postman_tutor/18.png)
