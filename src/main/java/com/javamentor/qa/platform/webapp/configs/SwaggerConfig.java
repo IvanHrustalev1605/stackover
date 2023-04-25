@@ -1,20 +1,30 @@
 package com.javamentor.qa.platform.webapp.configs;
 
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Contact;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.info.License;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import springfox.documentation.builders.PathSelectors;
-import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spring.web.plugins.Docket;
 
 @Configuration
 public class SwaggerConfig {
     @Bean
-    public Docket api(){
-        return new Docket(DocumentationType.SWAGGER_2)
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("com.javamentor.qa.platform.controller"))
-                .paths(PathSelectors.any())
-                .build();
+    public OpenAPI customOpenAPI(@Value("${application-description}") String appDesciption, @Value("${application-version}") String appVersion) {
+        return new OpenAPI()
+                .info(new Info()
+                        .title("StackJM")
+                        .version(appVersion)
+                        .description(appDesciption)
+                        .termsOfService("http://swagger.io/terms/")
+                        .license(new License().name("Apache 2.0").url("http://springdoc.org")))
+                .info(new Info()
+                        .contact(
+                                new Contact()
+                                        .email("yozhikov.dev@gmail.com")
+                                        .name("Ezhikov Daniil")
+                        ));
+
     }
 }
