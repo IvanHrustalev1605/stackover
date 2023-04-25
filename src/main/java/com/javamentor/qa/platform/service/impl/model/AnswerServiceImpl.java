@@ -6,13 +6,12 @@ import com.javamentor.qa.platform.models.entity.question.answer.Answer;
 import com.javamentor.qa.platform.service.abstracts.model.AnswerService;
 import com.javamentor.qa.platform.service.impl.repository.ReadWriteServiceImpl;
 import org.springframework.stereotype.Service;
-
 import java.util.Optional;
 
 @Service
 public class AnswerServiceImpl extends ReadWriteServiceImpl<Answer, Long> implements AnswerService {
 
-    private AnswerDao answerDao;
+    private final AnswerDao answerDao;
 
     public AnswerServiceImpl(ReadWriteDao<Answer, Long> readWriteDao, AnswerDao answerDao) {
         super(readWriteDao);
@@ -28,4 +27,10 @@ public class AnswerServiceImpl extends ReadWriteServiceImpl<Answer, Long> implem
     public void markAnswerIsDelete(Optional<Answer> answerOptional) {
         answerDao.markAnswerIsDelete(answerOptional);
     }
+
+    @Override
+    public Optional<Answer> getAnswerForVote(Long answerId, Long userId) {
+        return answerDao.getAnswerForVote(answerId,userId);
+    }
+
 }
