@@ -55,9 +55,9 @@ public class ResourceAnswerController {
 
     @DeleteMapping("/answerId")
     @ApiOperation(value = "Отмечает ответ для дальнейшего удаления")
-    @io.swagger.annotations.ApiResponses(value = {
-            @io.swagger.annotations.ApiResponse(code = 200, message = "Успешно! Ответ отмечен для удаления!"),
-            @io.swagger.annotations.ApiResponse(code = 404, message = "Ответ не найден...")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Успешно! Ответ отмечен для удаления!"),
+            @ApiResponse(responseCode = "404", description = "Ответ не найден...")
     })
     public ResponseEntity<HttpStatus> markAnswerForDelete(@Parameter(description = "Идентификатор ответа", required = true) @PathVariable Long answerId) {
         Optional<Answer> answerForMarkOptional = answerService.getAnswerById(answerId);
