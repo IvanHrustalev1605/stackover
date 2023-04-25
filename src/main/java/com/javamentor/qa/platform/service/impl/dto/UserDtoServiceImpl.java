@@ -7,6 +7,8 @@ import com.javamentor.qa.platform.service.abstracts.dto.UserDtoService;
 import com.javamentor.qa.platform.service.impl.repository.ReadWriteServiceImpl;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserDtoServiceImpl extends ReadWriteServiceImpl<UserDto, Long> implements UserDtoService {
     private final UserDtoDao userDtoDao;
@@ -17,10 +19,8 @@ public class UserDtoServiceImpl extends ReadWriteServiceImpl<UserDto, Long> impl
         this.userDtoDao = userDtoDao;
     }
 
-
-
     @Override
-    public UserDto getUserDtoByUserId(Long id) {
-        return userDtoDao.getUserDtoByUserId(id).orElseThrow(() -> new RuntimeException("UserDto не найден"));
+    public Optional<UserDto> getUserDtoByUserId(Long id) {
+        return userDtoDao.getUserDtoByUserId(id);
     }
 }

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/user")
 @Api(produces = "application/json", value = "Операции над User'ом   ")
 public class ResourceUserController {
+
     private final UserDtoService userDtoService;
 
     public ResourceUserController(UserDtoService userDtoService) {
@@ -30,8 +31,9 @@ public class ResourceUserController {
             @ApiResponse(code = 404, message = "Юзера с таким id не существует"),
             @ApiResponse(code = 403, message = "Недостаточно прав")})
     public ResponseEntity<UserDto> getUserDtoById(@PathVariable Long id) {
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(new UserDto()); //todo #17 дто готова
+
+        return userDtoService.getUserDtoByUserId(id)
+                .map(userDto -> new ResponseEntity<>(userDto, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(new UserDto(),HttpStatus.NOT_FOUND));
     }
 }
