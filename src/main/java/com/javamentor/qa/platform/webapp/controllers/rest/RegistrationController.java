@@ -29,12 +29,14 @@ import java.time.LocalDateTime;
 @RequestMapping("/api/user/registration")
 @Api(description = "отправка ссылки на подтверждение регистрации")
 public class RegistrationController {
+
     @Value("${EXPIRATION_TIME_IN_MINUTES}")
     private int EXPIRATION_TIME_IN_MINUTES;
-    private UserRegistrationMapper userMapper;
-    private UserService userService;
-    private ApplicationEventPublisher eventPublisher;
-    private PasswordEncoder passwordEncoder;
+    private final UserRegistrationMapper userMapper;
+    private final UserService userService;
+    private final ApplicationEventPublisher eventPublisher;
+    private final PasswordEncoder passwordEncoder;
+
     public RegistrationController(UserRegistrationMapper userMapper, UserService userService, ApplicationEventPublisher eventPublisher, PasswordEncoder passwordEncoder) {
         this.userMapper = userMapper;
         this.userService = userService;
