@@ -14,7 +14,7 @@ public class SwaggerConfig {
     public OpenAPI customOpenAPI(@Value("${application-description}") String appDesciption, @Value("${application-version}") String appVersion) {
         return new OpenAPI()
                 .info(new Info()
-                        .title("StackJM")
+                        .title("Stackover")
                         .version(appVersion)
                         .description(appDesciption)
                         .termsOfService("http://swagger.io/terms/")
@@ -22,8 +22,8 @@ public class SwaggerConfig {
                 .info(new Info()
                         .contact(
                                 new Contact()
-                                        .email("yozhikov.dev@gmail.com")
-                                        .name("Ezhikov Daniil")
+                                        .email("dev@gmail.com")
+                                        .name("Dev")
                         ));
 
     }
