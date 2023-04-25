@@ -26,15 +26,15 @@ public class UserDtoDaoImpl extends ReadWriteDaoImpl<UserDto, Long> implements U
                         u.fullName,
                         u.imageLink,
                         u.city,
-                        r.author.id,
+                        coalesce(sum(r.count), 0),
                         u.lastUpdateDateTime,
-                        cast(COALESCE(sum(case when v.voteType = 'UP' then 1 when v.voteType = 'DOWN' then -1 end), 0) as biginteger ))
+                        coalesce(sum(case when v.voteType = 'UP' then 1 when v.voteType = 'DOWN' then -1 end), 0))
                         from User as u
                         left join Reputation as r on u.id = r.author.id
                         left join VoteAnswer as v on u.id = v.user.id
                         where u.id = :id
-                        """)
+                        group by u.id,v.voteType,r.count
+                        """, UserDto.class)
                 .setParameter("id", id));
-
     }
 }
