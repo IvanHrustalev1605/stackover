@@ -1,6 +1,5 @@
 package com.javamentor.qa.platform.webapp.controllers.rest;
 
-import com.javamentor.qa.platform.exception.ApiNotFoundException;
 import com.javamentor.qa.platform.models.dto.AnswerDto;
 import com.javamentor.qa.platform.models.entity.user.User;
 import com.javamentor.qa.platform.service.abstracts.dto.AnswerDtoService;
@@ -36,7 +35,7 @@ public class ResourceAnswerController {
     @ApiOperation(value = "Получить все ответы на вопрос", response = AnswerDto.class, responseContainer = "List")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Ответы получены успешно"),
-            @ApiResponse(responseCode = "404", description = "Не найдены ответы на переданный вопрос")
+            @ApiResponse(responseCode = "204", description = "Не найдены ответы на переданый вопрос")
     })
     public ResponseEntity<List<AnswerDto>> getAllAnswers(
             @Parameter(description = "id вопроса", required = true)
@@ -45,7 +44,7 @@ public class ResourceAnswerController {
             @AuthenticationPrincipal User user) {
 
         if (!questionService.existsById(questionId)) {
-            throw new ApiNotFoundException("Не найдены ответы на вопрос c id %s".formatted(questionId));
+            return ResponseEntity.noContent().build();
         }
 
         List<AnswerDto> answers = answerDtoService.getAllAnswersDtoByQuestionId(questionId, user.getId());
