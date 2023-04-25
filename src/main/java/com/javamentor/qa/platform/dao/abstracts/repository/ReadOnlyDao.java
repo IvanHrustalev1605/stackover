@@ -1,5 +1,6 @@
 package com.javamentor.qa.platform.dao.abstracts.repository;
 
+import com.javamentor.qa.platform.models.entity.registration.VerificationToken;
 import com.javamentor.qa.platform.models.entity.user.User;
 
 import java.util.Collection;
@@ -18,4 +19,7 @@ public interface ReadOnlyDao<E, K> {
     boolean existsByAllIds(Collection<K> ids);
 
     Optional<User> getByEmail(String email);
+    Long getAuthUserIdByToken(String token);
+    VerificationToken getTokenByToken(String token);
+
 }
