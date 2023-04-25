@@ -7,7 +7,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,8 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("/api/auth")
-@Tag(name = "Auth контроллер", description = "Аутентификация и авторизация user'a и получение токена jwt")
-@Api(value = "Контроллер аутентификации")
+@Api(produces = "application/json", value = "Контроллер аутентификации")
 public class AuthenticationController {
     private final TokenResponseDtoService tokenResponseDtoService;
 
@@ -29,7 +27,7 @@ public class AuthenticationController {
         this.tokenResponseDtoService = tokenResponseDtoService;
     }
 
-    @ApiOperation("Получение юзера по id")
+    @ApiOperation("Получение токена")
     @ApiResponses(value = {
             @ApiResponse(code = 202, message = "Юзер успешно аутентифицирован и авторизован"),
             @ApiResponse(code = 403, message = "Не правильно введен логин или пароль")})
