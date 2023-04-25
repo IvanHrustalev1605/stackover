@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping("/api/auth")
 @Api(produces = "application/json", value = "Контроллер аутентификации")
 public class AuthenticationController {
+
     private final TokenResponseDtoService tokenResponseDtoService;
 
     public AuthenticationController(TokenResponseDtoService tokenResponseDtoService) {

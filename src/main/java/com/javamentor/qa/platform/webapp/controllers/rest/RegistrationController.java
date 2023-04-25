@@ -60,7 +60,7 @@ public class RegistrationController {
     }
     @GetMapping("/verify")
     @ApiOperation("Подтверждение регистрации")
-    public ResponseEntity confirmRegistration(@RequestParam String token) {
+    public ResponseEntity<String> confirmRegistration(@RequestParam String token) {
         User user = userService.getByToken(token);
         if (user == null) {
             throw new UsernameNotFoundException("Ошибка в данных на подтверждение регистрации. Попробуйте еще раз");
