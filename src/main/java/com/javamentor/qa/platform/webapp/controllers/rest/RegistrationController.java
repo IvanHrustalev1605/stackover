@@ -42,7 +42,7 @@ public class RegistrationController {
         this.passwordEncoder = passwordEncoder;
     }
     @ApiOperation("Отправка пользователю email с токеном для подтверждения документации")
-    @PostMapping("/verify")
+    @PostMapping
     public ResponseEntity<User> registerUser(@RequestBody UserRegistrationDto user,
                                              HttpServletRequest request) {
         User userRegistered = userMapper.toEntity(user);
@@ -58,7 +58,7 @@ public class RegistrationController {
             return new ResponseEntity<User>(userRegistered, HttpStatus.OK);
         }
     }
-    @GetMapping("/registrationConfirm")
+    @GetMapping("/verify")
     @ApiOperation("Подтверждение регистрации")
     public ResponseEntity confirmRegistration(@RequestParam String token) {
         User user = userService.getByToken(token);
