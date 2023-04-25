@@ -1,6 +1,5 @@
 package com.javamentor.qa.platform.service.impl.model;
 
-import com.javamentor.qa.platform.dao.abstracts.model.ReputationDao;
 import com.javamentor.qa.platform.dao.abstracts.model.VoteAnswerDao;
 import com.javamentor.qa.platform.dao.abstracts.repository.ReadWriteDao;
 import com.javamentor.qa.platform.exception.VoteException;
@@ -10,6 +9,7 @@ import com.javamentor.qa.platform.models.entity.question.answer.VoteAnswer;
 import com.javamentor.qa.platform.models.entity.user.User;
 import com.javamentor.qa.platform.models.entity.user.reputation.Reputation;
 import com.javamentor.qa.platform.models.entity.user.reputation.ReputationType;
+import com.javamentor.qa.platform.service.abstracts.model.ReputationService;
 import com.javamentor.qa.platform.service.abstracts.model.VoteAnswerService;
 import com.javamentor.qa.platform.service.impl.repository.ReadWriteServiceImpl;
 import org.springframework.stereotype.Service;
@@ -21,12 +21,12 @@ import java.util.Optional;
 public class VoteAnswerServiceImpl extends ReadWriteServiceImpl<VoteAnswer, Long> implements VoteAnswerService {
 
     private final VoteAnswerDao voteAnswerDao;
-    private final ReputationDao reputationDao;
+    private final ReputationService reputationService;
 
-    public VoteAnswerServiceImpl(ReadWriteDao<VoteAnswer, Long> readWriteDao, VoteAnswerDao voteAnswerDao, ReputationDao reputationDao) {
+    public VoteAnswerServiceImpl(ReadWriteDao<VoteAnswer, Long> readWriteDao, VoteAnswerDao voteAnswerDao, ReputationService reputationService) {
         super(readWriteDao);
         this.voteAnswerDao = voteAnswerDao;
-        this.reputationDao = reputationDao;
+        this.reputationService = reputationService;
     }
 
 
@@ -42,7 +42,7 @@ public class VoteAnswerServiceImpl extends ReadWriteServiceImpl<VoteAnswer, Long
     @Override
     public Long vote(Answer answer, User sender, Integer repCount, VoteType voteType) {
         Optional<VoteAnswer> voteAnswerOptional = voteAnswerDao.getByAnswerIdAndUserId(answer.getId(), sender.getId());
-        Optional<Reputation> reputationOptional = reputationDao.getByAnswerIdAndUserId(answer.getId(), sender.getId());
+        Optional<Reputation> reputationOptional = reputationService.getByAnswerIdAndUserId(answer.getId(), sender.getId());
         VoteAnswer voteAnswer;
         Reputation reputation;
         if (reputationOptional.isPresent() && voteAnswerOptional.isPresent()) {
@@ -64,7 +64,7 @@ public class VoteAnswerServiceImpl extends ReadWriteServiceImpl<VoteAnswer, Long
         reputation.setAuthor(answer.getUser());
         try {
             voteAnswerDao.update(voteAnswer);
-            reputationDao.update(reputation);
+            reputationService.update(reputation);
         } catch (Exception e) {
             e.printStackTrace();
         }
