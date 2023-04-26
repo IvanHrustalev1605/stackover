@@ -5,9 +5,9 @@ import com.javamentor.qa.platform.models.dto.AnswerDto;
 import com.javamentor.qa.platform.models.entity.question.answer.Answer;
 import com.javamentor.qa.platform.models.entity.user.User;
 import com.javamentor.qa.platform.service.abstracts.dto.AnswerDtoService;
-
 import com.javamentor.qa.platform.service.abstracts.model.AnswerService;
 import com.javamentor.qa.platform.service.abstracts.model.QuestionService;
+import com.javamentor.qa.platform.service.abstracts.model.VoteAnswerService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -19,19 +19,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
-
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/user/question/{questionId}/answer")
 @RequiredArgsConstructor
-@Tag(name="Контроллер ответов", description="Взаимодействие с ответами")
+@Tag(name = "Контроллер ответов", description = "Взаимодействие с ответами")
 public class ResourceAnswerController {
 
     private final AnswerDtoService answerDtoService;
     private final QuestionService questionService;
     private final AnswerService answerService;
+    private final VoteAnswerService voteAnswerService;
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
@@ -67,5 +67,21 @@ public class ResourceAnswerController {
             return ResponseEntity.ok(HttpStatus.OK);
         }
         return ResponseEntity.notFound().build();
+    }
+
+    @PostMapping("/{id}/upVote")
+    @ApiOperation(value = "Голосование за ответ ")
+    @io.swagger.annotations.ApiResponses(value = {
+            @io.swagger.annotations.ApiResponse(code = 200, message = "Голосование прошло успешно"),
+            @io.swagger.annotations.ApiResponse(code = 400, message = "Ошибка голосования")
+    })
+    public ResponseEntity<Long> upVote(@Parameter(description = "Уникальный id ответа ")
+                                       @PathVariable("questionId") Long answerId,
+                                       @Parameter(description = "Пользователь ")
+                                       @AuthenticationPrincipal User user) {
+        Optional<Answer> answerOptional = answerService.getAnswerForVote(answerId, user.getId());
+        return answerOptional.map(
+                answer -> new ResponseEntity<>(voteAnswerService.upVote(answer, user), HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
     }
 }
