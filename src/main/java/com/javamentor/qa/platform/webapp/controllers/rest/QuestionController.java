@@ -34,9 +34,11 @@ public class QuestionController {
     })
     public ResponseEntity<List<QuestionCommentDto>> getAllQuestionComment(@Parameter(description = "Вопрос")
                                                       @PathVariable("id") Long questionId) {
-        if (commentDtoService.getAllQuestionCommentDtoById(questionId) == null || commentDtoService.getAllQuestionCommentDtoById(questionId).isEmpty()) {
+        if (!commentDtoService.existsById(questionId)) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(commentDtoService.getAllQuestionCommentDtoById(questionId), HttpStatus.OK);
+
+        return commentDtoService.getAllQuestionCommentDtoById(questionId).isEmpty() ? new ResponseEntity<>(HttpStatus.BAD_REQUEST)
+                : new ResponseEntity<>(commentDtoService.getAllQuestionCommentDtoById(questionId), HttpStatus.OK);
     }
 }

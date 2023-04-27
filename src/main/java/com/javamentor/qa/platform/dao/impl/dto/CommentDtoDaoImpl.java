@@ -1,6 +1,7 @@
 package com.javamentor.qa.platform.dao.impl.dto;
 
 import com.javamentor.qa.platform.dao.abstracts.dto.CommentDtoDao;
+import com.javamentor.qa.platform.dao.impl.repository.ReadWriteDaoImpl;
 import com.javamentor.qa.platform.models.dto.QuestionCommentDto;
 import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
@@ -8,7 +9,7 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
-public class CommentDtoDaoImpl implements CommentDtoDao {
+public class CommentDtoDaoImpl extends ReadWriteDaoImpl<QuestionCommentDto, Long> implements CommentDtoDao {
 
     @PersistenceContext
     private EntityManager entityManager;
