@@ -2,6 +2,7 @@ package com.javamentor.qa.platform.webapp.controllers.rest;
 
 import com.javamentor.qa.platform.models.dto.QuestionCommentDto;
 import com.javamentor.qa.platform.service.abstracts.dto.CommentDtoService;
+import com.javamentor.qa.platform.service.abstracts.model.QuestionService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -20,9 +21,11 @@ import java.util.List;
 public class QuestionController {
 
     private final CommentDtoService commentDtoService;
+    private final QuestionService questionService;
 
     @Autowired
-    public QuestionController(CommentDtoService commentDtoService) {
+    public QuestionController(CommentDtoService commentDtoService, QuestionService questionService) {
+        this.questionService = questionService;
         this.commentDtoService = commentDtoService;
     }
 
@@ -32,9 +35,9 @@ public class QuestionController {
             @ApiResponse(code = 200, message = "Комментарии получены успешно"),
             @ApiResponse(code = 400, message = "Ошибка получения комментариев")
     })
-    public ResponseEntity<List<QuestionCommentDto>> getAllQuestionComment(@Parameter(description = "Вопрос")
+    public ResponseEntity<List<QuestionCommentDto>> getAllCommentsOnQuestion(@Parameter(description = "Вопрос")
                                                       @PathVariable("id") Long questionId) {
-        if (!commentDtoService.existsById(questionId)) {
+        if (!questionService.existsById(questionId)) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 

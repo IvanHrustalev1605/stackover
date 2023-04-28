@@ -1,9 +1,10 @@
 package com.javamentor.qa.platform.dao.abstracts.dto;
 
-import com.javamentor.qa.platform.dao.abstracts.repository.ReadWriteDao;
 import com.javamentor.qa.platform.models.dto.QuestionCommentDto;
+import org.springframework.stereotype.Repository;
 import java.util.List;
 
-public interface CommentDtoDao extends ReadWriteDao<QuestionCommentDto, Long> {
+@Repository
+public interface CommentDtoDao {
     List<QuestionCommentDto> getAllQuestionCommentDtoById(Long questionId);
 }
