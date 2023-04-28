@@ -14,6 +14,7 @@ public class AnswerDtoDaoImpl implements AnswerDtoDao {
     @PersistenceContext
     private EntityManager entityManager;
 
+    @Override
     public List<AnswerDto> getAllAnswersDtoByQuestionId(Long questionId, Long userId) {
         return entityManager.createQuery("""
                         SELECT NEW com.javamentor.qa.platform.models.dto.AnswerDto(
