@@ -13,7 +13,7 @@ import lombok.Setter;
 @Setter
 @Schema(description = "Тэг")
 public class TagDto {
-    @Parameter(description = "id тэга")
+    @Parameter(description = "id id тэга")
     private Long id;
     @Schema(description = "название тэга")
     private String name;

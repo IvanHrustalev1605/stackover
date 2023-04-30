@@ -1,6 +1,7 @@
 package com.javamentor.qa.platform.dao.impl.dto;
 
 import com.javamentor.qa.platform.dao.abstracts.dto.TagDtoDao;
+import com.javamentor.qa.platform.models.dto.RelatedTagDto;
 import com.javamentor.qa.platform.models.dto.TagDto;
 import org.springframework.stereotype.Repository;
 
@@ -14,6 +15,21 @@ public class TagDtoDaoImpl implements TagDtoDao {
 
     @PersistenceContext
     private EntityManager entityManager;
+    @Override
+    public List<RelatedTagDto> getTopTags() {
+        return entityManager.createQuery("""
+        SELECT NEW com.javamentor.qa.platform.models.dto.RelatedTagDto(
+            t.id,
+            t.name,
+            CAST(t.questions.size AS BIGINTEGER)
+        )
+        FROM Tag t
+        GROUP BY t.id, t.name
+        ORDER BY t.questions.size DESC
+        """, RelatedTagDto.class)
+                .setMaxResults(10)
+                .getResultList();
+    }
 
     @Override
     public List<TagDto> getTop3TagsByUserId(Long id) {
@@ -35,4 +51,5 @@ public class TagDtoDaoImpl implements TagDtoDao {
                 .setParameter("id", id);
         return query.getResultList();
     }
+
 }
