@@ -2,9 +2,11 @@ package com.javamentor.qa.platform.webapp.controllers.rest;
 
 import com.javamentor.qa.platform.exception.ApiNotFoundException;
 import com.javamentor.qa.platform.models.dto.RelatedTagDto;
+import com.javamentor.qa.platform.models.dto.TagDto;
 import com.javamentor.qa.platform.service.abstracts.dto.TagDtoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
@@ -42,8 +44,13 @@ public class ResourceTagController {
 
         return ResponseEntity.ok(topTags);
     }
+    @Schema(description = "Получение топ 3х тэгов, в которых было набрано больше всего баллов при ответе на вопросы пользователем")
     @GetMapping("/top-3-tags")
     public ResponseEntity getTopTags(@RequestParam("id") Long id) {
-        return new ResponseEntity<>(tagDtoService.getTop3TagsByUserId(id),HttpStatus.OK);
+        List<TagDto> top3TagsByUserId = tagDtoService.getTop3TagsByUserId(id);
+        if (top3TagsByUserId.isEmpty()) {
+            throw new ApiNotFoundException("Список тэгов пуст. Возможно не было ответов, приносящих репутацию");
+        }
+        return new ResponseEntity<>(top3TagsByUserId,HttpStatus.OK);
     }
 }

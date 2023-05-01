@@ -3,6 +3,7 @@ package com.javamentor.qa.platform.dao.impl.dto;
 import com.javamentor.qa.platform.dao.abstracts.dto.TagDtoDao;
 import com.javamentor.qa.platform.models.dto.RelatedTagDto;
 import com.javamentor.qa.platform.models.dto.TagDto;
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -32,6 +33,7 @@ public class TagDtoDaoImpl implements TagDtoDao {
     }
 
     @Override
+    @Schema(description = "Получение топ 3х тэгов, в которых было набрано больше всего баллов при ответе на вопросы пользователем")
     public List<TagDto> getTop3TagsByUserId(Long id) {
         TypedQuery<TagDto> query = entityManager.createQuery("""
                         SELECT new com.javamentor.qa.platform.models.dto.TagDto(
